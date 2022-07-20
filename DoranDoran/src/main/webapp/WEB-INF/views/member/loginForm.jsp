@@ -19,12 +19,12 @@
 			<ul>
 				<li>
 					<label for="id">아이디</label>
-					<input type="text" name="id" id="id"
+					<input type="text" name="mem_id" id="id"
 					       maxlength="12" autocomplete="off">
 				</li>
 				<li>	
 					<label for="passwd">비밀번호</label>
-					<input type="password" name="passwd"
+					<input type="password" name="mem_pw"
 					       id="passwd" maxlength="12">
 				</li>
 			</ul>
