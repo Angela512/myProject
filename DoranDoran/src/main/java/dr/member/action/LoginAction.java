@@ -23,12 +23,17 @@ public class LoginAction implements Action{
 		MemberVO member = dao.checkMember(mem_id);
 		boolean check = false;
 		
+		System.out.println("1:"+member);
+		
 		if(member!=null) {
 			//비밀번호 일치 여부 체크
 			check = member.isCheckedPassword(mem_pw);
+			System.out.println("2:"+check);
 			//로그인 실패시 auth 체크용(정지회원 체크)
 			request.setAttribute("auth", member.getAuth());
 		}
+		
+		System.out.println("3:"+check);
 		
 		if(check) { //인증 성공
 			//로그인 처리
