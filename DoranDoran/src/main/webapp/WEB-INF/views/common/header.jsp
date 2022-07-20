@@ -13,6 +13,26 @@
 			<a href="${pageContext.request.contextPath}/board/list.do">게시판</a>
 		</li>
 		
+		<li>
+			<a href="${pageContext.request.contextPath}/board/list.do">공지사항</a>
+		</li>
+		
+		<li>
+			<a href="${pageContext.request.contextPath}/board/list.do">맛집찾기</a>
+		</li>
+		
+		<li>
+			<a href="${pageContext.request.contextPath}/board/list.do">중고거래</a>
+		</li>
+		
+		<li>
+			<a href="${pageContext.request.contextPath}/board/list.do">구인구직</a>
+		</li>
+		
+		<li>
+			<a href="${pageContext.request.contextPath}/board/list.do">자유게시판</a>
+		</li>
+		
 		<c:if test="${!empty user_num && user_auth == 3}">
 		<li>
 			<a href="${pageContext.request.contextPath}/member/memberList.do">회원관리</a>
