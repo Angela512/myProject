@@ -351,71 +351,71 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 	}
 	
 	//목록(검색글 목록)
-	public List<MemberVO> getListMemberByAdmin(int start,int end,String keyfield,String keyword)throws Exception{
-		Connection conn=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		List<MemberVO> list=null;
-		String sql=null;
-		String sub_sql="";
-		int cnt=0;
-		
-		try {
-			//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션을 할당
-			conn=DBUtil.getConnection();
+		public List<MemberVO> getListMemberByAdmin(int start,int end,String keyfield,String keyword)throws Exception{
+			Connection conn=null;
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			List<MemberVO> list=null;
+			String sql=null;
+			String sub_sql="";
+			int cnt=0;
 			
-			if(keyword!=null && !"".equals(keyword)) {
-				//검색 처리
-				if(keyfield.equals("1")) sub_sql="WHERE id LIKE ?";
-				else if(keyfield.equals("2")) sub_sql="WHERE name LIKE ?";
-				else if(keyfield.equals("3")) sub_sql="WHERE email LIKE ?";
-			}
-			
-			sql="SELECT * FROM (SELECT a.*, rownum rnum FROM "
-					+ "(SELECT * FROM zmember m LEFT JOIN zmember_detail d "
-					+ "USING(mem_num) "+sub_sql
-					+" ORDER BY mem_num DESC NULLS LAST)a) "
-					+ "WHERE rnum>=? AND rnum<=?";
-			
-			pstmt=conn.prepareStatement(sql);
-			
-			if(keyword!=null && !"".equals(keyword)) {
-				pstmt.setString(++cnt, "%"+keyword+"%");
-			}
-			pstmt.setInt(++cnt, start);
-			pstmt.setInt(++cnt, end);
-			
-			rs=pstmt.executeQuery();
-			
-			list=new ArrayList<MemberVO>();
-			
-			while(rs.next()) {
-				MemberVO member = new MemberVO();
-				member.setMem_num(rs.getInt("mem_num"));
-				member.setId(rs.getString("id"));
-				member.setAuth(rs.getInt("auth"));
-				member.setPasswd(rs.getString("passwd"));
-				member.setName(rs.getString("name"));
-				member.setPhone(rs.getString("phone"));
-				member.setEmail(rs.getString("email"));
-				member.setZipcode(rs.getString("zipcode"));
-				member.setAddress1(rs.getString("address1"));
-				member.setAddress2(rs.getString("address2"));
-				member.setPhoto(rs.getString("photo"));
-				member.setReg_date(rs.getDate("reg_date"));
-				member.setModify_date(rs.getDate("modify_date"));
+			try {
+				//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션을 할당
+				conn=DBUtil.getConnection();
 				
-				list.add(member);
+				if(keyword!=null && !"".equals(keyword)) {
+					//검색 처리
+					if(keyfield.equals("1")) sub_sql="WHERE mem_id LIKE ?";
+					else if(keyfield.equals("2")) sub_sql="WHERE mem_name LIKE ?";
+					else if(keyfield.equals("3")) sub_sql="WHERE mem_email LIKE ?";
+				}
+				
+				sql="SELECT * FROM (SELECT a.*, rownum rnum FROM "
+						+ "(SELECT * FROM member m LEFT JOIN member_detail d "
+						+ "USING(mem_num) "+sub_sql
+						+" ORDER BY mem_num DESC NULLS LAST)a) "
+						+ "WHERE rnum>=? AND rnum<=?";
+				
+				pstmt=conn.prepareStatement(sql);
+				
+				if(keyword!=null && !"".equals(keyword)) {
+					pstmt.setString(++cnt, "%"+keyword+"%");
+				}
+				pstmt.setInt(++cnt, start);
+				pstmt.setInt(++cnt, end);
+				
+				rs=pstmt.executeQuery();
+				
+				list=new ArrayList<MemberVO>();
+				
+				while(rs.next()) {
+					MemberVO member = new MemberVO();
+					member.setMem_num(rs.getInt("mem_num"));
+					member.setMem_id(rs.getString("mem_id"));
+					member.setAuth(rs.getInt("auth"));
+					member.setMem_pw(rs.getString("mem_pw"));
+					member.setMem_name(rs.getString("mem_name"));
+					member.setMem_phone(rs.getString("mem_phone"));
+					member.setMem_email(rs.getString("mem_email"));
+					member.setMem_zipcode(rs.getString("mem_zipcode"));
+					member.setMem_addr1(rs.getString("mem_addr1"));
+					member.setMem_addr2(rs.getString("mem_addr2"));
+					member.setMem_photo(rs.getString("mem_photo"));
+					member.setMem_date(rs.getDate("mem_date"));
+					member.setMem_modify_date(rs.getDate("mem_modify_date"));
+					
+					list.add(member);
+				}
+				
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				DBUtil.executeClose(rs, pstmt, conn);
 			}
 			
-		}catch(Exception e) {
-			throw new Exception(e);
-		}finally {
-			DBUtil.executeClose(rs, pstmt, conn);
+			return list;
 		}
-		
-		return list;
-	}
 	
 	//회원정보(등급) 수정
 	public void updateMemberByAdmin(int auth,int mem_num)throws Exception{
