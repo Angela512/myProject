@@ -306,7 +306,6 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 			DBUtil.executeClose(null, pstmt, conn);
 		}
 	}
-	
 	//관리자
 	//전체글 개수(검색글 개수)
 	public int getMemberCountByAdmin(String keyfield,String keyword)throws Exception{
@@ -316,28 +315,28 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 		String sql=null;
 		String sub_sql="";
 		int count=0;
-		
+
 		try {
 			//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션을 할당
 			conn=DBUtil.getConnection();
-			
+
 			if(keyword!=null && !"".equals(keyword)) {
 				//검색 처리
-				if(keyfield.equals("1")) sub_sql="WHERE id LIKE ?";
-				else if(keyfield.equals("2")) sub_sql="WHERE name LIKE ?";
-				else if(keyfield.equals("3")) sub_sql="WHERE email LIKE ?";
+				if(keyfield.equals("1")) sub_sql="WHERE mem_id LIKE ?";
+				else if(keyfield.equals("2")) sub_sql="WHERE mem_name LIKE ?";
+				else if(keyfield.equals("3")) sub_sql="WHERE mem_email LIKE ?";
 			}
-			
-			sql="SELECT COUNT(*) FROM zmember LEFT JOIN zmember_detail USING (mem_num) "+sub_sql;
-			
+
+			sql="SELECT COUNT(*) FROM member LEFT JOIN member_detail USING (mem_num) "+sub_sql;
+
 			pstmt=conn.prepareStatement(sql);
-			
+
 			if(keyword!=null && !"".equals(keyword)) {
 				pstmt.setString(1, "%"+keyword+"%");
 			}
-			
+
 			rs=pstmt.executeQuery();
-			
+
 			if(rs.next()) {
 				count=rs.getInt(1);
 			}
@@ -347,9 +346,10 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 			//자원정리
 			DBUtil.executeClose(rs, pstmt, conn);
 		}
-		
+
 		return count;
 	}
+	
 	//목록(검색글 목록)
 	public List<MemberVO> getListMemberByAdmin(int start,int end,String keyfield,String keyword)throws Exception{
 		Connection conn=null;
