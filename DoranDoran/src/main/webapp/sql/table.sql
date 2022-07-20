@@ -47,6 +47,33 @@ create table notice(
 	);
 create sequence notice_seq;
 
+
+--food
+CREATE TABLE FOOD 
+(
+  FOOD_NUM NUMBER NOT NULL 
+, MEM_NUM NUMBER NOT NULL  
+, FOOD_NAME VARCHAR2(15) NOT NULL 
+, FOOD_PHONE VARCHAR2(20) 
+, FOOD_TIME VARCHAR2(20) 
+, FOOD_MENU VARCHAR2(60) 
+, FOOD_LINK VARCHAR2(30) 
+, FOOD_ZIPCODE VARCHAR2(5) NOT NULL
+, FOOD_ADDR1 VARCHAR2(150) NOT NULL 
+, FOOD_ADDR2 VARCHAR2(150) NOT NULL 
+, FOOD_MAP VARCHAR2(150) NOT NULL 
+, FOOD_IMAGE1 VARCHAR2(150) 
+, FOOD_IMAGE2 VARCHAR2(150) 
+, FOOD_IMAGE3 VARCHAR2(150) 
+, FOOD_COUNT NUMBER(5)
+, constraint FOOD_PK primary key (FOOD_NUM)
+, constraint FOOD_FK foreign key (MEM_NUM) 
+                             references MEMBER (MEM_NUM)
+); 
+
+create sequence food_seq;
+
+
 --job
 CREATE TABLE JOB 
 (
