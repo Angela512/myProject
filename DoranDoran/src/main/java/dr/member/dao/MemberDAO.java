@@ -180,22 +180,22 @@ public class MemberDAO {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		String sql=null;
-		
+
 		try {
 			//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
 			conn=DBUtil.getConnection();
 			//SQL문 작성
-			sql="UPDATE zmember_detail SET name=?,phone=?,email=?,zipcode=?,address1=?,"
-					+ "address2=?,modify_date=SYSDATE WHERE mem_num=?";
+			sql="UPDATE member_detail SET mem_name=?,mem_phone=?,mem_email=?,mem_zipcode=?,mem_addr1=?,"
+					+ "mem_addr2=?,mem_modify_date=SYSDATE WHERE mem_num=?";
 			//JDBC 수행 3단계 : PreparedStatement 객체 생성
 			pstmt=conn.prepareStatement(sql);
 			//?에 데이터 바인딩
-			pstmt.setString(1, member.getName());
-			pstmt.setString(2, member.getPhone());
-			pstmt.setString(3, member.getEmail());
-			pstmt.setString(4, member.getZipcode());
-			pstmt.setString(5, member.getAddress1());
-			pstmt.setString(6, member.getAddress2());
+			pstmt.setString(1, member.getMem_name());
+			pstmt.setString(2, member.getMem_phone());
+			pstmt.setString(3, member.getMem_email());
+			pstmt.setString(4, member.getMem_zipcode());
+			pstmt.setString(5, member.getMem_addr1());
+			pstmt.setString(6, member.getMem_addr2());
 			pstmt.setInt(7, member.getMem_num());
 			//JDBC 수행 4단계 : 
 			pstmt.executeUpdate();
