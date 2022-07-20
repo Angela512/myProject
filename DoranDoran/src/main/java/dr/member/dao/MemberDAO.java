@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dr.member.vo.MemberVO;
-import kr.util.DBUtil;
+import dr.util.DBUtil;
 
 public class MemberDAO {
 	//싱글턴 패턴

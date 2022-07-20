@@ -24,8 +24,8 @@ public class RegisterUserAction implements Action{
 		member.setMem_phone(request.getParameter("mem_phone"));
 		member.setMem_email(request.getParameter("mem_email"));
 		member.setMem_zipcode(request.getParameter("mem_zipcode"));
-		member.setAddress1(request.getParameter("mem_addr1"));
-		member.setAddress1(request.getParameter("mem_addr2"));
+		member.setMem_addr1(request.getParameter("mem_addr1"));
+		member.setMem_addr2(request.getParameter("mem_addr2"));
 		  
 		MemberDAO dao = MemberDAO.getInstance();
 		dao.insertMember(member);

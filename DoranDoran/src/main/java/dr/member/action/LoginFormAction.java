@@ -3,7 +3,7 @@ package dr.member.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.controller.Action;
+import dr.controller.Action;
 
 public class LoginFormAction implements Action{
 

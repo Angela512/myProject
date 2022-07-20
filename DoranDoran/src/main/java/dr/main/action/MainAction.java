@@ -1,9 +1,9 @@
-package kr.main.action;
+package dr.main.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.controller.Action;
+import dr.controller.Action;
 
 public class MainAction implements Action{
 

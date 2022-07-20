@@ -1,4 +1,4 @@
-package kr.util;
+package dr.util;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,4 +1,4 @@
-package kr.util;
+package dr.util;
 
 public class PagingUtil {
 	private int startRow;	 // 한 페이지에서 보여줄 게시글의 시작 번호
