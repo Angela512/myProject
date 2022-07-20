@@ -73,6 +73,9 @@ CREATE TABLE JOB
 
 create sequence job_seq;
 
+ALTER TABLE job ADD CONSTRAINT fk_mj foreign KEY(mem_num) references MEMBER (mem_num);
+
+
 --member_detail
 
 CREATE TABLE MEMBER_DETAIL 
@@ -120,6 +123,8 @@ NO INMEMORY
 NOPARALLEL;
 
 create sequence MEMBER_DETAIL_seq;
+
+ALTER TABLE MEMBER_DETAIL ADD CONSTRAINT fk_mm foreign KEY(mem_num) references MEMBER (mem_num);
 
 --trade_like
 create table trade_like(
