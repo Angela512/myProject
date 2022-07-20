@@ -242,7 +242,7 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 	         //JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션을 할당
 	         conn=DBUtil.getConnection();
 	         //SQL문 작성
-	         sql="UPDATE member_detail SET photo=? WHERE mem_num=?";
+	         sql="UPDATE member_detail SET mem_photo=? WHERE mem_num=?";
 	         //JDBC 수행 3단계 : PreparedStatement 객체 생성
 	         pstmt=conn.prepareStatement(sql);
 	         //?에 데이터 바인딩
@@ -274,9 +274,9 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 			//auto commit 해제
 			conn.setAutoCommit(false);
 			
-			//zmember의 auth 값 변경
+			//member의 auth 값 변경
 			//SQL문 작성
-			sql="UPDATE zmember SET auth=0 WHERE mem_num=?";
+			sql="UPDATE member SET auth=0 WHERE mem_num=?";
 			//JDBC 수행 3단계 : PreparedStatement 객체 생성
 			pstmt=conn.prepareStatement(sql);
 			//?에 데이터 바인딩
@@ -284,9 +284,9 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 			//JDBC 수행 4단계
 			pstmt.executeUpdate();
 					
-			//zmember_detail의 레코드 삭제
+			//member_detail의 레코드 삭제
 			//SQL문 작성
-			sql="DELETE FROM zmember_detail WHERE mem_num=?";
+			sql="DELETE FROM member_detail WHERE mem_num=?";
 			//JDBC 수행 3단계 : PreparedStatement 객체 생성
 			pstmt2=conn.prepareStatement(sql);
 			//?에 데이터 바인딩
