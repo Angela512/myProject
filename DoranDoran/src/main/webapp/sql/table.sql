@@ -119,4 +119,4 @@ NOCOMPRESS
 NO INMEMORY 
 NOPARALLEL;
 
-create sequence MEMBER_DETAIL_seq ;
+create sequence MEMBER_DETAIL_seq;
