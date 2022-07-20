@@ -3,9 +3,9 @@ package dr.member.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.controller.Action;
-import kr.member.dao.MemberDAO;
-import kr.member.vo.MemberVO;
+import dr.member.dao.MemberDAO;
+import dr.member.vo.MemberVO;
+import dr.controller.Action;
 
 public class RegisterUserAction implements Action{
 
@@ -18,14 +18,14 @@ public class RegisterUserAction implements Action{
 		//자바빈(VO) 생성
 		MemberVO member = new MemberVO();
 		//전송된 데이터를 자바빈에 저장
-		member.setId(request.getParameter("mem_id"));
-		member.setName(request.getParameter("mem_name"));
-		member.setPasswd(request.getParameter("mem_pw"));
-		member.setPhone(request.getParameter("mem_phone"));
-		member.setEmail(request.getParameter("mem_email"));
-		member.setZipcode(request.getParameter("mem_zipcode"));
+		member.setMem_id(request.getParameter("mem_id"));
+		member.setMem_name(request.getParameter("mem_name"));
+		member.setMem_pw(request.getParameter("mem_pw"));
+		member.setMem_phone(request.getParameter("mem_phone"));
+		member.setMem_email(request.getParameter("mem_email"));
+		member.setMem_zipcode(request.getParameter("mem_zipcode"));
 		member.setAddress1(request.getParameter("mem_addr1"));
-		member.setAddress2(request.getParameter("mem_addr2"));
+		member.setAddress1(request.getParameter("mem_addr2"));
 		  
 		MemberDAO dao = MemberDAO.getInstance();
 		dao.insertMember(member);
