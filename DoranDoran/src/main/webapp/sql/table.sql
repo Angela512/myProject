@@ -169,15 +169,14 @@ create sequence trade_like_seq;
 create table board(
  mem_num number not null,
  board_num number not null,
- board_head varchar2,
+ board_head varchar2(15),
  board_title varchar2(50) not null,
- board_content clob(15) not null,
+ board_content clob not null,
  board_date date default sysdate not null,
  board_count number(5),
- board_image1 varchar2,
- board_image2 varchar2,
- board_image3 varchar2,
- 
+ board_image1 varchar2(150),
+ board_image2 varchar2(150),
+ board_image3 varchar2(150),
  constraint board_pk primary key (board_num),
  constraint board_fk foreign key (mem_num) references member (mem_num)
 );
@@ -189,12 +188,12 @@ create table board_reply(
  mem_num number not null,
  board_num number not null,
  reply_num number not null,
- reply_content varchar2 not null,
- reply_date date default sysdate not null
+ reply_content varchar2(330) not null,
+ reply_date date default sysdate not null,
  
  constraint board_reply_pk primary key (reply_num),
  constraint board_reply_fk foreign key (mem_num) references member (mem_num),
- constraint board_reply_fk foreign key (board_num) references board (board_num)
+ constraint board_reply_fk2 foreign key (board_num) references board (board_num)
 );
 
 create sequence board_reply_seq;
