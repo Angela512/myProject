@@ -3,10 +3,10 @@
   <display-name>ch08-MvcPage</display-name>
   <servlet>
   	<servlet-name>DispatcherServlet</servlet-name>
-  	<servlet-class>kr.controller.DispatcherServlet</servlet-class>
+  	<servlet-class>dr.controller.DispatcherServlet</servlet-class>
   	<init-param>
   		<param-name>propertiesPath</param-name>
-  		<param-value>/WEB-INF/board.properties,/WEB-INF/food.properties,/WEB-INF/job.properties,/WEB-INF/notice.properties,/WEB-INF/trade.properties</param-value>
+  		<param-value>/WEB-INF/board.properties,/WEB-INF/food.properties,/WEB-INF/job.properties,/WEB-INF/notice.properties,/WEB-INF/trade.properties,/WEB-INF/member.properties</param-value>
   	</init-param>
   </servlet>
   <servlet-mapping>
