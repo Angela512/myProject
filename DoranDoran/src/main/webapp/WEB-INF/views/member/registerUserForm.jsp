@@ -19,7 +19,7 @@
 			<ul>
 				<li>
 					<label for="id">id</label>
-					<input type="text" name="id" id="id"
+					<input type="text" name="mem_id" id="id"
 					  maxlength="12" autocomplete="off">
 					<input type="button" value="ID중복체크"
 					      id="id_check">
