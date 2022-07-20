@@ -28,34 +28,34 @@
 				</li>
 				<li>
 					<label for="name">이름</label>
-					<input type="text" name="name" id="name" maxlength="10">
+					<input type="text" name="mem_name" id="name" maxlength="10">
 				</li>
 				<li>
 					<label for="passwd">비밀번호</label>
-					<input type="password" name="passwd" id="passwd" maxlength="12">
+					<input type="password" name="mem_pw" id="passwd" maxlength="12">
 				</li>
 				<li>
 					<label for="phone">전화번호</label>
-					<input type="text" name="phone" id="phone" maxlength="15">
+					<input type="text" name="mem_phone" id="phone" maxlength="15">
 				</li>
 				<li>
 					<label for="email">이메일</label>
-					<input type="email" name="email" id="email" maxlength="50">
+					<input type="email" name="mem_email" id="email" maxlength="50">
 				</li>
 				<li>
 					<label for="zipcode">우편번호</label>
-					<input type="text" name="zipcode" id="zipcode" 
+					<input type="text" name="mem_zipcode" id="zipcode" 
 					   maxlength="5" autocomplete="off">
 					<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기">
 				</li>
 				<li>
 					<label for="address1">주소</label>
-					<input type="text" name="address1" id="address1" 
+					<input type="text" name="mem_addr1" id="address1" 
 					                                        maxlength="30">
 				</li>
 				<li>
 					<label for="address2">나머지 주소</label>
-					<input type="text" name="address2" id="address2" 
+					<input type="text" name="mem_addr1" id="address2" 
 					                                        maxlength="30">
 				</li>
 			</ul>
