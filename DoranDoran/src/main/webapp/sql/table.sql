@@ -120,3 +120,15 @@ NO INMEMORY
 NOPARALLEL;
 
 create sequence MEMBER_DETAIL_seq;
+
+--trade_like
+create table trade_like(
+    like_num number not null,
+    mem_num number not null,
+    trade_num number not null,
+    constraint trade_like_pk primary key (like_num),
+    constraint trade_like_fk1 foreign key (mem_num) references member (mem_num),
+    constraint trade_like_fk2 foreign key (trade_num) references trade (trade_num)
+);
+
+create sequence trade_like_seq;
