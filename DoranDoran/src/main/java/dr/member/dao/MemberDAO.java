@@ -207,7 +207,7 @@ public class MemberDAO {
 	}
 	
 	//비밀번호 수정
-	public void updatePassword(String passwd,int mem_num)throws Exception{
+	public void updatePassword(String mem_pw,int mem_num)throws Exception{
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		String sql=null;
@@ -216,11 +216,11 @@ public class MemberDAO {
 			//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션을 할당
 			conn=DBUtil.getConnection();
 			//SQL문 작성
-			sql="UPDATE zmember_detail SET passwd=? WHERE mem_num=?";
+			sql="UPDATE member_detail SET mem_pw=? WHERE mem_num=?";
 			//JDBC 수행 3단계 : PreparedStatement 객체 생성
 			pstmt=conn.prepareStatement(sql);
 			//?에 데이터 바인딩
-			pstmt.setString(1, passwd);
+			pstmt.setString(1, mem_pw);
 			pstmt.setInt(2, mem_num);
 			//JDBC 수행 4단계
 			pstmt.executeUpdate();
