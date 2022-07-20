@@ -233,31 +233,31 @@ public class MemberDAO {
 	}
 	
 	//프로필 사진 수정
-	public void updateMyPhoto(String photo,int mem_num)throws Exception{
-		Connection conn=null;
-		PreparedStatement pstmt=null;
-		String sql=null;
-		
-		try {
-			//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션을 할당
-			conn=DBUtil.getConnection();
-			//SQL문 작성
-			sql="UPDATE zmember_detail SET photo=? WHERE mem_num=?";
-			//JDBC 수행 3단계 : PreparedStatement 객체 생성
-			pstmt=conn.prepareStatement(sql);
-			//?에 데이터 바인딩
-			pstmt.setString(1, photo);
-			pstmt.setInt(2, mem_num);
-			//JDBC 수행 4단계
-			pstmt.executeUpdate();
-			
-		}catch(Exception e) {
-			throw new Exception(e);
-		}finally {
-			//자원정리
-			DBUtil.executeClose(null, pstmt, conn);
-		}
-	}
+	   public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
+	      Connection conn=null;
+	      PreparedStatement pstmt=null;
+	      String sql=null;
+	      
+	      try {
+	         //JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션을 할당
+	         conn=DBUtil.getConnection();
+	         //SQL문 작성
+	         sql="UPDATE member_detail SET photo=? WHERE mem_num=?";
+	         //JDBC 수행 3단계 : PreparedStatement 객체 생성
+	         pstmt=conn.prepareStatement(sql);
+	         //?에 데이터 바인딩
+	         pstmt.setString(1, mem_photo);
+	         pstmt.setInt(2, mem_num);
+	         //JDBC 수행 4단계
+	         pstmt.executeUpdate();
+	         
+	      }catch(Exception e) {
+	         throw new Exception(e);
+	      }finally {
+	         //자원정리
+	         DBUtil.executeClose(null, pstmt, conn);
+	      }
+	   }
 	
 	//회원탈퇴(회원정보 삭제)
 	public void deleteMember(int mem_num)throws Exception{
