@@ -55,7 +55,7 @@
 				</li>
 				<li>
 					<label for="address2">나머지 주소</label>
-					<input type="text" name="mem_addr1" id="address2" 
+					<input type="text" name="mem_addr2" id="address2" 
 					                                        maxlength="30">
 				</li>
 			</ul>
