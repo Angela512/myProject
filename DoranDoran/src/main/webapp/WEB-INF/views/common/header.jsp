@@ -10,19 +10,19 @@
 <div id="main_nav">
 	<ul>
 		<li>
-			<a href="${pageContext.request.contextPath}/board/list.do">공지사항</a>
+			<a href="${pageContext.request.contextPath}/notice/list.do">공지사항</a>
 		</li>
 		
 		<li>
-			<a href="${pageContext.request.contextPath}/board/list.do">맛집찾기</a>
+			<a href="${pageContext.request.contextPath}/food/list.do">맛집찾기</a>
 		</li>
 		
 		<li>
-			<a href="${pageContext.request.contextPath}/board/list.do">중고거래</a>
+			<a href="${pageContext.request.contextPath}/trade/list.do">중고거래</a>
 		</li>
 		
 		<li>
-			<a href="${pageContext.request.contextPath}/board/list.do">구인구직</a>
+			<a href="${pageContext.request.contextPath}/job/list.do">구인구직</a>
 		</li>
 		
 		<li>
