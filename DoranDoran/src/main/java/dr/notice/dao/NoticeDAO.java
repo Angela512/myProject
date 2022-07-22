@@ -9,7 +9,7 @@ import java.util.List;
 import dr.notice.vo.NoticeVO;
 import dr.util.DBUtil;
 import dr.util.StringUtil;
-//import kr.board.vo.BoardFavVO;
+import dr.notice.vo.NoticeFavVO;
 
 public class NoticeDAO {
 	//싱글턴 패턴
@@ -180,8 +180,10 @@ public class NoticeDAO {
 				notice.setNotice_title(rs.getString("notice_title"));
 				notice.setNotice_content(rs.getString("notice_content"));
 				notice.setNotice_count(rs.getInt("notice_count"));
-				notice.setNotice_date(rs.getDate("notice_date1"));
+				notice.setNotice_date(rs.getDate("notice_date"));
 				notice.setNotice_file1(rs.getString("notice_file1"));
+				notice.setNotice_file2(rs.getString("notice_file2"));
+				notice.setNotice_file3(rs.getString("notice_file3"));
 				notice.setMem_num(rs.getInt("mem_num"));
 				notice.setMem_name(rs.getString("mem_name"));
 			}
@@ -230,7 +232,7 @@ public class NoticeDAO {
 			//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
 			conn = DBUtil.getConnection();
 			//SQL문 작성
-			sql = "UPDATE notice SET notice_file1='' WHERE notice_num=?";
+			sql = "UPDATE notice SET notice_file1='', notice_file2='', notice_file3='' WHERE notice_num=?";
 			//filename=''은 기존 파일명을 지우겠다는 의미
 			//파일만 없애는거니까 레코드를 다 지워버리면 안됨
 			
@@ -250,7 +252,7 @@ public class NoticeDAO {
 	}
 	
 	//글 수정
-	public void updateBoard(NoticeVO notice) throws Exception {
+	public void updateNotice(NoticeVO notice) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -266,6 +268,14 @@ public class NoticeDAO {
 				//업로드한 파일이 있는 경우
 				sub_sql = ", notice_file1=?";
 			}
+			if(notice.getNotice_file2() != null) {
+				//업로드한 파일이 있는 경우
+				sub_sql = ", notice_file2=?";
+			}
+			if(notice.getNotice_file3() != null) {
+				//업로드한 파일이 있는 경우
+				sub_sql = ", notice_file3=?";
+			}
 			
 			//SQL문 작성
 			sql = "UPDATE notice SET notice_title=?, notice_content=?" + sub_sql + " WHERE notice_num=?";
@@ -277,6 +287,12 @@ public class NoticeDAO {
 			pstmt.setString(++cnt, notice.getNotice_content());
 			if(notice.getNotice_file1() != null) {
 				pstmt.setString(++cnt, notice.getNotice_file1());
+			}
+			if(notice.getNotice_file2() != null) {
+				pstmt.setString(++cnt, notice.getNotice_file2());
+			}
+			if(notice.getNotice_file3() != null) {
+				pstmt.setString(++cnt, notice.getNotice_file3());
 			}
 			pstmt.setInt(++cnt, notice.getNotice_num());
 			
@@ -307,6 +323,14 @@ public class NoticeDAO {
 				//댓글 삭제
 				
 				//좋아요 삭제
+				/*
+				 * 
+				 
+				sql = "DELETE FROM notice_fav WHERE notice_num=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, notice_num);
+				pstmt.executeUpdate();
+				*/
 				
 				//부모글 삭제
 				sql = "DELETE FROM notice WHERE notice_num=?";
@@ -355,11 +379,41 @@ public class NoticeDAO {
 				DBUtil.executeClose(null, pstmt, conn);
 			}
 		}
-		/*
+		
 		//좋아요 개수
+		public int selectFavCount(int board_num)
+				throws Exception{
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			int count = 0;
+
+			try {
+				//커넥션풀로부터 커넥션 할당
+				conn = DBUtil.getConnection();
+				//SQL문 작성
+				sql = "SELECT COUNT(*) FROM zboard_fav WHERE board_num=?";
+				//PreparedStatement 객체 생성
+				pstmt = conn.prepareStatement(sql);
+				//?에 데이터 바인딩
+				pstmt.setInt(1, board_num);
+				//SQL문 실행
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					count = rs.getInt(1);
+				}
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				//자원정리
+				DBUtil.executeClose(rs, pstmt, conn);
+			}
+			return count;
+		}
+		
 		//회원번호와 게시물 번호를 이용한 좋아요 정보
-		public NoticeFavVO selectFav(int notice_num, int mem_num)
-		                                    throws Exception{
+		public NoticeFavVO selectFav(int notice_num, int mem_num) throws Exception{
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
@@ -374,12 +428,12 @@ public class NoticeDAO {
 				//PreparedStatement 객체 생성
 				pstmt = conn.prepareStatement(sql);
 				//?에 데이터를 바인딩
-				pstmt.setInt(1, board_num);
+				pstmt.setInt(1, notice_num);
 				pstmt.setInt(2, mem_num);
 				//SQL문 실행
 				rs = pstmt.executeQuery();
 				if(rs.next()) {
-					fav = new BoardFavVO();
+					fav = new NoticeFavVO();
 					fav.setFav_num(rs.getInt("fav_num"));
 					fav.setBoard_num(rs.getInt("board_num"));
 					fav.setMem_num(rs.getInt("mem_num"));
@@ -392,10 +446,78 @@ public class NoticeDAO {
 			}
 			return fav;
 		}
-	
-	
-	//좋아요 삭제
-	//내가 선택한 좋아요 목록
+		//좋아요 삭제
+		public void deleteFav(int fav_num)throws Exception{
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			String sql = null;
+			
+			try {
+				//커넥션풀로부터 커넥션 할당
+				conn = DBUtil.getConnection();
+				//SQL문 작성
+				sql = "DELETE FROM zboard_fav WHERE fav_num=?";
+				//PreparedStatement 객체 생성
+				pstmt = conn.prepareStatement(sql);
+				//?에 데이터 바인딩
+				pstmt.setInt(1, fav_num);
+				//SQL문 실행
+				pstmt.executeUpdate();
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				//자원정리
+				DBUtil.executeClose(null, pstmt, conn);
+			}
+		}
+		//내가 선택한 좋아요 목록
+		public List<NoticeVO> getListBoardFav(int start,int end, int mem_num) throws Exception{
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			List<NoticeVO> list = null;
+			String sql = null;
+			
+			try {
+				//커넥션풀로부터 커넥션 할당
+				conn = DBUtil.getConnection();
+				//SQL문 작성
+				sql = "SELECT * FROM (SELECT a.*, rownum rnum "
+				    + "FROM (SELECT * FROM notice n JOIN "
+				    + "member m USING(mem_num) JOIN notice_fav f "
+				    + "USING(notice_num) WHERE f.mem_num=? "
+				    + "ORDER BY notice_num DESC)a) "
+				    + "WHERE rnum >= ? AND rnum<=?";
+				
+				//PreparedStatement 객체 생성
+				pstmt = conn.prepareStatement(sql);
+				//?에 데이터 바인딩
+				pstmt.setInt(1, mem_num);
+				pstmt.setInt(2, start);
+				pstmt.setInt(3, end);
+				
+				//SQL문 실행
+				rs = pstmt.executeQuery();
+				list = new ArrayList<NoticeVO>();
+				while(rs.next()) {
+					NoticeVO notice = new NoticeVO();
+					notice.setNotice_num(rs.getInt("notice_num"));
+					notice.setNotice_title(StringUtil.useNoHtml(
+							           rs.getString("title")));
+					notice.setNotice_date(rs.getDate("notice_date"));
+					notice.setMem_name(rs.getString("mem_name"));
+					
+					list.add(notice);
+				}
+				
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				//자원정리
+				DBUtil.executeClose(rs, pstmt, conn);
+			}
+			return list;
+		}
 	
 	//댓글 등록
 	//댓글 갯수
@@ -403,6 +525,6 @@ public class NoticeDAO {
 	//댓글 상세
 	//댓글 수정
 	//댓글 삭제
-	 * */
+
 	 
 }

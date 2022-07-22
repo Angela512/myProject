@@ -25,13 +25,11 @@ public class ListAction implements Action{
 		int count = dao.getNoticeCount(keyfield, keyword);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield,keyword,
-				Integer.parseInt(pageNum),count,20,10,"list.do");
+		PagingUtil page = new PagingUtil(keyfield,keyword, Integer.parseInt(pageNum),count,20,10,"list.do");
 		
 		List<NoticeVO> list = null;
 		if(count > 0) {
-			list = dao.getListNotice(page.getStartRow(),
-					       page.getEndRow(), keyfield, keyword);
+			list = dao.getListNotice(page.getStartRow(), page.getEndRow(), keyfield, keyword);
 		}
 		
 		request.setAttribute("count", count);

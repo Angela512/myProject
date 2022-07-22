@@ -31,11 +31,25 @@
 			</li>
 		</ul>
 		<hr size="1" noshade="noshade" width="100%">
+		
+		<!-- 업로드 사진 -->
 		<c:if test="${!empty notice.notice_file1}">
-		<div class="align-center">
+		<div class="align-left">
 			<img src="${pageContext.request.contextPath}/upload/${notice.notice_file1}" class="detail-img">
 		</div>
 		</c:if>
+		<c:if test="${!empty notice.notice_file2}">
+		<div class="align-center">
+			<img src="${pageContext.request.contextPath}/upload/${notice.notice_file2}" class="detail-img">
+		</div>
+		</c:if>
+		<c:if test="${!empty notice.notice_file3}">
+		<div class="align-right">
+			<img src="${pageContext.request.contextPath}/upload/${notice.notice_file3}" class="detail-img">
+		</div>
+		</c:if>
+		<!-- 업로드사진 -->
+		
 		<p>
 			${notice.notice_content}
 		</p>
@@ -76,7 +90,7 @@
 		<div id="reply_div">
 			<span class="re-title">댓글 달기</span>
 			<form id="re_form">
-				<input type="hidden" name="board_num" value="${board.board_num}" id="board_num">
+				<input type="hidden" name="notice_num" value="${notice.notice_num}" id="notice_num">
 			</form>
 		</div>
 		댓글 끝 -->
