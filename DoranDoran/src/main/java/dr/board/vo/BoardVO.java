@@ -15,8 +15,23 @@ public class BoardVO {
 	private String board_image2;
 	private String board_image3;
 	
+	private String mem_id;
 	private String mem_name;
 	private String mem_photo;
+	private Date mem_modify_date;
+	
+	public Date getMem_modify_date() {
+		return mem_modify_date;
+	}
+	public void setMem_modify_date(Date mem_modify_date) {
+		this.mem_modify_date = mem_modify_date;
+	}
+	public String getMem_id() {
+		return mem_id;
+	}
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
+	}
 	public int getMem_num() {
 		return mem_num;
 	}
