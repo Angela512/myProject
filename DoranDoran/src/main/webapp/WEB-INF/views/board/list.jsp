@@ -49,17 +49,17 @@
 		<c:if test="${count > 0}">
 		<table>
 			 <tr>
-			 	<th>글번호</th>
+			 	<th>말머리</th>
 			 	<th>제목</th>
 			 	<th>작성자</th>
 			 	<th>작성일</th>
-			 	<th>조회</th>
+			 	<th>조회수</th>
 			 </tr>
 			 <c:forEach var="board" items="${list}">
 			 <tr>
-			 	<td>${board.board_num}</td>
+			 	<td>${board.board_head}</td>
 			 	<td><a href="detail.do?board_num=${board.board_num}">${board.board_title}</a></td>
-			 	<td>${board.mem_id}</td>
+			 	<td>${board.mem_name}</td>
 			 	<td>${board.board_date}</td>
 			 	<td>${board.board_count}</td>
 			 </tr>

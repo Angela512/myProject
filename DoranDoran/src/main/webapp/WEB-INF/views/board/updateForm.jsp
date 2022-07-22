@@ -19,24 +19,38 @@
 			<input type="hidden" name="board_num" value="${board.board_num}">
 			<ul>
 				<li>
+					<select name="board_head">
+						<option value="말머리 선택">말머리 선택</option>
+		     			<option value="동네소식">동네소식</option>
+		     			<option value="도움요청">도움요청</option>
+		     			<option value="함께해요">함께해요</option>
+		     			<option value="기타">기타</option>
+					</select>
+				</li>
+				<li>
 					<label for="title">제목</label>
-					<input type="text" name="title" id="title" value="${board.title}" 
+					<input type="text" name="title" id="title" value="${board.board_title}" 
 					maxlength="50">
 				</li>
 				<li>
 					<label for="content">내용</label>
-					<textarea rows="5" cols="30" name="content" id="content">${board.content}</textarea>
+					<textarea rows="5" cols="30" name="content" id="content">${board.board_content}</textarea>
 				</li>
 				<li>
-					<label for="filename">파일</label>
-					<input type="file" name="filename" id="filename" 
+					<label for="filename">이미지 첨부</label><br>
+					<input type="file" name="board_image1" id="filename" 
+					accept="image/gif,image/png,image/jpeg"><br>
+					<input type="file" name="board_image2" id="filename" 
+					accept="image/gif,image/png,image/jpeg"><br>
+					<input type="file" name="board_image3" id="filename" 
 					accept="image/gif,image/png,image/jpeg">
-					<c:if test="${!empty board.filename}">
+		
+					<c:if test="${!empty board.board_image1}">
 					<br>
 					<span id="file_detail">
-						(${board.filename})파일이 등록되어 있습니다.
+						(${board.board_image1})파일이 등록되어 있습니다.
 						다시 파일을 업로드하면 기존 파일은 삭제됩니다.
-						<input type="button" value="파일삭제" id="file_del">
+						<input type="button" value="이미지 삭제" id="file_del">
 					</span>
 					<script type="text/javascript">
 					$(function(){

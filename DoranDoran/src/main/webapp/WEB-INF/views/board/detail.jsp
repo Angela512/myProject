@@ -27,7 +27,7 @@
 				</c:if>
 			</li>
 			<li>
-				${board.mem_id}<br>
+				${board.mem_name}<br>
 				조회 : ${board.board_count}
 			</li>
 		</ul>

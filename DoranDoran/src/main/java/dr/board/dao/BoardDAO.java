@@ -29,7 +29,7 @@ public class BoardDAO {
 			try {
 				//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
 				conn = DBUtil.getConnection();
-				//SQL문 작성================자동으로 들어가는 항목 제외하고 sql인서트 하는것이 맞는지?
+				//SQL문 작성================pk(자동으로 들어가는 항목?) 제외하고 필요한 컬럼 인서트 하는것이 맞는지?
 				sql = "INSERT INTO board (board_num,board_head,board_title,board_content,"
 						+ "board_image1,board_image2,board_image3,mem_num) "
 						+ "VALUES (board_seq.nextval,?,?,?,?,?,?,?)";
@@ -231,7 +231,6 @@ public class BoardDAO {
 			}finally {
 				//자원정리
 				DBUtil.executeClose(null, pstmt, conn);
-				
 			}
 		}
 		//이미지 삭제

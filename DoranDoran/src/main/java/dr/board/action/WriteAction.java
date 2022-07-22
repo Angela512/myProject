@@ -25,6 +25,7 @@ public class WriteAction implements Action{
 		//로그인이 된 경우
 		MultipartRequest multi = FileUtil.createFile(request);
 		BoardVO board = new BoardVO();
+		board.setBoard_head(multi.getParameter("board_head"));
 		board.setBoard_title(multi.getParameter("board_title"));
 		board.setBoard_content(multi.getParameter("board_content"));
 		board.setBoard_image1(multi.getFilesystemName("board_image1"));
