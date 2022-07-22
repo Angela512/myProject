@@ -4,13 +4,13 @@
 body{
 	width:960px;
 	margin:0 auto;
-	background:#E6E6E6;
+	background:#E6E6E6;	
 }
 .page-main{
 	background:white;
 	margin:40px 0;
 	border-radius:5px;
-	box-shadow:0 2px 6px rgba(100,100,100,0.3);
+	box-shadow:0 2px 6px rgba(100,100,100,.3);
 	min-height:650px;
 }
 #main_logo{
@@ -19,30 +19,30 @@ body{
 #main_nav{
 	padding:2px 10px 20px 10px;
 	height:20px;
-	background-color:#C1BFBF;
+	background-color: #C1BFBF;
 }
 #main_nav ul{
 	list-style:none;
-	margin:0;
-	padding:0;
+	margin: 0;
+	padding: 0;
 }
 #main_nav ul li{
 	display:inline-block;
 	width:100px;
-	text-align:center;
-	vertical-align:middle;
-	padding-top:5px;
+	text-align: center;
+	vertical-align: middle;
+	padding-top: 5px;
 }
 #main_nav ul li.menu-profile{
-	padding-top:5px;
+	padding-top: 5px;
 	width:25px;
 }
 #main_nav ul li.menu-logout{
 	width:150px;
-	text-align:left;
+	text-align: left;
 }
 .content-main{
-	padding:10px 20px;
+	padding: 10px 20px;
 }
 .result-display{
 	width:400px;
@@ -60,20 +60,45 @@ body{
 	text-align:right;
 }
 a:link{
-	text-decoration:none;
+	text-decoration: none;
 	color:#000000;
 }
 a:visited{
-	text-decoration:none;
+	text-decoration: none;
 	color:#000000;
 }
 a:hover{
-	text-decoration:none;
+	text-decoration: none;
 	color:#6C6C6C;
 }
+/* 메인 */
+.board-space .horizontal-area{
+	margin:2px;
+	padding:3px;
+	width:220px;
+	height:260px;
+	float:left;
+	overflow: hidden;
+}
+.board-space .horizontal-area img.board-image{
+	width:215px;
+	height:195px;
+}
+.board-space .horizontal-area div.board-detail{
+	display:flex;
+	align-items:center;
+}
+.board-space .horizontal-area span{
+	padding:5px;
+	margin:5px;
+}
+.board-space .float-clear{
+	clear:both;
+}
+
 /*목록*/
 form#search_form{
-	border:none;
+	border: none;
 }
 ul.search{
 	width:300px;
@@ -89,6 +114,7 @@ ul.search li{
 .list-space{
 	margin-bottom:10px;
 }
+
 table{
 	width:100%;
 	border:1px solid #000;
@@ -99,6 +125,38 @@ table td, table th{
 	border:1px solid #000;
 	padding:5px;
 }
+/* 글상세 */
+ul.detail-info{
+	list-style: none;
+}
+ul.detail-info li{
+	display: inline-block;
+}
+.detail-img{
+	max-width: 500px;
+}
+ul.detail-sub{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+ul.detail-sub li{
+	display: inline-block;
+	width:49%;
+	height:50px;
+	vertical-align: middle;
+}
+ul.detail-sub li:first-child img{
+	vertical-align: middle;
+}
+ul.detail-sub li:last-child{
+	text-align: right;
+	line-height: 250%;
+}
+#output_fav{
+	cursor: pointer;
+}
+
 /*등록, 수정폼*/
 form{
 	width:600px;
@@ -136,18 +194,10 @@ input[id="zipcode"]{
 }
 .my-photo{
 	object-fit:cover;
-	/*정사각형이 아니라 직사각형일 경우 원 안에 보여지게 할 중심
-	이미지 위치를 지정*/
+	/*정사각형이 아니라 직사각형일 경우 원 안에 보여지게 할 중심 이미지 위치를 지정*/
 	object-position:top;
 	border-radius:50%;
 }
-
-
-
-
-
-
-
 
 
 
