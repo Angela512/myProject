@@ -226,5 +226,25 @@ public class TradeDAO {
 		
 		return trade;
 	}
+	
+	//조회수 증가
+	public void updateReadcount(int trade_num)throws Exception{
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		String sql=null;
+		
+		try {
+			conn=DBUtil.getConnection();
+			sql="UPDATE trade SET trade_count=trade_count+1 WHERE trade_num=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, trade_num);
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+		
+	}
 		
 }

@@ -88,6 +88,7 @@
 					</c:if>
 					
 					<span>${trade.mem_id }</span>
+					<span>조회수 ${trade.trade_count }</span>
 				</div>
 			</div>
 			</c:forEach>
