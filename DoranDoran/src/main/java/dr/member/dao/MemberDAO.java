@@ -86,6 +86,34 @@ public class MemberDAO {
 		}
 	}
 	
+	//auth값 가져오기
+	public MemberVO getAuth(int mem_num)throws Exception{
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		MemberVO member=null;
+		String sql=null;
+		
+		try {
+			conn=DBUtil.getConnection();
+			sql="SELECT * FROM member WHERE mem_num=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, mem_num);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				member=new MemberVO();
+				member.setAuth(rs.getInt("auth"));
+			}
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		
+		return member;
+	}
+	
 	//ID 중복 체크 및 로그인 처리
 	public MemberVO checkMember(String id)throws Exception{
 		Connection conn=null;

@@ -177,5 +177,54 @@ public class TradeDAO {
 		
 		return list;
 	}
+	
+	//글상세
+	public TradeVO getTrade(int trade_num)throws Exception{
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		TradeVO trade = null;
+		String sql=null;
+		
+		try {
+			//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션을 할당
+			conn=DBUtil.getConnection();
+			//SQL문 작성
+			sql="SELECT * FROM trade t JOIN member m USING(mem_num) "
+					+ "JOIN member_detail d USING(mem_num) "
+					+ "WHERE t.trade_num=?";
+			//JDBC 수행 3단계 : PreparedStatement 객체 생성
+			pstmt=conn.prepareStatement(sql);
+			//?에 데이터 바인딩
+			pstmt.setInt(1, trade_num);
+			//JDBC 수행 4단계
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				trade= new TradeVO();
+				trade.setTrade_num(rs.getInt("trade_num"));
+				trade.setMem_num(rs.getInt("mem_num"));
+				trade.setTrade_head(rs.getInt("trade_head"));
+				trade.setTrade_category(rs.getString("trade_category"));
+				trade.setTrade_title(rs.getString("trade_title"));
+				trade.setTrade_date(rs.getDate("trade_date"));
+				trade.setTrade_content(rs.getString("trade_content"));
+				trade.setTrade_price(rs.getInt("trade_price"));
+				trade.setTrade_image1(rs.getString("trade_image1"));
+				trade.setTrade_image2(rs.getString("trade_image2"));
+				trade.setTrade_image3(rs.getString("trade_image3"));
+				trade.setTrade_count(rs.getInt("trade_count"));
+				trade.setTrade_phone(rs.getString("trade_phone"));
+				trade.setMem_id(rs.getString("mem_id"));
+				trade.setMem_photo(rs.getString("mem_photo"));
+			}
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		
+		return trade;
+	}
 		
 }

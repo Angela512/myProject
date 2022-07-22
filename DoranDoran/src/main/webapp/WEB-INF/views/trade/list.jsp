@@ -48,6 +48,21 @@
 			</ul>
 		</form>
 		
+		<div class="list-space align-right">
+			<c:if test="${!empty user_num }">
+			<input type="button" value="글쓰기" onclick="location.href='writeForm.do'">
+			</c:if>
+			<input type="button" value="목록" onclick="location.href='list.do'">
+			<input type="button" value="홈으로" onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
+		</div>
+		
+		<c:if test="${count==0 }">
+		<div class="result-display">
+			표시할 게시물이 없습니다.
+		</div>
+		</c:if>
+		
+		<c:if test="${count>0 }">
 		<div class="board-space">
 			<c:forEach var="trade" items="${list }">
 			<div class="horizontal-area">
@@ -82,21 +97,18 @@
 			
 		</div>
 		
+		
+		
 	
 	
 	
-		<div class="list-space align-right">
-			<c:if test="${!empty user_num }">
-			<input type="button" value="글쓰기" onclick="location.href='writeForm.do'">
-			</c:if>
-			<input type="button" value="목록" onclick="location.href='list.do'">
-			<input type="button" value="홈으로" onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
-		</div>
+	
 		
 		<div class="align-center">
 			${page }
 		</div>
 		
+		</c:if>
 		
 	</div>
 </div>
