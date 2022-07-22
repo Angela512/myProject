@@ -243,7 +243,8 @@ public class BoardDAO {
 				//커넥션풀로부터 커넥션 할당
 				conn = DBUtil.getConnection();
 				//SQL문 작성             빈문자열은 기존 내용 지운다는 소리
-				sql = "UPDATE board SET board_image1='' WHERE board_num=?";
+				sql = "UPDATE board SET board_image1='', board_image2='', board_image3='' "
+						+ "WHERE board_num=?";
 				//PreparedStatement 객체 생성
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, board_num);

@@ -25,6 +25,8 @@ public class UpdateAction implements Action{
 		MultipartRequest multi = FileUtil.createFile(request);
 		int board_num = Integer.parseInt(multi.getParameter("board_num"));
 		String board_image1 = multi.getFilesystemName("board_image1");
+		String board_image2 = multi.getFilesystemName("board_image2");
+		String board_image3 = multi.getFilesystemName("board_image3");
 		
 		BoardDAO dao = BoardDAO.getInstance();
 		//수정 전 데이터
@@ -34,6 +36,8 @@ public class UpdateAction implements Action{
 			
 			//업로드된 파일이 있으면 파일 삭제
 			FileUtil.removeFile(request, board_image1);
+			FileUtil.removeFile(request, board_image2);
+			FileUtil.removeFile(request, board_image3);
 			return "/WEB-INF/views/common/notice.jsp";
 		}
 		
@@ -49,7 +53,14 @@ public class UpdateAction implements Action{
 			//새 파일로 교체할 때 원래 파일은 제거
 			FileUtil.removeFile(request, db_board.getBoard_image1());
 		}
-		
+		if(board_image2 != null) {
+			//새 파일로 교체할 때 원래 파일은 제거
+			FileUtil.removeFile(request, db_board.getBoard_image2());
+		}
+		if(board_image3 != null) {
+			//새 파일로 교체할 때 원래 파일은 제거
+			FileUtil.removeFile(request, db_board.getBoard_image3());
+		}
 		return "redirect:/board/detail.do?board_num="+board_num;
 	}
 
