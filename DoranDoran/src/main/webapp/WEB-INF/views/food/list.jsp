@@ -5,16 +5,52 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판 목록</title>
+<title>맞집 찾기 게시판</title>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script:400" rel="stylesheet">
+<!--  <link href="https://fonts.googleapis.com/css?family=Song+Myung:400" rel="stylesheet">-->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/notice.js"></script>
-</head>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/food.js"></script>
+<!--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+ -->
+ <style type="text/css">
+ .containerr{
+	position:relative;
+	text-align:center;
+	color:blue;
+}
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: Nanum Pen Script;
+	
+	font-size:100px;
+	color:white;
+  
+}
+span{
+	/*font-family: 'Song Myung', cursive; */
+	
+}
+ </style>
+ </head>
 <body>
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<br>
+	<br>
 	<div class="content-main">
-		<h2>게시판 목록</h2>
+	
+	<div class="containerr">
+   	    <img alt="" src="${pageContext.request.contextPath}/images/brooke-lark-wMzx2nBdeng-unsplash.jpg" width="900" height="150">
+	 	<div class="centered">
+	 		<span>맛집 찾기
+	 		</span>
+		</div>
+	</div>
+		<!-- <h2 align= "center">맛집 찾기</h2> -->
 		<form id="search_form" action="list.do" method="get">
 			<ul class="search">
 				<li>
@@ -33,6 +69,10 @@
 					<input type="submit" value="검색">
 				</li>
 			</ul>
+			
+			
+			
+			
 		</form>
 		<div class="list-space align-right">
 		    <c:if test="${!empty user_num}">
@@ -62,7 +102,7 @@
 			<tr>
 				<td>${food.food_num}</td>
 				<td><a href="detail.do?food_num=${food.food_num}">${food.food_name}</a></td>
-				<td>${food.mem_id}</td>
+				<td>${food.mem_name}</td>
 				<td>${food.food_date}</td>
 				<td>${food.food_count}</td>
 			</tr>
@@ -74,7 +114,8 @@
 		</c:if>
 	</div>
 </div>
-</body>
+<!--     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+ --></body>
 </html>
 
 

@@ -9,7 +9,7 @@ import java.util.List;
 import dr.food.vo.FoodVO;
 import dr.util.DBUtil;
 import dr.util.StringUtil;
-//import dr.board.vo.BoardFavVO;
+
 
 public class FoodDAO {
 	//싱글턴 패턴
@@ -98,7 +98,7 @@ public class FoodDAO {
 	
 	
 	//글목록(검색글 목록)
-	public List<FoodVO> getListBoard(int start, int end,
+	public List<FoodVO> getListFood(int start, int end,
 			          String keyfield,String keyword)
 	                                   throws Exception{
 		Connection conn = null;
@@ -141,15 +141,24 @@ public class FoodDAO {
 			while(rs.next()) {
 				FoodVO food = new FoodVO();
 				food.setFood_num(rs.getInt("food_num"));
+				food.setMem_num(rs.getInt("mem_num"));
 				food.setFood_name(StringUtil.useNoHtml(rs.getString("food_name")));
-				food.setFood_content(rs.getString("food_content"));
-				food.setFood_count(rs.getInt("food_count"));
-				//food.setFood_date(rs.getDate("reg_date"));
-				//food.setModify_date(rs.getDate("modify_date"));
+				food.setFood_phone(rs.getString("food_phone"));
+				food.setFood_time(rs.getString("food_time"));
+				food.setFood_menu(rs.getString("food_menu"));
+				food.setFood_link(rs.getString("food_link"));
+				food.setFood_zipcode(rs.getString("food_zipcode"));
+				food.setFood_addr1(rs.getString("food_addr1"));
+				food.setFood_addr2(rs.getString("food_addr2"));
+				food.setFood_map(rs.getString("food_map"));
 				food.setFood_image1(rs.getString("food_image1"));
+				food.setFood_image2(rs.getString("food_image2"));
+				food.setFood_image3(rs.getString("food_image3"));
+				food.setFood_count(rs.getInt("food_count"));		
+				food.setFood_content(rs.getString("food_content"));
 				food.setFood_date(rs.getDate("food_date"));
 				food.setFood_date_modi(rs.getDate("food_date_modi"));
-				food.setMem_num(rs.getInt("mem_num"));
+				
 				food.setMem_id(rs.getString("mem_id"));
 				food.setMem_name(rs.getString("mem_name"));
 				food.setMem_photo(rs.getString("mem_photo"));
@@ -192,15 +201,24 @@ public class FoodDAO {
 			if(rs.next()) {
 				food = new FoodVO();
 				food.setFood_num(rs.getInt("food_num"));
+				food.setMem_num(rs.getInt("mem_num"));
 				food.setFood_name(StringUtil.useNoHtml(rs.getString("food_name")));
-				food.setFood_content(rs.getString("food_content"));
-				food.setFood_count(rs.getInt("food_count"));
-				//food.setFood_date(rs.getDate("reg_date"));
-				//food.setModify_date(rs.getDate("modify_date"));
+				food.setFood_phone(rs.getString("food_phone"));
+				food.setFood_time(rs.getString("food_time"));
+				food.setFood_menu(rs.getString("food_menu"));
+				food.setFood_link(rs.getString("food_link"));
+				food.setFood_zipcode(rs.getString("food_zipcode"));
+				food.setFood_addr1(rs.getString("food_addr1"));
+				food.setFood_addr2(rs.getString("food_addr2"));
+				food.setFood_map(rs.getString("food_map"));
 				food.setFood_image1(rs.getString("food_image1"));
+				food.setFood_image2(rs.getString("food_image2"));
+				food.setFood_image3(rs.getString("food_image3"));
+				food.setFood_count(rs.getInt("food_count"));		
+				food.setFood_content(rs.getString("food_content"));
 				food.setFood_date(rs.getDate("food_date"));
 				food.setFood_date_modi(rs.getDate("food_date_modi"));
-				food.setMem_num(rs.getInt("mem_num"));
+				
 				food.setMem_id(rs.getString("mem_id"));
 				food.setMem_name(rs.getString("mem_name"));
 				food.setMem_photo(rs.getString("mem_photo"));
@@ -288,7 +306,7 @@ public class FoodDAO {
 			}
 			
 			sql = "UPDATE food SET food_name=?,food_content=?,"
-				+ "food_date_modi=SYSDATE" + sub_sql 
+				+ "food_date_modi=SYSDATE " + sub_sql 
 				+ "WHERE food_num=?";
 				//+ ",ip=? WHERE board_num=?";
 			
@@ -303,6 +321,8 @@ public class FoodDAO {
 			//pstmt.setString(++cnt, food.getIp());
 			pstmt.setInt(++cnt, food.getFood_num());
 			
+			//SQL문 실행
+			pstmt.executeUpdate();
 		}catch(Exception e) {
 			throw new Exception(e);
 		}finally {
@@ -351,7 +371,7 @@ public class FoodDAO {
 	}
 	/*
 	//좋아요 등록
-	public void insertFav(int board_num, int mem_num)
+	public void insertFav(int food_num, int mem_num)
 	                                    throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -366,7 +386,7 @@ public class FoodDAO {
 			//PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			//?에 데이터 바인딩
-			pstmt.setInt(1, board_num);
+			pstmt.setInt(1, food_num);
 			pstmt.setInt(2, mem_num);
 			//SQL문 실행
 			pstmt.executeUpdate();
@@ -377,6 +397,7 @@ public class FoodDAO {
 			DBUtil.executeClose(null, pstmt, conn);
 		}
 	}
+	
 	//좋아요 개수
 	//회원번호와 게시물 번호를 이용한 좋아요 정보
 	public BoardFavVO selectFav(int board_num, int mem_num)

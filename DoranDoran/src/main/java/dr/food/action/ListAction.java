@@ -30,7 +30,7 @@ public class ListAction implements Action{
 		
 		List<FoodVO> list = null;
 		if(count > 0) {
-			list = dao.getListBoard(page.getStartRow(),
+			list = dao.getListFood(page.getStartRow(),
 					       page.getEndRow(), keyfield, keyword);
 		}
 		
