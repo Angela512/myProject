@@ -14,7 +14,7 @@
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="content-main">
-		<h2>자유게시판 목록</h2>
+	<jsp:include page="boardHeader.jsp"/>
 		<form id="search_form" action="list.do" method="get">
 			<ul class="search">
 				<li>
@@ -58,7 +58,7 @@
 			 <c:forEach var="board" items="${list}">
 			 <tr>
 			 	<td>${board.board_head}</td>
-			 	<td><a href="detail.do?board_num=${board.board_num}">${board.board_title}</a></td>
+			 	<td><a href="detail.do?board_num=${board.board_num}">${board.title}</a></td>
 			 	<td>${board.mem_name}</td>
 			 	<td>${board.board_date}</td>
 			 	<td>${board.board_count}</td>

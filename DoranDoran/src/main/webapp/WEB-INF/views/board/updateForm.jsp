@@ -14,11 +14,12 @@
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="content-main">
-		<h2>게시판 글수정</h2>
+		<h2>자유게시판 글수정</h2>
 		<form action="update.do" method="post" enctype="multipart/form-data" id="write_form" > <%-- 아이디 공유한 것 --%>
 			<input type="hidden" name="board_num" value="${board.board_num}">
 			<ul>
 				<li>
+					<label>말머리</label>
 					<select name="board_head">
 						<option value="말머리 선택">말머리 선택</option>
 		     			<option value="동네소식">동네소식</option>
@@ -29,39 +30,66 @@
 				</li>
 				<li>
 					<label for="title">제목</label>
-					<input type="text" name="title" id="title" value="${board.board_title}" 
+					<input type="text" name="title" id="title" value="${board.title}" 
 					maxlength="50">
 				</li>
 				<li>
 					<label for="content">내용</label>
-					<textarea rows="5" cols="30" name="content" id="content">${board.board_content}</textarea>
+					<textarea rows="5" cols="30" name="content" id="content">${board.content}</textarea>
 				</li>
 				<li>
-					<label for="filename">이미지 첨부</label><br>
-					<input type="file" name="board_image1" id="filename" 
-					accept="image/gif,image/png,image/jpeg"><br>
-					<input type="file" name="board_image2" id="filename" 
-					accept="image/gif,image/png,image/jpeg"><br>
-					<input type="file" name="board_image3" id="filename" 
+					<span>이미지 첨부</span>
+				</li>
+				<li>
+					<label for="board_image1">이미지1</label>
+					<input type="file" name="board_image1" id="board_image1" 
 					accept="image/gif,image/png,image/jpeg">
-		
+					<br>
+					<label for="board_image2">이미지2</label>
+					<input type="file" name="board_image2" id="board_image2" 
+					accept="image/gif,image/png,image/jpeg">
+					<br>
+					<label for="board_image3">이미지3</label>
+					<input type="file" name="board_image3" id="board_image3" 
+					accept="image/gif,image/png,image/jpeg">
+					<br>
+					
 					<c:if test="${!empty board.board_image1}">
 					<br>
 					<span id="file_detail">
 						(${board.board_image1})파일이 등록되어 있습니다.
 						다시 파일을 업로드하면 기존 파일은 삭제됩니다.
-						<input type="button" value="이미지 삭제" id="file_del">
+						<input type="button" value="파일삭제" data-file="board_image1" class="file_del">
 					</span>
+					</c:if>
+					
+					<c:if test="${!empty board.board_image2}">
+					<br>
+					<span id="file_detail">
+						(${board.board_image2})파일이 등록되어 있습니다.
+						다시 파일을 업로드하면 기존 파일은 삭제됩니다.
+						<input type="button" value="파일삭제" data-file="board_image2" class="file_del">
+					</span>
+					</c:if>
+					<c:if test="${!empty board.board_image3}">
+					<br>
+					<span id="file_detail">
+						(${board.board_image3})파일이 등록되어 있습니다.
+						다시 파일을 업로드하면 기존 파일은 삭제됩니다.
+						<input type="button" value="파일삭제" data-file="board_image3" class="file_del">
+					</span>
+					</c:if>
+					<c:if test="${!empty board.board_image1 or !empty board.board_image2 or !empty board.board_image3}">
 					<script type="text/javascript">
 					$(function(){
 						//이벤트 연결
-						$('#file_del').click(function(){
+						$('.file_del').click(function(){
 							let choice = confirm('삭제하시겠습니까?');
 							if(choice){
 								$.ajax({
 									url:'deleteFile.do',
 									type:'post',        //el임. jsp에서 쓸 수 있음
-									data:{board_num:${board.board_num}},
+									data:{board_num:${board.board_num},board_image:$(this).attr('data-file')},
 									dataType:'json',
 									cache:false,
 									timeout:30000,

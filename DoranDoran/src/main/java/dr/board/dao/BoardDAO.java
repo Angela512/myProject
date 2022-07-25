@@ -37,8 +37,8 @@ public class BoardDAO {
 				pstmt = conn.prepareStatement(sql);
 				//?에 데이터 바인딩
 				pstmt.setString(1, board.getBoard_head());
-				pstmt.setString(2, board.getBoard_title());
-				pstmt.setString(3, board.getBoard_content());
+				pstmt.setString(2, board.getTitle());
+				pstmt.setString(3, board.getContent());
 				pstmt.setString(4, board.getBoard_image1());
 				pstmt.setString(5, board.getBoard_image2());
 				pstmt.setString(6, board.getBoard_image3());
@@ -138,7 +138,7 @@ public class BoardDAO {
 					BoardVO board = new BoardVO();
 					board.setBoard_num(rs.getInt("board_num"));
 					board.setBoard_head(rs.getString("board_head"));
-					board.setBoard_title(StringUtil.useNoHtml(rs.getString("board_title")));
+					board.setTitle(StringUtil.useNoHtml(rs.getString("board_title")));
 					board.setMem_id(rs.getString("mem_id"));
 					board.setMem_name(rs.getString("mem_name"));
 					board.setBoard_date(rs.getDate("board_date"));
@@ -146,7 +146,7 @@ public class BoardDAO {
 					board.setBoard_image1(rs.getString("board_image1"));
 					board.setBoard_image2(rs.getString("board_image2"));
 					board.setBoard_image3(rs.getString("board_image3"));
-					board.setBoard_content(rs.getString("board_content"));
+					board.setContent(rs.getString("board_content"));
 					board.setMem_num(rs.getInt("mem_num"));
 					board.setMem_photo(rs.getString("mem_photo"));
 					
@@ -188,7 +188,7 @@ public class BoardDAO {
 					board = new BoardVO();
 					board.setBoard_num(rs.getInt("board_num"));
 					board.setBoard_head(rs.getString("board_head"));
-					board.setBoard_title(StringUtil.useNoHtml(rs.getString("board_title")));
+					board.setTitle(StringUtil.useNoHtml(rs.getString("board_title")));
 					board.setMem_id(rs.getString("mem_id"));
 					board.setMem_name(rs.getString("mem_name"));
 					board.setBoard_date(rs.getDate("board_date"));
@@ -196,7 +196,7 @@ public class BoardDAO {
 					board.setBoard_image1(rs.getString("board_image1"));
 					board.setBoard_image2(rs.getString("board_image2"));
 					board.setBoard_image3(rs.getString("board_image3"));
-					board.setBoard_content(rs.getString("board_content"));
+					board.setContent(rs.getString("board_content"));
 					board.setMem_num(rs.getInt("mem_num"));
 					board.setMem_photo(rs.getString("mem_photo"));
 				}
@@ -234,7 +234,7 @@ public class BoardDAO {
 			}
 		}
 		//이미지 삭제
-		public void deleteImage(int board_num)throws Exception{
+		public void deleteImage(int board_num, String board_image)throws Exception{
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			String sql = null;
@@ -243,8 +243,7 @@ public class BoardDAO {
 				//커넥션풀로부터 커넥션 할당
 				conn = DBUtil.getConnection();
 				//SQL문 작성             빈문자열은 기존 내용 지운다는 소리
-				sql = "UPDATE board SET board_image1='', board_image2='', board_image3='' "
-						+ "WHERE board_num=?";
+				sql = "UPDATE board SET "+board_image+"='' WHERE board_num=?";
 				//PreparedStatement 객체 생성
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, board_num);
@@ -257,7 +256,6 @@ public class BoardDAO {
 			}finally {
 				//자원정리
 				DBUtil.executeClose(null, pstmt, conn);
-				
 			}
 		}
 		//글수정
@@ -274,23 +272,41 @@ public class BoardDAO {
 				
 				if(board.getBoard_image1()!=null) {
 					//업로드한 이미지가 있는 경우
-					sub_sql = ",board_image1=?";
+					sub_sql += ",board_image1=?";
 				}
+				if(board.getBoard_image2()!=null) {
+					//업로드한 이미지가 있는 경우
+					sub_sql += ",board_image2=?";
+				}
+				if(board.getBoard_image3()!=null) {
+					//업로드한 이미지가 있는 경우
+					sub_sql += ",board_image3=?";
+				}
+				
 				//sql문 작성
 				sql = "UPDATE board SET board_title=?,board_content=?,"
 						+ "board_date=SYSDATE" + sub_sql   //SYSDATE 뒤에 공백 없음. ,로 구분하기 때문
-						+ "WHERE board_num=?";
+						+ " WHERE board_num=?";
 				
 				//PreparedStatement 객체 생성
 				pstmt = conn.prepareStatement(sql);
 				
 				//?에 데이터 바인딩
-				pstmt.setString(++cnt, board.getBoard_title());
-				pstmt.setString(++cnt, board.getBoard_content());
+				pstmt.setString(++cnt, board.getTitle());
+				pstmt.setString(++cnt, board.getContent());
 				if(board.getBoard_image1()!=null) { //이미지가 있을 경우
 					pstmt.setString(++cnt, board.getBoard_image1());
 				}
+				if(board.getBoard_image2()!=null) { //이미지가 있을 경우
+					pstmt.setString(++cnt, board.getBoard_image2());
+				}
+				if(board.getBoard_image3()!=null) { //이미지가 있을 경우
+					pstmt.setString(++cnt, board.getBoard_image3());
+				}
+				
 				pstmt.setInt(++cnt, board.getBoard_num());
+				
+				pstmt.executeUpdate();
 				
 			}catch(Exception e) {
 				throw new Exception(e);
@@ -341,6 +357,10 @@ public class BoardDAO {
 		//회원번호와 게시물 번호를 이용한 좋아요 정보
 		//좋아요 삭제
 		//내가 선택한 좋아요 목록
+		public void deleteFile(int board_num, String board_image) {
+			// TODO Auto-generated method stub
+			
+		}
 		
 		//댓글 등록
 		//댓글 개수

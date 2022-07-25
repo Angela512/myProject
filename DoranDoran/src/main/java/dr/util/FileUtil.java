@@ -12,7 +12,7 @@ public class FileUtil {
 	//인코딩 타입
 	public static final String ENCODING_TYPE = "utf-8";
 	//최대 업로드 사이즈
-	public static final int MAX_SIZE=20*1024*1024;
+	public static final int MAX_SIZE=30*1024*1024;
 	//업로드 상태 경로
 	public static final String UPLOAD_PATH = "/upload";
 	

@@ -27,15 +27,23 @@ public class DeleteFileAction implements Action{
 			mapAjax.put("result", "logout");
 		}else { //로그인 된 경우 (삭제작업)
 			int board_num = Integer.parseInt(request.getParameter("board_num"));
+			String board_image=request.getParameter("board_image");
+			
 			BoardDAO dao = BoardDAO.getInstance();
 			BoardVO db_board = dao.getBoard(board_num);
 			if(user_num!=db_board.getMem_num()) {
 				mapAjax.put("result", "wrongAccess"); //남의 글 삭제면 잘못됐다고 함
 			}else {
-				dao.deleteImage(board_num); //일단 파일명만 지우는 것
+				dao.deleteImage(board_num, board_image); //일단 파일명만 지우는 것
 				
 				//파일 삭제 (실제로)
-				FileUtil.removeFile(request, db_board.getBoard_image1());
+				if(board_image.equals("board_image1")) {
+					FileUtil.removeFile(request, db_board.getBoard_image1());
+				}else if(board_image.equals("board_image2")) {
+					FileUtil.removeFile(request, db_board.getBoard_image2());
+				}else if(board_image.equals("board_image3")) {
+					FileUtil.removeFile(request, db_board.getBoard_image3());
+				}
 				mapAjax.put("result", "success");
 			}
 		}

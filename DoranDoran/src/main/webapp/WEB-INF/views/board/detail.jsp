@@ -14,7 +14,7 @@
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="content-main">
-		<h2>${board.board_title}</h2>
+		<h2>${board.title}</h2>
 		<ul class="detail-info">
 			<li>
 				<c:if test="${!empty board.mem_photo}">
@@ -51,7 +51,7 @@
 		</div>
 		</c:if>
 		<p>
-			${board.board_content}
+			${board.content}
 		</p>
 		<hr size="1" noshade="noshade" width="100%">
 		<ul class="detail-sub">
