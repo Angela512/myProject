@@ -36,6 +36,8 @@ public class WriteAction implements Action{
 		food.setFood_image1(
 				multi.getFilesystemName("filename"));
 		food.setMem_num(user_num);
+		food.setFood_phone(multi.getParameter("phone"));
+		food.setFood_addr1(multi.getParameter("address"));
 		
 		FoodDAO dao = FoodDAO.getInstance();
 		dao.insertFood(food);

@@ -31,8 +31,8 @@ public class FoodDAO {
 			conn = DBUtil.getConnection();
 			//SQL문 작성
 			sql = "INSERT INTO food (food_num,food_name,"
-				+ "food_content,food_image1,mem_num) VALUES ("
-				+ "food_seq.nextval,?,?,?,?)";
+				+ "food_content,food_image1,mem_num,food_phone,food_addr1) VALUES ("
+				+ "food_seq.nextval,?,?,?,?,?,?)";
 			//JDBC 수행 3단계 : PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			//?에 데이터 바인딩
@@ -41,7 +41,8 @@ public class FoodDAO {
 			pstmt.setString(3, food.getFood_image1());
 		//	pstmt.setString(4, board.getIp());
 			pstmt.setInt(4, food.getMem_num());
-		
+			pstmt.setString(5, food.getFood_phone());
+			pstmt.setString(6, food.getFood_addr1());
 			//JDBC 수행 4단계 : SQL문 실행
 			pstmt.executeUpdate();
 			
