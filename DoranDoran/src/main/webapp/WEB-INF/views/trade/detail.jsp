@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/trade.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/trade.like.js"></script>
 </head>
 <body>
 <div class="page-main">
@@ -65,9 +67,15 @@
 	
 	<div>
 	<h3>${trade.trade_title }</h3>
-	<h2>${trade.trade_price }</h2>
+	<h2><fmt:formatNumber value="${trade.trade_price }" pattern="#,###"/>원</h2>
 	전화모양 <h5>${trade.trade_phone }</h5>
-	<h1>찜하기 이미지</h1>
+	
+	<%-- 좋아요 --%>
+	<img id="output_fav" src="${pageContext.request.contextPath}/images/fav01.gif" width="50">
+	찜하기
+	<span id="output_fcount"></span>
+	<input type="hidden" name="trade_num" value="${trade.trade_num }" id="trade_num">
+	
 	</div>
 	</div>
 	
@@ -84,9 +92,11 @@
 		</li>
 		
 		<%-- 로그인한 회원번호와 작성자 회원번호가 일치해야 수정,삭제 가능 또는 관리자 --%>
-		<c:if test="${user_num==trade.mem_num || member.auth==3}">
+		<c:if test="${user_num==trade.mem_num || user_auth==3}">
 		<li>
+			<c:if test="${user_num==trade.mem_num }">
 			<input type="button" value="수정" onclick="location.href='updateForm.do?trade_num=${trade.trade_num}'">
+			</c:if>
 			<input type="button" value="삭제" id="delete_btn">
 			<script type="text/javascript">
 				let delete_btn = document.getElementById('delete_btn');

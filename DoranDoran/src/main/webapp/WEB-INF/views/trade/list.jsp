@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,14 +21,22 @@
 			<ul class="search">
 			
 				<li>
-					<input type="radio" name="trade_head" value="0"/>삽니다
-					<input type="radio" name="trade_head" value="1"/>팝니다
+					<input type="button" value="삽니다" onclick="location.href='list.do?trade_head=0'">
+					<input type="button" value="팝니다" onclick="location.href='list.do?trade_head=1'">
 				</li>
 				
 				<li>
-					<input type="radio" name="trade_category" value="1"/>가전제품
-					<input type="radio" name="trade_category" value="2"/>가구
-					<input type="radio" name="trade_category" value="3"/>옷
+					<c:if test="${!empty param.trade_head }">
+					<input type="button" value="가전제품" onclick="location.href='list.do?trade_head=${param.trade_head}&trade_category=1'">
+					<input type="button" value="가구" onclick="location.href='list.do?trade_head=${param.trade_head}&trade_category=2'">
+					<input type="button" value="옷" onclick="location.href='list.do?trade_head=${param.trade_head}&trade_category=3'">
+					</c:if>
+
+					<c:if test="${empty param.trade_head }">
+					<input type="button" value="가전제품" onclick="location.href='list.do?trade_category=1'">
+					<input type="button" value="가구" onclick="location.href='list.do?trade_category=2'">
+					<input type="button" value="옷" onclick="location.href='list.do?trade_category=3'">
+					</c:if>
 				</li>
 				
 				<li>
@@ -88,7 +97,9 @@
 					</c:if>
 					
 					<span>${trade.mem_id }</span>
+					<%-- <span><fmt:formatNumber value="${trade.trade_price }" pattern="#,###"/>원</span> --%>
 					<span>조회수 ${trade.trade_count }</span>
+					<span>찜 ${trade.like_count }</span>
 				</div>
 			</div>
 			</c:forEach>

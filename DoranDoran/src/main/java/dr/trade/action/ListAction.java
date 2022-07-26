@@ -32,6 +32,7 @@ public class ListAction implements Action{
 		
 		if(count>0) {
 			list=dao.getListTrade(page.getStartRow(), page.getEndRow(), trade_head, trade_category,keyfield,keyword);
+			
 		}
 		
 		request.setAttribute("count", count);

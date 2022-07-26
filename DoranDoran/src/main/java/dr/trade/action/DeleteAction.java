@@ -9,42 +9,41 @@ import dr.member.dao.MemberDAO;
 import dr.member.vo.MemberVO;
 import dr.trade.dao.TradeDAO;
 import dr.trade.vo.TradeVO;
-import dr.util.StringUtil;
+import dr.util.FileUtil;
 
-public class DetailAction implements Action{
+public class DeleteAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		HttpSession session=request.getSession();
 		Integer user_num=(Integer)session.getAttribute("user_num");
+		Integer user_auth=(Integer)session.getAttribute("user_auth");
 		
 		if(user_num==null) {//로그인이 되지 않은 경우
 			return "redirect:/member/loginForm.do";
 		}
 		
-		
-		//글번호 반환
 		int trade_num=Integer.parseInt(request.getParameter("trade_num"));
-		
 		TradeDAO dao=TradeDAO.getInstance();
-		
-		//조회수 증가
-		dao.updateReadcount(trade_num);
-		
-		//글상세 정보 반환
-		TradeVO trade=dao.getTrade(trade_num);
-		
-		//HTML을 허용하지 않음
-		trade.setTrade_title(StringUtil.useNoHtml(trade.getTrade_title()));
-		
-		//HTML을 허용하지 않으면서 줄바꿈 처리
-		trade.setTrade_content(StringUtil.useBrNoHtml(trade.getTrade_content()));
+		TradeVO db_trade=dao.getTrade(trade_num);
 		
 		
-		request.setAttribute("trade", trade);
+		if(user_num!=db_trade.getMem_num() && user_auth!=3) {
+			//로그인한 회원번호와 작성자 회원번호가 불일치,관리자가 아니면
+			return "/WEB-INF/views/common/notice.jsp";
+		}
 		
-		return "/WEB-INF/views/trade/detail.jsp";
+		//로그인한 회원번호와 작성자 회원번호가 일치하거나 관리자일경우
+		dao.deleteTrade(trade_num);
+		//파일삭제
+		FileUtil.removeFile(request, db_trade.getTrade_image1());
+		FileUtil.removeFile(request, db_trade.getTrade_image2());
+		FileUtil.removeFile(request, db_trade.getTrade_image3());
+		
+		
+		
+		return "redirect:/trade/list.do";
 	}
 
 }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dr.member.vo.MemberVO;
+import dr.trade.vo.TradeVO;
 import dr.util.DBUtil;
 
 public class MemberDAO {
@@ -86,33 +87,6 @@ public class MemberDAO {
 		}
 	}
 	
-	//auth값 가져오기
-	public MemberVO getAuth(int mem_num)throws Exception{
-		Connection conn=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		MemberVO member=null;
-		String sql=null;
-		
-		try {
-			conn=DBUtil.getConnection();
-			sql="SELECT * FROM member WHERE mem_num=?";
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, mem_num);
-			rs=pstmt.executeQuery();
-			
-			if(rs.next()) {
-				member=new MemberVO();
-				member.setAuth(rs.getInt("auth"));
-			}
-		}catch(Exception e) {
-			throw new Exception(e);
-		}finally {
-			DBUtil.executeClose(rs, pstmt, conn);
-		}
-		
-		return member;
-	}
 	
 	//ID 중복 체크 및 로그인 처리
 	public MemberVO checkMember(String id)throws Exception{
@@ -470,5 +444,108 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 		}finally {
 			DBUtil.executeClose(null, pstmt, conn);
 		}
+	}
+	
+	//내가 쓴 글 중고거래 게시물 수
+	public int getMyTradeCount(String trade_head,int mem_num)throws Exception{
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=null;
+		String sub_sql="";
+		int count=0;
+		
+		try {
+			conn=DBUtil.getConnection();
+			
+			if(trade_head!=null && !"".equals(trade_head)) {
+				 sub_sql+="AND trade_head="+trade_head;
+			}
+			
+			sql="SELECT COUNT(*) FROM trade t JOIN member m USING(mem_num) WHERE mem_num=? "+sub_sql;
+			
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, mem_num);
+			
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				count=rs.getInt(1);
+			}
+			
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		
+		return count;
+	}
+	
+	//내가 쓴 글 중고거래 게시물 목록
+	public List<TradeVO> getMyListTrade(int start,int end,String trade_head,int mem_num)throws Exception{
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<TradeVO> list=null;
+		String sql=null;
+		String sub_sql="";
+		
+		try {
+			conn=DBUtil.getConnection();
+			
+			if(trade_head!=null && !"".equals(trade_head)) {
+				 sub_sql+="AND trade_head="+trade_head;
+			}
+			
+			sql="SELECT a.*,NVL((SELECT COUNT(trade_num) FROM trade_like t "
+					+ "WHERE t.trade_num = a.trade_num GROUP BY trade_num),0) "
+					+ "AS like_count FROM (SELECT aa.*,rownum rnum FROM "
+					+ "(SELECT * FROM trade t JOIN member m "
+					+ "USING(mem_num) JOIN member_detail d USING(mem_num) "
+					+ "WHERE mem_num=? "+sub_sql
+					+ " ORDER BY t.trade_num DESC)aa) A "
+					+ "WHERE rnum>=? AND rnum<=?";
+			
+			pstmt=conn.prepareStatement(sql);
+			
+			
+			//?에 데이터 바인딩
+			pstmt.setInt(1, mem_num);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			
+			rs=pstmt.executeQuery();
+			
+			list=new ArrayList<TradeVO>();
+			
+			while(rs.next()) {
+				TradeVO trade = new TradeVO();
+				trade.setTrade_num(rs.getInt("trade_num"));
+				trade.setMem_num(rs.getInt("mem_num"));
+				trade.setTrade_head(rs.getInt("trade_head"));
+				trade.setTrade_category(rs.getString("trade_category"));
+				trade.setTrade_title(rs.getString("trade_title"));
+				trade.setTrade_date(rs.getDate("trade_date"));
+				trade.setTrade_content(rs.getString("trade_content"));
+				trade.setTrade_price(rs.getInt("trade_price"));
+				trade.setTrade_image1(rs.getString("trade_image1"));
+				trade.setTrade_image2(rs.getString("trade_image2"));
+				trade.setTrade_image3(rs.getString("trade_image3"));
+				trade.setTrade_count(rs.getInt("trade_count"));
+				trade.setTrade_phone(rs.getString("trade_phone"));
+				trade.setMem_id(rs.getString("mem_id"));
+				trade.setMem_photo(rs.getString("mem_photo"));
+				trade.setLike_count(rs.getString("like_count"));
+				
+				list.add(trade);
+			}
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		
+		return list;
 	}
 }

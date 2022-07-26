@@ -15,6 +15,7 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="content-main">
 	<form id="write_form" action="update.do" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="trade_num" value="${trade.trade_num}">
 		<ul>
 			<li>
 				<label>말머리</label>
@@ -46,7 +47,8 @@
 			<li>
 				<!-- 숫자만 입력하세요 조건체크 -->
 				<label for="trade_price">가격</label>
-				<input type="text" name="trade_price" id="trade_price" value="${trade.trade_price }" maxlength="12">
+				<input type="text" name="trade_price" id="trade_price" pattern="[0-9]+" value="${trade.trade_price }" maxlength="12">
+				<span>숫자만 입력하세요.</span>
 			</li>
 			
 			<li>
@@ -59,6 +61,40 @@
 						다시 파일을 업로드하면 기존 파일은 삭제됩니다.
 						<input type="button" value="파일삭제" id="file_del1">
 					</span>
+					
+					<script type="text/javascript">
+					$(function(){
+						//이벤트 연결
+						$('#file_del1').click(function(){
+							let choice = confirm('삭제하시겠습니까?');
+							if(choice){
+								$.ajax({
+									url:'deleteFile.do',
+									type:'post',
+									data:{trade_num:${trade.trade_num},trade_image:'trade_image1'},
+									dataType:'json',
+									cache:false,
+									timeout:30000,
+									success:function(param){
+										if(param.result=='logout'){
+											alert('로그인 후 사용하세요!');
+										}else if(param.result=='success'){
+											$('#file_detail1').hide();
+										}else if(param.result=='wrongAccess'){
+											alert('잘못된 접속입니다.');
+										}else{
+											alert('파일 삭제 오류 발생');
+										}
+									},
+									error:function(){
+										alert('네트워크 오류 발생');
+									}
+								});
+							}
+						});
+					});
+					</script>
+					
 				</c:if>
 			</li>
 			
@@ -72,6 +108,40 @@
 						다시 파일을 업로드하면 기존 파일은 삭제됩니다.
 						<input type="button" value="파일삭제" id="file_del2">
 					</span>
+					
+					<script type="text/javascript">
+					$(function(){
+						//이벤트 연결
+						$('#file_del2').click(function(){
+							let choice = confirm('삭제하시겠습니까?');
+							if(choice){
+								$.ajax({
+									url:'deleteFile.do',
+									type:'post',
+									data:{trade_num:${trade.trade_num},trade_image:'trade_image2'},
+									dataType:'json',
+									cache:false,
+									timeout:30000,
+									success:function(param){
+										if(param.result=='logout'){
+											alert('로그인 후 사용하세요!');
+										}else if(param.result=='success'){
+											$('#file_detail2').hide();
+										}else if(param.result=='wrongAccess'){
+											alert('잘못된 접속입니다.');
+										}else{
+											alert('파일 삭제 오류 발생');
+										}
+									},
+									error:function(){
+										alert('네트워크 오류 발생');
+									}
+								});
+							}
+						});
+					});
+					</script>
+					
 				</c:if>
 			</li>
 			
@@ -85,6 +155,40 @@
 						다시 파일을 업로드하면 기존 파일은 삭제됩니다.
 						<input type="button" value="파일삭제" id="file_del3">
 					</span>
+					
+					<script type="text/javascript">
+					$(function(){
+						//이벤트 연결
+						$('#file_del3').click(function(){
+							let choice = confirm('삭제하시겠습니까?');
+							if(choice){
+								$.ajax({
+									url:'deleteFile.do',
+									type:'post',
+									data:{trade_num:${trade.trade_num},trade_image:'trade_image3'},
+									dataType:'json',
+									cache:false,
+									timeout:30000,
+									success:function(param){
+										if(param.result=='logout'){
+											alert('로그인 후 사용하세요!');
+										}else if(param.result=='success'){
+											$('#file_detail3').hide();
+										}else if(param.result=='wrongAccess'){
+											alert('잘못된 접속입니다.');
+										}else{
+											alert('파일 삭제 오류 발생');
+										}
+									},
+									error:function(){
+										alert('네트워크 오류 발생');
+									}
+								});
+							}
+						});
+					});
+					</script>
+					
 				</c:if>
 			</li>
 			

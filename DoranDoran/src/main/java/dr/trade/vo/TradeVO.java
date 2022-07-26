@@ -20,6 +20,8 @@ public class TradeVO {
 	private String mem_id;
 	private String mem_photo;
 	
+	private String like_count;
+	
 	
 	public int getTrade_num() {
 		return trade_num;
@@ -110,6 +112,12 @@ public class TradeVO {
 	}
 	public void setMem_photo(String mem_photo) {
 		this.mem_photo = mem_photo;
+	}
+	public String getLike_count() {
+		return like_count;
+	}
+	public void setLike_count(String like_count) {
+		this.like_count = like_count;
 	}
 	
 	

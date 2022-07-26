@@ -43,7 +43,8 @@
 			<li>
 				<!-- 숫자만 입력하세요 조건체크 -->
 				<label for="trade_price">가격</label>
-				<input type="text" name="trade_price" id="trade_price" maxlength="12">
+				<input type="text" name="trade_price" id="trade_price" pattern="[0-9]+" maxlength="12">
+				<span>숫자만 입력하세요.</span>
 			</li>
 			
 			<li>
