@@ -18,8 +18,8 @@
 		<form id="search_form" action="list.do" method="get">
 			<ul class="search">
 				<li>
-					<input type="radio" name="head" value="필독">필독
-					<input type="radio" name="head" value="공지">공지
+					<input type="button" name="head" id="0" value="필독">
+					<input type="button" name="head" id="1" value="공지">
 				</li>
 				<li>
 					<select name="keyfield">
