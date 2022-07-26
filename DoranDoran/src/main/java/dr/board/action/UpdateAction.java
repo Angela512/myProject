@@ -44,8 +44,8 @@ public class UpdateAction implements Action{
 		//로그인한 회원번호와 작성자 회원번호가 일치
 		BoardVO board = new BoardVO();
 		board.setBoard_num(board_num);
-		board.setTitle(multi.getParameter("title"));
-		board.setContent(multi.getParameter("content"));
+		board.setBoard_title(multi.getParameter("board_title"));
+		board.setBoard_content(multi.getParameter("board_content"));
 		board.setBoard_image1(board_image1);
 		board.setBoard_image2(board_image2);
 		board.setBoard_image3(board_image3);

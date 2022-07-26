@@ -198,6 +198,7 @@ create table board(
  board_title varchar2(50) not null,
  board_content clob not null,
  board_date date default sysdate not null,
+ board_modifydate date,
  board_count number(5),
  board_image1 varchar2(150),
  board_image2 varchar2(150),
@@ -211,16 +212,21 @@ create sequence board_seq;
 --자유게시판 댓글
 create table board_reply(
  mem_num number not null,
+ mem_name varchar2(15) not null,
  board_num number not null,
  reply_num number not null,
  reply_content varchar2(330) not null,
  reply_date date default sysdate not null,
- 
+ reply_modifydate date,
+ --질문1)pk, fk 명칭은 sql디벨로퍼에 저장할 때 쓰는데 어디서 볼 수 있나요? 그리고 따로 fk를 추가했을 경우 디벨로퍼에서 설정하는 방법은?
  constraint board_reply_pk primary key (reply_num),
  constraint board_reply_fk foreign key (mem_num) references member (mem_num),
- constraint board_reply_fk2 foreign key (board_num) references board (board_num)
+ constraint board_reply_fk2 foreign key (board_num) references board (board_num),
+ constraint board_reply_fk3 foreign key (mem_name) references member_detail (mem_name)
 );
-
+--질문2) 프라이머리키는 해당 게시판의 고유값(번호 등), 포린키는 다른 테이블에서 가져오는 데이터를 검증.
+--포린키를 쓰지 않아도 가져올 수 있지만, 사용자가 포린키 값을 바꿀 경우 연동되도록 하려면 필요한것이 맞나요?
+--자유게시판에도 mem_name을 넣어주는것이 좋은지?
 create sequence board_reply_seq;
 
 

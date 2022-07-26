@@ -18,7 +18,7 @@
 			<ul>
 				<li>
 					<label>말머리</label>
-					<select name="board_head">
+					<select name="board_head" id="board_head">
 						<option value="말머리 선택">말머리 선택</option>
 		     			<option value="동네소식">동네소식</option>
 		     			<option value="도움요청">도움요청</option>
@@ -28,11 +28,11 @@
 				</li>
 				<li>
 					<label for="title">제목</label>
-					<input type="text" name="board_title" id="title" maxlength="50">
+					<input type="text" name="board_title" id="board_title" maxlength="50">
 				</li>
 				<li>
 					<label for="content">내용</label>
-					<textarea rows="5" cols="30" name="board_content" id="content"></textarea>
+					<textarea rows="5" cols="30" name="board_content" id="board_content"></textarea>
 				</li>
 				<li>
 					<span>이미지 첨부</span>

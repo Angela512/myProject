@@ -1,14 +1,19 @@
 $(function(){
 	//============== 게시판 글쓰기 ==============//
 	$('#write_form').submit(function(){
-		if($('#title').val().trim()==''){
-			alert('제목을 입력하세요!');
-			$('#title').val('').focus();
+		if($('#board_head option:selected').val()=='말머리 선택'){
+			alert('말머리를 선택해주세요!');
+			$('#board_head').focus();
 			return false;
 		}
-		if($('#content').val().trim()==''){
+		if($('#board_title').val().trim()==''){
+			alert('제목을 입력하세요!');
+			$('#board_title').val('').focus();
+			return false;
+		}
+		if($('#board_content').val().trim()==''){
 			alert('내용을 입력하세요!');
-			$('#content').val('').focus();
+			$('#board_content').val('').focus();
 			return false;
 		}
 	});

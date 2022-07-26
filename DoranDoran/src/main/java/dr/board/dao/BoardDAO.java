@@ -37,8 +37,8 @@ public class BoardDAO {
 				pstmt = conn.prepareStatement(sql);
 				//?에 데이터 바인딩
 				pstmt.setString(1, board.getBoard_head());
-				pstmt.setString(2, board.getTitle());
-				pstmt.setString(3, board.getContent());
+				pstmt.setString(2, board.getBoard_title());
+				pstmt.setString(3, board.getBoard_content());
 				pstmt.setString(4, board.getBoard_image1());
 				pstmt.setString(5, board.getBoard_image2());
 				pstmt.setString(6, board.getBoard_image3());
@@ -68,11 +68,12 @@ public class BoardDAO {
 				
 				if(keyword!=null && !"".equals(keyword)) {
 					if(keyfield.equals("1")) sub_sql = "WHERE b.board_title LIKE ?";
-					else if(keyfield.equals("2")) sub_sql = "WHERE m.mem_id LIKE ?";
+					else if(keyfield.equals("2")) sub_sql = "WHERE d.mem_name LIKE ?";
 					else if(keyfield.equals("3")) sub_sql = "WHERE b.board_content LIKE ?";
 				}
 				
-				sql = "SELECT COUNT(*) FROM board b JOIN member m USING(mem_num) " + sub_sql;
+				sql = "SELECT COUNT(*) FROM board b JOIN member m USING (mem_num) "
+						+ "JOIN member_detail d USING (mem_num) " + sub_sql;
 				
 				//JDBC 수행 3단계 : PreparedStatement 객체 생성
 				pstmt = conn.prepareStatement(sql);
@@ -111,7 +112,7 @@ public class BoardDAO {
 				
 				if(keyword!=null && !"".equals(keyword)) {
 					if(keyfield.equals("1")) sub_sql = "WHERE b.board_title LIKE ?";
-					else if(keyfield.equals("2")) sub_sql = "WHERE m.mem_id LIKE ?";
+					else if(keyfield.equals("2")) sub_sql = "WHERE d.mem_name LIKE ?";
 					else if(keyfield.equals("3")) sub_sql = "WHERE b.board_content LIKE ?";
 				}
 				
@@ -138,7 +139,7 @@ public class BoardDAO {
 					BoardVO board = new BoardVO();
 					board.setBoard_num(rs.getInt("board_num"));
 					board.setBoard_head(rs.getString("board_head"));
-					board.setTitle(StringUtil.useNoHtml(rs.getString("board_title")));
+					board.setBoard_title(StringUtil.useNoHtml(rs.getString("board_title")));
 					board.setMem_id(rs.getString("mem_id"));
 					board.setMem_name(rs.getString("mem_name"));
 					board.setBoard_date(rs.getDate("board_date"));
@@ -146,7 +147,7 @@ public class BoardDAO {
 					board.setBoard_image1(rs.getString("board_image1"));
 					board.setBoard_image2(rs.getString("board_image2"));
 					board.setBoard_image3(rs.getString("board_image3"));
-					board.setContent(rs.getString("board_content"));
+					board.setBoard_content(rs.getString("board_content"));
 					board.setMem_num(rs.getInt("mem_num"));
 					board.setMem_photo(rs.getString("mem_photo"));
 					
@@ -188,15 +189,16 @@ public class BoardDAO {
 					board = new BoardVO();
 					board.setBoard_num(rs.getInt("board_num"));
 					board.setBoard_head(rs.getString("board_head"));
-					board.setTitle(StringUtil.useNoHtml(rs.getString("board_title")));
+					board.setBoard_title(StringUtil.useNoHtml(rs.getString("board_title")));
 					board.setMem_id(rs.getString("mem_id"));
 					board.setMem_name(rs.getString("mem_name"));
 					board.setBoard_date(rs.getDate("board_date"));
+					board.setBoard_modifydate(rs.getDate("board_modifydate"));
 					board.setBoard_count(rs.getInt("board_count"));
 					board.setBoard_image1(rs.getString("board_image1"));
 					board.setBoard_image2(rs.getString("board_image2"));
 					board.setBoard_image3(rs.getString("board_image3"));
-					board.setContent(rs.getString("board_content"));
+					board.setBoard_content(rs.getString("board_content"));
 					board.setMem_num(rs.getInt("mem_num"));
 					board.setMem_photo(rs.getString("mem_photo"));
 				}
@@ -285,15 +287,15 @@ public class BoardDAO {
 				
 				//sql문 작성
 				sql = "UPDATE board SET board_title=?,board_content=?,"
-						+ "board_date=SYSDATE" + sub_sql   //SYSDATE 뒤에 공백 없음. ,로 구분하기 때문
+						+ "board_modifydate=SYSDATE" + sub_sql   //SYSDATE 뒤에 공백 없음. ,로 구분하기 때문
 						+ " WHERE board_num=?";
 				
 				//PreparedStatement 객체 생성
 				pstmt = conn.prepareStatement(sql);
 				
 				//?에 데이터 바인딩
-				pstmt.setString(++cnt, board.getTitle());
-				pstmt.setString(++cnt, board.getContent());
+				pstmt.setString(++cnt, board.getBoard_title());
+				pstmt.setString(++cnt, board.getBoard_content());
 				if(board.getBoard_image1()!=null) { //이미지가 있을 경우
 					pstmt.setString(++cnt, board.getBoard_image1());
 				}
