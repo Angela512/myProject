@@ -7,9 +7,10 @@ public class BoardVO {
 	private int mem_num;
 	private int board_num;
 	private String board_head;
-	private String title;
-	private String content;
+	private String board_title;
+	private String board_content;
 	private Date board_date;
+	private Date board_modifydate;
 	private int board_count;
 	private String board_image1;
 	private String board_image2;
@@ -50,24 +51,30 @@ public class BoardVO {
 	public void setBoard_head(String board_head) {
 		this.board_head = board_head;
 	}
-	
-	public String getTitle() {
-		return title;
+	public String getBoard_title() {
+		return board_title;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setBoard_title(String board_title) {
+		this.board_title = board_title;
 	}
-	public String getContent() {
-		return content;
+	public String getBoard_content() {
+		return board_content;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setBoard_content(String board_content) {
+		this.board_content = board_content;
 	}
 	public Date getBoard_date() {
 		return board_date;
 	}
 	public void setBoard_date(Date board_date) {
 		this.board_date = board_date;
+	}
+	
+	public Date getBoard_modifydate() {
+		return board_modifydate;
+	}
+	public void setBoard_modifydate(Date board_modifydate) {
+		this.board_modifydate = board_modifydate;
 	}
 	public int getBoard_count() {
 		return board_count;

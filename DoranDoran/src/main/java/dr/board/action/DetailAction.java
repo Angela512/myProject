@@ -22,9 +22,9 @@ public class DetailAction implements Action{
 		BoardVO board = dao.getBoard(board_num);
 		
 		//HTML을 허용하지 않음
-		board.setTitle(StringUtil.useNoHtml(board.getTitle()));
+		board.setBoard_title(StringUtil.useNoHtml(board.getBoard_title()));
 		//HTML을 허용하지 않으면서 줄바꿈 처리
-		board.setContent(StringUtil.useBrNoHtml(board.getContent()));
+		board.setBoard_content(StringUtil.useBrNoHtml(board.getBoard_content()));
 		
 		request.setAttribute("board", board);
 		

@@ -14,7 +14,7 @@
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="content-main">
-		<h2>${board.title}</h2>
+		<h2>${board.board_title}</h2>
 		<ul class="detail-info">
 			<li>
 				<c:if test="${!empty board.mem_photo}">
@@ -51,13 +51,13 @@
 		</div>
 		</c:if>
 		<p>
-			${board.content}
+			${board.board_content}
 		</p>
 		<hr size="1" noshade="noshade" width="100%">
-		<ul class="detail-sub">
+		<ul class="detail-sub align-right">
 			<li>
-				<c:if test="${!empty board.mem_modify_date}">
-				최근 수정일 : ${board.mem_modify_date}
+				<c:if test="${!empty board.board_modifydate}">
+				최근 수정일 : ${board.board_modifydate}
 				</c:if>
 				작성일 : ${board.board_date}
 				<%-- 로그인한 회원번호와 작성자 회원번호가 일치해야 수정,삭제 가능 --%>
