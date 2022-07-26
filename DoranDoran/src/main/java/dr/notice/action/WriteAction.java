@@ -29,6 +29,7 @@ public class WriteAction implements Action{
 		notice.setNotice_file1(multi.getFilesystemName("file1"));
 		notice.setNotice_file2(multi.getFilesystemName("file2"));
 		notice.setNotice_file3(multi.getFilesystemName("file3"));
+		notice.setNotice_head(multi.getParameter("head"));
 		notice.setMem_num(user_num);
 		
 		NoticeDAO dao = NoticeDAO.getInstance();

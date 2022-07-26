@@ -7,17 +7,31 @@ public class NoticeVO {
 	private int mem_num;
 	private String notice_title;
 	private Date notice_date;
+	private Date notice_modify_date;
 	private int notice_count;
 	private String notice_content;
 	private String notice_file1;
 	private String notice_file2;
 	private String notice_file3;
+	private String notice_head;
 	
 	private String mem_id;
 	private String mem_name;
 	private String mem_photo;
-	
-	
+
+
+	public Date getNotice_modify_date() {
+		return notice_modify_date;
+	}
+	public void setNotice_modify_date(Date notice_modify_date) {
+		this.notice_modify_date = notice_modify_date;
+	}
+	public String getNotice_head() {
+		return notice_head;
+	}
+	public void setNotice_head(String notice_head) {
+		this.notice_head = notice_head;
+	}
 	public String getMem_id() {
 		return mem_id;
 	}

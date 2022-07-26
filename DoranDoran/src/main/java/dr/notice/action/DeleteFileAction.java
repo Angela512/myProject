@@ -26,17 +26,25 @@ public class DeleteFileAction implements Action{
 			mapAjax.put("result", "logout");
 		}else {//로그인 된 경우
 			int notice_num = Integer.parseInt(request.getParameter("notice_num"));
+			String notice_image = request.getParameter("notice_image");
+						
 			NoticeDAO dao = NoticeDAO.getInstance();
 			NoticeVO db_notice = dao.getNotice(notice_num);
+			
 			if(user_num!=db_notice.getMem_num()) {
 				mapAjax.put("result", "wrongAccess");
 			}else {
-				dao.deleteFile(notice_num);
+				dao.deleteFile(notice_num, notice_image);
 				
 				//파일 삭제
-				FileUtil.removeFile(request, db_notice.getNotice_file1());
-				FileUtil.removeFile(request, db_notice.getNotice_file2());
-				FileUtil.removeFile(request, db_notice.getNotice_file3());
+				if(notice_image.equals("notice_file1")) {
+					FileUtil.removeFile(request, db_notice.getNotice_file1());
+				}else if(notice_image.equals("notice_file2")) {
+					FileUtil.removeFile(request, db_notice.getNotice_file2());
+				}else if(notice_image.equals("notice_file3")) {
+					FileUtil.removeFile(request, db_notice.getNotice_file3());
+				}
+				
 				mapAjax.put("result", "success");
 			}
 		}

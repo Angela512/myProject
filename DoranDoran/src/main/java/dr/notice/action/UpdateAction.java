@@ -35,9 +35,17 @@ public class UpdateAction implements Action{
 			//로그인한 회원번호와 작성자 회원번호가 불일치
 			
 			//업로드된 파일이 있으면 파일 삭제
-			FileUtil.removeFile(request, notice_file1);
-			FileUtil.removeFile(request, notice_file2);
-			FileUtil.removeFile(request, notice_file3);
+			if(notice_file1!=null) {
+				FileUtil.removeFile(request, notice_file1);
+			}
+			if(notice_file2!=null) {
+				FileUtil.removeFile(request, notice_file2);
+			}
+			if(notice_file3!=null) {
+				FileUtil.removeFile(request, notice_file3);
+			}
+			
+			
 			return "/WEB-INF/views/common/notice.jsp";
 		}
 		
@@ -46,15 +54,24 @@ public class UpdateAction implements Action{
 		notice.setNotice_num(notice_num);
 		notice.setNotice_title(multi.getParameter("title"));
 		notice.setNotice_content(multi.getParameter("content"));
+		notice.setNotice_head(multi.getParameter("head"));
 		notice.setNotice_file1(notice_file1);
-		notice.setNotice_file1(notice_file2);
-		notice.setNotice_file1(notice_file3);
+		notice.setNotice_file2(notice_file2);
+		notice.setNotice_file3(notice_file3);
 		
 		dao.updateNotice(notice);
 		
 		if(notice_file1!=null) {
 			//새 파일로 교체할 때 원래 파일 제거
 			FileUtil.removeFile(request, db_notice.getNotice_file1());
+		}
+		if(notice_file2!=null) {
+			//새 파일로 교체할 때 원래 파일 제거
+			FileUtil.removeFile(request, db_notice.getNotice_file2());
+		}
+		if(notice_file3!=null) {
+			//새 파일로 교체할 때 원래 파일 제거
+			FileUtil.removeFile(request, db_notice.getNotice_file3());
 		}
 		
 		return "redirect:/notice/detail.do?notice_num="+ notice_num;

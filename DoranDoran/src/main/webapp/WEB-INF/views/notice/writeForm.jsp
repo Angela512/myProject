@@ -18,6 +18,13 @@
 		   method="post" enctype="multipart/form-data">
 			<ul>
 				<li>
+					<label>말머리</label>
+					<select name="head">
+						<option value="0">필독</option>
+						<option value="1">공지</option>
+					</select>
+				</li>
+				<li>
 					<label for="title">제목</label>
 					<input type="text" name="title" 
 					      id="title" maxlength="50">

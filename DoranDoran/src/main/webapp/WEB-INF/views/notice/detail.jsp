@@ -15,7 +15,9 @@
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="content-main">
-		<h2>${notice.notice_title}</h2>
+	<c:if test="${notice.notice_head == 0}"><h2>필독 | ${notice.notice_title}</h2></c:if>
+	<c:if test="${notice.notice_head == 1}"><h2>공지 | ${notice.notice_title}</h2></c:if>
+		
 		<ul class="detail-info">
 			<li>
 				<c:if test="${!empty notice.mem_photo}">
@@ -69,7 +71,7 @@
 			  -->
 				작성일 : ${notice.notice_date}
 				<%-- 로그인한 회원번호와 작성자 회원번호가 일치해야 수정,삭제 가능 --%>
-				<c:if test="${user_num == notice.mem_num}">
+				<c:if test="${user_num == notice.mem_num || user_auth == 3}">
 				<input type="button" value="수정" 
 				 onclick="location.href='updateForm.do?notice_num=${notice.notice_num}'">
 				<input type="button" value="삭제" id="delete_btn">

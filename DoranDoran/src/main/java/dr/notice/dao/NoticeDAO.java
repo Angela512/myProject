@@ -31,7 +31,7 @@ public class NoticeDAO {
 			conn = DBUtil.getConnection();
 			//SQL문 작성
 			//****************file이 세개면..?
-			sql = "INSERT INTO notice(notice_num,notice_title,notice_content,notice_file1,notice_file2,notice_file3,mem_num) VALUES(notice_seq.nextval,?,?,?,?,?,?)";
+			sql = "INSERT INTO notice(notice_num,notice_title,notice_content,notice_file1,notice_file2,notice_file3,mem_num,notice_head) VALUES(notice_seq.nextval,?,?,?,?,?,?,?)";
 			
 			//JDBC 수행 3단계 : PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
@@ -42,6 +42,7 @@ public class NoticeDAO {
 			pstmt.setString(4, notice.getNotice_file2());
 			pstmt.setString(5, notice.getNotice_file3());
 			pstmt.setInt(6, notice.getMem_num());
+			pstmt.setString(7, notice.getNotice_head());
 			
 			//JDBC 수행 4단계 : SQL문 실행
 			pstmt.executeUpdate();
@@ -141,7 +142,7 @@ public class NoticeDAO {
 				notice.setNotice_file3(rs.getString("notice_file3"));
 				notice.setMem_num(rs.getInt("mem_num"));
 				notice.setMem_name(rs.getString("mem_name"));
-				
+				notice.setNotice_head(rs.getString("notice_head"));
 				list.add(notice);
 			}
 		}catch(Exception e) {
@@ -186,6 +187,7 @@ public class NoticeDAO {
 				notice.setNotice_file3(rs.getString("notice_file3"));
 				notice.setMem_num(rs.getInt("mem_num"));
 				notice.setMem_name(rs.getString("mem_name"));
+				notice.setNotice_head(rs.getString("notice_head"));
 			}
 		}catch(Exception e) {
 			throw new Exception(e);
@@ -223,7 +225,7 @@ public class NoticeDAO {
 	}
 	
 	//파일 삭제
-	public void deleteFile(int notice_num) throws Exception {
+	public void deleteFile(int notice_num, String notice_image) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = null;
@@ -232,7 +234,7 @@ public class NoticeDAO {
 			//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
 			conn = DBUtil.getConnection();
 			//SQL문 작성
-			sql = "UPDATE notice SET notice_file1='', notice_file2='', notice_file3='' WHERE notice_num=?";
+			sql = "UPDATE notice SET " + notice_image + "='' WHERE notice_num=?";
 			//filename=''은 기존 파일명을 지우겠다는 의미
 			//파일만 없애는거니까 레코드를 다 지워버리면 안됨
 			
@@ -278,13 +280,14 @@ public class NoticeDAO {
 			}
 			
 			//SQL문 작성
-			sql = "UPDATE notice SET notice_title=?, notice_content=?" + sub_sql + " WHERE notice_num=?";
+			sql = "UPDATE notice SET notice_title=?, notice_content=?, notice_head=?" + sub_sql + " WHERE notice_num=?";
 			
 			//JDBC 수행 3단계 : PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			//?에 데이터 바인딩
 			pstmt.setString(++cnt, notice.getNotice_title());
 			pstmt.setString(++cnt, notice.getNotice_content());
+			pstmt.setString(++cnt, notice.getNotice_head());
 			if(notice.getNotice_file1() != null) {
 				pstmt.setString(++cnt, notice.getNotice_file1());
 			}
