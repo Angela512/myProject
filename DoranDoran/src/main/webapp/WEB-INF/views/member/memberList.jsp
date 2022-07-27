@@ -22,6 +22,7 @@
 						<option value="1">ID</option>
 						<option value="2">이름</option>
 						<option value="3">email</option>
+						<option value="4">등급</option>
 					</select>
 				</li>
 				<li>
@@ -53,25 +54,62 @@
 			</tr>
 			<c:forEach var="member" items="${list}">
 			<tr>
+				<c:if test="${member.auth == 3}">
 				<td>
-					<c:if test="${member.auth > 0}">
 					<a href="detailUserForm.do?mem_num=${member.mem_num}">${member.mem_id}</a>
-					</c:if>
-					<c:if test="${member.auth == 0}">
-					${member.mem_id}
-					</c:if>
 				</td>
 				<td>${member.mem_name}</td>
 				<td>${member.mem_email}</td>
 				<td>${member.mem_phone}</td>
 				<td>${member.mem_date}</td>
-				<td>
-				<c:if test="${member.auth == 0}">탈퇴</c:if>
-				<c:if test="${member.auth == 1}">정지</c:if>
-				<c:if test="${member.auth == 2}">일반</c:if>
-				<c:if test="${member.auth == 3}">관리</c:if>
-				</td>
+				<td>관리</td>
+				</c:if>
 			</tr>
+			</c:forEach>
+			
+			<c:forEach var="member" items="${list}">
+			<tr>
+				<c:if test="${member.auth == 2}">
+				<td>
+					<a href="detailUserForm.do?mem_num=${member.mem_num}">${member.mem_id}</a>
+				</td>
+				<td>${member.mem_name}</td>
+				<td>${member.mem_email}</td>
+				<td>${member.mem_phone}</td>
+				<td>${member.mem_date}</td>
+				<td>일반</td>
+				</c:if>
+			</tr>
+			</c:forEach>
+			
+			<c:forEach var="member" items="${list}">
+			<tr>
+				<c:if test="${member.auth == 1}">
+				<td>
+					<a href="detailUserForm.do?mem_num=${member.mem_num}">${member.mem_id}</a>
+				</td>
+				<td>${member.mem_name}</td>
+				<td>${member.mem_email}</td>
+				<td>${member.mem_phone}</td>
+				<td>${member.mem_date}</td>
+				<td>정지</td>
+				</c:if>
+			</tr>
+			</c:forEach>
+			
+			<c:forEach var="member" items="${list}">
+			<c:if test="${member.auth == 0}">
+			<tr>
+				<td>
+					${member.mem_id}
+				</td>
+				<td>${member.mem_name}</td>
+				<td>${member.mem_email}</td>
+				<td>${member.mem_phone}</td>
+				<td>${member.mem_date}</td>
+				<td>탈퇴</td>
+			</tr>
+			</c:if>
 			</c:forEach>
 		</table>
 		<div class="align-center">

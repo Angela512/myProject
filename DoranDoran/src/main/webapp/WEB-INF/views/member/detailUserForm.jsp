@@ -12,10 +12,16 @@
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="content-main">
-		<h2>${member.mem_name}의 회원정보 (관리자 전용)</h2>
+		<h2>${member.mem_name}님의 회원정보 (관리자 전용)</h2>
 		<form action="detailUser.do" method="post" id="detail_form">
 			<input type="hidden" name="mem_num" value="${member.mem_num}">
 			<ul>
+				<c:if test="${empty member.mem_photo }">
+					<img src="${pageContext.request.contextPath}/images/face.png" width="100" height="100" class="my-photo">
+				</c:if>
+				<c:if test="${!empty member.mem_photo}">
+					<img src="${pageContext.request.contextPath}/upload/${member.mem_photo}" width="100" height="100" class="my-photo">
+				</c:if>
 				<li>
 					<label>등급</label>
 					<c:if test="${member.auth != 3}">
@@ -50,7 +56,19 @@
 					<label>주소</label>
 					${member.mem_addr1} ${member.mem_addr2}
 				</li>
+				<li>
+					<label>가입일</label> ${member.mem_date}
+				</li>
+				<c:if test="${!empty member.mem_modify_date}">
+				<li>
+					<label>회원정보 수정일</label> ${member.mem_modify_date}
+				</li>
+				<li>
+					${member.mem_name}님이 작성한 글
+				</li>
+				</c:if>
 			</ul>    
+				
 		</form>
 	</div>
 </div>

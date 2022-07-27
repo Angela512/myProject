@@ -22,8 +22,8 @@
 				<li>
 					<label for="head">말머리</label>
 					<select name="head">
-						<option value="필독" <c:if test="${notice.notice_head==0}"> selected="selected" </c:if>>필독</option>
-						<option value="공지" <c:if test="${notice.notice_head==1}"> selected="selected" </c:if>>공지</option>
+						<option value="0" <c:if test="${notice.notice_head==0}"> selected="selected" </c:if>>필독</option>
+						<option value="1" <c:if test="${notice.notice_head==1}"> selected="selected" </c:if>>공지</option>
 					</select>
 				</li>
 				<li>

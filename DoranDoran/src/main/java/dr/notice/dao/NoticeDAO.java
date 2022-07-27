@@ -109,13 +109,12 @@ public class NoticeDAO {
 			
 			if(keyword != null && !"".equals(keyword)) {
 				if(keyfield.equals("1")) sub_sql = "WHERE n.notice_title LIKE ?";
-				else if(keyfield.equals("2")) sub_sql = "WHERE m.mem_name LIKE ?";
+				else if(keyfield.equals("2")) sub_sql = "WHERE d.mem_name LIKE ?";
 				else if(keyfield.equals("3")) sub_sql = "WHERE n.notice_content LIKE ?";
 			}
 			//SQL문 작성
 			sql = "SELECT * FROM (SELECT a.*, rownum rnum "
-			+ "FROM (SELECT * FROM notice n JOIN member m USING (mem_num) "
-			+ "JOIN member_detail d USING(mem_num) " + sub_sql 
+			+ "FROM (SELECT * FROM notice n JOIN member_detail d USING (mem_num) JOIN member m USING(mem_num) " + sub_sql 
 			+ "ORDER BY n.notice_num DESC)a) WHERE rnum >= ? AND rnum <= ?";
 			
 			//JDBC 수행 3단계 : PreparedStatement 객체 생성
@@ -521,7 +520,53 @@ public class NoticeDAO {
 			}
 			return list;
 		}
-	
+		
+		//관리자 페이지에서 작성자가 쓴 글 목록보기
+		public List<NoticeVO> getAllList(int start,int end, int mem_num) throws Exception{
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			List<NoticeVO> list = null;
+			String sql = null;
+			
+			try {
+				//커넥션풀로부터 커넥션 할당
+				conn = DBUtil.getConnection();
+				//SQL문 작성
+				sql = "SELECT * FROM (SELECT a.*, rownum rnum "
+						+ "FROM (SELECT * FROM notice n JOIN trade t USING (mem_num) "
+						+ "JOIN member_detail d USING(mem_num) WHERE mem_num=?)a) "
+						+ "WHERE rnum >=? AND rnum<=?";
+				
+				//PreparedStatement 객체 생성
+				pstmt = conn.prepareStatement(sql);
+				//?에 데이터 바인딩
+				pstmt.setInt(1, mem_num);
+				pstmt.setInt(2, start);
+				pstmt.setInt(3, end);
+				
+				//SQL문 실행
+				rs = pstmt.executeQuery();
+				list = new ArrayList<NoticeVO>();
+				while(rs.next()) {
+					NoticeVO notice = new NoticeVO();
+					notice.setNotice_num(rs.getInt("notice_num"));
+					notice.setNotice_title(StringUtil.useNoHtml(rs.getString("notice_title")));
+					notice.setNotice_date(rs.getDate("notice_date"));
+					notice.setMem_name(rs.getString("mem_name"));
+					
+					list.add(notice);
+				}
+				
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				//자원정리
+				DBUtil.executeClose(rs, pstmt, conn);
+			}
+			return list;
+		}
+		
 	//댓글 등록
 	//댓글 갯수
 	//댓글 목록
