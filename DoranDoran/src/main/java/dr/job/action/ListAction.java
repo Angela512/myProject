@@ -9,8 +9,6 @@ import dr.job.dao.JobDAO;
 import dr.job.vo.JobVO;
 import dr.controller.Action;
 import dr.util.PagingUtil;
-import dr.job.dao.JobDAO;
-import dr.job.vo.JobVO;
 
 public class ListAction implements Action{
 
@@ -35,6 +33,7 @@ public class ListAction implements Action{
 			list = dao.getListJob(page.getStartRow(),
 					       page.getEndRow(), keyfield, keyword);
 		}
+		
 		
 		request.setAttribute("count", count);
 		request.setAttribute("list", list);

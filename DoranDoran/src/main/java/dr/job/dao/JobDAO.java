@@ -3,8 +3,13 @@ package dr.job.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 
 import dr.job.vo.JobVO;
 import dr.util.DBUtil;
@@ -19,7 +24,22 @@ public class JobDAO {
 		return instance;
 	}
 
-	private JobDAO() {
+	private JobDAO() {}
+	
+	private Connection getConnection()throws Exception{
+		Context initCtx = new InitialContext();
+		DataSource ds = 
+				(DataSource)initCtx.lookup(
+						         "java:comp/env/jdbc/xe");
+		return ds.getConnection();
+	}
+	
+	//자원정리
+	private void executeClose(ResultSet rs,
+			 PreparedStatement pstmt, Connection conn) {
+		if(rs!=null)try {rs.close();}catch(SQLException e) {}
+		if(pstmt!=null)try {pstmt.close();}catch(SQLException e) {}
+		if(conn!=null)try {conn.close();}catch(SQLException e) {}
 	}
 
 	// 글등록
@@ -32,13 +52,20 @@ public class JobDAO {
 			// JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
 			conn = DBUtil.getConnection();
 			// SQL문 작성
-			sql = "INSERT INTO JOB (job_num,job_title,job_content,mem_num) VALUES (job_seq.nextval,?,?,?)";
+			sql = "INSERT INTO JOB (job_num,job_title,job_category,job_content,job_logo,job_link,job_zipcode,job_addr1,job_addr2,job_enddate,mem_num) VALUES (job_seq.nextval,?,?,?,?,?,?,?,?,?,?)";
 			// JDBC 수행 3단계 : PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			// ?에 데이터 바인딩
 			pstmt.setString(1, job.getJob_title());
-			pstmt.setString(2, job.getJob_content());
-			pstmt.setInt(3, job.getMem_num());
+			pstmt.setString(2, job.getJob_category());
+			pstmt.setString(3, job.getJob_content());
+			pstmt.setString(4, job.getJob_logo());
+			pstmt.setString(5, job.getJob_link());
+			pstmt.setString(6, job.getJob_zipcode());
+			pstmt.setString(7, job.getJob_addr1());
+			pstmt.setString(8, job.getJob_addr2());
+			pstmt.setString(9, job.getJob_enddate());
+			pstmt.setInt(10, job.getMem_num());
 
 			// JDBC 수행 4단계 : SQL문 실행
 			pstmt.executeUpdate();
@@ -64,15 +91,12 @@ public class JobDAO {
 			// JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
 			conn = DBUtil.getConnection();
 
-			if (keyword != null && !"".equals(keyword)) {
-				if (keyfield.equals("1"))
-					sub_sql = "WHERE j.job_title LIKE ?";
-				else if (keyfield.equals("2"))
-					sub_sql = "WHERE m.mem_num LIKE ?";
-				else if (keyfield.equals("3"))
-					sub_sql = "WHERE j.job_content LIKE ?";
+			if(keyword!=null && !"".equals(keyword)) {
+				if(keyfield.equals("1")) sub_sql = "WHERE j.job_title LIKE ?";
+				else if(keyfield.equals("2")) sub_sql = "WHERE m.mem_num LIKE ?";
+				else if(keyfield.equals("3")) sub_sql = "WHERE j.job_content LIKE ?";
 			}
-
+			
 			sql = "SELECT COUNT(*) FROM job j JOIN member m USING(mem_num) " + sub_sql;
 
 			// JDBC 수행 3단계 : PreparedStatement 객체 생성
@@ -94,6 +118,7 @@ public class JobDAO {
 		}
 		return count;
 	}
+	
 
 	// 글목록(검색글 목록)
 	public List<JobVO> getListJob(int start, int end, String keyfield, String keyword) throws Exception {
@@ -120,7 +145,7 @@ public class JobDAO {
 
 			sql = "SELECT * FROM (SELECT a.*, rownum rnum " + "FROM (SELECT * FROM job j JOIN member m "
 					+ "USING (mem_num) JOIN member_detail d " + "USING (mem_num) " + sub_sql
-					+ " ORDER BY job_num DESC)a) " + "WHERE rnum >= ? AND rnum <= ?";
+					+ " ORDER BY j.job_num DESC)a) " + "WHERE rnum >= ? AND rnum <= ?";
 
 			// JDBC 수행 3단계 : PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
@@ -136,12 +161,19 @@ public class JobDAO {
 			list = new ArrayList<JobVO>();
 			while (rs.next()) {
 				JobVO Job = new JobVO();
+				
 				Job.setJob_num(rs.getInt("job_num"));
 				Job.setJob_title(StringUtil.useNoHtml(rs.getString("job_title")));
-
+				Job.setJob_content(rs.getString("job_content"));
 				Job.setJob_date(rs.getDate("job_date"));
-
 				Job.setJob_count(rs.getInt("job_count"));
+				Job.setJob_logo(rs.getString("job_logo"));
+				Job.setJob_enddate(rs.getString("job_enddate"));
+				Job.setJob_addr1(rs.getString("job_addr1"));
+				Job.setJob_addr2(rs.getString("job_addr2"));
+				Job.setJob_category(rs.getString("job_category"));
+				Job.setJob_link(rs.getString("job_link"));
+				Job.setJob_zipcode(rs.getString("job_zipcode"));
 				Job.setMem_num(rs.getInt("mem_num"));
 
 				list.add(Job);
@@ -154,7 +186,73 @@ public class JobDAO {
 		}
 		return list;
 	}
+	
+	// 카테고리
+		public List<JobVO> CategoryJob(int start, int end, String keyfield, String keyword) throws Exception {
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			List<JobVO> list = null;
+			String sql = null;
+			String sub_sql = "";
+			int cnt = 0;
 
+			try {
+				// JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
+				conn = DBUtil.getConnection();
+
+				if (keyword != null && !"".equals(keyword)) {
+					if (keyfield.equals("1"))
+						sub_sql = "WHERE j.job_title LIKE ?";
+					else if (keyfield.equals("2"))
+						sub_sql = "WHERE m.mem_num LIKE ?";
+					else if (keyfield.equals("3"))
+						sub_sql = "WHERE j.job_content LIKE ?";
+				}
+
+				sql = "SELECT * FROM (SELECT a.*, rownum rnum " + "FROM (SELECT * FROM job j JOIN member m "
+						+ "USING (mem_num) JOIN member_detail d " + "USING (mem_num) " + sub_sql
+						+ " ORDER BY j.job_num DESC)a) " + "WHERE rnum >= ? AND rnum <= ?";
+
+				// JDBC 수행 3단계 : PreparedStatement 객체 생성
+				pstmt = conn.prepareStatement(sql);
+				// ?에 데이터 바인딩
+				if (keyword != null && !"".equals(keyword)) {
+					pstmt.setString(++cnt, "%" + keyword + "%");
+				}
+				pstmt.setInt(++cnt, start);
+				pstmt.setInt(++cnt, end);
+
+				// JDBC 수행 4단계
+				rs = pstmt.executeQuery();
+				list = new ArrayList<JobVO>();
+				while (rs.next()) {
+					JobVO Job = new JobVO();
+					
+					Job.setJob_num(rs.getInt("job_num"));
+					Job.setJob_title(StringUtil.useNoHtml(rs.getString("job_title")));
+					Job.setJob_content(rs.getString("job_content"));
+					Job.setJob_date(rs.getDate("job_date"));
+					Job.setJob_count(rs.getInt("job_count"));
+					Job.setJob_logo(rs.getString("job_logo"));
+					Job.setJob_enddate(rs.getString("job_enddate"));
+					Job.setJob_addr1(rs.getString("job_addr1"));
+					Job.setJob_addr2(rs.getString("job_addr2"));
+					Job.setJob_category(rs.getString("job_category"));
+					Job.setJob_link(rs.getString("job_link"));
+					Job.setJob_zipcode(rs.getString("job_zipcode"));
+					Job.setMem_num(rs.getInt("mem_num"));
+
+					list.add(Job);
+				}
+			} catch (Exception e) {
+				throw new Exception(e);
+			} finally {
+				// 자원정리
+				DBUtil.executeClose(rs, pstmt, conn);
+			}
+			return list;
+		}
 	
 	//글상세
 		public JobVO getJob(int job_num)throws Exception{
@@ -183,8 +281,18 @@ public class JobDAO {
 					job = new JobVO();
 					job.setJob_num(rs.getInt("job_num"));
 					job.setJob_title(rs.getString("job_title"));
+					job.setJob_category(rs.getString("job_category"));
 					job.setJob_content(rs.getString("job_content"));
 					job.setJob_count(rs.getInt("job_count"));
+					job.setJob_link(rs.getString("job_link"));
+					job.setJob_logo(rs.getString("job_logo"));
+					job.setJob_zipcode(rs.getString("job_zipcode"));
+					job.setJob_addr1(rs.getString("job_addr1"));
+					job.setJob_addr2(rs.getString("job_addr2"));
+					job.setJob_enddate(rs.getString("job_enddate"));
+					job.setJob_date(rs.getDate("job_date"));
+
+
 					job.setMem_num(rs.getInt("mem_num"));
 					
 					/*
@@ -204,6 +312,138 @@ public class JobDAO {
 			}
 			return job;
 			
+		}
+		
+		//조회수 증가
+		public void updateReadcount(int job_num)
+				                      throws Exception{
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			String sql = null;
+			
+			try {
+				//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
+				conn = DBUtil.getConnection();
+				//SQL문 작성 
+				sql = "UPDATE job SET job_count=job_count+1 WHERE job_num=?";
+				
+				//JDBC 수행 3단계 : PreparedStatement 객체 생성
+				pstmt = conn.prepareStatement(sql);
+				//?에 데이터 바인딩
+				pstmt.setInt(1, job_num);
+				//JDBC 수행 4단계
+				pstmt.executeUpdate();
+				
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				//자원정리
+				DBUtil.executeClose(null, pstmt, conn);
+			}
+		}
+		
+		
+		
+		//파일 삭제
+		public void deleteFile(int job_num)throws Exception{
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			String sql = null;
+			
+			try {
+				//커넥션풀로부터 커넥션 할당
+				conn = DBUtil.getConnection();
+				//SQL문 작성
+				sql = "UPDATE job SET job_logo='' WHERE job_num=?";
+				
+				//PreparedStatement 객체 생성
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, job_num);
+				
+				//SQL문 실행
+				pstmt.executeUpdate();
+				
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				//자원정리
+				DBUtil.executeClose(null, pstmt, conn);
+			}
+		}
+		
+		
+		//글 수정
+		public void updateJob(JobVO job)throws Exception{
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			String sql = null;
+			String sub_sql = "";
+			int cnt = 0;
+			
+			try {
+				//커넥션풀로부터 커넥션 할당
+				conn = DBUtil.getConnection();
+				
+				sql = "UPDATE job SET job_title=?,job_category=?,job_content=?,job_link=?,job_logo=?,job_zipcode=?,job_addr1=?,job_addr2=?,job_enddate=?, job_date=SYSDATE"+ sub_sql+" WHERE job_num=?";
+
+				//PreparedStatement 객체 생성
+				pstmt = conn.prepareStatement(sql);
+				//?에 데이터 바인딩
+				pstmt.setString(++cnt, job.getJob_title());
+				pstmt.setString(++cnt, job.getJob_category());
+				pstmt.setString(++cnt, job.getJob_content());
+				pstmt.setString(++cnt, job.getJob_link());
+				pstmt.setString(++cnt, job.getJob_logo());
+				pstmt.setString(++cnt, job.getJob_zipcode());
+				pstmt.setString(++cnt, job.getJob_addr1());
+				pstmt.setString(++cnt, job.getJob_addr2());
+				pstmt.setString(++cnt, job.getJob_enddate());
+				pstmt.setInt(++cnt, job.getJob_num());
+				
+				
+				//SQL문 실행
+				pstmt.executeUpdate();
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				//자원정리
+				DBUtil.executeClose(null, pstmt, conn);
+			}
+			
+		}
+		
+		//글삭제
+		public void deleteJob(int job_num)throws Exception{
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			PreparedStatement pstmt2 = null;
+			PreparedStatement pstmt3 = null;
+			String sql = null;
+			
+			try {
+				//커넥션풀로부터 커넥션 할당
+				conn = DBUtil.getConnection();
+				//오토커밋 해제
+				conn.setAutoCommit(false);
+				
+				//부모글 삭제
+				sql = "DELETE FROM job WHERE job_num=?";
+				pstmt3 = conn.prepareStatement(sql);
+				pstmt3.setInt(1, job_num);
+				pstmt3.executeUpdate();
+				
+				//예외 발생이 없이 정상적으로 SQL문 실행
+				conn.commit();
+			}catch(Exception e) {
+				//예외 발생
+				conn.rollback();
+				throw new Exception(e);
+			}finally {
+				//자원정리
+				DBUtil.executeClose(null, pstmt3, null);
+				DBUtil.executeClose(null, pstmt2, null);
+				DBUtil.executeClose(null, pstmt, conn);
+			}
 		}
 	 
 }

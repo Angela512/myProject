@@ -18,7 +18,7 @@ public class DetailAction implements Action{
 				        request.getParameter("job_num"));
 		JobDAO dao = JobDAO.getInstance();
 		//조회수 증가
-		/* dao.updateReadcount(board_num); */
+		dao.updateReadcount(job_num);
 		//글상세 정보 반환
 		JobVO job = dao.getJob(job_num);
 		
