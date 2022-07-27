@@ -55,8 +55,10 @@
 	
 	<c:if test="${count>0 }">
 		<div class="board-space">
+			<%-- <form action="myTradeDelete.do" method="post" id="mytrade_delete_form"> --%>
 			<c:forEach var="trade" items="${list }">
 			<div class="horizontal-area">
+				<input type="checkbox" name="trade_num" value="${trade.trade_num }" class="trade_num">
 				<a href="${pageContext.request.contextPath}/trade/detail.do?trade_num=${trade.trade_num}">
 				<c:if test="${!empty trade.trade_image1 }">
 				<img class="board-image" src="${pageContext.request.contextPath}/upload/${trade.trade_image1}">
@@ -85,10 +87,34 @@
 				</div>
 			</div>
 			</c:forEach>
+			
 			<div class="float-clear">
 				<hr width="100%" size="1" noshade="noshade">
 			</div>
 			
+				<%-- 
+					<input type="submit" value="삭제">
+					<script type="text/javascript">
+					let myForm = document.getElementById('mytrade_delete_form');
+					//이벤트 연결
+					myForm.onsubmit=function(){
+						let tradenum = document.getElementsByClassName('trade_num');
+						let count=0;
+						for(let i=0;i<tradenum.length;i++){
+							if(tradenum[i].checked){
+								count++;
+							}
+						}
+						
+						if(count<1){
+							alert('1개 이상 선택하세요!');
+							return false;
+						}
+					};
+					</script>
+			
+			</form>
+			  --%>
 		</div>
 	
 		<div class="align-center">
