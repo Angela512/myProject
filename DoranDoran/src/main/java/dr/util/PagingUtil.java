@@ -15,22 +15,28 @@ public class PagingUtil {
 	 * */
 	public PagingUtil(int currentPage, int count, int rowCount,
 			int pageCount, String pageUrl) {
-		this(null,null,currentPage,count,rowCount,pageCount,pageUrl,null);
+		this(null,null,currentPage,count,rowCount,pageCount,pageUrl,null,null);
 	}
 	public PagingUtil(int currentPage, int count, int rowCount,
 			int pageCount, String pageUrl, String addKey) {
-		this(null,null,currentPage,count,rowCount,pageCount,pageUrl,addKey);
+		this(null,null,currentPage,count,rowCount,pageCount,pageUrl,addKey,null);
 	}
 	public PagingUtil(String keyfield, String keyword, int currentPage, int count, int rowCount,
 			int pageCount,String pageUrl) {
-		this(keyfield,keyword,currentPage,count,rowCount,pageCount,pageUrl,null);
+		this(keyfield,keyword,currentPage,count,rowCount,pageCount,pageUrl,null,null);
 	}
 	public PagingUtil(String keyfield, String keyword, int currentPage, int count, int rowCount,
 			int pageCount,String pageUrl,String addKey) {
+		this(keyfield,keyword,currentPage,count,rowCount,pageCount,pageUrl,addKey,null);
+	}
+		
+	public PagingUtil(String keyfield, String keyword, int currentPage, int count, int rowCount,
+			int pageCount,String pageUrl,String addKey,String addKey2) {
 		
 		String sub_url = "";
 		if(keyword != null) sub_url = "&keyfield="+keyfield+"&keyword="+keyword;
 		if(addKey != null) sub_url += addKey;
+		if(addKey2 !=null) sub_url += addKey2;
 		
 		// 전체 페이지 수
 		int totalPage = (int) Math.ceil((double) count / rowCount);

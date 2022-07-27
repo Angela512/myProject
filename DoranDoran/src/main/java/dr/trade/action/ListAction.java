@@ -26,7 +26,7 @@ public class ListAction implements Action{
 		int count=dao.getTradeCount(trade_head, trade_category, keyfield, keyword);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield, keyword, Integer.parseInt(pageNum), count, 8,5,"list.do");
+		PagingUtil page = new PagingUtil(keyfield, keyword, Integer.parseInt(pageNum), count, 8,5,"list.do","&trade_head="+trade_head,"&trade_category="+trade_category);
 		
 		List<TradeVO> list=null;
 		

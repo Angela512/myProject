@@ -18,6 +18,8 @@
 	<div class="content-main">
 	
 		<form id="search_form" action="list.do" method="get">
+			<input type="hidden" name="trade_head" value="${param.trade_head}">
+			<input type="hidden" name="trade_category" value="${param.trade_category}">
 			<ul class="search">
 			
 				<li>
@@ -39,11 +41,13 @@
 					</c:if>
 				</li>
 				
+				
+				
 				<li>
 					<select name="keyfield">
-						<option value="1">제목</option>
-						<option value="2">작성자</option>
-						<option value="3">내용</option>
+						<option value="1" <c:if test="${param.keyfield==1}">selected</c:if>>제목</option>
+						<option value="2" <c:if test="${param.keyfield==2}">selected</c:if>>작성자</option>
+						<option value="3" <c:if test="${param.keyfield==3}">selected</c:if>>내용</option>
 					</select>
 				</li>
 				
