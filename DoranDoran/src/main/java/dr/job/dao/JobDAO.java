@@ -26,22 +26,6 @@ public class JobDAO {
 
 	private JobDAO() {}
 	
-	private Connection getConnection()throws Exception{
-		Context initCtx = new InitialContext();
-		DataSource ds = 
-				(DataSource)initCtx.lookup(
-						         "java:comp/env/jdbc/xe");
-		return ds.getConnection();
-	}
-	
-	//자원정리
-	private void executeClose(ResultSet rs,
-			 PreparedStatement pstmt, Connection conn) {
-		if(rs!=null)try {rs.close();}catch(SQLException e) {}
-		if(pstmt!=null)try {pstmt.close();}catch(SQLException e) {}
-		if(conn!=null)try {conn.close();}catch(SQLException e) {}
-	}
-
 	// 글등록
 	public void insertJob(JobVO job) throws Exception {
 		Connection conn = null;
@@ -79,7 +63,7 @@ public class JobDAO {
 	}
 
 	// 총 레코드 수(검색 레코드 수)
-	public int getJobCount(String keyfield, String keyword) throws Exception {
+	public int getJobCount(String keyfield, String keyword, String job_category) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -91,18 +75,30 @@ public class JobDAO {
 			// JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
 			conn = DBUtil.getConnection();
 
-			if(keyword!=null && !"".equals(keyword)) {
+			if((keyword!=null && !"".equals(keyword)) && (job_category==null || "".equals(job_category))) {
 				if(keyfield.equals("1")) sub_sql = "WHERE j.job_title LIKE ?";
 				else if(keyfield.equals("2")) sub_sql = "WHERE m.mem_num LIKE ?";
 				else if(keyfield.equals("3")) sub_sql = "WHERE j.job_content LIKE ?";
+			}else if((keyword==null || "".equals(keyword)) &&  (job_category!=null && !"".equals(job_category))) {
+				sub_sql = "WHERE j.job_category = ?";
+			}else if((keyword!=null && !"".equals(keyword)) &&  (job_category!=null && !"".equals(job_category))) {
+				if(keyfield.equals("1")) sub_sql = "WHERE j.job_title LIKE ? AND j.job_category = ?";
+				else if(keyfield.equals("2")) sub_sql = "WHERE m.mem_num LIKE ? AND j.job_category = ?";
+				else if(keyfield.equals("3")) sub_sql = "WHERE j.job_content LIKE ? AND j.job_category = ?";
 			}
 			
 			sql = "SELECT COUNT(*) FROM job j JOIN member m USING(mem_num) " + sub_sql;
 
 			// JDBC 수행 3단계 : PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
-			if (keyword != null && !"".equals(keyword)) {
+		
+			if((keyword!=null && !"".equals(keyword)) && (job_category==null || "".equals(job_category))) {
 				pstmt.setString(1, "%" + keyword + "%");
+			}else if((keyword==null || "".equals(keyword)) &&  (job_category!=null && !"".equals(job_category))) {
+				pstmt.setString(1, job_category);
+			}else if((keyword!=null && !"".equals(keyword)) &&  (job_category!=null && !"".equals(job_category))) {
+				pstmt.setString(1, "%" + keyword + "%");
+				pstmt.setString(2, job_category);
 			}
 
 			// JDBC 수행 4단계
@@ -121,7 +117,7 @@ public class JobDAO {
 	
 
 	// 글목록(검색글 목록)
-	public List<JobVO> getListJob(int start, int end, String keyfield, String keyword) throws Exception {
+	public List<JobVO> getListJob(int start, int end, String keyfield, String keyword, String job_category) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -134,13 +130,16 @@ public class JobDAO {
 			// JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
 			conn = DBUtil.getConnection();
 
-			if (keyword != null && !"".equals(keyword)) {
-				if (keyfield.equals("1"))
-					sub_sql = "WHERE j.job_title LIKE ?";
-				else if (keyfield.equals("2"))
-					sub_sql = "WHERE m.mem_num LIKE ?";
-				else if (keyfield.equals("3"))
-					sub_sql = "WHERE j.job_content LIKE ?";
+			if((keyword!=null && !"".equals(keyword)) && (job_category==null || "".equals(job_category))) {
+				if(keyfield.equals("1")) sub_sql = "WHERE j.job_title LIKE ?";
+				else if(keyfield.equals("2")) sub_sql = "WHERE m.mem_num LIKE ?";
+				else if(keyfield.equals("3")) sub_sql = "WHERE j.job_content LIKE ?";
+			}else if((keyword==null || "".equals(keyword)) &&  (job_category!=null && !"".equals(job_category))) {
+				sub_sql = "WHERE j.job_category =? ";
+			}else if((keyword!=null && !"".equals(keyword)) &&  (job_category!=null && !"".equals(job_category))) {
+				if(keyfield.equals("1")) sub_sql = "WHERE j.job_title LIKE ? AND j.job_category = ?";
+				else if(keyfield.equals("2")) sub_sql = "WHERE m.mem_num LIKE ? AND j.job_category = ?";
+				else if(keyfield.equals("3")) sub_sql = "WHERE j.job_content LIKE ? AND j.job_category = ?";
 			}
 
 			sql = "SELECT * FROM (SELECT a.*, rownum rnum " + "FROM (SELECT * FROM job j JOIN member m "
@@ -150,8 +149,13 @@ public class JobDAO {
 			// JDBC 수행 3단계 : PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			// ?에 데이터 바인딩
-			if (keyword != null && !"".equals(keyword)) {
+			if((keyword!=null && !"".equals(keyword)) && (job_category==null || "".equals(job_category))) {
 				pstmt.setString(++cnt, "%" + keyword + "%");
+			}else if((keyword==null || "".equals(keyword)) &&  (job_category!=null && !"".equals(job_category))) {
+				pstmt.setString(++cnt, job_category);
+			}else if((keyword!=null && !"".equals(keyword)) &&  (job_category!=null && !"".equals(job_category))) {
+				pstmt.setString(++cnt, "%" + keyword + "%");
+				pstmt.setString(++cnt, job_category);
 			}
 			pstmt.setInt(++cnt, start);
 			pstmt.setInt(++cnt, end);

@@ -57,10 +57,57 @@
 				</li>
 				<li>
 					<label for="filename">기업 로고</label>
+					<input type="file" name="job_logo"
+					  id="filename" 
+					  accept="image/gif,image/png,image/jpeg">
+					  <p>* 파일 용량은 640MB를 초과할 수 없습니다.</p>
+					<c:if test="${!empty job.job_logo}">
+					<br>
+					<span id="file_detail">
+						(${job.job_logo})파일이 등록되어 있습니다. 
+						다시 파일을 업로드하면 기존 파일은 삭제됩니다.
+						<input type="button" value="파일삭제" id="file_del">
+					</span>
+					<script type="text/javascript">
+					$(function(){
+						//이벤트 연결
+						$('#file_del').click(function(){
+							let choice = confirm('삭제하시겠습니까?');
+							if(choice){
+								$.ajax({
+									url:'deleteFile.do',
+									type:'post',
+									data:{job_num:${job.job_num}},
+									dataType:'json',
+									cache:false,
+									timeout:30000,
+									success:function(param){
+										if(param.result == 'logout'){
+											alert('로그인 후 사용하세요!');
+										}else if(param.result == 'success'){
+											$('#file_detail').hide();
+										}else if(param.result == 'wrongAccess'){
+											alert('잘못된 접속입니다.');
+										}else{
+											alert('파일 삭제 오류 발생');
+										}
+									},
+									error:function(){
+										alert('네트워크 오류 발생');
+									}
+								});
+							}
+						});
+					});
+					</script>
+					</c:if>  
+				</li>
+				<!-- <li>
+					<label for="filename">기업 로고</label>
 					<input type="file" name="job_logo" id="filename" accept="image/gif,image/png,image/jpeg">
 					
-					<p>* 파일 용량은 640MB를 초과할 수 없습니다.</p>
-				</li>
+					
+				</li> -->
 				<li>
 					<label for="Homepage">홈페이지</label>
 					<input type="text" name="job_link" id="link" value="${job.job_link}">

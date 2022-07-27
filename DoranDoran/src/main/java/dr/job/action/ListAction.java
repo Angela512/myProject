@@ -18,20 +18,22 @@ public class ListAction implements Action{
 		String pageNum = request.getParameter("pageNum");
 		if(pageNum==null) pageNum = "1";
 		
+		String job_category = request.getParameter("job_category");
+		
 		String keyfield = request.getParameter("keyfield");
 		String keyword = request.getParameter("keyword");
 		
 		JobDAO dao = JobDAO.getInstance();
-		int count = dao.getJobCount(keyfield, keyword);
+		int count = dao.getJobCount(keyfield, keyword, job_category);
 		
 		//페이지 처리
 		PagingUtil page = new PagingUtil(keyfield,keyword,
-				Integer.parseInt(pageNum),count,20,10,"list.do");
+				Integer.parseInt(pageNum),count,20,10,"list.do","&job_category="+job_category);
 		
 		List<JobVO> list = null;
 		if(count > 0) {
 			list = dao.getListJob(page.getStartRow(),
-					       page.getEndRow(), keyfield, keyword);
+					       page.getEndRow(), keyfield, keyword, job_category);
 		}
 		
 		

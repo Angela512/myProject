@@ -27,6 +27,8 @@ public class UpdateAction implements Action{
 				FileUtil.createFile(request);
 		int job_num = Integer.parseInt(
 				multi.getParameter("job_num"));
+		String job_logo = multi.getFilesystemName("job_logo");
+
 		
 		JobDAO dao = JobDAO.getInstance();
 		//수정전 데이터
@@ -34,6 +36,8 @@ public class UpdateAction implements Action{
 		if(user_num != db_job.getMem_num()) {
 			//로그인한 회원번호와 작성자 회원번호가 불일치
 		
+			//업로드된 파일이 있으면 파일 삭제
+			FileUtil.removeFile(request, job_logo);
 			return "/WEB-INF/views/common/notice.jsp";
 		}
 		
@@ -53,6 +57,11 @@ public class UpdateAction implements Action{
 		
 		dao.updateJob(job);
 		
+		if(job_logo!=null) {
+			//새 파일로 교체할 때 원래 파일 제거
+			FileUtil.removeFile(request, 
+					        db_job.getJob_logo());
+		}
 		
 		return "redirect:/job/detail.do?job_num="+job_num;
 	}

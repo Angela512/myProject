@@ -21,13 +21,13 @@
 			<div id="category_btn">
 		
 				<input type="button" value="전체보기" onclick="location.href='list.do'">
-				<input type="button" value="어업" >
-				<input type="button" value="농업" onclick="location.href='writeForm.do'">
-				<input type="button" value="요식" onclick="">
-				<input type="button" value="기획" onclick="">
-				<input type="button" value="서비스" onclick="">
-				<input type="button" value="생산" onclick="">
-				<input type="button" value="기타" onclick="">
+				<input type="button" value="어업"  onclick="location.href='list.do?job_category=어업'">
+				<input type="button" value="농업"  onclick="location.href='list.do?job_category=농업'">
+				<input type="button" value="요식"  onclick="location.href='list.do?job_category=요식'">
+				<input type="button" value="기획"  onclick="location.href='list.do?job_category=기획'">
+				<input type="button" value="서비스"  onclick="location.href='list.do?job_category=서비스'">
+				<input type="button" value="생산"  onclick="location.href='list.do?job_category=생산'">
+				<input type="button" value="기타"  onclick="location.href='list.do?job_category=기타'">
 				
 
 			</div>
@@ -75,6 +75,7 @@
 				</table>
 				
 				<form id="search_form" action="list.do" method="get">
+					<input type="hidden" name="job_category" value="${param.job_category}">
 					<ul class="search">
 						<li><select name="keyfield">
 								<option value="1">제목</option>

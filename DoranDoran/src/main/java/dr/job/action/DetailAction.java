@@ -16,6 +16,7 @@ public class DetailAction implements Action{
 		//글번호 반환
 		int job_num = Integer.parseInt(
 				        request.getParameter("job_num"));
+		
 		JobDAO dao = JobDAO.getInstance();
 		//조회수 증가
 		dao.updateReadcount(job_num);

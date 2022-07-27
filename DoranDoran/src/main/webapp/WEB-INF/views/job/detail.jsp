@@ -116,7 +116,7 @@
 						<input type="button" value="수정"
 							onclick="location.href='updateForm.do?job_num=${job.job_num}'">
 					</c:if>
-					<c:if test="${user_num == job.mem_num}">
+					<c:if test="${user_num == job.mem_num || user_auth == 3}">
 							
 						<input type="button" value="삭제" id="delete_btn">
 						<script type="text/javascript">
@@ -126,31 +126,12 @@
 							delete_btn.onclick = function() {
 								let choice = confirm('삭제하시겠습니까?');
 								if (choice) {
-									location
-											.replace('delete.do?job_num=${job.job_num}');
+									location.replace('delete.do?job_num=${job.job_num}');
 								}
 							};
 						
 						</script>
 				</c:if>
-						
-					<%-- <c:if test="${member.auth == 3}">
-						<input type="button" value="수정"
-							onclick="location.href='updateForm.do?job_num=${job.job_num}'">
-						<input type="button" value="삭제" id="delete_btn">
-						<script type="text/javascript">
-							let delete_btn = document
-									.getElementById('delete_btn');
-							//이벤트 연결
-							delete_btn.onclick = function() {
-								let choice = confirm('삭제하시겠습니까?');
-								if (choice) {
-									location
-											.replace('delete.do?job_num=${job.job_num}');
-								}
-							};
-						</script>
-					</c:if> --%>
 				</li>
 			</ul>
 		</div>
