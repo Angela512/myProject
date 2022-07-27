@@ -9,6 +9,8 @@ import java.util.List;
 import dr.board.vo.BoardVO;
 import dr.util.DBUtil;
 import dr.util.StringUtil;
+import dr.util.DurationFromNow;
+import dr.board.vo.BoardReplyVO;
 
 public class BoardDAO {
 
@@ -54,7 +56,7 @@ public class BoardDAO {
 			}
 		}
 		//총 레코드 수(검색 레코드 수)
-		public int getBoardCount(String keyfield,String keyword)throws Exception{
+		public int getBoardCount(String keyfield,String keyword, String head)throws Exception{
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
@@ -66,10 +68,16 @@ public class BoardDAO {
 				//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
 				conn = DBUtil.getConnection();
 				
-				if(keyword!=null && !"".equals(keyword)) {
+				if((keyword!=null && !"".equals(keyword)) && (head==null || "".equals(head))) {
 					if(keyfield.equals("1")) sub_sql = "WHERE b.board_title LIKE ?";
 					else if(keyfield.equals("2")) sub_sql = "WHERE d.mem_name LIKE ?";
 					else if(keyfield.equals("3")) sub_sql = "WHERE b.board_content LIKE ?";
+				}else if((keyword==null || "".equals(keyword)) && (head!=null && !"".equals(head))) {
+					sub_sql = "WHERE b.board_head = ?";
+				}else if((keyword!=null && !"".equals(keyword)) && (head!=null && !"".equals(head))) {
+					if(keyfield.equals("1")) sub_sql = "WHERE b.board_title LIKE ? AND b.board_head = ?";
+					else if(keyfield.equals("2")) sub_sql = "WHERE d.mem_name LIKE ? AND b.board_head = ?";
+					else if(keyfield.equals("3")) sub_sql = "WHERE b.board_content LIKE ? AND b.board_head = ?";
 				}
 				
 				sql = "SELECT COUNT(*) FROM board b JOIN member m USING (mem_num) "
@@ -77,8 +85,13 @@ public class BoardDAO {
 				
 				//JDBC 수행 3단계 : PreparedStatement 객체 생성
 				pstmt = conn.prepareStatement(sql);
-				if(keyword!=null && !"".equals(keyword)) {
+				if((keyword!=null && !"".equals(keyword)) && (head==null || "".equals(head))) {
 					pstmt.setString(1, "%"+keyword+"%");
+				}else if((keyword==null || "".equals(keyword)) && (head!=null && !"".equals(head))) {
+					pstmt.setString(1, head);
+				}else if((keyword!=null && !"".equals(keyword)) && (head!=null && !"".equals(head))) {
+					pstmt.setString(1, "%"+keyword+"%");
+					pstmt.setString(2, head);
 				}
 				
 				//JDBC 수행 4단계
@@ -96,7 +109,7 @@ public class BoardDAO {
 			return count;
 		}
 		//글목록(검색글 목록)
-		public List<BoardVO> getListBoard(int start,int end,String keyfield,String keyword)
+		public List<BoardVO> getListBoard(int start,int end,String keyfield,String keyword,String head)
 										throws Exception{
 			Connection conn = null;
 			PreparedStatement pstmt = null;
@@ -110,10 +123,16 @@ public class BoardDAO {
 				//JDBC 수행 1,2 단계 : 커넥션풀로부터 커넥션 할당
 				conn = DBUtil.getConnection();
 				
-				if(keyword!=null && !"".equals(keyword)) {
+				if((keyword!=null && !"".equals(keyword)) && (head==null || "".equals(head))) {
 					if(keyfield.equals("1")) sub_sql = "WHERE b.board_title LIKE ?";
 					else if(keyfield.equals("2")) sub_sql = "WHERE d.mem_name LIKE ?";
 					else if(keyfield.equals("3")) sub_sql = "WHERE b.board_content LIKE ?";
+				}else if((keyword==null || "".equals(keyword)) && (head!=null && !"".equals(head))) {
+					sub_sql = "WHERE b.board_head = ?";
+				}else if((keyword!=null && !"".equals(keyword)) && (head!=null && !"".equals(head))) {
+					if(keyfield.equals("1")) sub_sql = "WHERE b.board_title LIKE ? AND b.board_head = ?";
+					else if(keyfield.equals("2")) sub_sql = "WHERE d.mem_name LIKE ? AND b.board_head = ?";
+					else if(keyfield.equals("3")) sub_sql = "WHERE b.board_content LIKE ? AND b.board_head = ?";
 				}
 				
 				sql = "SELECT * FROM (SELECT a.*, rownum rnum "
@@ -126,8 +145,13 @@ public class BoardDAO {
 				pstmt = conn.prepareStatement(sql);
 				
 				//?에 데이터 바인딩
-				if(keyword!=null && !"".equals(keyword)) {
+				if((keyword!=null && !"".equals(keyword)) && (head==null || "".equals(head))) {
 					pstmt.setString(++cnt, "%"+keyword+"%");
+				}else if((keyword==null || "".equals(keyword)) && (head!=null && !"".equals(head))) {
+					pstmt.setString(++cnt, head);
+				}else if((keyword!=null && !"".equals(keyword)) && (head!=null && !"".equals(head))) {
+					pstmt.setString(++cnt, "%"+keyword+"%");
+					pstmt.setString(++cnt, head);
 				}
 				pstmt.setInt(++cnt, start);
 				pstmt.setInt(++cnt, end);
@@ -322,7 +346,6 @@ public class BoardDAO {
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			PreparedStatement pstmt2 = null;
-			PreparedStatement pstmt3 = null;
 			String sql = null;
 			
 			try {
@@ -330,15 +353,18 @@ public class BoardDAO {
 				conn = DBUtil.getConnection();
 				//오토커밋 해제
 				conn.setAutoCommit(false);
-				//댓글 삭제
 				
-				//좋아요 삭제
+				//댓글 삭제
+				sql = "DELETE FROM board_reply WHERE board_num=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, board_num);
+				pstmt.executeUpdate();
 				
 				//부모글 삭제
 				sql = "DELETE FROM board WHERE board_num=?";
-				pstmt3 = conn.prepareStatement(sql);
-				pstmt3.setInt(1, board_num);
-				pstmt3.executeUpdate();
+				pstmt2 = conn.prepareStatement(sql);
+				pstmt2.setInt(1, board_num);
+				pstmt2.executeUpdate();
 				
 				//예외 발생이 없이 정상적으로 SQL문 실행
 				conn.commit();
@@ -348,27 +374,208 @@ public class BoardDAO {
 				throw new Exception(e);
 			}finally {
 				//자원정리
-				DBUtil.executeClose(null, pstmt3, null);
 				DBUtil.executeClose(null, pstmt2, null);
 				DBUtil.executeClose(null, pstmt, conn);
 			
 			}
 		}
-		//좋아요 등록
-		//좋아요 개수
-		//회원번호와 게시물 번호를 이용한 좋아요 정보
-		//좋아요 삭제
-		//내가 선택한 좋아요 목록
-		public void deleteFile(int board_num, String board_image) {
-			// TODO Auto-generated method stub
-			
-		}
-		
 		//댓글 등록
+		public void insertReplyBoard(BoardReplyVO boardReply)throws Exception{
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			String sql = null;
+			
+			try {
+				//커넥션풀로부터 커넥션 할당 //질문)오라클 db와 연결하는 것?
+				conn = DBUtil.getConnection();
+				//sql문 작성            //질문)sql문에서 pk와 date들은 ?로 데이터 바인딩 안하나요?
+				sql = "INSERT INTO board_reply (reply_num,mem_num,board_num,reply_content) "
+						+ "VALUES (board_reply_seq.nextval,?,?,?)";  //질문)뜻이 board_reply db에 ()안의 값을 삽입하고, 시퀀스에서는 무엇을 한다는 걸까요
+				//PreparedStatement 객체 생성 //질문)이 객체를 생성한다는 것은 어떤 의미?
+				pstmt = conn.prepareStatement(sql);
+				//?에 데이터 바인딩
+				pstmt.setInt(1, boardReply.getMem_num());
+				pstmt.setInt(2, boardReply.getBoard_num());
+				pstmt.setString(3, boardReply.getReply_content());
+				//sql문 실행
+				pstmt.executeUpdate();
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				//자원정리
+				DBUtil.executeClose(null, pstmt, conn);
+			}
+		}
 		//댓글 개수
+		public int getReplyBoardCount(int board_num)throws Exception{
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			int count = 0;
+			
+			try {
+				//커넥션풀로부터 커넥션 할당
+				conn = DBUtil.getConnection();
+				//SQL문 작성
+				sql = "SELECT COUNT(*) FROM board_reply b "
+						+ "JOIN member m ON b.mem_num=m.mem_num "
+						+ "WHERE b.board_num=?";
+				//PreparedStatement 객체 생성
+				pstmt = conn.prepareStatement(sql);
+				//?에 데이터 바인딩
+				pstmt.setInt(1, board_num);
+				//SQL문 실행
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					count = rs.getInt(1);
+				}
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				//자원정리
+				DBUtil.executeClose(rs, pstmt, conn);
+			}
+			return count;
+		}
 		//댓글 목록
-		//댓글 상세
+		public List<BoardReplyVO> getListReplyBoard(int start, int end, int board_num)
+																			throws Exception{
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			List<BoardReplyVO> list = null;
+			String sql = null;
+			
+			try {
+				//커넥션풀로부터 커넥션을 할당
+				conn = DBUtil.getConnection();
+				//sql문 작성
+				sql = "SELECT * FROM (SELECT a.*, rownum rnum "
+						+ "FROM (SELECT * FROM board_reply b "
+						+ "JOIN member m USING (mem_num) "
+						+ "JOIN member_detail d USING (mem_num) "
+						+ "WHERE b.board_num=? ORDER BY b.reply_num "
+						+ "DESC)a) WHERE rnum >= ? AND rnum <= ?";
+				//PreparedStatement 객체 생성
+				pstmt = conn.prepareStatement(sql);
+				//?에 데이터 바인딩
+				pstmt.setInt(1, board_num);
+				pstmt.setInt(2, start);
+				pstmt.setInt(3, end);
+				//sql문 실행
+				rs = pstmt.executeQuery();
+				list = new ArrayList<BoardReplyVO>();
+				while(rs.next()) {
+					BoardReplyVO reply = new BoardReplyVO();
+					reply.setReply_num(rs.getInt("reply_num"));
+					//날짜 -> 1분전, 1시간전, 1일전 형식의 문자열로 변환
+					reply.setReply_date(DurationFromNow.getTimeDiffLabel(rs.getString("reply_date")));
+					if(rs.getString("reply_modifydate")!=null) {
+						reply.setReply_modifydate(DurationFromNow.getTimeDiffLabel(
+								rs.getString("reply_modifydate")));
+					}
+					reply.setReply_content(StringUtil.useBrNoHtml(rs.getString("reply_content")));
+					reply.setBoard_num(rs.getInt("board_num"));
+					reply.setMem_num(rs.getInt("mem_num"));
+					reply.setMem_name(rs.getString("mem_name"));
+					
+					list.add(reply);
+				}
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				//자원정리
+				DBUtil.executeClose(rs, pstmt, conn);
+			}
+			
+			return list;
+		}
+		//댓글 상세(인증하기 위해서 만드는 것임)
+		public BoardReplyVO getReplyBoard(int reply_num)throws Exception{
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			BoardReplyVO reply = null;
+			String sql = null;
+			
+			try {
+				//커넥션풀로부터 커넥션 할당
+				conn = DBUtil.getConnection();
+				//sql문 작성
+				sql = "SELECT * FROM board_reply WHERE reply_num=?";
+				//PreparedStatement 객체 생성
+				pstmt = conn.prepareStatement(sql);
+				//?에 데이터 바인딩
+				pstmt.setInt(1, reply_num);
+				//sql문 실행
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					reply = new BoardReplyVO();
+					reply.setReply_num(rs.getInt("reply_num"));
+					reply.setMem_num(rs.getInt("mem_num"));
+				}
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				//자원정리
+				DBUtil.executeClose(rs, pstmt, conn);
+			}
+			
+			
+			return reply;
+		}
 		//댓글 수정
+		public void updateReplyBoard(BoardReplyVO reply)throws Exception{
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			String sql = null;
+			
+			try {
+				//커넥션풀로부터 커넥션을 할당
+				conn = DBUtil.getConnection();
+				//sql문 작성
+				sql = "UPDATE board_reply SET reply_content=?,"
+						+ "reply_modifydate=SYSDATE "
+						+ "WHERE reply_num=?";
+				//PreparedStatement 객체 생성
+				pstmt = conn.prepareStatement(sql);
+				//?에 데이터 바인딩
+				pstmt.setString(1, reply.getReply_content());
+				pstmt.setInt(2, reply.getReply_num());
+				//sql문 실행
+				pstmt.executeUpdate();
+				
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				//자원정리
+				DBUtil.executeClose(null, pstmt, conn);
+			}
+		}
 		//댓글 삭제
-		
+		public void deleteReplyBoard(int reply_num)throws Exception{
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			String sql = null;
+			
+			try {
+				//커넥션풀로부터 커넥션을 할당
+				conn = DBUtil.getConnection();
+				//sql문 작성
+				sql = "DELETE FROM board_reply WHERE reply_num=?";
+				//PreparedStatement 객체 생성
+				pstmt = conn.prepareStatement(sql);
+				//?에 데이터 바인딩
+				pstmt.setInt(1, reply_num);
+				//sql문 실행
+				pstmt.executeUpdate();
+				
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				//자원정리
+				DBUtil.executeClose(null, pstmt, conn);
+			}
+		}
 	}

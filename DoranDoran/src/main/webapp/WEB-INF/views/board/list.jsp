@@ -16,6 +16,7 @@
 	<div class="content-main">
 	<jsp:include page="boardHeader.jsp"/>
 		<form id="search_form" action="list.do" method="get">
+		    <input type="hidden" name="head" value="${param.head}">
 			<ul class="search">
 				<li>
 					<select name="keyfield">
@@ -33,13 +34,26 @@
 				</li>
 			</ul>
 		</form>
+		
 		<div class="list-space align-right">
+		<tr>
+			<td>
+			<select id="selectKey">
+				<option value="1" <c:if test="${param.selectKey==1}">selected</c:if>>최신순</option>
+				<option value="2" <c:if test="${param.selectKey==2}">selected</c:if>>조회순</option>
+				<option value="3" <c:if test="${param.selectKey==3}">selected</c:if>>댓글 많은순</option>
+			</select>
+			</td>
+		</tr>
 			<c:if test="${!empty user_num}">
 			<input type="button" value="글쓰기" onclick="location.href='writeForm.do'">
 			</c:if>
 			<input type="button" value="목록" onclick="location.href='list.do'">
 			<input type="button" value="홈으로" 
 			onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
+		<ul>
+			<li>총${count}개</li>
+		</ul>
 		</div>
 		<c:if test="${count == 0}">
 		<div class="result-display">

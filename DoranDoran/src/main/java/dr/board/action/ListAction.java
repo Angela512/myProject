@@ -18,18 +18,19 @@ public class ListAction implements Action{
 		String pageNum = request.getParameter("pageNum");
 		if(pageNum==null) pageNum = "1";
 		
+		String head = request.getParameter("head");
 		String keyfield = request.getParameter("keyfield");
 		String keyword = request.getParameter("keyword");
 		
 		BoardDAO dao = BoardDAO.getInstance();
-		int count = dao.getBoardCount(keyfield, keyword); //키워드가 없을때 전체 카운트 읽고, 있으면 키워드 카운트 읽음
+		int count = dao.getBoardCount(keyfield, keyword, head); //키워드가 없을때 전체 카운트 읽고, 있으면 키워드 카운트 읽음
 		
 		//페이지 처리
 		PagingUtil page = new PagingUtil(keyfield,keyword,Integer.parseInt(pageNum),
-				count, 20,10,"list.do");
+				count, 20,10,"list.do","&head="+head);
 		List<BoardVO> list = null;
 		if(count > 0) {
-			list = dao.getListBoard(page.getStartRow(), page.getEndRow(), keyfield, keyword);
+			list = dao.getListBoard(page.getStartRow(), page.getEndRow(), keyfield, keyword, head);
 		}
 		
 		request.setAttribute("count", count);
