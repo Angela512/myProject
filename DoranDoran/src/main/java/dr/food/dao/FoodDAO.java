@@ -31,8 +31,8 @@ public class FoodDAO {
 			conn = DBUtil.getConnection();
 			//SQL문 작성
 			sql = "INSERT INTO food (food_num,food_name,"
-				+ "food_content,food_image1,mem_num,food_phone,food_addr1) VALUES ("
-				+ "food_seq.nextval,?,?,?,?,?,?)";
+				+ "food_content,food_image1,mem_num,food_phone1,food_phone2,food_phone3,food_addr1,food_addr2,food_local,food_zipcode) VALUES ("
+				+ "food_seq.nextval,?,?,?,?,?,?,?,?,?,?,?)";
 			//JDBC 수행 3단계 : PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			//?에 데이터 바인딩
@@ -41,8 +41,14 @@ public class FoodDAO {
 			pstmt.setString(3, food.getFood_image1());
 		//	pstmt.setString(4, board.getIp());
 			pstmt.setInt(4, food.getMem_num());
-			pstmt.setString(5, food.getFood_phone());
-			pstmt.setString(6, food.getFood_addr1());
+			pstmt.setString(5, food.getFood_phone1());
+			pstmt.setString(6, food.getFood_phone2());
+			pstmt.setString(7, food.getFood_phone3());
+			pstmt.setString(8, food.getFood_addr1());
+			pstmt.setString(9, food.getFood_addr2());
+			pstmt.setString(10, food.getFood_local());
+			pstmt.setString(11, food.getFood_zipcode());
+
 			//JDBC 수행 4단계 : SQL문 실행
 			pstmt.executeUpdate();
 			
@@ -56,7 +62,7 @@ public class FoodDAO {
 	
 	
 	//총 레코드 수(검색 레코드 수)
-	public int getFoodCount(String keyfield,String keyword)
+	public int getFoodCount(String keyfield,String keyword, String food_local)
 	                               throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -69,18 +75,29 @@ public class FoodDAO {
 			//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
 			conn = DBUtil.getConnection();
 			
-			if(keyword!=null && !"".equals(keyword)) {
+			if((keyword!=null && !"".equals(keyword)) && (food_local==null || "".equals(food_local))) {
 				if(keyfield.equals("1")) sub_sql = "WHERE b.food_name LIKE ?";
 				else if(keyfield.equals("2")) sub_sql = "WHERE m.mem_id LIKE ?";
 				else if(keyfield.equals("3")) sub_sql = "WHERE b.food_content LIKE ?";
+			}else if((keyword==null || "".equals(keyword)) && (food_local!=null && !"".equals(food_local))) {
+				sub_sql = "WHERE b.food_local = ?";
+			}else if((keyword!=null && !"".equals(keyword)) && (food_local!=null && !"".equals(food_local))) {
+				if(keyfield.equals("1")) sub_sql = "WHERE b.food_name LIKE ? AND b.food_local = ?";
+				else if(keyfield.equals("2")) sub_sql = "WHERE m.mem_id LIKE ? AND b.food_local = ?";
+				else if(keyfield.equals("3")) sub_sql = "WHERE b.food_content LIKE ? AND b.food_local = ?";
 			}
 			
 			sql = "SELECT COUNT(*) FROM food b JOIN member m USING(mem_num) " + sub_sql;
 			
 			//JDBC 수행 3단계 : PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
-			if(keyword!=null && !"".equals(keyword)) {
+			if((keyword!=null && !"".equals(keyword)) && (food_local==null || "".equals(food_local))) {
 				pstmt.setString(1, "%"+keyword+"%");
+			}else if((keyword==null || "".equals(keyword)) && (food_local!=null && !"".equals(food_local))) {
+				pstmt.setString(1, food_local);
+			}else if((keyword!=null && !"".equals(keyword)) && (food_local!=null && !"".equals(food_local))) {
+				pstmt.setString(1, "%"+keyword+"%");
+				pstmt.setString(2, food_local);
 			}
 			
 			//JDBC 수행 4단계
@@ -100,7 +117,7 @@ public class FoodDAO {
 	
 	//글목록(검색글 목록)
 	public List<FoodVO> getListFood(int start, int end,
-			          String keyfield,String keyword)
+			          String keyfield,String keyword,String food_local)
 	                                   throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -114,10 +131,16 @@ public class FoodDAO {
 			//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
 			conn = DBUtil.getConnection();
 			
-			if(keyword!=null && !"".equals(keyword)) {
+			if((keyword!=null && !"".equals(keyword)) && (food_local==null || "".equals(food_local))) {
 				if(keyfield.equals("1")) sub_sql = "WHERE b.food_name LIKE ?";
 				else if(keyfield.equals("2")) sub_sql = "WHERE m.mem_id LIKE ?";
 				else if(keyfield.equals("3")) sub_sql = "WHERE b.food_content LIKE ?";
+			}else if((keyword==null || "".equals(keyword)) && (food_local!=null && !"".equals(food_local))) {
+				sub_sql = "WHERE b.food_local = ?";
+			}else if((keyword!=null && !"".equals(keyword)) && (food_local!=null && !"".equals(food_local))) {
+				if(keyfield.equals("1")) sub_sql = "WHERE b.food_name LIKE ? AND b.food_local = ?";
+				else if(keyfield.equals("2")) sub_sql = "WHERE m.mem_id LIKE ? AND b.food_local = ?";
+				else if(keyfield.equals("3")) sub_sql = "WHERE b.food_content LIKE ? AND b.food_local = ?";
 			}
 			
 			sql = "SELECT * FROM (SELECT a.*, rownum rnum "
@@ -130,8 +153,13 @@ public class FoodDAO {
 			//JDBC 수행 3단계 : PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			//?에 데이터 바인딩
-			if(keyword!=null && !"".equals(keyword)) {
+			if((keyword!=null && !"".equals(keyword)) && (food_local==null || "".equals(food_local))) {
 				pstmt.setString(++cnt, "%"+keyword+"%");
+			}else if((keyword==null || "".equals(keyword)) && (food_local!=null && !"".equals(food_local))) {
+				pstmt.setString(++cnt, food_local);
+			}else if((keyword!=null && !"".equals(keyword)) && (food_local!=null && !"".equals(food_local))) {
+				pstmt.setString(++cnt, "%"+keyword+"%");
+				pstmt.setString(++cnt, food_local);
 			}
 			pstmt.setInt(++cnt, start);
 			pstmt.setInt(++cnt, end);
@@ -144,14 +172,16 @@ public class FoodDAO {
 				food.setFood_num(rs.getInt("food_num"));
 				food.setMem_num(rs.getInt("mem_num"));
 				food.setFood_name(StringUtil.useNoHtml(rs.getString("food_name")));
-				food.setFood_phone(rs.getString("food_phone"));
+				food.setFood_phone1(rs.getString("food_phone1"));
+				food.setFood_phone2(rs.getString("food_phone2"));
+				food.setFood_phone3(rs.getString("food_phone3"));
 				food.setFood_time(rs.getString("food_time"));
 				food.setFood_menu(rs.getString("food_menu"));
 				food.setFood_link(rs.getString("food_link"));
 				food.setFood_zipcode(rs.getString("food_zipcode"));
 				food.setFood_addr1(rs.getString("food_addr1"));
 				food.setFood_addr2(rs.getString("food_addr2"));
-				food.setFood_map(rs.getString("food_map"));
+
 				food.setFood_image1(rs.getString("food_image1"));
 				food.setFood_image2(rs.getString("food_image2"));
 				food.setFood_image3(rs.getString("food_image3"));
@@ -163,7 +193,9 @@ public class FoodDAO {
 				food.setMem_id(rs.getString("mem_id"));
 				food.setMem_name(rs.getString("mem_name"));
 				food.setMem_photo(rs.getString("mem_photo"));
+				food.setAuth(rs.getInt("auth"));
 				
+				food.setFood_local(rs.getString("food_local"));
 				
 				list.add(food);				
 			}
@@ -204,14 +236,16 @@ public class FoodDAO {
 				food.setFood_num(rs.getInt("food_num"));
 				food.setMem_num(rs.getInt("mem_num"));
 				food.setFood_name(StringUtil.useNoHtml(rs.getString("food_name")));
-				food.setFood_phone(rs.getString("food_phone"));
+				food.setFood_phone1(rs.getString("food_phone1"));
+				food.setFood_phone2(rs.getString("food_phone2"));
+				food.setFood_phone3(rs.getString("food_phone3"));
 				food.setFood_time(rs.getString("food_time"));
 				food.setFood_menu(rs.getString("food_menu"));
 				food.setFood_link(rs.getString("food_link"));
 				food.setFood_zipcode(rs.getString("food_zipcode"));
 				food.setFood_addr1(rs.getString("food_addr1"));
 				food.setFood_addr2(rs.getString("food_addr2"));
-				food.setFood_map(rs.getString("food_map"));
+
 				food.setFood_image1(rs.getString("food_image1"));
 				food.setFood_image2(rs.getString("food_image2"));
 				food.setFood_image3(rs.getString("food_image3"));
@@ -223,6 +257,9 @@ public class FoodDAO {
 				food.setMem_id(rs.getString("mem_id"));
 				food.setMem_name(rs.getString("mem_name"));
 				food.setMem_photo(rs.getString("mem_photo"));
+				food.setAuth(rs.getInt("auth"));
+				
+				food.setFood_local(rs.getString("food_local"));
 			}
 			
 		}catch(Exception e) {
@@ -307,6 +344,7 @@ public class FoodDAO {
 			}
 			
 			sql = "UPDATE food SET food_name=?,food_content=?,"
+				+ "food_phone1=?,food_phone2=?,food_phone3=?,food_local=?,food_addr1=?,food_addr2=?,food_zipcode=?,"
 				+ "food_date_modi=SYSDATE " + sub_sql 
 				+ "WHERE food_num=?";
 				//+ ",ip=? WHERE board_num=?";
@@ -316,6 +354,16 @@ public class FoodDAO {
 			//?에 데이터 바인딩
 			pstmt.setString(++cnt, food.getFood_name());
 			pstmt.setString(++cnt, food.getFood_content());
+			
+			pstmt.setString(++cnt, food.getFood_phone1());
+			pstmt.setString(++cnt, food.getFood_phone2());
+			pstmt.setString(++cnt, food.getFood_phone3());
+			pstmt.setString(++cnt, food.getFood_local());
+			
+			pstmt.setString(++cnt, food.getFood_addr1());
+			pstmt.setString(++cnt, food.getFood_addr2());
+			pstmt.setString(++cnt, food.getFood_zipcode());
+			
 			if(food.getFood_image1()!=null) {
 				pstmt.setString(++cnt, food.getFood_image1());
 			}

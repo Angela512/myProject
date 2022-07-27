@@ -48,6 +48,15 @@ public class UpdateAction implements Action{
 	//	food.setIp(request.getRemoteAddr());
 		food.setFood_image1(filename);
 		
+		food.setFood_phone1(multi.getParameter("phone1"));
+		food.setFood_phone2(multi.getParameter("phone2"));
+		food.setFood_phone3(multi.getParameter("phone3"));
+		food.setFood_local(multi.getParameter("local"));
+		
+		food.setFood_addr1(multi.getParameter("address1"));
+		food.setFood_addr2(multi.getParameter("address2"));
+		food.setFood_zipcode(multi.getParameter("zipcode"));
+		
 		dao.updateFood(food);
 		
 		if(filename!=null) {

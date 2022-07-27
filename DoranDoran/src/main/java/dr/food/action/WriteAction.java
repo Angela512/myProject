@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 
-
 import dr.controller.Action;
 import dr.food.dao.FoodDAO;
 import dr.food.vo.FoodVO;
@@ -36,8 +35,16 @@ public class WriteAction implements Action{
 		food.setFood_image1(
 				multi.getFilesystemName("filename"));
 		food.setMem_num(user_num);
-		food.setFood_phone(multi.getParameter("phone"));
-		food.setFood_addr1(multi.getParameter("address"));
+		
+		food.setFood_addr1(multi.getParameter("address1"));
+		food.setFood_addr2(multi.getParameter("address2"));
+		
+		food.setFood_phone1(multi.getParameter("phone1"));
+		food.setFood_phone2(multi.getParameter("phone2"));
+		food.setFood_phone3(multi.getParameter("phone3"));
+		
+		food.setFood_local(multi.getParameter("local"));
+		food.setFood_zipcode(multi.getParameter("zipcode"));
 		
 		FoodDAO dao = FoodDAO.getInstance();
 		dao.insertFood(food);

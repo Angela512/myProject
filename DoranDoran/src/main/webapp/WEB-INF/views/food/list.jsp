@@ -31,10 +31,7 @@
 	color:white;
   
 }
-span{
-	/*font-family: 'Song Myung', cursive; */
-	
-}
+
     /* 화면 디자인 맛집 게시판용 css */
 .board-spacee .horizontal-areaa{
 	margin:70px ;
@@ -67,7 +64,15 @@ span{
 	</div>
 		<!-- <h2 align= "center">맛집 찾기</h2> -->
 		<form id="search_form" action="list.do" method="get">
+		    <input type="hidden" name="food_local" value="${param.food_local}">
 			<ul class="search">
+				<li>
+				    <input type="button" value="전체" onclick="location.href='list.do'">
+					<input type="button" value="서울" onclick="location.href='list.do?food_local=서울'">
+					<input type="button" value="경기" onclick="location.href='list.do?food_local=경기'">
+					<input type="button" value="인천" onclick="location.href='list.do?food_local=인천'">
+					<input type="button" value="제주" onclick="location.href='list.do?food_local=제주'">
+				</li>
 				<li>
 					<select name="keyfield">
 						<option value="1">제목</option>
@@ -120,15 +125,15 @@ span{
 				<div>
 				<ul>
 					<li>
-						<span style="font-famil:'Song Myung';">${fn:substring(food.food_name,0,15)}</span>
+						<span style="font-famil:'Song Myung';">[${food.food_local}] ${fn:substring(food.food_name,0,15)}</span>
 						
 					<li>
 					<br>
 					<li>
-						번호 : ${food.food_phone}
+						번호 : ${food.food_phone1}-${food.food_phone2}-${food.food_phone3}
 					</li>
 					<li>
-						주소 : ${food.food_addr1}
+						주소 : ${food.food_addr1} ${food.food_addr2}
 					</li>
 					<li>
 						설명 : ${food.food_content}
@@ -152,42 +157,12 @@ span{
 				<hr width="100%" size="1" noshade="noshade">
 			</div>
 		</div>
+		
+		
 		<div class="align-center">
 			${page}
 		</div> 
-		
-		<%-- <div class="align-center">
-			${page}
-		</div> --%>
 		</c:if>
-		
-
-		
-		
-		<%-- <c:if test="${count > 0}">
-		<table>
-			<tr>
-				<th>글번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일</th>
-				<th>조회</th>
-			</tr>
-			<c:forEach var="food" items="${list}">
-			<tr>
-				<td>${food.food_num}</td>
-				<td><a href="detail.do?food_num=${food.food_num}">${food.food_name}</a></td>
-				<td>${food.mem_name}</td>
-				<td>${food.food_date}</td>
-				<td>${food.food_count}</td>
-			</tr>
-			</c:forEach>
-		</table>
-		
-		
-		
-		
-		</c:if> --%>
 	</div>
 </div>
 <!--     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

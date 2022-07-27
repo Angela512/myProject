@@ -20,18 +20,19 @@ public class ListAction implements Action{
 		
 		String keyfield = request.getParameter("keyfield");
 		String keyword = request.getParameter("keyword");
+		String food_local = request.getParameter("food_local");
 		
 		FoodDAO dao = FoodDAO.getInstance();
-		int count = dao.getFoodCount(keyfield, keyword);
+		int count = dao.getFoodCount(keyfield, keyword,food_local);
 		
 		//페이지 처리
 		PagingUtil page = new PagingUtil(keyfield,keyword,
-				Integer.parseInt(pageNum),count,4,10,"list.do");
+				Integer.parseInt(pageNum),count,4,10,"list.do","&food_local="+food_local);
 		
 		List<FoodVO> list = null;
 		if(count > 0) {
 			list = dao.getListFood(page.getStartRow(),
-					       page.getEndRow(), keyfield, keyword);
+					       page.getEndRow(), keyfield, keyword, food_local);
 		}
 		
 		request.setAttribute("count", count);
