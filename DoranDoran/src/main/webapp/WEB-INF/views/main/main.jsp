@@ -40,7 +40,7 @@ body {
 }
 
 /* Caption text */
-.text {
+/* .text {
 	color: #f2f2f2;
 	font-size: 15px;
 	padding: 8px 12px;
@@ -48,7 +48,7 @@ body {
 	bottom: 8px;
 	width: 100%;
 	text-align: center;
-}
+} */
 
 /* Number text (1/3 etc) */
 .numbertext {
@@ -104,22 +104,22 @@ to {
 		<div class="slideshow-container">
 
 			<div class="mySlides fade">
-				<div class="numbertext">1 / 3</div>
-				<img src="../images/coffee1.jpg" style="width: 100%;height:300px;">
-				<div class="text">Caption Text</div>
-			</div>
+<!-- 				<div class="numbertext">1 / 3</div>
+ -->				<img src="../images/coffee1.jpg" style="width: 100%;height:450px;">
+<!-- 				<div class="text">Caption Text</div>
+ -->			</div>
 
 			<div class="mySlides fade">
-				<div class="numbertext">2 / 3</div>
-				<img src="../images/coffee2.jpg" style="width: 100%;height:300px;">
-				<div class="text">Caption Two</div>
-			</div>
+<!-- 				<div class="numbertext">2 / 3</div>
+ -->				<img src="../images/coffee2.jpg" style="width: 100%;height:450px;">
+<!-- 				<div class="text">Caption Two</div>
+ -->			</div>
 
 			<div class="mySlides fade">
-				<div class="numbertext">3 / 3</div>
-				<img src="../images/aabb.jpg" style="width: 100%;height:300px;">
-				<div class="text">Caption Three</div>
-			</div>
+<!-- 				<div class="numbertext">3 / 3</div>
+ -->				<img src="../images/aabb.jpg" style="width: 100%;height:450px;">
+<!-- 				<div class="text">Caption Three</div>
+ -->			</div>
 
 		</div>
 	<div class="page-main">
