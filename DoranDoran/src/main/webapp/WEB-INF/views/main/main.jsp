@@ -7,148 +7,155 @@
 <title>메인</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css" type="text/css">
- <style>
-
-#slider {
-  position: relative;
-  width: 500px;
-  height: 290px;
-  margin: 100px auto;
-  overflow: hidden;
-
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-}
-#slider ul {
-  position: relative;
-  list-style: none;
-  height: 100%;
-  width: 10000%;
-  padding: 0;
-  margin: 0;
-
-  transition: all 750ms ease;
-  left: 0;
-}
-#slider ul li {
-  position: relative;
-  height: 100%;
-
-  float: left;
-}
-#slider ul li img{
-  width: 500px;
-  height: 290px;
-
+<style>
+* {
+	box-sizing: border-box;
 }
 
-#slider #prev, #slider #next {
-  width: 40px;
-  line-height: 40px;
+body {
+	font-family: Verdana, sans-serif;
+}
 
-  font-size: 1.5rem;
-  text-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
-  text-align: center;
-  color: black;
-	background: #f9f7fb;
-  text-decoration: none;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  transition: all 150ms ease;
+.mySlides {
+	display: none;
 }
-#slider #prev:hover, #slider #next:hover {
-  background-color: rgba(0, 0, 0, 0.5);
-  text-shadow: 0;
-	color: white;
+
+.mySlides img {
+	vertical-align: middle;
+	width: 1920px;
+	height: 1080px;
 }
-#slider #prev {
+
+/* Slideshow container */
+.slideshow-container {
+	max-width: 100%;
+	position: relative;
+	margin: auto;
+}
+
+/* Caption text */
+.text {
+	color: #f2f2f2;
+	font-size: 15px;
+	padding: 8px 12px;
+	position: absolute;
+	bottom: 8px;
+	width: 100%;
+	text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+	color: #f2f2f2;
+	font-size: 12px;
+	padding: 8px 12px;
+	position: absolute;
+	top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+	height: 15px;
+	width: 15px;
+	margin: 0 2px;
+	background-color: #bbb;
+	border-radius: 50%;
+	display: inline-block;
+	transition: background-color 0.6s ease;
+}
+
+.active {
+	background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+	animation-name: fade;
+	animation-duration: 1.5s;
+}
+
+@
+keyframes fade {
+	from {opacity: .4
+}
+
+to {
+	opacity: 1
+}
 
 }
-#slider #next {
-  right: 0px;
-}
-  </style>
 
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+	.text {
+		font-size: 11px
+	}
+}
+</style>
 </head>
 <body>
 	<div class="page-main">
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-		<div id="slider">
-    <ul id="slideWrap">
-      <li><img src="../images/coffee1.jpg" alt=""></li>
-      <li><img src="../images/coffee2.jpg" alt=""></li>
-      <li><img src="../images/coffee3.jpg" alt=""></li>
-     </ul>
-    <a id="prev" href="#">&#8810;</a>
-    <a id="next" href="#">&#8811;</a>
-  </div>
-  
-  <script>
-    var responsiveSlider = function() {
 
-var slider = document.getElementById("slider");
-var sliderWidth = slider.offsetWidth;
-var slideList = document.getElementById("slideWrap");
-var count = 1;
-var items = slideList.querySelectorAll("li").length;
-var prev = document.getElementById("prev");
-var next = document.getElementById("next");
+		<div class="slideshow-container">
 
-window.addEventListener('resize', function() {
-  sliderWidth = slider.offsetWidth;
-});
+			<div class="mySlides fade">
+				<div class="numbertext">1 / 3</div>
+				<img src="../images/coffee1.jpg" style="width: 100%">
+				<div class="text">Caption Text</div>
+			</div>
 
-var prevSlide = function() {
-  if(count > 1) {
-    count = count - 2;
-    slideList.style.left = "-" + count * sliderWidth + "px";
-    count++;
-  }
-  else if(count = 1) {
-    count = items - 1;
-    slideList.style.left = "-" + count * sliderWidth + "px";
-    count++;
-  }
-};
+			<div class="mySlides fade">
+				<div class="numbertext">2 / 3</div>
+				<img src="../images/coffee2.jpg" style="width: 100%">
+				<div class="text">Caption Two</div>
+			</div>
 
-var nextSlide = function() {
-  if(count < items) {
-    slideList.style.left = "-" + count * sliderWidth + "px";
-    count++;
-  }
-  else if(count = items) {
-    slideList.style.left = "0px";
-    count = 1;
-  }
-};
+			<div class="mySlides fade">
+				<div class="numbertext">3 / 3</div>
+				<img src="../images/aabb.jpg" style="width: 100%">
+				<div class="text">Caption Three</div>
+			</div>
 
-next.addEventListener("click", function() {
-  nextSlide();
-});
+		</div>
+		<br>
 
-prev.addEventListener("click", function() {
-  prevSlide();
-});
-
-setInterval(function() {
-  nextSlide()
-}, 5000);
-
-};
-
-window.onload = function() {
-responsiveSlider();
-}
+		<div style="text-align: center">
+			<span class="dot"></span> <span class="dot"></span> <span class="dot"></span>
+		</div>
 
 
-  </script>
-		
 		<div class="content-main">
 			<h4>게시판 최신글</h4>
 		</div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</div>
+
+
+	<script>
+		let slideIndex = 0;
+		showSlides();
+
+		function showSlides() {
+			let i;
+			let slides = document.getElementsByClassName("mySlides");
+			let dots = document.getElementsByClassName("dot");
+			for (i = 0; i < slides.length; i++) {
+				slides[i].style.display = "none";
+			}
+			slideIndex++;
+			if (slideIndex > slides.length) {
+				slideIndex = 1
+			}
+			for (i = 0; i < dots.length; i++) {
+				dots[i].className = dots[i].className.replace(" active", "");
+			}
+			slides[slideIndex - 1].style.display = "block";
+			dots[slideIndex - 1].className += " active";
+			setTimeout(showSlides, 2000); // Change image every 2 seconds
+		}
+	</script>
 </body>
 </html>
 
