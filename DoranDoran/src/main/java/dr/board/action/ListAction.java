@@ -22,13 +22,23 @@ public class ListAction implements Action{
 		String head = request.getParameter("head");
 		String keyfield = request.getParameter("keyfield");
 		String keyword = request.getParameter("keyword");
+		String board_head = null;
+		String board_sort = null;
 		
 		BoardDAO dao = BoardDAO.getInstance();
 		int count = dao.getBoardCount(keyfield, keyword, head); //키워드가 없을때 전체 카운트 읽고, 있으면 키워드 카운트 읽음
 		
+		if(head!=null) {
+			board_head = "&head="+head;
+		}
+		if(sort!=null) {
+			board_sort = "&sort="+sort;
+		}
+		
+		
 		//페이지 처리
 		PagingUtil page = new PagingUtil(keyfield,keyword,Integer.parseInt(pageNum),
-				count, 20,10,"list.do","&head="+head+"&sort="+sort);
+				count, 20,10,"list.do",board_head,board_sort);
 		List<BoardVO> list = null;
 		if(count > 0) {
 			list = dao.getListBoard(page.getStartRow(), page.getEndRow(), keyfield, keyword, head, sort);
