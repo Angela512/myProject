@@ -63,6 +63,9 @@
 					
 				</li>
 				<li>
+					<intput type="text" name="hour1" id="hour1" maxlength="2">
+				</li>
+				<li>
 					<br><br>
 					<label for="address">가게 위치</label>
 					<br><br>
