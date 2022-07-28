@@ -21,12 +21,23 @@ public class ListAction implements Action{
 		String keyword=request.getParameter("keyword");
 		String trade_head=request.getParameter("trade_head");
 		String trade_category=request.getParameter("trade_category");
+		String first_head=null;
+		String first_category=null;
 		
 		TradeDAO dao = TradeDAO.getInstance();
 		int count=dao.getTradeCount(trade_head, trade_category, keyfield, keyword);
 		
+		if(trade_head!=null) {
+			first_head="&trade_head="+trade_head;
+		}
+		if(trade_category!=null) {
+			first_category="&trade_category="+trade_category;
+		}
+		
+		
+		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield, keyword, Integer.parseInt(pageNum), count, 8,5,"list.do","&trade_head="+trade_head,"&trade_category="+trade_category);
+		PagingUtil page = new PagingUtil(keyfield, keyword, Integer.parseInt(pageNum), count, 8,5,"list.do",first_head,first_category);
 		
 		List<TradeVO> list=null;
 		

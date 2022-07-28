@@ -18,6 +18,8 @@ public class MyWriteAction implements Action{
 			return "redirect:/member/loginForm.do";
 		}
 		
+		
+		
 		return "/WEB-INF/views/member/myWrite.jsp";
 	}
 

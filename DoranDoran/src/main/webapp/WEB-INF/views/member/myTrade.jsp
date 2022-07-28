@@ -55,7 +55,7 @@
 	
 	<c:if test="${count>0 }">
 		<div class="board-space">
-			<%-- <form action="myTradeDelete.do" method="post" id="mytrade_delete_form"> --%>
+			<form action="myTradeDelete.do" method="post" id="mytrade_delete_form">
 			<c:forEach var="trade" items="${list }">
 			<div class="horizontal-area">
 				<input type="checkbox" name="trade_num" value="${trade.trade_num }" class="trade_num">
@@ -92,7 +92,7 @@
 				<hr width="100%" size="1" noshade="noshade">
 			</div>
 			
-				<%-- 
+			
 					<input type="submit" value="삭제">
 					<script type="text/javascript">
 					let myForm = document.getElementById('mytrade_delete_form');
@@ -114,7 +114,7 @@
 					</script>
 			
 			</form>
-			  --%>
+			
 		</div>
 	
 		<div class="align-center">
