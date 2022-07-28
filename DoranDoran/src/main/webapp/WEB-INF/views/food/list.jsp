@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>맞집 찾기 게시판</title>
+<title>맛집 찾기 게시판</title>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script:400" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Song+Myung:400" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
@@ -164,6 +164,8 @@
 		</div> 
 		</c:if>
 	</div>
+			<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	
 </div>
 <!--     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
  --> </body>
