@@ -13,6 +13,8 @@
 	<div class="content-main">
 		<h4>게시판 최신글</h4>
 	</div>
+	
+		<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </div>
 </body>
 </html>

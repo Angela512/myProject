@@ -1,26 +1,86 @@
 @charset "UTF-8";
+@font-face {
+    font-family: 'MaplestoryOTFBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@font-face {
+  font-family: 'Nanum Gothic';
+  font-style: normal;
+  font-weight: 700;
+  src: url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Bold.eot);
+  src: url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Bold.eot?#iefix) format('embedded-opentype'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Bold.woff2) format('woff2'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Bold.woff) format('woff'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Bold.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Nanum Gothic';
+  font-style: normal;
+  font-weight: 400;
+  src: url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.eot);
+  src: url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.eot?#iefix) format('embedded-opentype'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.woff2) format('woff2'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.woff) format('woff'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Nanum Gothic';
+  font-style: normal;
+  font-weight: 800;
+  src: url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-ExtraBold.eot);
+  src: url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-ExtraBold.eot?#iefix) format('embedded-opentype'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-ExtraBold.woff2) format('woff2'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-ExtraBold.woff) format('woff'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-ExtraBold.ttf) format('truetype');
+}
 
 /*공통*/
 body{
 	width:960px;
-	margin:0 auto;
-	background:#E6E6E6;	
+	margin:0 auto;	
+  font-family: 'Nanum Gothic';
+  font-weight: 400;
+color:#1f1f1f !important;
 }
 .page-main{
-	background:white;
+/* 	background:white;
 	margin:40px 0;
 	border-radius:5px;
 	box-shadow:0 2px 6px rgba(100,100,100,.3);
-	min-height:650px;
+	min-height:650px; */
+}
+#main_login{
+	text-align:right;
+	padding-right:50px;
+	padding-top:50px;
+	
+}
+#main_login ul li{
+	display:inline-block;
+	width:100px;
+	text-align: center;
+	vertical-align: middle;
+	
 }
 #main_logo{
 	padding-top:20px;
+	font-family: 'MaplestoryOTFBold';
+	color:#FA5D57;
+}
+#main_logo a:visited{
+	color:#FA5D57;
 }
 #main_nav{
 	padding:2px 10px 20px 10px;
 	height:20px;
-	background-color: #C1BFBF;
-}
+	background-color: #ffffff;
+	text-align:center;
+	font-weight:400;}
+	
 #main_nav ul{
 	list-style:none;
 	margin: 0;
@@ -42,8 +102,8 @@ body{
 	text-align: left;
 }
 .content-main{
-	padding: 10px 20px;
-}
+/* 	padding: 10px 20px;
+ */}
 .result-display{
 	width:400px;
 	height:200px;
@@ -68,7 +128,7 @@ a:link{
 }
 a:visited{
 	text-decoration: none;
-	color:#000000;
+	color:#1f1f1f;
 }
 a:hover{
 	text-decoration: none;
@@ -253,12 +313,32 @@ input[id="zipcode"]{
 }
 .my-photo{
 	object-fit:cover;
-	/*정사각형이 아니라 직사각형일 경우 원 안에 보여지게 할 중심 이미지 위치를 지정*/
 	object-position:top;
 	border-radius:50%;
 }
 
+#footer{
+	background-color:red;
+	
+}
 
+#footer_logo{
+	text-align:left;
+	padding-top:20px;
+	font-family: 'MaplestoryOTFBold';
+	color:#FA5D57;
+	float:left;
+	padding-left:100px;
+	
+}
 
+#footer_logo a:visited{
+	color:#FA5D57;
+}
 
+#footer_content{
+	float:left;
+	padding-left:50px;
+	font-size:10pt;
+}
 
