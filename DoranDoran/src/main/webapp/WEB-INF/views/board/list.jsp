@@ -16,7 +16,7 @@
 	<div class="content-main">
 	<jsp:include page="boardHeader.jsp"/>
 		<form id="search_form" action="list.do" method="get">
-		    <input type="hidden" name="head" value="${param.head}">
+		    <input type="hidden" name="head" id="h_head" value="${param.head}">
 			<ul class="search">
 				<li>
 					<select name="keyfield">
@@ -36,15 +36,16 @@
 		</form>
 		
 		<div class="list-space align-right">
-		<tr>
-			<td>
-			<select id="selectKey">
-				<option value="1" <c:if test="${param.selectKey==1}">selected</c:if>>최신순</option>
-				<option value="2" <c:if test="${param.selectKey==2}">selected</c:if>>조회순</option>
-				<option value="3" <c:if test="${param.selectKey==3}">selected</c:if>>댓글 많은순</option>
+			<select name="sort" id="sort">
+				<option value="1" <c:if test="${param.sort==1}">selected</c:if>>최신순</option>
+				<option value="2" <c:if test="${param.sort==2}">selected</c:if>>조회순</option>
+				<option value="3" <c:if test="${param.sort==3}">selected</c:if>>댓글 많은순</option>
 			</select>
-			</td>
-		</tr>
+			<script>
+				$('#sort').change(function(){
+					location.href='list.do?keyfield=${param.keyfield}&keyword=${param.keyword}&head='+$('#h_head').val()+'&sort='+$('#sort').val();
+				});
+			</script>
 			<c:if test="${!empty user_num}">
 			<input type="button" value="글쓰기" onclick="location.href='writeForm.do'">
 			</c:if>
@@ -72,7 +73,7 @@
 			 <c:forEach var="board" items="${list}">
 			 <tr>
 			 	<td>${board.board_head}</td>
-			 	<td><a href="detail.do?board_num=${board.board_num}">${board.board_title}</a></td>
+			 	<td><a href="detail.do?board_num=${board.board_num}">${board.board_title}</a>  <c:if test="${board.reply_cnt>0}">[${board.reply_cnt}]</c:if></td>
 			 	<td>${board.mem_name}</td>
 			 	<td>${board.board_date}</td>
 			 	<td>${board.board_count}</td>

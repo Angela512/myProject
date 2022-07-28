@@ -55,6 +55,7 @@ public class BoardDAO {
 				DBUtil.executeClose(null, pstmt, null);
 			}
 		}
+		
 		//총 레코드 수(검색 레코드 수)
 		public int getBoardCount(String keyfield,String keyword, String head)throws Exception{
 			Connection conn = null;
@@ -109,7 +110,7 @@ public class BoardDAO {
 			return count;
 		}
 		//글목록(검색글 목록)
-		public List<BoardVO> getListBoard(int start,int end,String keyfield,String keyword,String head)
+		public List<BoardVO> getListBoard(int start,int end,String keyfield,String keyword,String head,String sort)
 										throws Exception{
 			Connection conn = null;
 			PreparedStatement pstmt = null;
@@ -117,6 +118,7 @@ public class BoardDAO {
 			List<BoardVO> list = null;
 			String sql = null;
 			String sub_sql = "";
+			String order_sql = "board_num DESC";
 			int cnt = 0;
 			
 			try {
@@ -135,11 +137,18 @@ public class BoardDAO {
 					else if(keyfield.equals("3")) sub_sql = "WHERE b.board_content LIKE ? AND b.board_head = ?";
 				}
 				
+				if(sort!=null && !"".equals(sort)) {
+					if(sort.equals("1"))  order_sql = "board_num DESC";
+					else if(sort.equals("2")) order_sql = "board_count DESC";
+					else if(sort.equals("3")) order_sql = "reply_cnt DESC NULLS LAST";
+				}
+				
 				sql = "SELECT * FROM (SELECT a.*, rownum rnum "
-						+ "FROM (SELECT * FROM board b JOIN member m "
-						+ "USING (mem_num) JOIN member_detail d "
-						+ "USING (mem_num) "+ sub_sql 
-						+ " ORDER BY b.board_num DESC)a) "
+						+ "FROM (SELECT * FROM board b "
+						+ "JOIN member m USING (mem_num) "
+						+ "JOIN member_detail d USING (mem_num) "
+						+ "LEFT OUTER JOIN (SELECT board_num, COUNT(*) reply_cnt FROM board_reply GROUP BY board_num)r USING(board_num) "
+						+ sub_sql + " ORDER BY " + order_sql + ")a) "
 						+ "WHERE rnum >= ? AND rnum <= ?";
 				//JDBC 수행 3단계 : PreparedStatement 객체 생성
 				pstmt = conn.prepareStatement(sql);
@@ -174,6 +183,7 @@ public class BoardDAO {
 					board.setBoard_content(rs.getString("board_content"));
 					board.setMem_num(rs.getInt("mem_num"));
 					board.setMem_photo(rs.getString("mem_photo"));
+					board.setReply_cnt(rs.getInt("reply_cnt"));
 					
 					list.add(board);
 				}

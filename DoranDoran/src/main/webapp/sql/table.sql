@@ -217,6 +217,7 @@ create table board_reply(
  reply_content varchar2(330) not null,
  reply_date date default sysdate not null,
  reply_modifydate date,
+ reply_count number,
  --질문1)pk, fk 명칭은 sql디벨로퍼에 저장할 때 쓰는데 어디서 볼 수 있나요? 그리고 따로 fk를 추가했을 경우 디벨로퍼에서 설정하는 방법은?
  constraint board_reply_pk primary key (reply_num),
  constraint board_reply_fk foreign key (mem_num) references member (mem_num),

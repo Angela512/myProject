@@ -21,6 +21,8 @@ public class BoardVO {
 	private String mem_photo;
 	private Date mem_modify_date;
 	
+	private int reply_cnt;
+	
 	public Date getMem_modify_date() {
 		return mem_modify_date;
 	}
@@ -112,5 +114,10 @@ public class BoardVO {
 	public void setMem_photo(String mem_photo) {
 		this.mem_photo = mem_photo;
 	}
-
+	public int getReply_cnt() {
+		return reply_cnt;
+	}
+	public void setReply_cnt(int reply_cnt) {
+		this.reply_cnt = reply_cnt;
+	}
 }

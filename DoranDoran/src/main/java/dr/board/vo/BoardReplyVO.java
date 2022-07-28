@@ -8,6 +8,7 @@ public class BoardReplyVO {
 	private String reply_content;
 	private String reply_date;  
 	private String reply_modifydate;
+	private int reply_count;
 	
 	
 	public int getMem_num() {
@@ -52,5 +53,12 @@ public class BoardReplyVO {
 	public void setReply_modifydate(String reply_modifydate) {
 		this.reply_modifydate = reply_modifydate;
 	}
+	public int getReply_count() {
+		return reply_count;
+	}
+	public void setReply_count(int reply_count) {
+		this.reply_count = reply_count;
+	}
+	
 	
 }

@@ -41,9 +41,11 @@ $(function(){
 					}
 					
 					//로그인한 회원번호와 작성자의 회원번호 일치 여부 체크
+					if(param.user_num == item.mem_num || param.user_auth == 3){
+						output += ' <input type="button" data-renum="'+item.reply_num+'" value="삭제" class="delete-btn">';
+					}
 					if(param.user_num == item.mem_num){
 						output += ' <input type="button" data-renum="'+item.reply_num+'" value="수정" class="modify-btn">';
-						output += ' <input type="button" data-renum="'+item.reply_num+'" value="삭제" class="delete-btn">';
 					}
 					
 					output += '<hr size="1" noshade width="100%">';

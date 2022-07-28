@@ -18,6 +18,7 @@ public class ListAction implements Action{
 		String pageNum = request.getParameter("pageNum");
 		if(pageNum==null) pageNum = "1";
 		
+		String sort = request.getParameter("sort");
 		String head = request.getParameter("head");
 		String keyfield = request.getParameter("keyfield");
 		String keyword = request.getParameter("keyword");
@@ -27,10 +28,10 @@ public class ListAction implements Action{
 		
 		//페이지 처리
 		PagingUtil page = new PagingUtil(keyfield,keyword,Integer.parseInt(pageNum),
-				count, 20,10,"list.do","&head="+head);
+				count, 20,10,"list.do","&head="+head+"&sort="+sort);
 		List<BoardVO> list = null;
 		if(count > 0) {
-			list = dao.getListBoard(page.getStartRow(), page.getEndRow(), keyfield, keyword, head);
+			list = dao.getListBoard(page.getStartRow(), page.getEndRow(), keyfield, keyword, head, sort);
 		}
 		
 		request.setAttribute("count", count);
