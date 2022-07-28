@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dr.member.vo.MemberVO;
+import dr.notice.vo.NoticeVO;
 import dr.trade.vo.TradeVO;
 import dr.util.DBUtil;
+import dr.util.StringUtil;
 
 public class MemberDAO {
 	//싱글턴 패턴
@@ -351,6 +353,105 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 
 		return count;
 	}
+	
+	
+	//관리자페이지 회원별 총 레코드 수(검색 레코드 수)
+		public int getAdminBoardCount(int mem_num)throws Exception{
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			int count = 0;
+			
+			try {
+				//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
+				conn = DBUtil.getConnection();
+				
+				//SQL문 작성
+				sql = "SELECT COUNT(*) FROM "
+						+ "(SELECT mem_num, notice_num num, notice_title title, notice_date ndate,'notice' tname  FROM notice "
+						+ "UNION ALL "
+						+ "SELECT mem_num, board_num, board_title, board_date, 'board' FROM board "
+						+ "UNION ALL "
+						+ "SELECT mem_num, trade_num, trade_title, trade_date, 'trade' FROM trade "
+						+ "UNION ALL "
+						+ "SELECT mem_num, food_num, food_name, food_date, 'food' FROM food "
+						+ "UNION ALL "
+						+ "SELECT mem_num, job_num, job_title, job_date, 'job' FROM job) "
+						+ "WHERE mem_num = ?";
+				
+				//JDBC 수행 3단계 : PreparedStatement 객체 생성
+				pstmt = conn.prepareStatement(sql);
+				//?에 데이터 바인딩
+				pstmt.setInt(1, mem_num);
+				
+				//JDBC 수행 4단계
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					count = rs.getInt(1);
+				}
+				
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				DBUtil.executeClose(rs, pstmt, conn);
+			}
+			return count;
+		}
+		//관리자페이지 회원별 글 목록(검색글 목록)
+		public List<NoticeVO> getListAdminBoard(int start, int end, int mem_num) throws Exception{
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			List<NoticeVO> list = null;
+			String sql = null;
+			
+			try {
+				//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
+				conn = DBUtil.getConnection();
+				
+				//SQL문 작성
+				sql="SELECT * FROM "
+						+ "(SELECT a.*, rownum rnum FROM "
+						+ "(SELECT mem_num, notice_num num, notice_title title, notice_date ndate, 'notice' tname FROM notice "
+						+ "UNION ALL "
+						+ "SELECT mem_num, board_num, board_title, board_date, 'board' FROM board "
+						+ "UNION ALL "
+						+ "SELECT mem_num, trade_num, trade_title, trade_date, 'trade' FROM trade "
+						+ "UNION ALL "
+						+ "SELECT mem_num, food_num, food_name, food_date,'food'  FROM food "
+						+ "UNION ALL "
+						+ "SELECT mem_num, job_num, job_title, job_date,'job' FROM job ORDER BY 3 DESC)a "
+						+ "WHERE mem_num = ?) "
+						+ "WHERE rnum >= ? AND rnum <= ?";
+				
+				//JDBC 수행 3단계 : PreparedStatement 객체 생성
+				pstmt = conn.prepareStatement(sql);
+				//?에 데이터 바인딩
+				pstmt.setInt(1, mem_num);
+				pstmt.setInt(2, start);
+				pstmt.setInt(3, end);
+				
+				//JDBC 수행 4단계
+				rs = pstmt.executeQuery();
+				list = new ArrayList<NoticeVO>();
+				while(rs.next()) {
+					NoticeVO notice = new NoticeVO();
+					notice.setMem_num(rs.getInt("mem_num"));
+					notice.setNotice_num(rs.getInt("num"));
+					notice.setNotice_title(StringUtil.useNoHtml(rs.getString("title")));
+					notice.setNotice_date(rs.getDate("ndate"));
+					notice.setMem_name(rs.getString("mem_name"));
+					notice.setNotice_tname(rs.getString("tname"));
+					list.add(notice);
+				}
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				DBUtil.executeClose(rs, pstmt, conn);
+			}		
+			return list;
+		}
 	
 	//목록(검색글 목록)
 		public List<MemberVO> getListMemberByAdmin(int start,int end,String keyfield,String keyword)throws Exception{

@@ -62,12 +62,31 @@
 				<c:if test="${!empty member.mem_modify_date}">
 				<li>
 					<label>회원정보 수정일</label> ${member.mem_modify_date}
-				</li>
-				<li>
-					${member.mem_name}님이 작성한 글
-				</li>
+				</li>				
 				</c:if>
-			</ul>    
+			</ul>
+			<table>
+				<tr>
+					<th>게시판</th>
+					<th>제목</th>
+					<th>작성일</th>
+				</tr>
+				<c:forEach var="member" items="${list}">
+				<tr>
+					<c:if test="${member.auth == 3}">
+					<td>
+						
+					</td>
+					<td>${member.notice_tname}</td>
+					<td>
+						<a href="detailUserForm.do?mem_num=${member.mem_num}">${member.notice_title}</a>
+					</td>
+					<td>${member.notice_date}</td>
+					<td>관리</td>
+					</c:if>
+				</tr>
+				</c:forEach>
+			</table>
 				
 		</form>
 	</div>
