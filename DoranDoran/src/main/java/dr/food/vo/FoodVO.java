@@ -13,7 +13,11 @@ public class FoodVO {
 	
 	private String food_local;
 	
-	private String food_time;
+	private String food_timeh1;
+	private String food_timem1;
+	private String food_timeh2;
+	private String food_timem2;
+	
 	private String food_menu;
 	private String food_link;
 	private String food_zipcode;
@@ -30,19 +34,12 @@ public class FoodVO {
 	private String mem_id;
 	private String mem_name;
 	private String mem_photo;
-	private int auth;
 	
 	
 	private Date food_date_modi;
 	
 	
 	
-	public int getAuth() {
-		return auth;
-	}
-	public void setAuth(int auth) {
-		this.auth = auth;
-	}
 	public int getFood_num() {
 		return food_num;
 	}
@@ -60,12 +57,6 @@ public class FoodVO {
 	}
 	public void setFood_name(String food_name) {
 		this.food_name = food_name;
-	}
-	public String getFood_time() {
-		return food_time;
-	}
-	public void setFood_time(String food_time) {
-		this.food_time = food_time;
 	}
 	public String getFood_menu() {
 		return food_menu;
@@ -181,6 +172,30 @@ public class FoodVO {
 	}
 	public void setFood_local(String food_local) {
 		this.food_local = food_local;
+	}
+	public String getFood_timeh1() {
+		return food_timeh1;
+	}
+	public void setFood_timeh1(String food_timeh1) {
+		this.food_timeh1 = food_timeh1;
+	}
+	public String getFood_timem1() {
+		return food_timem1;
+	}
+	public void setFood_timem1(String food_timem1) {
+		this.food_timem1 = food_timem1;
+	}
+	public String getFood_timeh2() {
+		return food_timeh2;
+	}
+	public void setFood_timeh2(String food_timeh2) {
+		this.food_timeh2 = food_timeh2;
+	}
+	public String getFood_timem2() {
+		return food_timem2;
+	}
+	public void setFood_timem2(String food_timem2) {
+		this.food_timem2 = food_timem2;
 	}
 	
 	

@@ -125,13 +125,14 @@
 				<div>
 				<ul>
 					<li>
-						<span style="font-famil:'Song Myung';">[${food.food_local}] ${fn:substring(food.food_name,0,15)}</span>
+						<span style="font-family:'Song Myung'; font-size:25px;">[${food.food_local}] ${fn:substring(food.food_name,0,15)}</span>
 						
 					<li>
 					<br>
+					
 					<li>
 						번호 : ${food.food_phone1}-${food.food_phone2}-${food.food_phone3}
-					</li>
+					</li>				
 					<li>
 						주소 : ${food.food_addr1} ${food.food_addr2}
 					</li>
