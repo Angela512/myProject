@@ -22,15 +22,21 @@ body {
 
 .mySlides img {
 	vertical-align: middle;
+	/*
 	width: 1920px;
 	height: 1080px;
+	*/
 }
 
 /* Slideshow container */
+
 .slideshow-container {
+	/*
 	max-width: 100%;
 	position: relative;
 	margin: auto;
+	*/
+	margin-top:20px;
 }
 
 /* Caption text */
@@ -94,31 +100,29 @@ to {
 </style>
 </head>
 <body>
-	<div class="page-main">
-		<jsp:include page="/WEB-INF/views/common/header.jsp" />
-
-
+    <jsp:include page="/WEB-INF/views/common/header.jsp" />
 		<div class="slideshow-container">
 
 			<div class="mySlides fade">
 				<div class="numbertext">1 / 3</div>
-				<img src="../images/coffee1.jpg" style="width: 100%">
+				<img src="../images/coffee1.jpg" style="width: 100%;height:300px;">
 				<div class="text">Caption Text</div>
 			</div>
 
 			<div class="mySlides fade">
 				<div class="numbertext">2 / 3</div>
-				<img src="../images/coffee2.jpg" style="width: 100%">
+				<img src="../images/coffee2.jpg" style="width: 100%;height:300px;">
 				<div class="text">Caption Two</div>
 			</div>
 
 			<div class="mySlides fade">
 				<div class="numbertext">3 / 3</div>
-				<img src="../images/aabb.jpg" style="width: 100%">
+				<img src="../images/aabb.jpg" style="width: 100%;height:300px;">
 				<div class="text">Caption Three</div>
 			</div>
 
 		</div>
+	<div class="page-main">
 		<br>
 
 		<div style="text-align: center">
