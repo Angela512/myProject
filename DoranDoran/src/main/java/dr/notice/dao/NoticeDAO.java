@@ -54,7 +54,7 @@ public class NoticeDAO {
 		}
 	}
 	//총 레코드 수(검색 레코드 수)
-	public int getNoticeCount(String keyfield, String keyword)throws Exception{
+	public int getNoticeCount(String keyfield, String keyword, String head)throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -66,18 +66,29 @@ public class NoticeDAO {
 			//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
 			conn = DBUtil.getConnection();
 			
-			if(keyword != null && !"".equals(keyword)) {
+			if(keyword != null && !"".equals(keyword) && (head == null || "".equals(head))) {
 				if(keyfield.equals("1")) sub_sql = "WHERE n.notice_title LIKE ?";
-				else if(keyfield.equals("2")) sub_sql = "WHERE m.mem_id LIKE ?";
+				else if(keyfield.equals("2")) sub_sql = "WHERE d.mem_name LIKE ?";
 				else if(keyfield.equals("3")) sub_sql = "WHERE n.notice_content LIKE ?";
+			}else if((keyword==null || "".equals(keyword)) && (head != null && !"".equals(head))) {
+				sub_sql = "WHERE n.notice_head = ?";
+			}else if((keyword!=null && !"".equals(keyword)) && (head != null && !"".equals(head))) {
+				if(keyfield.equals("1")) sub_sql = "WHERE notice_title LIKE ? AND notice_head = ?";
+				else if(keyfield.equals("2")) sub_sql = "WHERE mem_name LIKE ? AND notice_head = ?";
+				else if(keyfield.equals("3")) sub_sql = "WHERE notice_content LIKE ? AND notice_head = ?";
 			}
 			//SQL문 작성
-			sql = "SELECT COUNT(*) FROM notice n JOIN member m USING(mem_num) " + sub_sql;
+			sql = "SELECT COUNT(*) FROM notice n JOIN member m USING(mem_num) JOIN member_detail d USING(mem_num) " + sub_sql;
 			
 			//JDBC 수행 3단계 : PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
-			if(keyword != null && !"".equals(keyword)) {
+			if(keyword != null && !"".equals(keyword) && (head == null || "".equals(head))) {
 				pstmt.setString(1, "%" + keyword + "%");
+			}else if((keyword==null || "".equals(keyword)) && (head != null && !"".equals(head))) {
+				pstmt.setString(1, head);
+			}else if((keyword!=null && !"".equals(keyword)) && (head != null && !"".equals(head))) {
+				pstmt.setString(1, "%"+keyword+"%");
+				pstmt.setString(2, head);
 			}
 			
 			//JDBC 수행 4단계
@@ -94,7 +105,7 @@ public class NoticeDAO {
 		return count;
 	}
 	//글 목록(검색글 목록)
-	public List<NoticeVO> getListNotice(int start, int end, String keyfield, String keyword) throws Exception{
+	public List<NoticeVO> getListNotice(int start, int end, String keyfield, String keyword, String head) throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -107,21 +118,32 @@ public class NoticeDAO {
 			//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
 			conn = DBUtil.getConnection();
 			
-			if(keyword != null && !"".equals(keyword)) {
+			if((keyword != null && !"".equals(keyword)) && (head == null || "".equals(head))) {
 				if(keyfield.equals("1")) sub_sql = "WHERE n.notice_title LIKE ?";
 				else if(keyfield.equals("2")) sub_sql = "WHERE d.mem_name LIKE ?";
 				else if(keyfield.equals("3")) sub_sql = "WHERE n.notice_content LIKE ?";
+			}else if((keyword == null || "".equals(keyword)) && (head!=null && !"".equals(head))) {
+				sub_sql = "WHERE n.notice_head = ?";
+			}else if((keyword != null && !"".equals(keyword)) && (head != null && !"".equals(head))) {
+				if(keyfield.equals("1")) sub_sql = "WHERE n.notice_title LIKE ? AND n.notice_head = ?";
+				else if(keyfield.equals("2")) sub_sql = "WHERE d.mem_name LIKE ? AND n.notice_head = ?";
+				else if(keyfield.equals("3")) sub_sql = "WHERE n.notice_content LIKE ? AND n.notice_head = ?";
 			}
 			//SQL문 작성
 			sql = "SELECT * FROM (SELECT a.*, rownum rnum "
 			+ "FROM (SELECT * FROM notice n JOIN member_detail d USING (mem_num) JOIN member m USING(mem_num) " + sub_sql 
-			+ "ORDER BY n.notice_num DESC)a) WHERE rnum >= ? AND rnum <= ?";
+			+ ")a) WHERE rnum >= ? AND rnum <= ?";
 			
 			//JDBC 수행 3단계 : PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			//?에 데이터 바인딩
-			if(keyword != null && !"".equals(keyword)) {
-				pstmt.setString(++cnt, "%" + keyword + "%");
+			if((keyword != null && !"".equals(keyword)) && (head == null || "".equals(head))) {
+				pstmt.setString(1, "%"+keyword+"%");
+			}else if((keyword == null || "".equals(keyword)) && (head != null && !"".equals(head))) {
+				pstmt.setString(1, head);
+			}else if((keyword != null && !"".equals(keyword)) && (head != null && !"".equals(head))) {
+				pstmt.setString(1, "%"+keyword+"%");
+				pstmt.setString(2, head);
 			}
 			pstmt.setInt(++cnt, start);
 			pstmt.setInt(++cnt, end);

@@ -15,8 +15,8 @@
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="content-main">
-	<c:if test="${notice.notice_head == 0}"><h2>필독 | ${notice.notice_title}</h2></c:if>
-	<c:if test="${notice.notice_head == 1}"><h2>공지 | ${notice.notice_title}</h2></c:if>
+	<c:if test="${notice.notice_head == '필독'}"><h2>${notice.notice_head} | ${notice.notice_title}</h2></c:if>
+	<c:if test="${notice.notice_head == '공지'}"><h2>${notice.notice_head} | ${notice.notice_title}</h2></c:if>
 		
 		<ul class="detail-info">
 			<li>

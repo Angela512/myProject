@@ -22,8 +22,8 @@
 				<li>
 					<label for="head">말머리</label>
 					<select name="head">
-						<option value="0" <c:if test="${notice.notice_head==0}"> selected="selected" </c:if>>필독</option>
-						<option value="1" <c:if test="${notice.notice_head==1}"> selected="selected" </c:if>>공지</option>
+						<option value="필독" <c:if test="${notice.notice_head=='필독'}"> selected="selected" </c:if>>${notice.notice_head}</option>
+						<option value="공지" <c:if test="${notice.notice_head=='공지'}"> selected="selected" </c:if>>${notice.notice_head}</option>
 					</select>
 				</li>
 				<li>
@@ -39,14 +39,12 @@
 				<li>
 					*다시 파일을 업로드하면 기존 파일은 삭제됩니다.<br>
 					<label for="file1">파일1</label>
-					<c:if test="${empty notice.notice_file1}">
-					
-					<input type="file" name="file1" id="file1" accept="image/gif,image/png,image/jpeg">
-					
-					</c:if>
-					
+						<input type="file" name="file1" id="file1" accept="image/gif,image/png,image/jpeg"> 
+				</li>
+				<li>
+					<label>&nbsp;</label>
 					<c:if test="${!empty notice.notice_file1}">
-					<span id="file_detail">
+					<span id="file_detail1">
 						(${notice.notice_file1}) 
 						<input type="button" value="파일삭제" id="file_del1">
 					</span>
@@ -67,7 +65,8 @@
 										if(param.result == 'logout'){
 											alert('로그인 후 사용하세요!');
 										}else if(param.result == 'success'){
-											$('#file_detail').hide();
+											$('#file_detail1').hide();
+											$('#file_detail').show();
 										}else if(param.result == 'wrongAccess'){
 											alert('잘못된 접속입니다.');
 										}else{
@@ -88,15 +87,12 @@
 					<!-- 이미지2 --> 
 					<br>
 					<label for="file2">파일2</label>
-					<c:if test="${empty notice.notice_file2}">
-					
-					<span id="file_detail2">
-					<input type="file" name="file2" id="file2" accept="image/gif,image/png,image/jpeg">
-					</span>
-					
-					</c:if>
+						<input type="file" name="file2" id="file2" accept="image/gif,image/png,image/jpeg">
+				</li>
+				<li>
+					<label>&nbsp;</label>	
 					<c:if test="${!empty notice.notice_file2}">
-					<span id="file_detail">
+					<span id="file_detail2">
 						(${notice.notice_file2}) 
 						<input type="button" value="파일삭제" id="file_del2">
 						
@@ -118,7 +114,7 @@
 										if(param.result == 'logout'){
 											alert('로그인 후 사용하세요!');
 										}else if(param.result == 'success'){
-											$('#file_detail').hide();
+											$('#file_detail2').hide();
 											//$('#file2').show();
 										}else if(param.result == 'wrongAccess'){
 											alert('잘못된 접속입니다.');
@@ -141,13 +137,11 @@
 					<!-- 이미지3 -->
 					<br>
 					<label for="file3">파일3</label>
-					<c:if test="${empty notice.notice_file3}">
-					
-					<input type="file" name="file3" id="file3" accept="image/gif,image/png,image/jpeg">
-					
-					</c:if>
+						<input type="file" name="file3" id="file3" accept="image/gif,image/png,image/jpeg">
+				</li>
+				<li><label>&nbsp;</label>
 					<c:if test="${!empty notice.notice_file3}">
-					<span id="file_detail">
+					<span id="file_detail3">
 						(${notice.notice_file3}) 
 						<input type="button" value="파일삭제" id="file_del3">
 					</span>
@@ -168,7 +162,7 @@
 										if(param.result == 'logout'){
 											alert('로그인 후 사용하세요!');
 										}else if(param.result == 'success'){
-											$('#file_detail').hide();
+											$('#file_detail3').hide();
 										}else if(param.result == 'wrongAccess'){
 											alert('잘못된 접속입니다.');
 										}else{

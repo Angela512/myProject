@@ -14,18 +14,22 @@
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="content-main">
-		<h2>게시판 목록</h2>
+		<h2>공지사항</h2>
 		<form id="search_form" action="list.do" method="get">
+			<input type="hidden" name="head" value="${param.head}">
 			<ul class="search">
 				<li>
-					<input type="button" name="head" id="0" value="필독">
-					<input type="button" name="head" id="1" value="공지">
+					<input type="button" value="전체글" onclick="location.href='list.do'"> 
+					<input type="button" name="head" value="필독" 
+						onclick="location.href='list.do?head=필독'">
+					<input type="button" name="head" value="공지" 
+						onclick="location.href='list.do?head=공지'">
 				</li>
 				<li>
 					<select name="keyfield">
-						<option value="1">제목</option>
-						<option value="2">작성자</option>
-						<option value="3">내용</option>
+						<option value="1" <c:if test="${param.keyfield==1}">selected</c:if>>제목</option>
+						<option value="2" <c:if test="${param.keyfield==2}">selected</c:if>>작성자</option>
+						<option value="3" <c:if test="${param.keyfield==3}">selected</c:if>>내용</option>
 					</select>
 				</li>
 				<li>
@@ -39,10 +43,10 @@
 		<div class="list-space align-right">
 		
 		<%-- 공지게시판은 관리자만 글쓰기 가능 --%>
+			${count}개의 공지
 			<c:if test="${user_auth == 3 && !empty user_num}">
 				<input type="button" value="글쓰기" onclick="location.href='writeForm.do'">
 			</c:if>
-
 			<input type="button" value="목록" onclick="location.href='list.do'"> 
 			<input type="button" value="홈으로" onclick="location.href='${pageContext.request.contextPath}/main/main.do'">         
 		
@@ -64,8 +68,8 @@
 			
 			<c:forEach var="notice" items="${list}">
 			<tr>
-				<c:if test="${notice.notice_head == 0}">
-				<td>필독</td>
+				<c:if test="${notice.notice_head == '필독'}">
+				<td>${notice.notice_head}</td>
 				<td><a href="detail.do?notice_num=${notice.notice_num}">${notice.notice_title}</a></td>
 				<td>${notice.mem_name}</td>
 				<td>${notice.notice_date}</td>
@@ -75,8 +79,8 @@
 			</c:forEach>
 			<c:forEach var="notice" items="${list}">
 			<tr>
-				<c:if test="${notice.notice_head == 1}">
-				<td>공지</td>
+				<c:if test="${notice.notice_head == '공지'}">
+				<td>${notice.notice_head}</td>
 				<td><a href="detail.do?notice_num=${notice.notice_num}">${notice.notice_title}</a></td>
 				<td>${notice.mem_name}</td>
 				<td>${notice.notice_date}</td>
