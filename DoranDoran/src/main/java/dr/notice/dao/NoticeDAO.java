@@ -132,18 +132,18 @@ public class NoticeDAO {
 			//SQL문 작성
 			sql = "SELECT * FROM (SELECT a.*, rownum rnum "
 			+ "FROM (SELECT * FROM notice n JOIN member_detail d USING (mem_num) JOIN member m USING(mem_num) " + sub_sql 
-			+ ")a) WHERE rnum >= ? AND rnum <= ?";
+			+ " ORDER BY n.notice_num DESC)a) WHERE rnum >= ? AND rnum <= ?";
 			
 			//JDBC 수행 3단계 : PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			//?에 데이터 바인딩
 			if((keyword != null && !"".equals(keyword)) && (head == null || "".equals(head))) {
-				pstmt.setString(1, "%"+keyword+"%");
+				pstmt.setString(++cnt, "%"+keyword+"%");
 			}else if((keyword == null || "".equals(keyword)) && (head != null && !"".equals(head))) {
-				pstmt.setString(1, head);
+				pstmt.setString(++cnt, head);
 			}else if((keyword != null && !"".equals(keyword)) && (head != null && !"".equals(head))) {
-				pstmt.setString(1, "%"+keyword+"%");
-				pstmt.setString(2, head);
+				pstmt.setString(++cnt, "%"+keyword+"%");
+				pstmt.setString(++cnt, head);
 			}
 			pstmt.setInt(++cnt, start);
 			pstmt.setInt(++cnt, end);
