@@ -253,6 +253,7 @@ public class FoodDAO {
 				food.setFood_timem1(rs.getString("food_timem1"));
 				food.setFood_timeh2(rs.getString("food_timeh2"));
 				food.setFood_timem2(rs.getString("food_timem2"));
+				
 	
 				food.setFood_menu(rs.getString("food_menu"));
 				food.setFood_link(rs.getString("food_link"));
@@ -271,7 +272,6 @@ public class FoodDAO {
 				food.setMem_id(rs.getString("mem_id"));
 				food.setMem_name(rs.getString("mem_name"));
 				food.setMem_photo(rs.getString("mem_photo"));
-				
 				food.setFood_local(rs.getString("food_local"));
 			}
 			
