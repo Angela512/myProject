@@ -132,7 +132,6 @@ to {
          <span class="dot"></span> <span class="dot"></span> <span class="dot"></span>
       </div>
 
-
       <div class="content-main">
          <h4>게시판 최신글</h4>
       </div>
