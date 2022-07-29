@@ -32,7 +32,7 @@ public class AdminDetailUserAction implements Action{
 		
 		MemberDAO dao = MemberDAO.getInstance();
 		dao.updateMemberByAdmin(auth, mem_num);
-		
+		System.out.println("AdminDetailUserAction****");
 		request.setAttribute("mem_num", mem_num);
 		
 		return "/WEB-INF/views/member/detailUser.jsp";

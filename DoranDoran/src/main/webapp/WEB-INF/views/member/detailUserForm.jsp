@@ -65,30 +65,41 @@
 				</li>				
 				</c:if>
 			</ul>
+		</form>
+		<form action="adminBoardCount.do" method="post" id="adminBoard_form">
+			<input type="hidden" name="mem_num" value="${member.mem_num}">
 			<table>
 				<tr>
-					<th>게시판</th>
+					<th>게시판${member.mem_num}</th>
 					<th>제목</th>
 					<th>작성일</th>
 				</tr>
 				<c:forEach var="member" items="${list}">
 				<tr>
-					<c:if test="${member.auth == 3}">
+					<td>${member.notice_tname }의 게시판</td> 
+					<c:if test="${member.notice_tname =='notice'}">
+				<!--	<td>공지사항</td>  -->
 					<td>
-						
-					</td>
-					<td>${member.notice_tname}</td>
-					<td>
-						<a href="detailUserForm.do?mem_num=${member.mem_num}">${member.notice_title}</a>
+						<a href="detail.do?notice_num=${member.notice_num}">${member.notice_title}</a>
 					</td>
 					<td>${member.notice_date}</td>
-					<td>관리</td>
 					</c:if>
 				</tr>
+				
+				<tr>
+					<c:if test="${member.notice_tname =='trade'}">
+					<td>중고거래</td>
+					<td>
+						<a href="detail.do?notice_num=${member.notice_num}">${member.notice_title}</a>
+					</td>
+					<td>${member.notice_date}</td>
+					</c:if>
+				</tr>
+				
 				</c:forEach>
 			</table>
-				
-		</form>
+		</form>		
+		
 	</div>
 </div>
 </body>

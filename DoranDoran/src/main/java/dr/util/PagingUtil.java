@@ -13,20 +13,17 @@ public class PagingUtil {
 	 * pageUrl : 호출 페이지 url
 	 * addKey : 부가적인 key 없을 때는 null 처리 (&num=23형식으로 전달할 것)
 	 * */
-	public PagingUtil(int currentPage, int count, int rowCount,
-			int pageCount, String pageUrl) {
+	public PagingUtil(int currentPage, int count, int rowCount, int pageCount, String pageUrl) {
 		this(null,null,currentPage,count,rowCount,pageCount,pageUrl,null,null);
 	}
-	public PagingUtil(int currentPage, int count, int rowCount,
-			int pageCount, String pageUrl, String addKey) {
+	public PagingUtil(int currentPage, int count, int rowCount, int pageCount, String pageUrl, String addKey) {
 		this(null,null,currentPage,count,rowCount,pageCount,pageUrl,addKey,null);
 	}
-	public PagingUtil(String keyfield, String keyword, int currentPage, int count, int rowCount,
-			int pageCount,String pageUrl) {
+	public PagingUtil(String keyfield, String keyword, int currentPage, int count, int rowCount, int pageCount,String pageUrl) {
 		this(keyfield,keyword,currentPage,count,rowCount,pageCount,pageUrl,null,null);
 	}
 	public PagingUtil(String keyfield, String keyword, int currentPage, int count, int rowCount,
-			int pageCount,String pageUrl,String addKey) {
+						int pageCount,String pageUrl,String addKey) {
 		this(keyfield,keyword,currentPage,count,rowCount,pageCount,pageUrl,addKey,null);
 	}
 		

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import dr.controller.Action;
 import dr.member.dao.MemberDAO;
-import dr.member.vo.MemberVO;
 import dr.notice.vo.NoticeVO;
 import dr.util.PagingUtil;
 
@@ -26,13 +25,12 @@ public class AdminBoardCountAction implements Action{
 		if(user_auth < 3) {//관리자로 로그인하지 않은 경우
 			return "/WEB-INF/views/common/notice.jsp";
 		}
-		
 		//관리자로 로그인한 경우
 		String pageNum = request.getParameter("pageNum");
 		if(pageNum==null) pageNum = "1";
 		
-		String keyfield = request.getParameter("keyfield");
-		String keyword = request.getParameter("keyword");
+//		String keyfield = request.getParameter("keyfield");
+//		String keyword = request.getParameter("keyword");
 		//전송된 데이터 반환
 		int mem_num = Integer.parseInt(request.getParameter("mem_num"));
 		
@@ -40,12 +38,11 @@ public class AdminBoardCountAction implements Action{
 		int count = dao.getAdminBoardCount(mem_num); //총레코드수
 		//페이지 처리
 		//keyfield,keyword,currentPage,count,rowCount,pageCount,url
-		PagingUtil page = new PagingUtil(keyfield,keyword,Integer.parseInt(pageNum),count,20,10,"memberList.do");
+		PagingUtil page = new PagingUtil(Integer.parseInt(pageNum),count,20,10,"adminBoardCount.do");
 		List<NoticeVO> list = null;
 		if(count > 0) {
 			list = dao.getListAdminBoard(page.getStartRow(),page.getEndRow(),mem_num); //글목록(검색글목록)
 		}
-		
 		request.setAttribute("count", count);
 		request.setAttribute("list", list);
 		request.setAttribute("page", page.getPage());

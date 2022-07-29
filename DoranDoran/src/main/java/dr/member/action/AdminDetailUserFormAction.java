@@ -29,7 +29,6 @@ public class AdminDetailUserFormAction implements Action{
 		
 		MemberDAO dao = MemberDAO.getInstance();
 		MemberVO member = dao.getMember(mem_num);
-		
 		request.setAttribute("member", member);
 		
 		return "/WEB-INF/views/member/detailUserForm.jsp";
