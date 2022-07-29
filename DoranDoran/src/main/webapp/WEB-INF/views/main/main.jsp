@@ -137,6 +137,27 @@ to {
 			<h4>게시판 최신글</h4>
 		</div>
 		
+		<!-- 공지 시작 -->
+		<h3>공지사항</h3>
+			<a href="${pageContext.request.contextPath}/notice/list.do">더보기</a>
+			<table>
+				<tr>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					<th>조회수</th>
+				</tr>
+				<c:forEach var="notice" items="${noticeList}">
+				<tr>
+					<td><a href="${pageContext.request.contextPath }/notice/detail.do?notice_num=${notice.notice_num}">${notice.notice_title }</a></td>
+					<td>${notice.mem_name}</td>
+					<td>${notice.notice_date}</td>
+					<td>${notice.notice_count}</td>
+				</tr>
+				</c:forEach>
+			</table>
+		<!-- 공지 끝 -->
+		
 		<h3>중고거래</h3>
 		<a href="${pageContext.request.contextPath }/trade/list.do">더보기></a>
 		<table>
