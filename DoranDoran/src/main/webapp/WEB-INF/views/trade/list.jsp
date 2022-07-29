@@ -20,29 +20,48 @@
 		<form id="search_form" action="list.do" method="get">
 			<input type="hidden" name="trade_head" value="${param.trade_head}">
 			<input type="hidden" name="trade_category" value="${param.trade_category}">
-			<ul class="search">
 			
+			<ul>
 				<li>
 					<input type="button" value="삽니다" onclick="location.href='list.do?trade_head=0'">
 					<input type="button" value="팝니다" onclick="location.href='list.do?trade_head=1'">
 				</li>
-				
-				<li>
+			</ul>
+			
+			
+			<div id="main_nav">
+				<ul>
 					<c:if test="${!empty param.trade_head }">
-					<input type="button" value="가전제품" onclick="location.href='list.do?trade_head=${param.trade_head}&trade_category=1'">
-					<input type="button" value="가구" onclick="location.href='list.do?trade_head=${param.trade_head}&trade_category=2'">
-					<input type="button" value="옷" onclick="location.href='list.do?trade_head=${param.trade_head}&trade_category=3'">
+						<li>
+							<a href="list.do?trade_head=${param.trade_head}&trade_category=1">가전제품</a>
+						</li>
+						
+						<li>
+							<a href="list.do?trade_head=${param.trade_head}&trade_category=2">가구</a>
+						</li>
+
+						<li>
+							<a href="list.do?trade_head=${param.trade_head}&trade_category=3">옷</a>
+						</li>
 					</c:if>
 
 					<c:if test="${empty param.trade_head }">
-					<input type="button" value="가전제품" onclick="location.href='list.do?trade_category=1'">
-					<input type="button" value="가구" onclick="location.href='list.do?trade_category=2'">
-					<input type="button" value="옷" onclick="location.href='list.do?trade_category=3'">
+						<li>
+							<a href="list.do?trade_category=1">가전제품</a>
+						</li>
+						
+						<li>
+							<a href="list.do?trade_category=2">가구</a>
+						</li>
+
+						<li>
+							<a href="list.do?trade_category=3">옷</a>
+						</li>
 					</c:if>
-				</li>
+				</ul>
+			</div>
 				
-				
-				
+			<ul class="search">	
 				<li>
 					<select name="keyfield">
 						<option value="1" <c:if test="${param.keyfield==1}">selected</c:if>>제목</option>
