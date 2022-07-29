@@ -14,6 +14,7 @@
 <body>
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<jsp:include page="/WEB-INF/views/board/banner.jsp"/>
 	<div class="content-main">
 	<jsp:include page="boardHeader.jsp"/>
 		<form id="search_form" action="list.do" method="get">

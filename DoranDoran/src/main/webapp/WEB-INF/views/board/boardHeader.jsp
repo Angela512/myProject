@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- header 시작 -->
-<div id="main_board_nav">
+<!-- 자유게시판 header 시작 -->
+<div id="main_sub_nav">
 	<ul>
 		<li>
-			<a href="${pageContext.request.contextPath}/board/list.do">전체</a>
+			<a href="${pageContext.request.contextPath}/board/list.do">전체보기</a>
 		</li>
 		
 		<li>
@@ -24,6 +24,6 @@
 		</li>
 	</ul>
 </div>
-<!-- header 끝 -->
+<!-- 자유게시판 header 끝 -->
 
 

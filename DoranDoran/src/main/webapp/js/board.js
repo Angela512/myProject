@@ -26,5 +26,10 @@ $(function(){
 			return false;
 		}
 	});
+	//=============서브메뉴 클릭 후 유지=============//
+	$("#a").click(function() {
+	    toggleClass(".active-color");
+	});
+
 	
 });
