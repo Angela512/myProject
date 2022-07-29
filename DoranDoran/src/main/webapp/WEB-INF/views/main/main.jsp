@@ -100,6 +100,43 @@ to {
       font-size: 11px
    }
 }
+
+
+
+ /* 화면 디자인 맛집 게시판용 css  106 ~ 138*/
+
+ .containerr{
+	position:relative;
+	text-align:center;
+	color:blue;
+}
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: Nanum Pen Script;
+	
+	font-size:100px;
+	color:white;
+  
+}
+
+   
+.board-spacee .horizontal-areaa{
+	margin:70px ;
+	padding:3px;
+	width:300px;
+	height:600px;
+	float:left;
+	overflow: hidden;
+}
+
+.board-spacee .horizontal-areaa img.board-imagee{
+	width:500px;
+	height:300px;
+}
+
 </style>
 </head>
 <body>
@@ -158,6 +195,60 @@ to {
             </c:forEach>
          </table>
       <!-- 공지 끝 -->
+      
+      <!-- 맛집 찾기 시작 -->
+      <h3>맛집 찾기</h3>
+		
+		<a href="${pageContext.request.contextPath }/food/list.do">더보기></a>
+		
+			<div class="board-spacee">
+			<c:forEach var="food" items="${foodList }">
+
+			<div class="horizontal-areaa">
+				<a href="${pageContext.request.contextPath}/food/detail.do?food_num=${food.food_num}">
+				<c:if test="${!empty food.food_image1}">
+				<img class="board-imagee" src="${pageContext.request.contextPath}/upload/${food.food_image1}">
+				</c:if>
+				<c:if test="${empty food.food_image1}">
+				<img class="board-imagee" src="${pageContext.request.contextPath}/images/blank.png">
+				</c:if>
+				
+				<ul>
+					<li>
+						<span style="font-family:'Song Myung'; font-size:25px;">[${food.food_local}] ${fn:substring(food.food_name,0,15)}</span>
+						
+					<li>
+					<br>
+					
+					<li>
+						번호 : ${food.food_phone1}-${food.food_phone2}-${food.food_phone3}
+					</li>				
+					<li>
+						주소 : ${food.food_addr1} ${food.food_addr2}
+					</li>
+					<li>
+						설명 : ${food.food_content}
+					</li>
+				</ul>
+				
+				</a>
+				<div class="board-detail">
+					<c:if test="${!empty food.mem_photo}">
+					<img src="${pageContext.request.contextPath}/upload/${food.mem_photo}" width="25" height="25" class="my-photo">
+					</c:if>
+					<c:if test="${empty food.mem_photo}">
+					<img src="${pageContext.request.contextPath}/images/face.png" width="25" height="25" class="my-photo">
+					</c:if>
+					<span>${food.mem_name}</span>
+					<span>/ 조회수 : ${food.food_count}</span>
+				</div>
+			</div>
+	
+			</c:forEach>
+			</div>
+			<br>
+      
+      <!-- 맛집 찾기 끝 -->
       
       <h3>중고거래</h3>
       <a href="${pageContext.request.contextPath }/trade/list.do">더보기></a>
