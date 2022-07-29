@@ -179,9 +179,28 @@ to {
 		
 		</table>
 		
-		
-		
-		
+		<!-- 자유게시판 시작 -->
+		<h3>자유게시판</h3>
+		<a href="${pageContext.request.contextPath}/board/list.do">더보기 ></a>
+			<table>
+				<tr>
+					<th>말머리</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					<th>조회수</th>
+				</tr>
+				<c:forEach var="board" items="${boardList}">
+				<tr>
+					<td>${board.board_head}</td>
+					<td><a href="${pageContext.request.contextPath }/board/detail.do?board_num=${board.board_num}">${board.board_title}</a></td>
+					<td>${board.mem_name}</td>
+					<td>${board.board_date}</td>
+					<td>${board.board_count}</td>
+				</tr>
+				</c:forEach>
+			</table>
+		<!-- 자유게시판 끝 -->
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</div>
 

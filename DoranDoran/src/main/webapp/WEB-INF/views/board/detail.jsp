@@ -62,11 +62,9 @@
 				</c:if>
 				작성일 : ${board.board_date}
 				<%-- 로그인한 회원번호와 작성자 회원번호가 일치해야 수정,삭제 가능 --%>
-				<c:if test="${user_num == board.mem_num || user_auth == 3}">
 					<c:if test="${user_num == board.mem_num}">
 					<input type="button" value="수정" 
 					onclick="location.href='updateForm.do?board_num=${board.board_num}'">
-					</c:if>
 					<input type="button" value="삭제" id="delete_btn">
 					<script type="text/javascript">
 						let delete_btn = document.getElementById('delete_btn');
@@ -78,7 +76,20 @@
 							}
 						};
 					</script>
-				</c:if>
+					</c:if>
+					<c:if test="${!empty user_num && user_auth == 3}">
+					<input type="button" value="관리자 삭제" id="delete_btn">
+					<script type="text/javascript">
+						let delete_btn = document.getElementById('delete_btn');
+						//이벤트 연결
+						delete_btn.onclick=function(){
+							let choice = confirm('[관리자 전용]삭제하시겠습니까?');
+							if(choice){
+								location.replace('AdminDelete.do?board_num=${board.board_num}');
+							}
+						};
+					</script>
+					</c:if>
 			</li>
 		</ul>
 		<!-- 댓글 시작 -->

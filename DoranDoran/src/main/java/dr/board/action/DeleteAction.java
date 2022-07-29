@@ -28,10 +28,6 @@ public class DeleteAction implements Action{
 			//로그인한 회원번호와 작성자 회원번호가 불일치
 			return "WEB-INF/views/common/notice.jsp";
 		}
-		if(user_num != db_board.getMem_num() && user_auth != 3) {
-			//로그인한 회원번호와 작성자 회원번호가 불일치
-			return "WEB-INF/views/common/notice.jsp";
-		}
 		//로그인한 회원번호와 작성자 회원번호가 일치
 		dao.deleteBoard(board_num);
 		//파일 삭제

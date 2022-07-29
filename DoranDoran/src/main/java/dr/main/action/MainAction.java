@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dr.board.dao.BoardDAO;
+import dr.board.vo.BoardVO;
 import dr.controller.Action;
 import dr.notice.dao.NoticeDAO;
 import dr.notice.vo.NoticeVO;
@@ -22,8 +24,12 @@ public class MainAction implements Action{
 		TradeDAO tradeDao=TradeDAO.getInstance();
 		List<TradeVO> tradeList=tradeDao.getListTrade(1, 5, null, null, null, null);
 		
+		BoardDAO boardDao = BoardDAO.getInstance();
+		List<BoardVO> boardList = boardDao.getListBoard(1, 5, null, null, null, null);
+		
 		request.setAttribute("noticeList", noticeList);
 		request.setAttribute("tradeList", tradeList);
+		request.setAttribute("boardList", boardList);
 		
 		
 		return "/WEB-INF/views/main/main.jsp";
