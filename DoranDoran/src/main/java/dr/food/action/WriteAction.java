@@ -46,6 +46,11 @@ public class WriteAction implements Action{
 		food.setFood_local(multi.getParameter("local"));
 		food.setFood_zipcode(multi.getParameter("zipcode"));
 		
+		food.setFood_timeh1(multi.getParameter("hour1"));
+		food.setFood_timem1(multi.getParameter("min1"));
+		food.setFood_timeh2(multi.getParameter("hour2"));
+		food.setFood_timem2(multi.getParameter("min2"));
+
 		FoodDAO dao = FoodDAO.getInstance();
 		dao.insertFood(food);
 		
