@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+/* 글목록 시작 */
+
+.category_btn{
+  background-color: rgba( 255, 255, 255, 0.5 );
+  text-decoration: none;
+  display: inline-block;
+  font-size: 17px;
+  cursor: pointer;
+  border:none;
+  width: 100px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+#category_btn{
+		text-align: center;
+		padding:20px 0 20px 0;
+	
+}
+
+.content-main h2{
+	font-weight:700;
+	padding-top:30px;
+}
+
+/* 글목록 끝 */
+
+/*******************************/
+
+/* 글쓰기 시작 */
+
+
+
+/* 글쓰기 끝 */
