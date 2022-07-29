@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -133,6 +136,29 @@ to {
 		<div class="content-main">
 			<h4>게시판 최신글</h4>
 		</div>
+		
+		<h3>중고거래</h3>
+		<a href="${pageContext.request.contextPath }/trade/list.do">더보기></a>
+		<table>
+			<tr>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>작성일</th>
+			</tr>
+			
+			<c:forEach var="trade" items="${tradeList }">
+			<tr>
+				<td><a href="${pageContext.request.contextPath }/trade/detail.do?trade_num=${trade.trade_num}">${trade.trade_title }</a></td>
+				<td>${trade.mem_id }</td>
+				<td>${trade.trade_date }</td>
+			</tr>
+			</c:forEach>
+		
+		</table>
+		
+		
+		
+		
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</div>
 
