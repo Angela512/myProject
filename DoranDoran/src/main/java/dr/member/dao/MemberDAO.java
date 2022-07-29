@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import dr.admin.adminvo.AdminVO;
 import dr.member.vo.MemberVO;
 import dr.notice.vo.NoticeVO;
 import dr.trade.vo.TradeVO;
@@ -399,11 +400,11 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 			return count;
 		}
 		//관리자페이지 회원별 글 목록(검색글 목록)
-		public List<NoticeVO> getListAdminBoard(int start, int end, int mem_num) throws Exception{
+		public List<AdminVO> getListAdminBoard(int start, int end, int mem_num) throws Exception{
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
-			List<NoticeVO> list = null;
+			List<AdminVO> list = null;
 			String sql = null;
 			
 			try {
@@ -434,15 +435,14 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 				
 				//JDBC 수행 4단계
 				rs = pstmt.executeQuery();
-				list = new ArrayList<NoticeVO>();
+				list = new ArrayList<AdminVO>();
 				while(rs.next()) {
-					NoticeVO notice = new NoticeVO();
+					AdminVO notice = new AdminVO();
 					notice.setMem_num(rs.getInt("mem_num"));
-					notice.setNotice_num(rs.getInt("num"));
-					notice.setNotice_title(StringUtil.useNoHtml(rs.getString("title")));
-					notice.setNotice_date(rs.getDate("ndate"));
-					notice.setMem_name(rs.getString("mem_name"));
-					notice.setNotice_tname(rs.getString("tname"));
+					notice.setNum(rs.getInt("num"));
+					notice.setTitle(StringUtil.useNoHtml(rs.getString("title")));
+					notice.setNdate(rs.getDate("ndate"));
+					notice.setTname(rs.getString("tname"));
 					list.add(notice);
 				}
 			}catch(Exception e) {

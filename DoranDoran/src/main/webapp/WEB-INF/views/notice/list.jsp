@@ -20,10 +20,8 @@
 			<ul class="search">
 				<li>
 					<input type="button" value="전체글" onclick="location.href='list.do'"> 
-					<input type="button" name="head" value="필독" 
-						onclick="location.href='list.do?head=필독'">
-					<input type="button" name="head" value="공지" 
-						onclick="location.href='list.do?head=공지'">
+					<input type="button" name="head" value="필독" onclick="location.href='list.do?head=필독'">
+					<input type="button" name="head" value="공지" onclick="location.href='list.do?head=공지'">
 				</li>
 				<li>
 					<select name="keyfield">

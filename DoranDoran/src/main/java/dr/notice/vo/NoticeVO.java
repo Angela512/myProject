@@ -14,18 +14,12 @@ public class NoticeVO {
 	private String notice_file2;
 	private String notice_file3;
 	private String notice_head;
-	private String notice_tname;
 	
 	private String mem_id;
 	private String mem_name;
 	private String mem_photo;
 	
-	public String getNotice_tname() {
-		return notice_tname;
-	}
-	public void setNotice_tname(String notice_tname) {
-		this.notice_tname = notice_tname;
-	}
+	
 	public Date getNotice_modify_date() {
 		return notice_modify_date;
 	}

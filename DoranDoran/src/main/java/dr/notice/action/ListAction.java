@@ -21,12 +21,15 @@ public class ListAction implements Action{
 		String head = request.getParameter("head");
 		String keyfield = request.getParameter("keyfield");
 		String keyword = request.getParameter("keyword");
+		String notice_head = null;
 		
 		NoticeDAO dao = NoticeDAO.getInstance();
 		int count = dao.getNoticeCount(keyfield, keyword, head);//키워드가 없을때 전체 카운트 읽고, 있으면 키워드 카운트 읽음
 		
+		if(head != null) notice_head = "&head=" + head;
+		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield,keyword, Integer.parseInt(pageNum),count,20,10,"list.do","&head="+head);
+		PagingUtil page = new PagingUtil(keyfield,keyword, Integer.parseInt(pageNum),count,20,10,"list.do",notice_head);
 		
 		List<NoticeVO> list = null;
 		if(count > 0) {

@@ -66,41 +66,38 @@
 				</c:if>
 			</ul>
 		</form>
-		<form action="adminBoardCount.do" method="post" id="adminBoard_form">
-			<input type="hidden" name="mem_num" value="${member.mem_num}">
 			<table>
 				<tr>
-					<th>게시판${member.mem_num}</th>
+					<th>게시판</th>
 					<th>제목</th>
 					<th>작성일</th>
 				</tr>
 				<c:forEach var="member" items="${list}">
 				<tr>
-					<td>${member.notice_tname }의 게시판</td> 
-					<c:if test="${member.notice_tname =='notice'}">
-				<!--	<td>공지사항</td>  -->
 					<td>
-						<a href="detail.do?notice_num=${member.notice_num}">${member.notice_title}</a>
+						<c:if test="${member.tname=='board'}">자유게시판</c:if>
+						<c:if test="${member.tname=='notice'}">공지사항</c:if>
+						<c:if test="${member.tname=='food'}">맛집</c:if>
+						<c:if test="${member.tname=='job'}">구인구직</c:if>
+						<c:if test="${member.tname=='trade'}">중고거래</c:if>
 					</td>
-					<td>${member.notice_date}</td>
-					</c:if>
-				</tr>
-				
-				<tr>
-					<c:if test="${member.notice_tname =='trade'}">
-					<td>중고거래</td>
 					<td>
-						<a href="detail.do?notice_num=${member.notice_num}">${member.notice_title}</a>
+					    <c:if test="${member.tname=='board'}"><a href="${pageContext.request.contextPath}/${member.tname}/detail.do?board_num=${member.num}">${member.title}</a></c:if>
+						<c:if test="${member.tname=='notice'}"><a href="${pageContext.request.contextPath}/${member.tname}/detail.do?notice_num=${member.num}">${member.title}</a></c:if>
+						<c:if test="${member.tname=='food'}"><a href="${pageContext.request.contextPath}/${member.tname}/detail.do?food_num=${member.num}">${member.title}</a></c:if>
+						<c:if test="${member.tname=='job'}"><a href="${pageContext.request.contextPath}/${member.tname}/detail.do?job_num=${member.num}">${member.title}</a></c:if>
+						<c:if test="${member.tname=='trade'}"><a href="${pageContext.request.contextPath}/${member.tname}/detail.do?trade_num=${member.num}">${member.title}</a></c:if>
 					</td>
-					<td>${member.notice_date}</td>
-					</c:if>
+					<td>${member.ndate}</td>
 				</tr>
-				
 				</c:forEach>
 			</table>
-		</form>		
+			<div class="align-center">
+				${page}
+			</div>
 		
 	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </div>
 </body>
 </html>
