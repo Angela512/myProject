@@ -142,6 +142,7 @@ to {
 			<a href="${pageContext.request.contextPath}/notice/list.do">더보기</a>
 			<table>
 				<tr>
+					<th>말머리</th>
 					<th>제목</th>
 					<th>작성자</th>
 					<th>작성일</th>
@@ -149,6 +150,7 @@ to {
 				</tr>
 				<c:forEach var="notice" items="${noticeList}">
 				<tr>
+					<td>${notice.notice_head}</td>
 					<td><a href="${pageContext.request.contextPath }/notice/detail.do?notice_num=${notice.notice_num}">${notice.notice_title }</a></td>
 					<td>${notice.mem_name}</td>
 					<td>${notice.notice_date}</td>
