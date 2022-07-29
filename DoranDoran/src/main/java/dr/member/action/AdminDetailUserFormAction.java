@@ -33,16 +33,18 @@ public class AdminDetailUserFormAction implements Action{
 		String pageNum = request.getParameter("pageNum");
 		if(pageNum==null) pageNum = "1";
 		
+		
 		int mem_num = Integer.parseInt(request.getParameter("mem_num"));
 
 		MemberDAO dao = MemberDAO.getInstance();	
 		MemberVO member = dao.getMember(mem_num);
 
 		int count = dao.getAdminBoardCount(mem_num); //총레코드수
-
+		
+		
 		//페이지 처리
 		//keyfield,keyword,currentPage,count,rowCount,pageCount,url
-		PagingUtil page = new PagingUtil(Integer.parseInt(pageNum),count,20,10,"adminBoardCount.do");
+		PagingUtil page = new PagingUtil(Integer.parseInt(pageNum),count,20,10,"detailUserForm.do");
 
 		List<AdminVO> list = null;
 		if(count > 0) {

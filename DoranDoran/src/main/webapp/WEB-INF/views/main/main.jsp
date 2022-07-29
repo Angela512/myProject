@@ -171,11 +171,12 @@ to {
 
       <div class="content-main">
          <h4>게시판 최신글</h4>
-      </div>
+  
       
       <!-- 공지 시작 -->
+      
       <h3>공지사항</h3>
-         <a href="${pageContext.request.contextPath}/notice/list.do">더보기</a>
+         <a href="${pageContext.request.contextPath}/notice/list.do">더보기></a>
          <table>
             <tr>
                <th>말머리</th>
@@ -194,9 +195,11 @@ to {
             </tr>
             </c:forEach>
          </table>
+      
       <!-- 공지 끝 -->
       
-      <!-- 맛집 찾기 시작 -->
+      <!-- 맛집 찾기 시작 
+      <div style="width:40%; float:right;">
       <h3>맛집 찾기</h3>
 		
 		<a href="${pageContext.request.contextPath }/food/list.do">더보기></a>
@@ -247,11 +250,13 @@ to {
 			</c:forEach>
 			</div>
 			<br>
+      </div>
       
-      <!-- 맛집 찾기 끝 -->
+       맛집 찾기 끝 -->
       
       
       <!-- 중고거래 시작 -->
+      <div style="width:50%; float:left;">
       <h3>중고거래</h3>
       <a href="${pageContext.request.contextPath }/trade/list.do">더보기></a>
       <table>
@@ -270,10 +275,33 @@ to {
          </c:forEach>
       
       </table>
-      
+      </div>
        <!-- 중고거래 끝 -->
+       
+      <!-- 구인구직 시작 -->
+      <div style="width:50%; float:right;">
+      <h3>구인구직</h3>
+		<a href="${pageContext.request.contextPath}/job/list.do">더보기 ></a>
+			<table>
+			<tr>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>작성일</th>
+			</tr>
+			<c:forEach var="job" items="${jobList}">
+			<tr>
+				<td><a href="detail.do?job_num=${job.job_num}">${job.job_title}</a></td>
+				<td>${job.job_num}</td>
+				<td>${job.job_date}</td>
+			</tr>
+			</c:forEach>
+		</table>
+		<p></p>
+		</div>
+      <!-- 구인구직 끝 -->
       
       <!-- 자유게시판 시작 -->
+      <div style="margin:2% 0px 2% 0px;">
       <h3>자유게시판</h3>
       <a href="${pageContext.request.contextPath}/board/list.do">더보기 ></a>
          <table>
@@ -294,32 +322,9 @@ to {
             </tr>
             </c:forEach>
          </table>
+         </div>
       <!-- 자유게시판 끝 -->
-      
-      <!-- 구인구직 시작 -->
-      
-      <h3>구인구직</h3>
-		<a href="${pageContext.request.contextPath}/job/list.do">더보기 ></a>
-			<table>
-			<tr>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일</th>
-			</tr>
-			<c:forEach var="job" items="${jobList}">
-			<tr>
-				<td><a href="detail.do?job_num=${job.job_num}">${job.job_title}</a></td>
-				<td>${job.job_num}</td>
-				<td>${job.job_date}</td>
-			</tr>
-			</c:forEach>
-		</table>
-		<p></p>
-		
-      <!-- 구인구직 끝 -->
-      
-      
-      
+      </div> 
       <jsp:include page="/WEB-INF/views/common/footer.jsp" />
    </div>
 
