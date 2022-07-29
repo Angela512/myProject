@@ -33,6 +33,7 @@ public class MainAction implements Action{
 		
 		JobDAO jobDao = JobDAO.getInstance();
 		List<JobVO> jobList = jobDao.getListJob(1, 5, null, null, null);
+		
 		FoodDAO foodDao = FoodDAO.getInstance();
 		List<FoodVO> foodList = foodDao.getListFood(1, 5, null, null, null);
 		

@@ -200,6 +200,31 @@ to {
             </c:forEach>
          </table>
       <!-- 자유게시판 끝 -->
+      
+      <!-- 구인구직 시작 -->
+      
+      <h3>구인구직</h3>
+		<a href="${pageContext.request.contextPath}/job/list.do">더보기 ></a>
+			<table>
+			<tr>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>작성일</th>
+			</tr>
+			<c:forEach var="job" items="${jobList}">
+			<tr>
+				<td><a href="detail.do?job_num=${job.job_num}">${job.job_title}</a></td>
+				<td>${job.job_num}</td>
+				<td>${job.job_date}</td>
+			</tr>
+			</c:forEach>
+		</table>
+		<p></p>
+		
+      <!-- 구인구직 끝 -->
+      
+      
+      
       <jsp:include page="/WEB-INF/views/common/footer.jsp" />
    </div>
 
