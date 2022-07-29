@@ -45,7 +45,16 @@
 					 id="filename" 
 					 accept="image/gif,image/png,image/jpeg">
 				</li>
+				<li>
+					<br><br>
+					<label for="time">가게 운영시간</label>
+					<br><br>
+					<input type="text" name="hour1" id="hour1" maxlength="2" style="width:25px;" > :
+					<input type="text" name="min1" id="min1" maxlength="2" style="width:25px;" > ~
+					<input type="text" name="hour2" id="hour2" maxlength="2" style="width:25px;" > :
+					<input type="text" name="min2" id="min2" maxlength="2" style="width:25px;" > 
 					
+				</li>
 				<li>
 					<br><br>
 					<label for="phone">가게 전화번호</label>

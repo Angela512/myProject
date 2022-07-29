@@ -51,11 +51,12 @@ li.j{
 		<div>
 			<ul style="margin:50px; padding-left:160px;">
 				<li class="j">
-					<b>전화번호</b><span style="padding-left:30px;">${food.food_phone1} - ${food.food_phone2} - ${food.food_phone3}</span>
-				</li>
-				<li class="j">
 					<b>운영시간</b><span style="padding-left:30px;">${food.food_timeh1}:${food.food_timem1} ~ ${food.food_timeh2}:${food.food_timem2}</span>
 				</li>
+				<li class="j">
+					<b>전화번호</b><span style="padding-left:30px;">${food.food_phone1} - ${food.food_phone2} - ${food.food_phone3}</span>
+				</li>
+				
 				<li class="j">
 					<b>주소</b><span style="padding-left:60px;">${food.food_addr1}  ${food.food_addr2}</span>
 				</li>

@@ -10,6 +10,8 @@ import dr.board.vo.BoardVO;
 import dr.controller.Action;
 import dr.job.dao.JobDAO;
 import dr.job.vo.JobVO;
+import dr.food.dao.FoodDAO;
+import dr.food.vo.FoodVO;
 import dr.notice.dao.NoticeDAO;
 import dr.notice.vo.NoticeVO;
 import dr.trade.dao.TradeDAO;
@@ -31,11 +33,14 @@ public class MainAction implements Action{
 		
 		JobDAO jobDao = JobDAO.getInstance();
 		List<JobVO> jobList = jobDao.getListJob(1, 5, null, null, null);
+		FoodDAO foodDao = FoodDAO.getInstance();
+		List<FoodVO> foodList = foodDao.getListFood(1, 5, null, null, null);
 		
 		request.setAttribute("noticeList", noticeList);
 		request.setAttribute("tradeList", tradeList);
 		request.setAttribute("boardList", boardList);
 		request.setAttribute("jobList", jobList);
+		request.setAttribute("foodList", foodList);
 		
 		
 		return "/WEB-INF/views/main/main.jsp";
