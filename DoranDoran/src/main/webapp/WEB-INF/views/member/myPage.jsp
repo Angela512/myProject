@@ -17,14 +17,25 @@
 	<div class="content-main">
 		<h2>마이페이지</h2>
 		<hr size="1" noshade="noshade" width="100%">
-		<ul>
-			<li>
-			<button onclick="location.href='myPage.do'">내정보</button>
-			<button onclick="location.href='myWrite.do'">내가 쓴 글</button>
-			<button onclick="location.href='myReply.do'">내가 쓴 댓글</button>
-			<button onclick="location.href='myLike.do'">찜목록</button>
-			</li>
-		</ul>
+		<div id="main_nav">
+				<ul>
+						<li>
+							<a href="myPage.do">내정보</a>
+						</li>
+						
+						<li>
+							<a href="myWrite.do">내가 쓴 글</a>
+						</li>
+
+						<li>
+							<a href="myReply.do">내가 쓴 댓글</a>
+						</li>
+
+						<li>
+							<a href="myLike.do">찜목록</a>
+						</li>
+				</ul>
+			</div>
 		
 		<div class="mypage-div">
 			<h3>프로필 사진</h3>
