@@ -250,6 +250,8 @@ to {
       
       <!-- 맛집 찾기 끝 -->
       
+      
+      <!-- 중고거래 시작 -->
       <h3>중고거래</h3>
       <a href="${pageContext.request.contextPath }/trade/list.do">더보기></a>
       <table>
@@ -262,12 +264,14 @@ to {
          <c:forEach var="trade" items="${tradeList }">
          <tr>
             <td><a href="${pageContext.request.contextPath }/trade/detail.do?trade_num=${trade.trade_num}">${trade.trade_title }</a></td>
-            <td>${trade.mem_id }</td>
+            <td>${trade.mem_name }</td>
             <td>${trade.trade_date }</td>
          </tr>
          </c:forEach>
       
       </table>
+      
+       <!-- 중고거래 끝 -->
       
       <!-- 자유게시판 시작 -->
       <h3>자유게시판</h3>
