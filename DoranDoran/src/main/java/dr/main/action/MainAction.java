@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import dr.board.dao.BoardDAO;
 import dr.board.vo.BoardVO;
 import dr.controller.Action;
+import dr.job.dao.JobDAO;
+import dr.job.vo.JobVO;
 import dr.notice.dao.NoticeDAO;
 import dr.notice.vo.NoticeVO;
 import dr.trade.dao.TradeDAO;
@@ -27,9 +29,13 @@ public class MainAction implements Action{
 		BoardDAO boardDao = BoardDAO.getInstance();
 		List<BoardVO> boardList = boardDao.getListBoard(1, 5, null, null, null, null);
 		
+		JobDAO jobDao = JobDAO.getInstance();
+		List<JobVO> jobList = jobDao.getListJob(1, 5, null, null, null);
+		
 		request.setAttribute("noticeList", noticeList);
 		request.setAttribute("tradeList", tradeList);
 		request.setAttribute("boardList", boardList);
+		request.setAttribute("jobList", jobList);
 		
 		
 		return "/WEB-INF/views/main/main.jsp";
