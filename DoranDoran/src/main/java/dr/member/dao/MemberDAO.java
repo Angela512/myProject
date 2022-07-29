@@ -636,6 +636,7 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 				trade.setTrade_count(rs.getInt("trade_count"));
 				trade.setTrade_phone(rs.getString("trade_phone"));
 				trade.setMem_id(rs.getString("mem_id"));
+				trade.setMem_name(rs.getString("mem_name"));
 				trade.setMem_photo(rs.getString("mem_photo"));
 				trade.setLike_count(rs.getString("like_count"));
 				
@@ -736,6 +737,7 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 				trade.setTrade_count(rs.getInt("trade_count"));
 				trade.setTrade_phone(rs.getString("trade_phone"));
 				trade.setMem_id(rs.getString("mem_id"));
+				trade.setMem_name(rs.getString("mem_name"));
 				trade.setMem_photo(rs.getString("mem_photo"));
 				trade.setLike_count(rs.getString("like_count"));
 				

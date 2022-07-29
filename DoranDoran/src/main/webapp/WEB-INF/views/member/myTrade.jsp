@@ -102,7 +102,7 @@
 					<img src="${pageContext.request.contextPath}/images/face.png" width="25" height="25" class="my-photo">
 					</c:if>
 					
-					<span>${trade.mem_id }</span>
+					<span>${trade.mem_name }</span>
 					<%-- <span><fmt:formatNumber value="${trade.trade_price }" pattern="#,###"/>원</span> --%>
 					<span>조회수 ${trade.trade_count }</span>
 					<span>찜 ${trade.like_count }</span>

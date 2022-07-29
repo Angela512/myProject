@@ -171,6 +171,7 @@ public class TradeDAO {
 				trade.setTrade_phone(rs.getString("trade_phone"));
 				trade.setMem_id(rs.getString("mem_id"));
 				trade.setMem_photo(rs.getString("mem_photo"));
+				trade.setMem_name(rs.getString("mem_name"));
 				trade.setLike_count(rs.getString("like_count"));
 				
 				list.add(trade);
@@ -223,6 +224,7 @@ public class TradeDAO {
 				trade.setTrade_count(rs.getInt("trade_count"));
 				trade.setTrade_phone(rs.getString("trade_phone"));
 				trade.setMem_id(rs.getString("mem_id"));
+				trade.setMem_name(rs.getString("mem_name"));
 				trade.setMem_photo(rs.getString("mem_photo"));
 			}
 		}catch(Exception e) {

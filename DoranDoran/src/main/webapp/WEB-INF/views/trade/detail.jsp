@@ -37,7 +37,7 @@
 		</li>
 		
 		<li>
-			${trade.mem_id }<br>
+			${trade.mem_name }<br>
 			${trade.trade_date } 조회수 ${trade.trade_count }
 		</li>
 	</ul>

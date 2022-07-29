@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>중고거래 목록</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/trade-style.css" type="text/css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/trade.js"></script>
 </head>
@@ -23,7 +24,7 @@
 			
 			<ul>
 				<li>
-					<input type="button" value="삽니다" onclick="location.href='list.do?trade_head=0'">
+					<input type="button" value="삽니다" class="button-1" onclick="location.href='list.do?trade_head=0'">
 					<input type="button" value="팝니다" onclick="location.href='list.do?trade_head=1'">
 				</li>
 			</ul>
@@ -119,7 +120,7 @@
 					<img src="${pageContext.request.contextPath}/images/face.png" width="25" height="25" class="my-photo">
 					</c:if>
 					
-					<span>${trade.mem_id }</span>
+					<span>${trade.mem_name }</span>
 					<%-- <span><fmt:formatNumber value="${trade.trade_price }" pattern="#,###"/>원</span> --%>
 					<span>조회수 ${trade.trade_count }</span>
 					<span>찜 ${trade.like_count }</span>

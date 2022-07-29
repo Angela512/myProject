@@ -19,6 +19,7 @@ public class TradeVO {
 	
 	private String mem_id;
 	private String mem_photo;
+	private String mem_name;
 	
 	private String like_count;
 	
@@ -118,6 +119,12 @@ public class TradeVO {
 	}
 	public void setLike_count(String like_count) {
 		this.like_count = like_count;
+	}
+	public String getMem_name() {
+		return mem_name;
+	}
+	public void setMem_name(String mem_name) {
+		this.mem_name = mem_name;
 	}
 	
 	

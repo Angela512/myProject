@@ -1,2 +1,7 @@
 @charset "UTF-8";
 
+input.button-1{
+	background-image: url(../images/button1.png);
+	width: 200px;
+	height:50px;
+}
