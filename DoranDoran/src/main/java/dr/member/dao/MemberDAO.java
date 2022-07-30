@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dr.admin.adminvo.AdminVO;
+import dr.board.vo.BoardVO;
 import dr.member.vo.MemberVO;
 import dr.notice.vo.NoticeVO;
 import dr.trade.vo.TradeVO;
@@ -751,5 +752,103 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 		
 		return list;
 	}
+	
+	//내가 쓴 글 자유게시판 게시물 수
+			public int getMyBoardCount(String board_head,int mem_num)throws Exception{
+				Connection conn=null;
+				PreparedStatement pstmt=null;
+				ResultSet rs=null;
+				String sql=null;
+				String sub_sql="";
+				int count=0;
+				
+				try {
+					conn=DBUtil.getConnection();
+					
+					if(board_head!=null && !"".equals(board_head)) {
+						 sub_sql+="AND board_head="+board_head;
+					}
+					
+					sql="SELECT COUNT(*) FROM board WHERE mem_num=? "+sub_sql;
+					
+					pstmt=conn.prepareStatement(sql);
+					pstmt.setInt(1, mem_num);
+					
+					rs=pstmt.executeQuery();
+					
+					if(rs.next()) {
+						count=rs.getInt(1);
+					}
+					
+				}catch(Exception e) {
+					throw new Exception(e);
+				}finally {
+					DBUtil.executeClose(rs, pstmt, conn);
+				}
+				
+				return count;
+			}
+		
+		//내가 쓴 글 자유게시판 게시물 목록
+			public List<BoardVO> getMyListBoard(int start,int end,String board_head,int mem_num)throws Exception{
+				Connection conn=null;
+				PreparedStatement pstmt=null;
+				ResultSet rs=null;
+				List<BoardVO> list=null;
+				String sql=null;
+				String sub_sql="";
+				
+				try {
+					conn=DBUtil.getConnection();
+					
+					if(board_head!=null && !"".equals(board_head)) {
+						 sub_sql+="AND board_head="+board_head;
+					}
+					
+					sql="SELECT a.*,NVL((SELECT COUNT(board_num) FROM board_reply r "
+							+ "WHERE r.board_num = a.board_num GROUP BY board_num),0) "
+							+ "AS reply_count FROM (SELECT aa.*,rownum rnum FROM "
+							+ "(SELECT * FROM board b JOIN member m "
+							+ "USING(mem_num) JOIN member_detail d USING(mem_num) "
+							+ "WHERE mem_num=? "+sub_sql
+							+ " ORDER BY b.board_num DESC)aa) A "
+							+ "WHERE rnum>=? AND rnum<=?";
+					
+					pstmt=conn.prepareStatement(sql);
+					
+					
+					//?에 데이터 바인딩
+					pstmt.setInt(1, mem_num);
+					pstmt.setInt(2, start);
+					pstmt.setInt(3, end);
+					
+					rs=pstmt.executeQuery();
+					
+					list=new ArrayList<BoardVO>();
+					
+					while(rs.next()) {
+						BoardVO board = new BoardVO();
+						board.setBoard_num(rs.getInt("board_num"));
+						board.setMem_num(rs.getInt("mem_num"));
+						board.setBoard_head(rs.getString("board_head"));
+						board.setBoard_title(rs.getString("board_title"));
+						board.setBoard_date(rs.getDate("board_date"));
+						board.setBoard_content(rs.getString("board_content"));
+						board.setBoard_count(rs.getInt("board_count"));
+						board.setBoard_image1(rs.getString("board_image1"));
+						board.setBoard_image2(rs.getString("board_image2"));
+						board.setBoard_image3(rs.getString("board_image3"));
+						
+						list.add(board);
+					}
+				}catch(Exception e) {
+					throw new Exception(e);
+				}finally {
+					DBUtil.executeClose(rs, pstmt, conn);
+				}
+				
+				return list;
+			}
+	
 	
 }

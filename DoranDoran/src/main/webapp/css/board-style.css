@@ -13,15 +13,15 @@
 	/* border:1px solid red; */ /*행의 간격 맞출 때 좋음*/
 }
 #sub_nav1{
-	padding:15px 0 0 0;
+	padding: 20px 0 7px 0;
 	float:left; 
-	width:600px;
+	width:468px;
 }
 #sub_nav2{
-	padding: 20px 0 0 0;
+	padding: 20px 0 7px 0;
 	float:right; 
-	width:231px; 
-	height:43px;
+	width:110px; 
+	height:23px;
 	font-size:15px;
 }
 .sub_nav ul{
@@ -56,61 +56,92 @@
     background: #1f1f1f;
 }
 #total{
-	padding: 5px 0 5px 0;
+	padding: 10px 0 0 0;
 	color: #1f1f1f;
 	float: right; 
 	width: 100%; 
-	height: 30px;
+	height: 22px;
 	font-size:15px;
-	/*border: 1px solid red; */
+	/*border: 1px solid red;*/ 
 }
-#write_button{
-	width:100%;;
+.write_button{
+	text-align:right;
 }
-/* #write_pen{
-	width: 100px; 
-	height: 30px;
-	border: 1px solid red;
-	float:left;
-	width: 900px; 
-} */
+#write_pen{
+	position:relative;
+	left:46px;
+	top:4px;
+	width: 18px; 
+	height: 18px;
+	/*border: 1px solid red;*/
+} 
 #write_button_box{
+	padding-left: 26px;
 	color: #fff;
-	width: 100px; 
-	height: 30px;
+	width: 120px; 
+	height: 35px;
 	font-size:15px;
 	font-weight: 600;
 	border: 0;
 	background-color: #FA5D57;
 	border-radius: 3px;
-	margin: 10px 807px;
+	margin:20px 0 0 0;
+}
+/*카테고리(head) 공통 끝*/
+
+/* 자유게시판 테이블 시작 */
+.board_table {
+  border: 1px #a39485 solid;
+  font-size: 16px;
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 5px;
+  overflow: hidden;
+}
+thead {
+  font-weight: bold;
+  background: #E1E1E1;
+}
+td, th {
+  padding: 1em .5em;
+  vertical-align: middle;
+}
+td {
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  background: #fff;
 }
 
-table {
- 	width: 100%;
-	border: 1px solid #000;
-	border-collapse: collapse;
-	margin-top: 5px; 
-	text-align:center;
-}
-
-table td, table th {
-	border: 1px solid #000;
-	padding: 10px 0 10px 0;
-}
-
-table th{
-	padding: 20px 0 20px 0;
-	font-weight:bold;
-	
-} 
+/* 자유게시판 테이블 끝 */
 
 .board_page{
-	width:100%;
-	/*border: 1px solid red;*/
-	text-align: center;
+	width: 100%; 
+	height: 50px;
+	padding: 30px 0 0 0;
+	text-align:center;
+	font-size:16px;
+	/* border: 1px solid red; */
+}
+
+ul.search_board{
+	list-style:none;
+	padding:20px 55px 90px 0px;
+	margin:0;
+	text-align:center;
+}
+ul.search_board li{
+	padding:0;
+	display:inline;
+}
+
+.search_board #search_button{
+	color: #fff;
+	font-size:15px;
+	border: 0;
+	background-color: #FA5D57;
+	border-radius: 3px;
 }
 
 
 
-/*카테고리(head) 공통 끝*/
+
+
