@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>게시판 목록</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+<link rel ="stylesheet" href="${pageContext.request.contextPath}/css/notice-style.css" type="text/css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/notice.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -14,25 +15,12 @@
 <body>
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<jsp:include page="/WEB-INF/views/notice/banner.jsp"/>
 	<div class="content-main">
-		<h2>공지사항</h2>
+		<jsp:include page="noticeHeader.jsp"/>
 		<form id="search_form" action="list.do" method="get">
 			<input type="hidden" name="head" value="${param.head}">
 			<ul class="search">
-				<li>
-					<button type="button" class="btn btn-primary">Primary</button>
-					<button type="button" class="btn btn-secondary">Secondary</button>
-					<button type="button" class="btn btn-success">Success</button>
-					<button type="button" class="btn btn-danger">Danger</button>
-					<button type="button" class="btn btn-warning">Warning</button>
-					<button type="button" class="btn btn-info">Info</button>
-					<button type="button" class="btn btn-light">Light</button>
-					<button type="button" class="btn btn-dark">Dark</button>
-					
-					<input type="button" value="전체글" onclick="location.href='list.do'"> 
-					<input type="button" name="head" value="필독" onclick="location.href='list.do?head=필독'">
-					<input type="button" name="head" value="공지" onclick="location.href='list.do?head=공지'">
-				</li>
 				<li>
 					<select name="keyfield">
 						<option value="1" <c:if test="${param.keyfield==1}">selected</c:if>>제목</option>

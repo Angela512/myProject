@@ -8,10 +8,46 @@
 <head>
 <meta charset="UTF-8">
 <title>메인</title>
-<link rel="stylesheet"
-   href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
    
 <style>
+.container{
+	display:flex;
+	justify-content: space-between;
+}
+.tboard{
+	display: flex;
+  justify-content: space-between;
+}
+.tname {
+  height: 50px;
+  text-align: center;
+}
+.main_table {
+  border: 1px #a39485 solid;
+  font-size: .9em;
+  
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 5px;
+  overflow: hidden;
+}
+thead {
+  font-weight: bold;
+  background: #E1E1E1;
+}
+td, th {
+  padding: 1em .5em;
+  vertical-align: middle;
+}
+  
+ td {
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  background: #fff;
+}
+
+
+
 * {
    box-sizing: border-box;
 }
@@ -171,14 +207,17 @@ to {
       </div>
 
       <div class="content-main">
-         <h4>게시판 최신글</h4>
+         <h2>게시판 최신글</h2>
   
       
       <!-- 공지 시작 -->
-      
-      <h3>공지사항</h3>
-         <a href="${pageContext.request.contextPath}/notice/list.do">더보기></a>
-         <table>
+      <div >
+      <div class="tboard">
+      <div class="tname"><h3>공지사항</h3></div>
+         <div class="tname"><h4><a href="${pageContext.request.contextPath}/notice/list.do">더보기></a></h4></div>
+        </div> 
+         <table class="main_table">
+         <thead>
             <tr>
                <th>말머리</th>
                <th>제목</th>
@@ -186,6 +225,8 @@ to {
                <th>작성일</th>
                <th>조회수</th>
             </tr>
+            </thead>
+            <tbody>
             <c:forEach var="notice" items="${noticeList}">
             <tr>
                <td>${notice.notice_head}</td>
@@ -195,8 +236,10 @@ to {
                <td>${notice.notice_count}</td>
             </tr>
             </c:forEach>
+            </tbody>
          </table>
-      
+     
+      </div>
       <!-- 공지 끝 -->
       
       <!-- 맛집 찾기 시작 
@@ -257,16 +300,21 @@ to {
       
       
       <!-- 중고거래 시작 -->
-      <div style="width:50%; float:left;">
-      <h3>중고거래</h3>
-      <a href="${pageContext.request.contextPath }/trade/list.do">더보기></a>
-      <table>
+      <div class="container">
+	      <div style="width:48%">
+		      <div class="tboard">
+		      	<div class="tname"><h3>중고거래</h3></div>
+		      	<div class="tname"><h4><a href="${pageContext.request.contextPath }/trade/list.do">더보기></a></h4></div>
+		      </div>
+	      <table class="main_table">
+      <thead>
          <tr>
             <th>제목</th>
             <th>작성자</th>
             <th>작성일</th>
          </tr>
-         
+       </thead>  
+        <tbody>
          <c:forEach var="trade" items="${tradeList }">
          <tr>
             <td><a href="${pageContext.request.contextPath }/trade/detail.do?trade_num=${trade.trade_num}">${trade.trade_title }</a></td>
@@ -274,21 +322,28 @@ to {
             <td>${trade.trade_date }</td>
          </tr>
          </c:forEach>
-      
+      </tbody>
       </table>
+      
       </div>
        <!-- 중고거래 끝 -->
        
       <!-- 구인구직 시작 -->
-      <div style="width:50%; float:right;">
-      <h3>구인구직</h3>
-		<a href="${pageContext.request.contextPath}/job/list.do">더보기 ></a>
-			<table>
+      
+      <div style="width:48%">
+      <div class="tboard">
+      <div class="tname"><h3>구인구직</h3></div>
+		<div class="tname"><h4><a href="${pageContext.request.contextPath}/job/list.do">더보기 ></a></h4></div>
+	  </div>
+			<table class="main_table">
+			<thead>
 			<tr>
 				<th>제목</th>
 				<th>작성자</th>
 				<th>작성일</th>
 			</tr>
+			</thead>
+			<tbody>
 			<c:forEach var="job" items="${jobList}">
 			<tr>
 				<td><a href="detail.do?job_num=${job.job_num}">${job.job_title}</a></td>
@@ -296,16 +351,21 @@ to {
 				<td>${job.job_date}</td>
 			</tr>
 			</c:forEach>
+			</tbody>
 		</table>
 		<p></p>
+		</div>
 		</div>
       <!-- 구인구직 끝 -->
       
       <!-- 자유게시판 시작 -->
-      <div style="margin:2% 0px 2% 0px;">
-      <h3>자유게시판</h3>
-      <a href="${pageContext.request.contextPath}/board/list.do">더보기 ></a>
-         <table>
+      <div style="width:100%">
+      <div class="tboard">
+      	<div class="tname"><h3>자유게시판</h3></div>
+      	<div class="tname"><h4><a href="${pageContext.request.contextPath}/board/list.do">더보기 ></a></h4></div>
+       </div>
+         <table class="main_table">
+         <thead>
             <tr>
                <th>말머리</th>
                <th>제목</th>
@@ -313,6 +373,8 @@ to {
                <th>작성일</th>
                <th>조회수</th>
             </tr>
+            </thead>
+            <tbody>
             <c:forEach var="board" items="${boardList}">
             <tr>
                <td>${board.board_head}</td>
@@ -322,6 +384,7 @@ to {
                <td>${board.board_count}</td>
             </tr>
             </c:forEach>
+            </tbody>
          </table>
          </div>
       <!-- 자유게시판 끝 -->
@@ -352,7 +415,7 @@ to {
          dots[slideIndex - 1].className += " active";
          setTimeout(showSlides, 2000); // Change image every 2 seconds
       }
-   </script>
+   </script>   
 </body>
 </html>
 
