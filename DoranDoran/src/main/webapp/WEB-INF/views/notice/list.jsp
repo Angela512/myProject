@@ -10,7 +10,6 @@
 <link rel ="stylesheet" href="${pageContext.request.contextPath}/css/notice-style.css" type="text/css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/notice.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
 <div class="page-main">
@@ -53,7 +52,8 @@
 		</div>
 		</c:if>
 		<c:if test="${count > 0}">
-		<table>
+		<table class="notice_table">
+			<thead>
 			<tr>
 				<th>말머리</th>
 				<th>제목</th>
@@ -61,9 +61,10 @@
 				<th>작성일</th>
 				<th>조회</th>
 			</tr>
-			
+			</thead>
+			<tbody>
 			<c:forEach var="notice" items="${list}">
-			<tr>
+			<tr id="tr_hover">
 				<c:if test="${notice.notice_head == '필독'}">
 				<td>${notice.notice_head}</td>
 				<td><a href="detail.do?notice_num=${notice.notice_num}">${notice.notice_title}</a></td>
@@ -84,6 +85,7 @@
 				</c:if>
 			</tr>
 			</c:forEach>
+			</tbody>
 		</table>
 		<div class="align-center">
 			${page}
@@ -92,7 +94,6 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
 

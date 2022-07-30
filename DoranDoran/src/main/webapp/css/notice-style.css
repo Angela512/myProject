@@ -47,3 +47,33 @@
     background: black;
 }
 /*카테고리(head) 공통 끝*/
+/* 게시판 테이블 시작 */
+
+.notice_table {
+  border: 1px #a39485 solid;
+  font-size: .9em;
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 5px;
+  overflow: hidden;
+}
+thead {
+  font-weight: bold;
+  background: #E1E1E1;
+}
+td, th {
+  padding: 1em .5em;
+  vertical-align: middle;
+}
+td {
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  background: #fff;
+}
+
+
+
+/* 게시판 테이블 끝 */
+
+
+
+
