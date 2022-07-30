@@ -139,39 +139,19 @@ to {
 }
 
 
-
- /* 화면 디자인 맛집 게시판용 css  106 ~ 138*/
-
- .containerr{
-	position:relative;
-	text-align:center;
-	color:blue;
-}
-.centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: Nanum Pen Script;
-	
-	font-size:100px;
-	color:white;
-  
-}
-
-   
+/* 화면 디자인 맛집 게시판용 css  */
 .board-spacee .horizontal-areaa{
-	margin:70px ;
-	padding:3px;
-	width:300px;
-	height:600px;
+	margin:0px ;
+	padding:0px;
+	width:150px;
+	height:200px;
 	float:left;
 	overflow: hidden;
 }
 
 .board-spacee .horizontal-areaa img.board-imagee{
-	width:500px;
-	height:300px;
+	width:100px;
+	height:120px;
 }
 
 </style>
@@ -243,13 +223,13 @@ to {
       </div>
       <!-- 공지 끝 -->
       
-      <!-- 맛집 찾기 시작 
-      <div style="width:48%">
+      <!-- 맛집 찾기 시작 -->
+      <div style="width:48%; padding-left:60px;">   
       <div class="tboard">
-	      <div class="tname"><h3>맛집 찾기</h3></div>
-		  <div class="tname"><h4><a href="${pageContext.request.contextPath }/food/list.do">더보기></a></h4></div>
-	  </div>	
+      <div class="tname"><h3>맛집 찾기</h3></div>
 		
+		<div class="tname"><a href="${pageContext.request.contextPath }/food/list.do">더보기></a></div>
+	</div>
 		
 			<div class="board-spacee">
 			<c:forEach var="food" items="${foodList }">
@@ -262,45 +242,18 @@ to {
 				<c:if test="${empty food.food_image1}">
 				<img class="board-imagee" src="${pageContext.request.contextPath}/images/blank.png">
 				</c:if>
-				
-				<ul>
-					<li>
-						<span style="font-family:'Song Myung'; font-size:25px;">[${food.food_local}] ${fn:substring(food.food_name,0,15)}</span>
-						
-					<li>
-					<br>
-					
-					<li>
-						번호 : ${food.food_phone1}-${food.food_phone2}-${food.food_phone3}
-					</li>				
-					<li>
-						주소 : ${food.food_addr1} ${food.food_addr2}
-					</li>
-					<li>
-						설명 : ${food.food_content}
-					</li>
-				</ul>
-				
+				<p style="font-family:'Song Myung'; font-size:5px; padding:0px;">[${food.food_local}] ${fn:substring(food.food_name,0,15)}</p>	
 				</a>
-				<div class="board-detail">
-					<c:if test="${!empty food.mem_photo}">
-					<img src="${pageContext.request.contextPath}/upload/${food.mem_photo}" width="25" height="25" class="my-photo">
-					</c:if>
-					<c:if test="${empty food.mem_photo}">
-					<img src="${pageContext.request.contextPath}/images/face.png" width="25" height="25" class="my-photo">
-					</c:if>
-					<span>${food.mem_name}</span>
-					<span>/ 조회수 : ${food.food_count}</span>
-				</div>
 			</div>
 	
 			</c:forEach>
 			</div>
 			<br>
-      </div>
-     
-       맛집 찾기 끝 -->
+			<br>
+		</div>
       </div> 
+      <!-- 맛집 찾기 끝 -->
+      
       
       <!-- 중고거래 시작 -->
       <div class="container">

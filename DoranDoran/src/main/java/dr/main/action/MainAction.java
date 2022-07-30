@@ -35,7 +35,7 @@ public class MainAction implements Action{
 		List<JobVO> jobList = jobDao.getListJob(1, 5, null, null, null);
 		
 		FoodDAO foodDao = FoodDAO.getInstance();
-		List<FoodVO> foodList = foodDao.getListFood(1, 5, null, null, null);
+		List<FoodVO> foodList = foodDao.getListFood(1, 6, null, null, null);
 		
 		request.setAttribute("noticeList", noticeList);
 		request.setAttribute("tradeList", tradeList);

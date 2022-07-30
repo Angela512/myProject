@@ -68,15 +68,10 @@ li.j{
 		<br><br><br>
 			<div id="map" style="width:500px;height:300px;  margin: auto !important; text-align:center; ">
 			</div>
+			<br>
 		
 		<hr size="1" noshade="noshade" width="100%">
 		<ul class="detail-sub">
-			<li>
-				<%-- 좋아요 --%>
-				<img id="output_fav" src="${pageContext.request.contextPath}/images/fav01.gif" width="50">
-				좋아요
-				<span id="output_fcount">0</span>
-			</li>
 			<li>
 				<c:if test="${!empty food.food_date_modi}">
 				최근 수정일 : ${food.food_date_modi}
@@ -100,17 +95,9 @@ li.j{
 				</c:if>
 			</li>
 		</ul>
-		<!-- 댓글 시작 -->
-		 <div id="reply_div">
-			<span class="re-title">댓글 달기</span>
-			<form id="re_form">
-				<input type="hidden" name="food_num" value="${food.food_num}" id="food_num">
-			</form>
-		</div> 
-		<!-- 댓글 끝 -->
 	</div>
 </div>
-
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0982dcd2faa86918f8990b344af7f993&libraries=services"></script>
 <script type="text/javascript">
