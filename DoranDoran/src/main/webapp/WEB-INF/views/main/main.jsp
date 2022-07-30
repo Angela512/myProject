@@ -211,7 +211,8 @@ to {
   
       
       <!-- 공지 시작 -->
-      <div >
+      <div class="container">
+	      <div style="width:48%">
       <div class="tboard">
       <div class="tname"><h3>공지사항</h3></div>
          <div class="tname"><h4><a href="${pageContext.request.contextPath}/notice/list.do">더보기></a></h4></div>
@@ -243,10 +244,12 @@ to {
       <!-- 공지 끝 -->
       
       <!-- 맛집 찾기 시작 
-      <div style="width:40%; float:right;">
-      <h3>맛집 찾기</h3>
+      <div style="width:48%">
+      <div class="tboard">
+	      <div class="tname"><h3>맛집 찾기</h3></div>
+		  <div class="tname"><h4><a href="${pageContext.request.contextPath }/food/list.do">더보기></a></h4></div>
+	  </div>	
 		
-		<a href="${pageContext.request.contextPath }/food/list.do">더보기></a>
 		
 			<div class="board-spacee">
 			<c:forEach var="food" items="${foodList }">
@@ -295,9 +298,9 @@ to {
 			</div>
 			<br>
       </div>
-      
+     
        맛집 찾기 끝 -->
-      
+      </div> 
       
       <!-- 중고거래 시작 -->
       <div class="container">
