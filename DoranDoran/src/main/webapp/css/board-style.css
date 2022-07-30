@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 /*서브 배너 공통 시작*/
 #sub_banner{
 	padding: 30px 0 0 0;
@@ -6,45 +7,110 @@
 /*서브 배너 공통 끝*/
 
 /*카테고리 공통 시작*/
-#main_sub_nav {
-	margin-left: 0;
-	padding: 30px 0 30px 0;
+.sub_nav{
 	font-weight: 600;
 	width:100%;
-	left:0;
+	/* border:1px solid red; */ /*행의 간격 맞출 때 좋음*/
 }
-
-#main_sub_nav ul {
+#sub_nav1{
+	padding:15px 0 0 0;
+	float:left; 
+	width:600px;
+}
+#sub_nav2{
+	padding: 20px 0 0 0;
+	float:right; 
+	width:231px; 
+	height:43px;
+	font-size:15px;
+}
+.sub_nav ul{
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
-
-#main_sub_nav ul li {
+.sub_nav li{
 	list-style-type: none;
-	margin-left: 10px;
+	margin-left: 0;
+	padding: 0;
 	display: inline-block;
 	width: 90px;
 	text-align: left;
-	vertical-align: middle;
 }
-#main_sub_nav ul li a {
-	position: relative;
+.sub_nav a{
 	color: #717171 !important;
 	font-size: 20px !important;
-	word-spacing: 5px;
 }
-
-#main_sub_nav ul li a:active{
+.sub_nav a:hover{
+	position: relative;
 	color: #1f1f1f !important;
-}
-#main_sub_nav ul li a:hover:after{
+} 
+.sub_nav a:hover:after{
+	color: #1f1f1f !important;
 	content: '';
     width: 100%;
-    height: 2px;
+    height: 3px;
     position: absolute;
     bottom: -5px;
     left: 1px;
-    background: black;
+    background: #1f1f1f;
 }
+#total{
+	padding: 5px 0 5px 0;
+	color: #1f1f1f;
+	float: right; 
+	width: 100%; 
+	height: 30px;
+	font-size:15px;
+	/*border: 1px solid red; */
+}
+#write_button{
+	width:100%;;
+}
+/* #write_pen{
+	width: 100px; 
+	height: 30px;
+	border: 1px solid red;
+	float:left;
+	width: 900px; 
+} */
+#write_button_box{
+	color: #fff;
+	width: 100px; 
+	height: 30px;
+	font-size:15px;
+	font-weight: 600;
+	border: 0;
+	background-color: #FA5D57;
+	border-radius: 3px;
+	margin: 10px 807px;
+}
+
+table {
+ 	width: 100%;
+	border: 1px solid #000;
+	border-collapse: collapse;
+	margin-top: 5px; 
+	text-align:center;
+}
+
+table td, table th {
+	border: 1px solid #000;
+	padding: 10px 0 10px 0;
+}
+
+table th{
+	padding: 20px 0 20px 0;
+	font-weight:bold;
+	
+} 
+
+.board_page{
+	width:100%;
+	/*border: 1px solid red;*/
+	text-align: center;
+}
+
+
+
 /*카테고리(head) 공통 끝*/

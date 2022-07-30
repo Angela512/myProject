@@ -6,57 +6,43 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판 목록</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <link rel ="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
 <link rel ="stylesheet" href="${pageContext.request.contextPath}/css/board-style.css" type="text/css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/board.js"></script>
 </head>
 <body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<jsp:include page="/WEB-INF/views/board/banner.jsp"/>
 	<div class="content-main">
-	<jsp:include page="boardHeader.jsp"/>
-		<form id="search_form" action="list.do" method="get">
-		    <input type="hidden" name="head" id="h_head" value="${param.head}">
-			<ul class="search">
-				<li>
-					<select name="keyfield">
-						<option value="1" <c:if test="${param.keyfield==1}">selected</c:if>>제목</option>
-						<option value="2" <c:if test="${param.keyfield==2}">selected</c:if>>작성자</option>
-						<option value="3" <c:if test="${param.keyfield==3}">selected</c:if>>내용</option>
-					</select>
-				</li>
-				<li>
-					<input type="search" size="16" name="keyword" id="keyword" 
-					value="${param.keyword}">
-				</li>
-				<li>
-					<input type="submit" value="검색">
-				</li>
+		<div class="sub_nav" id="sub_nav1">
+			<ul>
+				<li><a href="${pageContext.request.contextPath}/board/list.do">전체보기</a></li>
+				<li><a href="${pageContext.request.contextPath}/board/list.do?head=동네소식">동네소식</a></li>
+				<li><a href="${pageContext.request.contextPath}/board/list.do?head=도움요청">도움요청</a></li>
+				<li><a href="${pageContext.request.contextPath}/board/list.do?head=함께해요">함께해요</a></li>
+				<li><a href="${pageContext.request.contextPath}/board/list.do?head=기타">기타</a></li>
 			</ul>
-		</form>
-		
+		</div>
 		<div class="list-space align-right">
+			<div class="sub_nav" id="sub_nav2">
 			<select name="sort" id="sort">
 				<option value="1" <c:if test="${param.sort==1}">selected</c:if>>최신순</option>
 				<option value="2" <c:if test="${param.sort==2}">selected</c:if>>조회순</option>
 				<option value="3" <c:if test="${param.sort==3}">selected</c:if>>댓글 많은순</option>
 			</select>
+			</div>
 			<script>
 				$('#sort').change(function(){
 					location.href='list.do?keyfield=${param.keyfield}&keyword=${param.keyword}&head='+$('#h_head').val()+'&sort='+$('#sort').val();
 				});
 			</script>
-			<c:if test="${!empty user_num}">
-			<input type="button" value="글쓰기" onclick="location.href='writeForm.do'">
-			</c:if>
-			<input type="button" value="목록" onclick="location.href='list.do'">
-			<input type="button" value="홈으로" 
-			onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
 		<ul>
-			<li>총${count}개</li>
-		</ul>
+			<li id="total">총${count}개</li>
+		</ul><br>
 		</div>
 		<c:if test="${count == 0}">
 		<div class="result-display">
@@ -82,10 +68,36 @@
 			 </tr>
 			 </c:forEach>
 		</table>
-		<div class="align-center">
+		<c:if test="${!empty user_num}">
+			<!-- <img src="../images/pen.png" class="write_button" id="write_pen"> -->
+			<input class="write_button" id="write_button_box" type="button" value="글쓰기" onclick="location.href='writeForm.do'">
+			</c:if>
+			<%-- <input type="button" value="목록" onclick="location.href='list.do'">
+			<input type="button" value="홈으로" 
+			onclick="location.href='${pageContext.request.contextPath}/main/main.do'"> --%>
+		<div class="board_page">
 			${page}
 		</div>
 		</c:if>
+		<form id="search_form" action="list.do" method="get">
+		    <input type="hidden" name="head" id="h_head" value="${param.head}">
+			<ul class="search">
+				<li>
+					<select name="keyfield">
+						<option value="1" <c:if test="${param.keyfield==1}">selected</c:if>>제목</option>
+						<option value="2" <c:if test="${param.keyfield==2}">selected</c:if>>작성자</option>
+						<option value="3" <c:if test="${param.keyfield==3}">selected</c:if>>내용</option>
+					</select>
+				</li>
+				<li>
+					<input type="search" size="16" name="keyword" id="keyword" 
+					value="${param.keyword}">
+				</li>
+				<li>
+					<input type="submit" value="검색">
+				</li>
+			</ul>
+		</form>
 	</div>
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
