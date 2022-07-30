@@ -64,7 +64,7 @@
 			</thead>
 			<tbody>
 			<c:forEach var="notice" items="${list}">
-			<tr id="tr_hover">
+			<tr>
 				<c:if test="${notice.notice_head == '필독'}">
 				<td>${notice.notice_head}</td>
 				<td><a href="detail.do?notice_num=${notice.notice_num}">${notice.notice_title}</a></td>
