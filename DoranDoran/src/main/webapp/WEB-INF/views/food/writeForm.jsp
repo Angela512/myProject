@@ -41,10 +41,20 @@
 					<br><br>
 					<label for="filename">가게 & 메뉴 사진</label>
 					<br><br>
-					<input type="file" name="filename" 
-					 id="filename" 
+					<input type="file" name="filename1" 
+					 id="filename1" 
+					 accept="image/gif,image/png,image/jpeg">
+					 <br>
+					 <input type="file" name="filename2" 
+					 id="filename2" 
+					 accept="image/gif,image/png,image/jpeg">
+					 <br>
+					 <input type="file" name="filename3" 
+					 id="filename3" 
 					 accept="image/gif,image/png,image/jpeg">
 				</li>
+				
+				
 				<li>
 					<br><br>
 					<label for="time">가게 운영시간</label>
@@ -135,6 +145,13 @@
 				</li>
 				<li>
 					<br><br>
+					<label for="link">가게 홈페이지</label>
+					<br><br>
+					<input type="text" name="link" 
+					      id="link" maxlength="100" placeholder="가게 홈페이지 주소를 입력" style="width:500px;">
+				</li>
+				<li>
+					<br><br>
 					<label for="address">가게 위치</label>
 					<br><br>
 					<label for="zipcode">우편번호</label>
@@ -142,6 +159,7 @@
 					   maxlength="5" autocomplete="off">
 					<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기">
 				</li>
+				
 				<li>
 					<label for="address1">주소</label>
 					<input type="text" name="address1" id="address1" 

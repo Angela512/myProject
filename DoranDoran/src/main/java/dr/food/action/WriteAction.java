@@ -33,7 +33,11 @@ public class WriteAction implements Action{
 		food.setFood_content(multi.getParameter("content"));
 	//	food.setIp(request.getRemoteAddr());
 		food.setFood_image1(
-				multi.getFilesystemName("filename"));
+				multi.getFilesystemName("filename1"));
+		food.setFood_image2(
+				multi.getFilesystemName("filename2"));
+		food.setFood_image3(
+				multi.getFilesystemName("filename3"));
 		food.setMem_num(user_num);
 		
 		food.setFood_addr1(multi.getParameter("address1"));
@@ -50,6 +54,8 @@ public class WriteAction implements Action{
 		food.setFood_timem1(multi.getParameter("min1"));
 		food.setFood_timeh2(multi.getParameter("hour2"));
 		food.setFood_timem2(multi.getParameter("min2"));
+		
+		food.setFood_link(multi.getParameter("link"));
 
 		FoodDAO dao = FoodDAO.getInstance();
 		dao.insertFood(food);

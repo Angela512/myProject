@@ -82,6 +82,47 @@ ul{
 	font-size:0.5em;
 	maring-left:100px;
 }
+.sub_nav{
+	font-weight: 600;
+	width:100%;
+	/* border:1px solid red; */ /*행의 간격 맞출 때 좋음*/
+}
+#sub_nav1{
+	padding: 20px 0 7px 0;
+	float:left; 
+	width:650px;
+}
+.sub_nav ul{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.sub_nav li{
+	list-style-type: none;
+	margin-left: 0;
+	padding: 0;
+	display: inline-block;
+	width: 90px;
+	text-align: center;
+}
+.sub_nav a{
+	color: #717171 !important;
+	font-size: 20px !important;
+}
+.sub_nav a:hover{
+	position: relative;
+	color: #1f1f1f !important;
+} 
+.sub_nav a:hover:after{
+	color: #1f1f1f !important;
+	content: '';
+    width: 100%;
+    height: 3px;
+    position: absolute;
+    bottom: -5px;
+    left: 1px;
+    background: #1f1f1f;
+}
  </style>
  </head>
 <body>
@@ -129,14 +170,23 @@ ul{
 					<input type="submit" value="검색">
 				</li>
 			</ul> --%>
-			<div id="category_btn">
+			<!-- <div id="category_btn">
 		
 				<input class="category_btn" type="button" value="전체보기" onclick="location.href='list.do'">
 				<input class="category_btn" type="button" value="서울"  onclick="location.href='list.do?job_category=서울'">
 				<input class="category_btn" type="button" value="경기"  onclick="location.href='list.do?job_category=경기'">
 				<input class="category_btn" type="button" value="인천"  onclick="location.href='list.do?job_category=인천'">
 				<input class="category_btn" type="button" value="제주"  onclick="location.href='list.do?job_category=제주'">
-			</div>
+			</div> -->
+			<div class="sub_nav" id="sub_nav1">
+			<ul>
+				<li><a href="${pageContext.request.contextPath}/food/list.do">전체보기</a></li>
+				<li><a href="${pageContext.request.contextPath}/food/list.do?food_local=서울">서울</a></li>
+				<li><a href="${pageContext.request.contextPath}/food/list.do?food_local=경기">경기</a></li>
+				<li><a href="${pageContext.request.contextPath}/food/list.do?food_local=인천">인천</a></li>
+				<li><a href="${pageContext.request.contextPath}/food/list.do?food_local=제주">제주</a></li>
+			</ul>
+		</div>
 		
 		</form>
 		<div class="list-space align-right">
@@ -146,8 +196,7 @@ ul{
 			</c:if>   
 			<input type="button" value="목록" class="btn btn-primary"
 			       onclick="location.href='list.do'"> 
-			<input type="button" value="홈으로" class="btn btn-primary"
-			 onclick="location.href='${pageContext.request.contextPath}/main/main.do'">         
+			
 		</div>
 		<c:if test="${count == 0}">
 		<div class="result-display">
@@ -224,11 +273,11 @@ ul{
 						</li>
 						
 						<li class="col-auto col">
-						<input type="search" class="form-control" size="16" name="keyword" id="keyword" value="${param.keyword}">
+						<input type="search" class="form-control" size="14" name="keyword" id="keyword" value="${param.keyword}">
 						</li>
-						<li>
+
 						<input type="submit" class="btn btn-primary col-lg-2"  value="검색">
-						</li>
+
 					</ul>
 				</form>
 		

@@ -14,7 +14,21 @@
 <style type="text/css">
 
 li.j{
-	margin:20px 0px;
+	
+	margin-top:25px;
+	
+}
+
+
+.detail-image {
+	width: 340px;
+ 	 height: 250px;
+}
+li.img{
+	
+	float:left;
+	margin-left:10px;
+	
 }
 
 </style>
@@ -39,17 +53,29 @@ li.j{
 				조회 : ${food.food_count}
 			</li>
 		</ul>
-		<h2 align="center">[${food.food_local}] ${food.food_name}</h2>
+		
 		<hr size="1" noshade="noshade" width="100%">
+		<h2>[${food.food_local}] ${food.food_name}</h2>
 		<c:if test="${!empty food.food_image1}">
-		<div class="align-center">
-			<img src="${pageContext.request.contextPath}/upload/${food.food_image1}" class="detail-img">
+		
+		<div>
+		  <ul style="disply:inline-block; padding:10px; display:flex;">
+		    <li class="img"><img src="${pageContext.request.contextPath}/upload/${food.food_image1}" class="detail-image"></li>
+		    <li class="img"><img src="${pageContext.request.contextPath}/upload/${food.food_image2}" class="detail-image"></li>
+		    <li class="img"><img src="${pageContext.request.contextPath}/upload/${food.food_image3}" class="detail-image"></li>
+		    
+		  </ul>
+		  
 		</div>
+		
+		
+		
+		
 		
 		</c:if>
 		<br><br><br>
 		<div>
-			<ul style="margin:50px; padding-left:300px;">
+			<ul>
 				<li class="j">
 					<b>운영시간</b><span style="padding-left:30px;">${food.food_timeh1}:${food.food_timem1} ~ ${food.food_timeh2}:${food.food_timem2}</span>
 				</li>
@@ -61,12 +87,15 @@ li.j{
 					<b>주소</b><span style="padding-left:60px;">${food.food_addr1}  ${food.food_addr2}</span>
 				</li>
 				<li class="j">
+					<b>홈페이지</b><span style="padding-left:30px;"><a href="${food.food_link}">${food.food_link}</a></span>
+				</li>
+				<li class="j">
 					<b>설명</b><span style="padding-left:60px;">${food.food_content}</span>
 				</li>				
 			</ul>
 		</div>
 		<br><br><br>
-			<div id="map" style="width:500px;height:300px;  margin: auto !important; text-align:center; ">
+			<div id="map" style="width:700px;height:300px;">
 			</div>
 			<br>
 		
@@ -142,6 +171,10 @@ li.j{
 		}
 		getMyLocation();
 	};
+	
+	
+
+	
 </script>      
 <!-- 중앙 컨텐츠 시작 -->
 	

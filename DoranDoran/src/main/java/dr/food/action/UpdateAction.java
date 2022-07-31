@@ -27,7 +27,9 @@ public class UpdateAction implements Action{
 				FileUtil.createFile(request);
 		int food_num = Integer.parseInt(
 				multi.getParameter("food_num"));
-		String filename = multi.getFilesystemName("filename");
+		String filename1 = multi.getFilesystemName("filename1");
+		String filename2 = multi.getFilesystemName("filename2");
+		String filename3 = multi.getFilesystemName("filename3");
 		
 		FoodDAO dao = FoodDAO.getInstance();
 		//수정전 데이터
@@ -36,7 +38,9 @@ public class UpdateAction implements Action{
 			//로그인한 회원번호와 작성자 회원번호가 불일치
 			
 			//업로드된 파일이 있으면 파일 삭제
-			FileUtil.removeFile(request, filename);
+			FileUtil.removeFile(request, filename1);
+			FileUtil.removeFile(request, filename2);
+			FileUtil.removeFile(request, filename3);
 			return "/WEB-INF/views/common/notice.jsp";
 		}
 		
@@ -46,7 +50,9 @@ public class UpdateAction implements Action{
 		food.setFood_name(multi.getParameter("title"));
 		food.setFood_content(multi.getParameter("content"));
 	//	food.setIp(request.getRemoteAddr());
-		food.setFood_image1(filename);
+		food.setFood_image1(filename1);
+		food.setFood_image2(filename2);
+		food.setFood_image3(filename3);
 		
 		food.setFood_phone1(multi.getParameter("phone1"));
 		food.setFood_phone2(multi.getParameter("phone2"));
@@ -62,12 +68,24 @@ public class UpdateAction implements Action{
 		food.setFood_timeh2(multi.getParameter("hour2"));
 		food.setFood_timem2(multi.getParameter("min2"));
 		
+		food.setFood_link(multi.getParameter("link"));
+		
 		dao.updateFood(food);
 		
-		if(filename!=null) {
+		if(filename1!=null) {
 			//새 파일로 교체할 때 원래 파일 제거
 			FileUtil.removeFile(request, 
 					        db_food.getFood_image1());
+		}
+		if(filename2!=null) {
+			//새 파일로 교체할 때 원래 파일 제거
+			FileUtil.removeFile(request, 
+					        db_food.getFood_image2());
+		}
+		if(filename3!=null) {
+			//새 파일로 교체할 때 원래 파일 제거
+			FileUtil.removeFile(request, 
+					        db_food.getFood_image3());
 		}
 		
 		return "redirect:/food/detail.do?food_num="+food_num;

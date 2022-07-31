@@ -31,8 +31,8 @@ public class FoodDAO {
 			conn = DBUtil.getConnection();
 			//SQL문 작성
 			sql = "INSERT INTO food (food_num,food_name,"
-				+ "food_content,food_image1,mem_num,food_phone1,food_phone2,food_phone3,food_addr1,food_addr2,food_local,food_zipcode,food_timeh1,food_timem1,food_timeh2,food_timem2) VALUES ("
-				+ "food_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				+ "food_content,food_image1,mem_num,food_phone1,food_phone2,food_phone3,food_addr1,food_addr2,food_local,food_zipcode,food_timeh1,food_timem1,food_timeh2,food_timem2,food_image2,food_image3,food_link) VALUES ("
+				+ "food_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			//JDBC 수행 3단계 : PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			//?에 데이터 바인딩
@@ -53,6 +53,11 @@ public class FoodDAO {
 			pstmt.setString(13, food.getFood_timem1());
 			pstmt.setString(14, food.getFood_timeh2());
 			pstmt.setString(15, food.getFood_timem2());
+			
+			pstmt.setString(16, food.getFood_image2());
+			pstmt.setString(17, food.getFood_image3());
+			
+			pstmt.setString(18, food.getFood_link());
 
 			//JDBC 수행 4단계 : SQL문 실행
 			pstmt.executeUpdate();
@@ -353,11 +358,19 @@ public class FoodDAO {
 			
 			if(food.getFood_image1()!=null) {
 				//업로드한 파일이 있는 경우
-				sub_sql = ",food_image1=?";
+				sub_sql += ",food_image1=?";
+			}
+			if(food.getFood_image2()!=null) {
+				//업로드한 파일이 있는 경우
+				sub_sql += ",food_image2=?";
+			}
+			if(food.getFood_image3()!=null) {
+				//업로드한 파일이 있는 경우
+				sub_sql += ",food_image3=?";
 			}
 			
 			sql = "UPDATE food SET food_name=?,food_content=?,"
-				+ "food_phone1=?,food_phone2=?,food_phone3=?,food_local=?,food_addr1=?,food_addr2=?,food_zipcode=?,food_timeh1=?,food_timem1=?,food_timeh2=?,food_timem2=?,"
+				+ "food_phone1=?,food_phone2=?,food_phone3=?,food_local=?,food_addr1=?,food_addr2=?,food_zipcode=?,food_timeh1=?,food_timem1=?,food_timeh2=?,food_timem2=?,food_link=?,"
 				+ "food_date_modi=SYSDATE " + sub_sql 
 				+ "WHERE food_num=?";
 				//+ ",ip=? WHERE board_num=?";
@@ -382,8 +395,16 @@ public class FoodDAO {
 			pstmt.setString(++cnt, food.getFood_timeh2());
 			pstmt.setString(++cnt, food.getFood_timem2());
 			
+			pstmt.setString(++cnt, food.getFood_link());
+			
 			if(food.getFood_image1()!=null) {
 				pstmt.setString(++cnt, food.getFood_image1());
+			}
+			if(food.getFood_image2()!=null) {
+				pstmt.setString(++cnt, food.getFood_image2());
+			}
+			if(food.getFood_image3()!=null) {
+				pstmt.setString(++cnt, food.getFood_image3());
 			}
 			//pstmt.setString(++cnt, food.getIp());
 			pstmt.setInt(++cnt, food.getFood_num());

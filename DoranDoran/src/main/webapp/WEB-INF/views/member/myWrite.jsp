@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,6 +57,29 @@
 				</li>
 		</ul>
 	</div>
+	
+	<c:if test="${count==0 }">
+	<div class="result-display">
+		표시할 게시물이 없습니다.
+	</div>
+	</c:if>
+		<c:forEach var="food" items="${foodList }">
+		<div class="horizontal-areaa">
+				<a href="${pageContext.request.contextPath}/food/detail.do?food_num=${food.food_num}">
+				<c:if test="${!empty food.food_image1}">
+				<img class="board-imagee" src="${pageContext.request.contextPath}/upload/${food.food_image1}">
+				</c:if>
+				<c:if test="${empty food.food_image1}">
+				<img class="board-imagee" src="${pageContext.request.contextPath}/images/blank.png">
+				</c:if>
+				<p style="font-family:'Song Myung';font-size:5px; padding:0px;">[${food.food_local}] ${fn:substring(food.food_name,0,15)}</p>	
+				</a>
+			</div>
+	
+			</c:forEach>
+			</div>
+	
+	
 	
 	</div>
 </div>

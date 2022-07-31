@@ -22,6 +22,8 @@
 			<ul>
 				<li>
 					<select name='local'>
+						<option value="${food.food_local}">${food.food_local}</option>
+						<option disabled>-------</option>
 						<option value="서울">서울</option>
 						<option value="경기">경기</option>
 						<option value="인천">인천</option>
@@ -42,8 +44,16 @@
 					<br><br>
 					<label for="filename">가게 & 메뉴 사진</label>
 					<br><br>
-					<input type="file" name="filename" 
-					 id="filename" 
+					<input type="file" name="filename1" 
+					 id="filename1" 
+					 accept="image/gif,image/png,image/jpeg">
+					 <br>
+					 <input type="file" name="filename2" 
+					 id="filename2" 
+					 accept="image/gif,image/png,image/jpeg">
+					 <br>
+					 <input type="file" name="filename3" 
+					 id="filename3" 
 					 accept="image/gif,image/png,image/jpeg">
 				</li>
 				<li>
@@ -51,6 +61,8 @@
 					<label for="time">가게 운영시간</label>
 					<br><br>
 					<select name='hour1'>
+						<option value="${food.food_timeh1}">${food.food_timeh1}</option>
+						<option disabled>-------</option>
 						<option value="00">00</option>
 						<option value="01">01</option>
 						<option value="02">02</option>
@@ -78,11 +90,15 @@
 					</select>
 					:
 					<select name='min1'>
+						<option value="${food.food_timem1}">${food.food_timem1}</option>
+						<option disabled>-------</option>
 						<option value="00">00</option>
 						<option value="30">30</option>
 					</select>
 					~
 					<select name='hour2'>
+						<option value="${food.food_timeh2}">${food.food_timeh2}</option>
+						<option disabled>-------</option>
 						<option value="00">00</option>
 						<option value="01">01</option>
 						<option value="02">02</option>
@@ -110,6 +126,8 @@
 					</select>
 					:
 					<select name='min2'>
+						<option value="${food.food_timem2}">${food.food_timem2}</option>
+						<option disabled>-------</option>
 						<option value="00">00</option>
 						<option value="30">30</option>
 					</select>
@@ -121,6 +139,8 @@
 					<br>
 					<br>
 					<select name = 'phone1'>
+						<option value="${food.food_phone1}">${food.food_phone1}</option>
+						<option disabled>-------</option>
 						<option value="02">02</option>
 						<option value="031">031</option>
 						<option value="032">032</option>
@@ -130,6 +150,13 @@
 					- <input type="text" name="phone2" id="phone2" maxlength="4" style="width:50px;" value="${food.food_phone2}">
 					- <input type="text" name="phone3" id="phone3" maxlength="4" style="width:50px;" value="${food.food_phone3}">
 					
+				</li>
+				<li>
+					<br><br>
+					<label for="link">가게 홈페이지</label>
+					<br><br>
+					<input type="text" name="link" 
+					      id="link" maxlength="100" placeholder="가게 홈페이지 주소를 입력" value="${food.food_link}"  style="width:500px;">
 				</li>
 				<li>
 					<br><br>
