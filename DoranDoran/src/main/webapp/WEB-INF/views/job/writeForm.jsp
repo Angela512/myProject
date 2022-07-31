@@ -10,7 +10,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/job-style.css" type="text/css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/notice.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/job.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   					 <script>
   $( function() {
     $( "#datepicker" ).datepicker({
@@ -24,17 +26,18 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="content-main">
 		<h2>구인구직 글쓰기</h2>
+		<hr>
 		<form id="write_form" action="write.do" 
 		   method="post" enctype="multipart/form-data">
 			<ul>
-				<li>
-					<label for="title">제목</label>
+				<li class="row">
+					<label for="title" class="col">제목</label>
 					<input type="text" name="job_title" 
-					      id="title" maxlength="50" class="form-control">
+					      id="title" maxlength="50" class="form-control col" placeholder="제목 입력" required>
 				</li>
-				<li>
-					<label for="title">카테고리</label>
-							<select name="job_category" class="form-select">
+				<li class="row">
+					<label for="title" class="job_ct col">카테고리</label>
+							<select name="job_category" class="form-select col">
 								<option value="" hidden="">카테고리</option>
 								<option value="어업">어업</option>
 								<option value="기계">기계</option>
@@ -48,31 +51,34 @@
 					
 				</li>
 				<li>
-					<label for="content">모집내용</label>
+					<label for="content" class="col">모집내용</label>
 					<textarea rows="5" cols="30" name="job_content"
-					     id="content" class="form-control"></textarea>
+					     id="content" class="form-control" placeholder="모집 내용 입력" required></textarea>
+				</li>
+				<li class="row">
+					<label for="filename" class="col">기업 로고</label>
+					<input type="file"  class="btn btn-secondary col" name="job_logo" id="filename" accept="image/gif,image/png,image/jpeg">
+				</li>
+				<li class="row">
+					<label for="Homepage" class="col">홈페이지</label>
+					<input type="text" name="job_link" id="link" class="form-control col" placeholder="alpha.com의 형태로 입력하세요.">
+				</li>
+				<li class="row">
+					<label for="enddate" class="col">마감일</label>
+					<input type="date"  name="job_enddate"  class="form-control col">
+					<!-- id="datepicker" -->
 				</li>
 				<li>
-					<label for="filename">기업 로고</label>
-					<input type="file"  class="btn btn-secondary" name="job_logo" id="filename" accept="image/gif,image/png,image/jpeg">
-					<p>* 파일 용량은 640MB를 초과할 수 없습니다.</p>
-				</li>
-				<li>
-					<label for="Homepage">홈페이지</label>
-					<input type="text" name="job_link" id="link" class="form-control">
-				</li>
-				<li>
-					<label for="enddate">마감일</label>
-					<input type="text" id="datepicker" name="job_enddate"  class="form-control">
-				</li>
-				<li>
-					<label for="Homepage">주소</label>
-					<input type="text" id="sample3_postcode" name="job_zipcode" placeholder="우편번호" class="form-control">
-					<input type="button" onclick="sample3_execDaumPostcode()" value="찾기" class="btn btn-secondary"    ><br>
-					<input type="text" id="sample3_address" name="job_addr1" placeholder="주소" class="form-control"><br>
-					<input type="text" id="sample3_detailAddress" name="job_addr2" placeholder="상세주소" class="form-control">
-					<input type="text" id="sample3_extraAddress" placeholder="참고항목" class="form-control">
-					
+				<div class="row">
+					<label for="Homepage" class="col">주소</label>
+					<input type="text" id="sample3_postcode" name="job_zipcode" placeholder="우편번호" class="form-control col" required>
+					<input type="button" onclick="sample3_execDaumPostcode()" value="찾기" class="btn btn-secondary col"><br>
+				</div>
+				<div class="row">
+					<input type="text" id="sample3_address" name="job_addr1" placeholder="주소" class="form-control col" required>
+					<input type="text" id="sample3_detailAddress" name="job_addr2" placeholder="상세주소" class="form-control col">
+					<input type="text" id="sample3_extraAddress" placeholder="참고항목" class="form-control col">
+				</div>
 					<div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
 					<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
 					</div>
@@ -165,6 +171,7 @@
 		</form>
 	</div>
 </div>
+
 </body>
 </html>
 

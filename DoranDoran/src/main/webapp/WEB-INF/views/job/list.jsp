@@ -19,7 +19,7 @@
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
 		<div class="content-main">
 			<h2>구인구직</h2>
-			<div id="category_btn">
+			<div id="category_btn" class="job_ct">
 		
 				<input class="category_btn" type="button" value="전체보기" onclick="location.href='list.do'">
 				<input class="category_btn" type="button" value="어업"  onclick="location.href='list.do?job_category=어업'">
@@ -100,6 +100,20 @@
 				<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 		
 	</div>
+	
+<script>
+var menu = document.querySelector('.job_ct');
+
+function clickHandler(e){    // eventHandler써주면 자동으로 들어오지만 활용하려면 e를 써주기.  e는 이벤트 객체로써, 발생한 이벤트에 대한 많은 정보를 담고 있는 객체.
+    console.log(e.target);    // event 객체의 타겟
+    console.log(e.currentTarget);
+    console.log(this);   // this는 menu이다. menu가 addEventLisner를 호출하였으므로
+    console.log(this == e.currentTarget);
+}
+
+menu.addEventListener('click', clickHandler);
+
+</script>
 </body>
 </html>
 

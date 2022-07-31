@@ -1,36 +1,107 @@
 @charset "UTF-8";
 
-/* 글목록 시작 */
+/*서브 배너 공통 시작*/
+#sub_banner{
+	padding: 30px 0 0 0;
+}
+/*서브 배너 공통 끝*/
 
-.category_btn{
-  background-color: rgba( 255, 255, 255, 0.5 );
-  text-decoration: none;
-  display: inline-block;
-  font-size: 17px;
-  cursor: pointer;
-  border:none;
-  width: 100px;
+.job_ct{
+	
+	color:red;
+}
+
+
+
+/* 글목록 시작 */
+.category_btn {
+	background-color: rgba(255, 255, 255, 10);
+	text-decoration: none;
+	display: inline-block;
+	font-size: 17px;
+	cursor: pointer;
+	border: none;
+	width: 100px;
 	text-align: center;
 	vertical-align: middle;
 }
 
-#category_btn{
-		text-align: center;
-		padding:20px 0 20px 0;
-	
+#category_btn {
+	text-align: center;
+	padding: 20px 0 20px 0;
 }
 
-.content-main h2{
-	font-weight:700;
-	padding-top:30px;
+.content-main h2 {
+	font-weight: 700;
+	padding-top: 30px;
 }
+
 
 /* 글목록 끝 */
 
 /*******************************/
 
 /* 글쓰기 시작 */
+.content-main ul li {
+/* 	padding: 10px;
+ */}
 
+.content-main form {
+	padding-top: 50px;
+}
 
+input[type=file] {
+	position: absolute;
+	width: 0;
+	height: 0;
+	padding: 0;
+	overflow: hidden;
+	border: 0;
+}
+
+.content-main{
+	padding:0 0 0 0 px;
+	
+}
+
+.content-main form{
+	padding: 0;
+}
 
 /* 글쓰기 끝 */
+
+
+/* 글 상세보기 시작 */
+
+ul.default-info{
+	display:inline-block;
+	vertical-align:middle;
+	padding:0 0 0 0 !important;
+}
+
+.content-main ul{
+	padding-left:0 !important;
+}
+
+.detail-detail{
+	margin:50px 0 0 0 ;
+}
+
+.detail-detail li{
+	padding: 10px 10px 10px 0 ;
+}
+
+.detail-detail li:nth-child(even){
+	font-weight:700;
+	margin:0 !important;
+	padding:0 !important;
+}
+
+.detail_sub{
+	text-align:right;
+}
+ul.detail-sub li{
+	width:100% !important;
+}
+
+/* 글 상세보기 끝 */
