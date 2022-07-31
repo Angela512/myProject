@@ -104,7 +104,7 @@ thead {
   background: #E1E1E1;
 }
 td, th {
-  padding: .7em .5em;
+  padding: 1em .5em;
   vertical-align: middle;
 }
 td {
@@ -113,35 +113,35 @@ td {
 }
 .news{
   width: 100px;
-  height: 30px;
+  height: 20px;
   background: #FAAB36; 
   color:white;
   margin:auto;
-  padding: 6px 0 0 0;
+  padding: 0;
 }
 .help{
   width: 100px;
-  height: 30px;
+  height: 20px;
   background: #FA5D57;
   color:white;
   margin:auto;
-  padding: 6px 0 0 0;
+  padding: 0;
 }
 .together{
   width: 100px;
-  height: 30px;
+  height: 20px;
   background: #8B8C00;
   color:white;
   margin:auto;
-  padding: 6px 0 0 0;
+  padding: 0;
 }
 .etc{
   width: 100px;
-  height: 30px;
+  height: 20px;
   background: #7C7877;
   color:white;
   margin:auto;
-  padding: 6px 0 0 0;
+  padding: 0;
 }
 
 
