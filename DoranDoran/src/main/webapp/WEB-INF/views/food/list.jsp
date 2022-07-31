@@ -34,26 +34,54 @@
 
     /* 화면 디자인 맛집 게시판용 css */
 .board-spacee .horizontal-areaa{
-	margin:100px ;
- 	padding:0px; 
-	width:350px;
-	height:600px;
+	
 	float:left;
 	overflow: hidden;
-	maring:10px;
+	/*maring:50px;*/
+	margin:10px 10px 10px 10px;
+	width:330px;
+	padding:20px;
+
 }
 
 img.board-imagee{
-	width:500px;
-	height:300px;
+	width:290px;
+	height:230px;
 }
 ul{
 	padding:0px;
 }
 .in{
-	padding-left:20px;
+	/*padding-left:20px;*/
+	display: flex;
 }
+.pick{
+	display:inline-block; 
 
+	height:50px; width:260px; 
+	font-size:0.5em;
+	maring-left:100px;
+	
+}
+.pick-category{
+	display:inline-block; 
+	font-size:5px; 
+	width:60px;
+}
+.pick-content{
+	display:inline-block; 
+
+	height:50px; width:290px; 
+	font-size:0.5em;
+	maring-left:100px;
+}
+.pick-phone{
+	display:inline-block; 
+
+	height:25px; width:260px; 
+	font-size:0.5em;
+	maring-left:100px;
+}
  </style>
  </head>
 <body>
@@ -131,7 +159,7 @@ ul{
 		<c:if test="${count > 0}">
 		<div class="board-spacee">
 			<c:forEach var="food" items="${list}">
-			<div class="horizontal-areaa" style="border:5px solid #f6da7a; border-radius:16px; box-shadow:5px 5px 5px 5px #E0E0E0;">
+			<div class="horizontal-areaa" style="box-shadow:5px 5px 5px 5px #E0E0E0;">
 				<a href="${pageContext.request.contextPath}/food/detail.do?food_num=${food.food_num}">
 				<c:if test="${!empty food.food_image1}">
 				<img class="board-imagee" src="${pageContext.request.contextPath}/upload/${food.food_image1}">
@@ -143,21 +171,26 @@ ul{
 				<ul>
 					<li>
 						<br>
-						<p style="font-family:'Song Myung'; font-size:25px; text-align:center;">[${food.food_local}] ${fn:substring(food.food_name,0,15)}</p>
-						 <hr width = "100%" style="height:2px; color:blue;">
+						<p style="font-family:'Song Myung'; font-size:25px;">[${food.food_local}] ${fn:substring(food.food_name,0,15)}</p>
+						 <hr width = "100%" style="height:2px; color:#E0E0E0;">
 					</li>
 					<br>
 					
 					<li class="in">
-						<b>번호</b> &nbsp; ${food.food_phone1}-${food.food_phone2}-${food.food_phone3}
+						<span class="pick-category"><b>&#9742; 전화</b></span>  &nbsp; 
+						<span class="pick-phone">${food.food_phone1}-${food.food_phone2}-${food.food_phone3}</span>
+						
 					</li>				
 					<li class="in">
-						<b>주소</b>  &nbsp; ${food.food_addr1} 
+						<span class="pick-category"><b>&#127988; 주소</b></span>  &nbsp; 
+						<span class="pick">${food.food_addr1} ${food.food_addr2}</span>
 					</li>
+					<hr width = "100%" style="height:2px; color:#E0E0E0;">
 					<li class="in">
-						<b>설명</b>  &nbsp; ${food.food_content}
+						<span class="pick-content">${food.food_content}</span>
 					</li>
 				</ul>
+				
 				</div>
 				</a>
 				<div class="board-detail">

@@ -49,7 +49,7 @@ li.j{
 		</c:if>
 		<br><br><br>
 		<div>
-			<ul style="margin:50px; padding-left:160px;">
+			<ul style="margin:50px; padding-left:300px;">
 				<li class="j">
 					<b>운영시간</b><span style="padding-left:30px;">${food.food_timeh1}:${food.food_timem1} ~ ${food.food_timeh2}:${food.food_timem2}</span>
 				</li>
