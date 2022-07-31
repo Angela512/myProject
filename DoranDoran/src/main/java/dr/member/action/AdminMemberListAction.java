@@ -33,6 +33,7 @@ public class AdminMemberListAction implements Action{
 		
 		String keyfield = request.getParameter("keyfield");
 		String keyword = request.getParameter("keyword");
+	//	int auth = Integer.parseInt(request.getParameter("auth"));
 		
 		MemberDAO dao = MemberDAO.getInstance();
 		int count = dao.getMemberCountByAdmin(keyfield, keyword);
@@ -48,7 +49,7 @@ public class AdminMemberListAction implements Action{
 		request.setAttribute("list", list);
 		request.setAttribute("page", page.getPage());
 		
-		return "/WEB-INF/views/member/memberList.jsp";
+		return "/WEB-INF/views/admin/memberList.jsp";
 	}
 
 }

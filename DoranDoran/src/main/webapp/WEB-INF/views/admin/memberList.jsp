@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>회원목록</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+<link rel ="stylesheet" href="${pageContext.request.contextPath}/css/admin-style.css" type="text/css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/member.js"></script>
 </head>
@@ -15,14 +16,15 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="content-main">
 		<h2>회원목록(관리자 전용)</h2>
+		<jsp:include page="adminHeader.jsp"/>
 		<form id="search_form" action="memberList.do" method="get">
+		<!-- <input type="hidden" name="auth" value="${auth}"> -->
 			<ul class="search">
 				<li>
 					<select name="keyfield">
 						<option value="1">ID</option>
 						<option value="2">이름</option>
 						<option value="3">email</option>
-						<option value="4">등급</option>
 					</select>
 				</li>
 				<li>
@@ -43,7 +45,8 @@
 		</div>
 		</c:if>
 		<c:if test="${count > 0}">
-		<table>
+		<table class="admin_table">
+			<thead>
 			<tr>
 				<th>ID</th>
 				<th>이름</th>
@@ -52,6 +55,8 @@
 				<th>가입일</th>
 				<th>등급</th>
 			</tr>
+			</thead>
+			<tbody>
 			<c:forEach var="member" items="${list}">
 			<tr>
 				<c:if test="${member.auth == 3}">
@@ -111,6 +116,7 @@
 			</tr>
 			</c:if>
 			</c:forEach>
+			</tbody>
 		</table>
 		<div class="align-center">
 			${page}

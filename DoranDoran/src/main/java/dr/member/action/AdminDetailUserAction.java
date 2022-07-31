@@ -34,7 +34,7 @@ public class AdminDetailUserAction implements Action{
 		dao.updateMemberByAdmin(auth, mem_num);
 		request.setAttribute("mem_num", mem_num);
 		
-		return "/WEB-INF/views/member/detailUser.jsp";
+		return "/WEB-INF/views/admin/detailUser.jsp";
 	}
 
 }
