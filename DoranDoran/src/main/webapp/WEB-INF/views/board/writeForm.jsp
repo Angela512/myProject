@@ -6,18 +6,26 @@
 <meta charset="UTF-8">
 <title>자유게시판 글쓰기</title>
 <link rel ="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+<link rel ="stylesheet" href="${pageContext.request.contextPath}/css/board-style.css" type="text/css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/board.js"></script>
 </head>
 <body>
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<hr width="100%" color="#b5b5b5" size="1px" id="hr_top1" noshade>
 	<div class="content-main">
-		<h2>자유게시판 글쓰기</h2>
 		<form id="write_form" action="write.do" method="post" enctype="multipart/form-data">
+		<div class="wline1">
+			<h2 id="write_text">자유게시판 글쓰기</h2>
+			<input id="write_submit" type="submit" value="등록">
+				<!-- <input type="button" value="목록" onclick="location.href='list.do'"> -->
+		</div>
+		
+		<hr width="100%" color="#b5b5b5" size="1px" id="hr_top2" noshade>
 			<ul>
-				<li>
-					<label>말머리</label>
+				<li class="head_title" >
+					<!-- <label>말머리</label> -->
 					<select name="board_head" id="board_head">
 						<option value="말머리 선택">말머리 선택</option>
 		     			<option value="동네소식">동네소식</option>
@@ -25,11 +33,10 @@
 		     			<option value="함께해요">함께해요</option>
 		     			<option value="기타">기타</option>
 					</select>
-				</li>
-				<li>
-					<label for="title">제목</label>
+					<!-- <label for="title">제목</label> -->
 					<input type="text" name="board_title" id="board_title" maxlength="50">
 				</li>
+				
 				<li>
 					<label for="content">내용</label>
 					<textarea rows="5" cols="30" name="board_content" id="board_content"></textarea>
@@ -53,10 +60,7 @@
 					accept="image/gif,image/png,image/jpeg">
 				</li>
 			</ul>
-			<div class="align-center">
-				<input type="submit" value="등록">
-				<input type="button" value="목록" onclick="location.href='list.do'">
-			</div>
+			
 		</form>
 	</div>
 </div>

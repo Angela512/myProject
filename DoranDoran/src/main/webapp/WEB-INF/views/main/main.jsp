@@ -189,7 +189,7 @@ to {
 	        <div class="container_table">
       <div class="tboard">
       <div class="tname"><h3>공지사항</h3></div>
-         <div class="tname"><h4><a href="${pageContext.request.contextPath}/notice/list.do">더보기></a></h4></div>
+         <div class="tname"><h5><a href="${pageContext.request.contextPath}/notice/list.do">더보기 ></a></h5></div>
         </div> 
          <table class="main_table">
          <thead>
@@ -234,7 +234,7 @@ to {
       <div style="width:48%; padding-left:60px;">  
       <div class="tboard">
       <div class="tname"><h3>맛집 찾기</h3></div>
-		<div class="tname"><a href="${pageContext.request.contextPath }/food/list.do">더보기></a></div>
+		<div class="tname"><h5><a href="${pageContext.request.contextPath }/food/list.do">더보기 ></a></h5></div>
 	  </div>
 		
 			<div class="board-spacee">
@@ -266,7 +266,7 @@ to {
 	      <div class="container_table">
 		      <div class="tboard">
 		      	<div class="tname"><h3>중고거래</h3></div>
-		      	<div class="tname"><h4><a href="${pageContext.request.contextPath }/trade/list.do">더보기></a></h4></div>
+		      	<div class="tname"><h5><a href="${pageContext.request.contextPath }/trade/list.do">더보기 ></a></h5></div>
 		      </div>
 	      <table class="main_table">
       <thead>
@@ -295,7 +295,7 @@ to {
       <div class="container_table">
       <div class="tboard">
       <div class="tname"><h3>구인구직</h3></div>
-		<div class="tname"><h4><a href="${pageContext.request.contextPath}/job/list.do">더보기 ></a></h4></div>
+		<div class="tname"><h5><a href="${pageContext.request.contextPath}/job/list.do">더보기 ></a></h5></div>
 	  </div>
 			<table class="main_table">
 			<thead>
@@ -324,7 +324,7 @@ to {
       <div style="width:100%">
       <div class="tboard">
       	<div class="tname"><h3>자유게시판</h3></div>
-      	<div class="tname"><h4><a href="${pageContext.request.contextPath}/board/list.do">더보기 ></a></h4></div>
+      	<div class="tname"><h5><a href="${pageContext.request.contextPath}/board/list.do">더보기 ></a></h5></div>
        </div>
          <table class="main_table">
          <thead>
@@ -339,13 +339,40 @@ to {
             <tbody>
             <c:forEach var="board" items="${boardList}">
             <tr>
-               <td>${board.board_head}</td>
+               <c:if test="${board.board_head == '동네소식'}">
+               <td><div class="news">${board.board_head}</div></td>
                <td><a href="${pageContext.request.contextPath }/board/detail.do?board_num=${board.board_num}">${board.board_title}</a></td>
                <td>${board.mem_name}</td>
                <td>${board.board_date}</td>
                <td>${board.board_count}</td>
+               </c:if>
+               
+               <c:if test="${board.board_head == '도움요청'}">
+               <td><div class="help">${board.board_head}</div></td>
+               <td><a href="${pageContext.request.contextPath }/board/detail.do?board_num=${board.board_num}">${board.board_title}</a></td>
+               <td>${board.mem_name}</td>
+               <td>${board.board_date}</td>
+               <td>${board.board_count}</td>
+               </c:if>
+               
+               <c:if test="${board.board_head == '함께해요'}">
+               <td><div class="together">${board.board_head}</div></td>
+               <td><a href="${pageContext.request.contextPath }/board/detail.do?board_num=${board.board_num}">${board.board_title}</a></td>
+               <td>${board.mem_name}</td>
+               <td>${board.board_date}</td>
+               <td>${board.board_count}</td>
+               </c:if>
+               
+               <c:if test="${board.board_head == '기타'}">
+               <td><div class="etc">${board.board_head}</div></td>
+               <td><a href="${pageContext.request.contextPath }/board/detail.do?board_num=${board.board_num}">${board.board_title}</a></td>
+               <td>${board.mem_name}</td>
+               <td>${board.board_date}</td>
+               <td>${board.board_count}</td>
+               </c:if>
             </tr>
             </c:forEach>
+            
             </tbody>
          </table>
          </div>

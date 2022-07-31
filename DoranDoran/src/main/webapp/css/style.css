@@ -429,6 +429,43 @@ input[id="zipcode"] {
   border: 1px solid #FA5D57;
 }
 /* 공지 말머리 css 끝 */
+
+/* 자유게시판 말머리 css 시작 */
+.news{
+  width: 100px;
+  height: 30px;
+  background: #FAAB36; 
+  color:white;
+  margin:auto;
+  padding: 6px 0 0 0;
+}
+.help{
+  width: 100px;
+  height: 30px;
+  background: #FA5D57;
+  color:white;
+  margin:auto;
+  padding: 6px 0 0 0;
+}
+.together{
+  width: 100px;
+  height: 30px;
+  background: #8B8C00;
+  color:white;
+  margin:auto;
+  padding: 6px 0 0 0;
+}
+.etc{
+  width: 100px;
+  height: 30px;
+  background: #7C7877;
+  color:white;
+  margin:auto;
+  padding: 6px 0 0 0;
+}
+
+/* 자유게시판 말머리 css 끝 */
+
 /* footer 시작 */
 * {
    box-sizing: border-box;
