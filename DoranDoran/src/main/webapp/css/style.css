@@ -182,25 +182,31 @@ a:hover {
 .board-space .horizontal-area {
 	margin: 2px;
 	padding: 3px;
-	width: 220px;
-	height: 260px;
+	width: 250px;
+	height: 310px;
 	float: left;
 	overflow: hidden;
 }
 
 .board-space .horizontal-area img.board-image {
 	width: 215px;
-	height: 195px;
+	height: 175px;
 }
 
 .board-space .horizontal-area div.board-detail {
-	display: flex;
 	align-items: center;
 }
 
 .board-space .horizontal-area span {
 	padding: 5px;
 	margin: 5px;
+}
+.board-space .horizontal-area span#detail-title{
+	font-size: 15pt;
+}
+
+.board-space .horizontal-area span.small{
+	color:#5b695f;
 }
 
 .board-space .float-clear {

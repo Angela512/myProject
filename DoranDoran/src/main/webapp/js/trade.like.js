@@ -46,9 +46,9 @@ $(function(){
 	function displayLike(param){
 		let output;
 		if(param.status=='noLike'){
-			output='../images/fav01.gif';
+			output='../images/nolike.png';
 		}else{
-			output='../images/fav02.gif';
+			output='../images/like.png';
 		}
 		//문서 객체에 추가
 		$('#output_fav').attr('src',output);

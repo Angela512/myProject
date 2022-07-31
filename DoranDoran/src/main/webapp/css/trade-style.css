@@ -1,7 +1,171 @@
 @charset "UTF-8";
 
-input.button-1{
-	background-color:#eb34c6;
-	width: 200px;
+/*서브 배너 공통 시작*/
+#sub_banner{
+	padding: 30px 0 30px 0;
+}
+
+
+/*삽니다 팝니다 버튼*/
+div.btn-group{
+	width:300px;
+	padding-bottom: 20px;
+	
+}
+/*리스트 카테고리*/
+.sub_nav{
+	font-weight: 600;
+	width:100%;
+	/* border:1px solid red; */ /*행의 간격 맞출 때 좋음*/
+}
+#sub_nav1{
+	padding: 20px 0 7px 0;
+	float:left; 
+	width:468px;
+}
+.sub_nav ul{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.sub_nav li{
+	list-style-type: none;
+	margin-left: 0;
+	padding: 0;
+	display: inline-block;
+	width: 90px;
+	text-align: center;
+}
+.sub_nav a{
+	color: #717171 !important;
+	font-size: 20px !important;
+}
+.sub_nav a:hover{
+	position: relative;
+	color: #1f1f1f !important;
+} 
+.sub_nav a:hover:after{
+	color: #1f1f1f !important;
+	content: '';
+    width: 100%;
+    height: 3px;
+    position: absolute;
+    bottom: -5px;
+    left: 1px;
+    background: #1f1f1f;
+}
+div #category-end{
+	clear: both;
+}
+/*탑 버튼*/
+.button{
+	color: #fff;
+	font-size:15px;
+	border: 0;
+	background-color: #FA5D57;
+	border-radius: 3px;
+}
+/*글쓰기 버튼*/
+.write_button{
+	text-align:right;
+}
+#write_pen{
+	position:relative;
+	left:46px;
+	width: 18px; 
+	height: 18px;
+	/*border: 1px solid red;*/
+} 
+#write_button_box{
+	padding-left: 26px;
+	color: #fff;
+	width: 120px; 
+	height: 35px;
+	font-size:15px;
+	font-weight: 600;
+	border: 0;
+	background-color: #FA5D57;
+	border-radius: 3px;
+	margin:20px 0 0 0;
+}
+/*리스트 검색 창*/
+ul.search_board{
+	list-style:none;
+	padding:20px 55px 90px 0px;
+	margin:0;
+	text-align:center;
+}
+ul.search_board li{
+	padding:0;
+	display:inline;
+}
+
+.search_board #search_button{
+	color: #fff;
+	font-size:15px;
+	border: 0;
+	background-color: #FA5D57;
+	border-radius: 3px;
+}
+/*상세페이지*/
+h5.trade-detail-head{
+	background-color: #FA5D57;
+	width:180px;
 	height:50px;
+	text-align: center;
+	padding-top: 12px;
+	color:white;
+	border-radius: 20px;
+	margin-left: 10px;
+}
+ul #detail-top{
+	margin-bottom: 10px;
+}
+.detail-info #li-margin{
+	margin-left: 20px;
+	vertical-align: middle;
+}
+hr.hr-look{
+	height : 1px;
+}
+.detail-div {
+	width: 48%;
+	height : 300px;
+	float: left;
+	padding: 5px;
+}
+
+.detail-end {
+	clear: both;
+}
+
+.detail-div .carousel-inner img{
+	height:300px;
+}
+
+div #detail-margin{
+	margin-left: 20px;
+}
+
+.detail-div #detail-div-title{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.detail-div #detail-div-price{
+	font-weight: bold;
+}
+.detail-div #detail-div-call-phone{
+	font-weight: bold;
+}
+.detail-div #detail-div-like{
+	margin-top: 20px;
+	display: flex;
+}
+div #flex{
+	display: flex;
+	margin-left: 44%;
+	margin-bottom: 30px;
+}
+div #flex2{
+	margin-left: 36%;
 }
