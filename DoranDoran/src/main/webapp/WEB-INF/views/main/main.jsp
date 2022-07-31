@@ -26,7 +26,7 @@
 .main_table {
   border: 1px #a39485 solid;
   font-size: .9em;
-  
+
   width: 100%;
   border-collapse: collapse;
   border-radius: 5px;
@@ -192,7 +192,7 @@ to {
       
       <!-- 공지 시작 -->
       <div class="container">
-	      <div style="width:48%">
+	        <div style="width:48%">
       <div class="tboard">
       <div class="tname"><h3>공지사항</h3></div>
          <div class="tname"><h4><a href="${pageContext.request.contextPath}/notice/list.do">더보기></a></h4></div>
@@ -224,12 +224,11 @@ to {
       <!-- 공지 끝 -->
       
       <!-- 맛집 찾기 시작 -->
-      <div style="width:48%; padding-left:60px;">   
+      <div style="width:48%; padding-left:60px;">  
       <div class="tboard">
       <div class="tname"><h3>맛집 찾기</h3></div>
-		
 		<div class="tname"><a href="${pageContext.request.contextPath }/food/list.do">더보기></a></div>
-	</div>
+	  </div>
 		
 			<div class="board-spacee">
 			<c:forEach var="food" items="${foodList }">
@@ -242,7 +241,7 @@ to {
 				<c:if test="${empty food.food_image1}">
 				<img class="board-imagee" src="${pageContext.request.contextPath}/images/blank.png">
 				</c:if>
-				<p style="font-family:'Song Myung'; font-size:5px; padding:0px;">[${food.food_local}] ${fn:substring(food.food_name,0,15)}</p>	
+				<p style="font-family:'Song Myung';font-size:5px; padding:0px;">[${food.food_local}] ${fn:substring(food.food_name,0,15)}</p>	
 				</a>
 			</div>
 	
@@ -257,7 +256,7 @@ to {
       
       <!-- 중고거래 시작 -->
       <div class="container">
-	      <div style="width:48%">
+	      <div class="container_table">
 		      <div class="tboard">
 		      	<div class="tname"><h3>중고거래</h3></div>
 		      	<div class="tname"><h4><a href="${pageContext.request.contextPath }/trade/list.do">더보기></a></h4></div>
@@ -286,7 +285,7 @@ to {
        
       <!-- 구인구직 시작 -->
       
-      <div style="width:48%">
+      <div class="container_table">
       <div class="tboard">
       <div class="tname"><h3>구인구직</h3></div>
 		<div class="tname"><h4><a href="${pageContext.request.contextPath}/job/list.do">더보기 ></a></h4></div>
