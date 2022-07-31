@@ -15,6 +15,9 @@
 	display:flex;
 	justify-content: space-between;
 }
+.container_table{
+	width:48%;
+}
 .tboard{
 	display: flex;
   justify-content: space-between;
@@ -192,7 +195,7 @@ to {
       
       <!-- 공지 시작 -->
       <div class="container">
-	        <div style="width:48%">
+	        <div class="container_table">
       <div class="tboard">
       <div class="tname"><h3>공지사항</h3></div>
          <div class="tname"><h4><a href="${pageContext.request.contextPath}/notice/list.do">더보기></a></h4></div>
