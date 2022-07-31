@@ -57,6 +57,11 @@ public class UpdateAction implements Action{
 		food.setFood_addr2(multi.getParameter("address2"));
 		food.setFood_zipcode(multi.getParameter("zipcode"));
 		
+		food.setFood_timeh1(multi.getParameter("hour1"));
+		food.setFood_timem1(multi.getParameter("min1"));
+		food.setFood_timeh2(multi.getParameter("hour2"));
+		food.setFood_timem2(multi.getParameter("min2"));
+		
 		dao.updateFood(food);
 		
 		if(filename!=null) {

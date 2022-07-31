@@ -31,7 +31,7 @@ public class ListAction implements Action{
 		}
 		//페이지 처리
 		PagingUtil page = new PagingUtil(keyfield,keyword,
-				Integer.parseInt(pageNum),count,4,10,"list.do",local);
+				Integer.parseInt(pageNum),count,6,10,"list.do",local);
 		
 		List<FoodVO> list = null;
 		if(count > 0) {
