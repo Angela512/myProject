@@ -67,14 +67,20 @@
 				</c:if>
 			</ul>
 		</form>
+			<c:if test="${empty list}">
+				<p>작성한 글이 없습니다</p>
+			</c:if>
+			
 			<table class="admin_table">
-			<thead>
-				<tr>
-					<th>게시판</th>
-					<th>제목</th>
-					<th>작성일</th>
-				</tr>
-			</thead>
+				<c:if test="${!empty list}">
+				<thead>
+					<tr>
+						<th>게시판</th>
+						<th>제목</th>
+						<th>작성일</th>
+					</tr>
+				</thead>
+				</c:if>
 			<tbody>
 				<c:forEach var="member" items="${list}">
 				<tr>

@@ -50,15 +50,6 @@ td, th {
 }
 
 
-
-* {
-   box-sizing: border-box;
-}
-
-body {
-   font-family: Verdana, sans-serif;
-}
-
 .mySlides {
    display: none;
 }
@@ -347,6 +338,9 @@ to {
          </div>
       <!-- 자유게시판 끝 -->
       </div> 
+      <br>
+      <hr width="100%" color="#b5b5b5" size="1px" noshade>
+      <br>
       <jsp:include page="/WEB-INF/views/common/footer.jsp" />
    </div>
 

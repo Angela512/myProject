@@ -414,29 +414,43 @@ input[id="zipcode"] {
 	border-radius: 50%;
 }
 
-#footer {
+/* footer 시작 */
+* {
+   box-sizing: border-box;
+}
+.footer_container{
+	float:left;
+	width:100%;
+	font-family: Verdana, sans-serif;
+}
+.footer {
 	background-color: red;
 }
 
-#footer_logo {
-	text-align: left;
+.footer_logo {
+	float:left;
+	width:30%;
+	text-align: right;
 	padding-top: 20px;
 	font-family: 'MaplestoryOTFBold';
 	color: #FA5D57;
-	float: left;
-	padding-left: 100px;
+	padding-left: 10%;
+	padding-right:2%;
 }
 
-#footer_logo a:visited {
+.footer_logo a:visited {
 	color: #FA5D57;
 }
 
-#footer_content {
-	float: left;
-	padding-left: 50px;
+.footer_content {
+	float:right;
+	width:70%;
+	text-align: left;
+	padding-right: 10%;
+	padding-left:2%;
 	font-size: 10pt;
 }
-
+/* footer 끝 */
 
 /* 검색 */
 /* 

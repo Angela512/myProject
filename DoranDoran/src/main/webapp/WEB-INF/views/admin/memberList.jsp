@@ -18,7 +18,7 @@
 		<h2>회원목록(관리자 전용)</h2>
 		<jsp:include page="adminHeader.jsp"/>
 		<form id="search_form" action="memberList.do" method="get">
-		<!-- <input type="hidden" name="auth" value="${auth}"> -->
+		<!-- <input type="hidden" name="auth" value="${param.auth}"> -->
 			<ul class="search">
 				<li>
 					<select name="keyfield">
