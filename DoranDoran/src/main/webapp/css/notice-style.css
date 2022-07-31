@@ -48,7 +48,6 @@
 }
 /*카테고리(head) 공통 끝*/
 /* 게시판 테이블 시작 */
-
 .notice_table {
   border: 1px #a39485 solid;
   font-size: 16px;
@@ -69,6 +68,21 @@ td {
   border-bottom: 1px solid rgba(0,0,0,.1);
   background: #fff;
 }
+.must{
+  width: 45px;
+  height: 20px;
+  background: #FA5D57;
+  color:white;
+  margin:auto;
+}
+.read{
+  width: 45px;
+  height: 20px;
+  color: #FA5D57;
+  margin:auto;
+  border: 1px solid #FA5D57;
+}
+
 /* 게시판 테이블 끝 */
 /* 버튼 및 검색 공통 폼 시작 */
 .write_button{

@@ -45,7 +45,7 @@
 			<c:forEach var="notice" items="${list}">
 			<tr>
 				<c:if test="${notice.notice_head == '필독'}">
-				<td>${notice.notice_head}</td>
+				<td><div class="must">${notice.notice_head}</div></td>
 				<td><a href="detail.do?notice_num=${notice.notice_num}">${notice.notice_title}</a></td>
 				<td>${notice.mem_name}</td>
 				<td>${notice.notice_date}</td>
@@ -56,7 +56,7 @@
 			<c:forEach var="notice" items="${list}">
 			<tr>
 				<c:if test="${notice.notice_head == '공지'}">
-				<td>${notice.notice_head}</td>
+				<td><div class="read">${notice.notice_head}</div></td>
 				<td><a href="detail.do?notice_num=${notice.notice_num}">${notice.notice_title}</a></td>
 				<td>${notice.mem_name}</td>
 				<td>${notice.notice_date}</td>
