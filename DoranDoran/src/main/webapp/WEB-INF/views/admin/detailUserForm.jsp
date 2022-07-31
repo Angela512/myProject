@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>회원정보(관리자 전용)</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+<link rel ="stylesheet" href="${pageContext.request.contextPath}/css/admin-style.css" type="text/css">
 </head>
 <body>
 <div class="page-main">
@@ -66,12 +67,15 @@
 				</c:if>
 			</ul>
 		</form>
-			<table>
+			<table class="admin_table">
+			<thead>
 				<tr>
 					<th>게시판</th>
 					<th>제목</th>
 					<th>작성일</th>
 				</tr>
+			</thead>
+			<tbody>
 				<c:forEach var="member" items="${list}">
 				<tr>
 					<td>
@@ -91,6 +95,7 @@
 					<td>${member.ndate}</td>
 				</tr>
 				</c:forEach>
+				</tbody>
 			</table>
 			<div class="align-center">
 				${page}

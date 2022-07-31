@@ -56,7 +56,7 @@ public class AdminDetailUserFormAction implements Action{
 		request.setAttribute("list", list);
 		request.setAttribute("page", page.getPage());
 
-		return "/WEB-INF/views/member/detailUserForm.jsp";
+		return "/WEB-INF/views/admin/detailUserForm.jsp";
 	}
 
 }

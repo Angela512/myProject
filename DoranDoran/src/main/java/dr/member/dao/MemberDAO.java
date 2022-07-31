@@ -321,11 +321,13 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 		String sql=null;
 		String sub_sql="";
 		int count=0;
-
+//		String find_auth = Integer.toString(auth);
+	//	int found_auth;
+		
 		try {
 			//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션을 할당
 			conn=DBUtil.getConnection();
-
+			
 			if(keyword!=null && !"".equals(keyword)) {
 				//검색 처리
 				if(keyfield.equals("1")) sub_sql="WHERE mem_id LIKE ?";
@@ -340,7 +342,34 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 			if(keyword!=null && !"".equals(keyword)) {
 				pstmt.setString(1, "%"+keyword+"%");
 			}
+			
+			/* 
+			if((keyword != null && !"".equals(keyword)) && (find_auth == null || "".equals(find_auth))) {
+				if(keyfield.equals("1")) sub_sql = "WHERE mem_id LIKE ?";
+				else if(keyfield.equals("2")) sub_sql = "WHERE mem_name LIKE ?";
+				else if(keyfield.equals("3")) sub_sql = "WHERE mem_email LIKE ?";
+			}else if((keyword == null || "".equals(keyword)) && (find_auth!=null && !"".equals(find_auth))) {
+				sub_sql = "WHERE auth = ?";
+			}else if((keyword != null && !"".equals(keyword)) && (find_auth != null && !"".equals(find_auth))) {
+				if(keyfield.equals("1")) sub_sql = "WHERE mem_id LIKE ? AND auth = ?";
+				else if(keyfield.equals("2")) sub_sql = "WHERE mem_name LIKE ? AND auth = ?";
+				else if(keyfield.equals("3")) sub_sql = "WHERE mem_email LIKE ? AND auth = ?";
+			}
 
+			sql="SELECT COUNT(*) FROM member LEFT JOIN member_detail USING (mem_num) "+sub_sql;
+			
+			pstmt = conn.prepareStatement(sql);
+			if(keyword != null && !"".equals(keyword) && (find_auth == null || "".equals(find_auth))) {
+				pstmt.setString(1, "%" + keyword + "%");
+			}else if((keyword==null || "".equals(keyword)) && (find_auth != null && !"".equals(find_auth))) {
+				found_auth = Integer.parseInt(find_auth);
+				pstmt.setInt(1, found_auth);
+			}else if((keyword!=null && !"".equals(keyword)) && (find_auth != null && !"".equals(find_auth))) {
+				found_auth = Integer.parseInt(find_auth);
+				pstmt.setString(1, "%"+keyword+"%");
+				pstmt.setInt(2, found_auth);
+			}
+*/
 			rs=pstmt.executeQuery();
 
 			if(rs.next()) {
@@ -463,6 +492,8 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 			String sql=null;
 			String sub_sql="";
 			int cnt=0;
+		//	String find_auth = Integer.toString(auth);
+		//	int found_auth;
 			
 			try {
 				//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션을 할당
@@ -486,6 +517,38 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 				if(keyword!=null && !"".equals(keyword)) {
 					pstmt.setString(++cnt, "%"+keyword+"%");
 				}
+					/*			
+				if((keyword != null && !"".equals(keyword)) && (find_auth == null || "".equals(find_auth))) {
+					if(keyfield.equals("1")) sub_sql = "WHERE mem_id LIKE ?";
+					else if(keyfield.equals("2")) sub_sql = "WHERE mem_name LIKE ?";
+					else if(keyfield.equals("3")) sub_sql = "WHERE mem_email LIKE ?";
+				}else if((keyword == null || "".equals(keyword)) && (find_auth!=null && !"".equals(find_auth))) {
+					sub_sql = "WHERE auth = ?";
+				}else if((keyword != null && !"".equals(keyword)) && (find_auth != null && !"".equals(find_auth))) {
+					if(keyfield.equals("1")) sub_sql = "WHERE mem_id LIKE ? AND auth = ?";
+					else if(keyfield.equals("2")) sub_sql = "WHERE mem_name LIKE ? AND auth = ?";
+					else if(keyfield.equals("3")) sub_sql = "WHERE mem_email LIKE ? AND auth = ?";
+				}
+				
+				sql="SELECT * FROM (SELECT a.*, rownum rnum FROM "
+						+ "(SELECT * FROM member m LEFT JOIN member_detail d "
+						+ "USING(mem_num) "+sub_sql
+						+" ORDER BY mem_num DESC NULLS LAST)a) "
+						+ "WHERE rnum>=? AND rnum<=?";
+				
+				pstmt=conn.prepareStatement(sql);
+								
+				if((keyword != null && !"".equals(keyword)) && (find_auth == null || "".equals(find_auth))) {
+					pstmt.setString(++cnt, "%"+keyword+"%");
+				}else if((keyword == null || "".equals(keyword)) && (find_auth != null && !"".equals(find_auth))) {
+					found_auth = Integer.parseInt(find_auth);
+					pstmt.setInt(++cnt, found_auth);
+				}else if((keyword != null && !"".equals(keyword)) && (find_auth != null && !"".equals(find_auth))) {
+					found_auth = Integer.parseInt(find_auth);
+					pstmt.setString(++cnt, "%"+keyword+"%");
+					pstmt.setInt(++cnt, found_auth);
+				}
+				*/
 				pstmt.setInt(++cnt, start);
 				pstmt.setInt(++cnt, end);
 				
