@@ -413,7 +413,22 @@ input[id="zipcode"] {
 	object-position: top;
 	border-radius: 50%;
 }
-
+/* 공지 말머리 css 시작 */
+.must{
+  width: 45px;
+  height: 20px;
+  background: #FA5D57;
+  color:white;
+  margin:auto;
+}
+.read{
+  width: 45px;
+  height: 20px;
+  color: #FA5D57;
+  margin:auto;
+  border: 1px solid #FA5D57;
+}
+/* 공지 말머리 css 끝 */
 /* footer 시작 */
 * {
    box-sizing: border-box;

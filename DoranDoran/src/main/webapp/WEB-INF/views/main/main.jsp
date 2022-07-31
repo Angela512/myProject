@@ -28,7 +28,7 @@
 }
 .main_table {
   border: 1px #a39485 solid;
-  font-size: .9em;
+  font-size: 16px;
 
   width: 100%;
   border-collapse: collapse;
@@ -203,15 +203,28 @@ to {
             </thead>
             <tbody>
             <c:forEach var="notice" items="${noticeList}">
-            <tr>
-               <td>${notice.notice_head}</td>
-               <td><a href="${pageContext.request.contextPath }/notice/detail.do?notice_num=${notice.notice_num}">${notice.notice_title }</a></td>
-               <td>${notice.mem_name}</td>
-               <td>${notice.notice_date}</td>
-               <td>${notice.notice_count}</td>
-            </tr>
-            </c:forEach>
-            </tbody>
+			<tr>
+				<c:if test="${notice.notice_head == '필독'}">
+				<td><div class="must">${notice.notice_head}</div></td>
+				<td><a href="${pageContext.request.contextPath}/notice/detail.do?notice_num=${notice.notice_num}">${notice.notice_title}</a></td>
+				<td>${notice.mem_name}</td>
+				<td>${notice.notice_date}</td>
+				<td>${notice.notice_count}</td>
+				</c:if>
+			</tr>
+			</c:forEach>
+			<c:forEach var="notice" items="${noticeList}">
+			<tr>
+				<c:if test="${notice.notice_head == '공지'}">
+				<td><div class="read">${notice.notice_head}</div></td>
+				<td><a href="${pageContext.request.contextPath}/notice/detail.do?notice_num=${notice.notice_num}">${notice.notice_title}</a></td>
+				<td>${notice.mem_name}</td>
+				<td>${notice.notice_date}</td>
+				<td>${notice.notice_count}</td>
+				</c:if>
+			</tr>
+			</c:forEach>
+			</tbody>
          </table>
      
       </div>
