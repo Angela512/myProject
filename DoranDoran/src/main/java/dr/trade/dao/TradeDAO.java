@@ -235,6 +235,59 @@ public class TradeDAO {
 		
 		return trade;
 	}
+	//이전글 가져오기
+	public int getPrev(int trade_num)throws Exception{
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=null;
+		int prev=0;
+		
+		try {
+			conn=DBUtil.getConnection();
+			sql="SELECT t.* FROM (SELECT trade_num,LAG(trade_num) OVER(ORDER BY trade_num) AS prev FROM trade)t WHERE t.trade_num=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, trade_num);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				prev=rs.getInt("prev");
+			}
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		
+		return prev;
+	}
+
+	//다음글 가져오기
+	public int getNext(int trade_num)throws Exception{
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=null;
+		int next=0;
+		
+		try {
+			conn=DBUtil.getConnection();
+			sql="SELECT t.* FROM (SELECT trade_num,LEAD(trade_num) OVER(ORDER BY trade_num) AS next FROM trade)t WHERE t.trade_num=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, trade_num);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				next=rs.getInt("next");
+			}
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		
+		return next;
+	}
 	
 	//조회수 증가
 	public void updateReadcount(int trade_num)throws Exception{
