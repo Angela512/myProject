@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- header 시작 -->
 <div id="main_login">
-   <ul class="">
+   <ul class="member_top">
       <c:if test="${!empty user_num && user_auth == 3}">
          <li><a
             href="${pageContext.request.contextPath}/member/memberList.do">회원관리</a>
