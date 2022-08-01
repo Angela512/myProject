@@ -12,17 +12,23 @@
 <body>
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<hr width="100%" color="#b5b5b5" size="1px" id="hr_top1" noshade>
 	<div class="content-main">
 		<h2>${member.mem_name}님의 회원정보 (관리자 전용)</h2>
 		<form action="detailUser.do" method="post" id="detail_form">
 			<input type="hidden" name="mem_num" value="${member.mem_num}">
-			<ul>
+			<div class="container">
+				<div class="container_table1">
 				<c:if test="${empty member.mem_photo }">
-					<img src="${pageContext.request.contextPath}/images/face.png" width="100" height="100" class="my-photo">
+					<img src="${pageContext.request.contextPath}/images/face.png" width="200" height="200" class="my-photo">
 				</c:if>
 				<c:if test="${!empty member.mem_photo}">
-					<img src="${pageContext.request.contextPath}/upload/${member.mem_photo}" width="100" height="100" class="my-photo">
+					<img src="${pageContext.request.contextPath}/upload/${member.mem_photo}" style="padding-left:50%;" width="200" height="200" class="my-photo">
 				</c:if>
+				
+			</div>
+			<div class="container_table2">
+			<ul >
 				<li>
 					<label>등급</label>
 					<c:if test="${member.auth != 3}">
@@ -35,12 +41,6 @@
 					<input type="radio" name="auth" value="3" id="auth3" checked>관리
 					</c:if>
 				</li>
-			</ul>
-			<div class="align-center">
-				<input type="submit" value="수정">
-				<input type="button" value="목록" onclick="location.href='memberList.do'">
-			</div>  
-			<ul>
 				<li>
 					<label>아이디</label>${member.mem_id}
 				</li>
@@ -65,14 +65,23 @@
 					<label>회원정보 수정일</label> ${member.mem_modify_date}
 				</li>				
 				</c:if>
+				<li>
+				<input type="submit" value="등급변경" id="button_box">
+				<input type="button" value="회원목록" id="button_box" onclick="location.href='memberList.do'">
+				</li>
 			</ul>
+			
+			</div>
+			</div>
 		</form>
+		<hr width="100%" color="#b5b5b5" size="1px" id="hr_top1" noshade>
 			<c:if test="${empty list}">
-				<p>작성한 글이 없습니다</p>
+				<p style="text-align:center;">작성한 글이 없습니다</p>
 			</c:if>
 			
 			<table class="admin_table">
 				<c:if test="${!empty list}">
+				<p>작성한 글 ${count}개</p>
 				<thead>
 					<tr>
 						<th>게시판</th>
@@ -106,7 +115,7 @@
 			<div class="align-center">
 				${page}
 			</div>
-		
+		<hr width="100%" color="#b5b5b5" size="1px" noshade>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </div>

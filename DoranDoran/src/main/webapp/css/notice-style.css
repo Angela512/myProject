@@ -117,17 +117,17 @@ td {
 	/* border: 1px solid red; */
 }
 
-ul.search_board{
+ul.search_notice{
 	list-style:none;
 	padding:20px 55px 90px 0px;
 	margin:0;
 	text-align:center;
 }
-ul.search_board li{
+ul.search_notice li{
 	padding:0;
 	display:inline;
 }
-.search_board #search_button{
+.search_notice #search_button{
 	color: #fff;
 	font-size:15px;
 	border: 0;

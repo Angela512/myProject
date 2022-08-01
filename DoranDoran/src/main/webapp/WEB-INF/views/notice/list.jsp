@@ -78,7 +78,7 @@
 		</c:if>
 		<form id="search_form" action="list.do" method="get">
 			<input type="hidden" name="head" value="${param.head}">
-			<ul class="search_board">
+			<ul class="search_notice">
 				<li>
 					<select name="keyfield" style="width:100px; height:30px;">
 						<option value="1" <c:if test="${param.keyfield==1}">selected</c:if>>제목</option>

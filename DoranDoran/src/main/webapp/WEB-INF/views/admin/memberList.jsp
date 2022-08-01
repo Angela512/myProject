@@ -14,30 +14,13 @@
 <body>
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<hr width="100%" color="#b5b5b5" size="1px" id="hr_top1" noshade>
 	<div class="content-main">
 		<h2>회원목록(관리자 전용)</h2>
 		<jsp:include page="adminHeader.jsp"/>
-		<form id="search_form" action="memberList.do" method="get">
-		<!-- <input type="hidden" name="auth" value="${param.auth}"> -->
-			<ul class="search">
-				<li>
-					<select name="keyfield">
-						<option value="1">ID</option>
-						<option value="2">이름</option>
-						<option value="3">email</option>
-					</select>
-				</li>
-				<li>
-					<input type="search" size="16" name="keyword" id="keyword" value="${param.keyword}">
-				</li>
-				<li>
-					<input type="submit" value="찾기">
-				</li>
-			</ul>
-		</form>
 		<div class="list-space align-right">
-			<input type="button" value="목록" onclick="location.href='memberList.do'">
-			<input type="button" value="홈으로" onclick="location.href='${pageContext.request.contextPath}/main/main.do'">     
+			${count}명의 회원목록
+			<input type="button" id="home_button" value="홈으로" onclick="location.href='${pageContext.request.contextPath}/main/main.do'">     
 		</div>
 		<c:if test="${count == 0}">
 		<div class="result-display">
@@ -121,8 +104,26 @@
 		<div class="align-center">
 			${page}
 		</div>
+		<hr width="100%" color="#b5b5b5" size="1px" noshade>
 		</c:if>
-		
+		<form id="search_form" action="memberList.do" method="get">
+		<!-- <input type="hidden" name="auth" value="${param.auth}"> -->
+			<ul class="search_notice">
+				<li>
+					<select name="keyfield" style="width:100px; height:30px;">
+						<option value="1" <c:if test="${param.keyfield==1}">selected</c:if>>ID</option>
+						<option value="2" <c:if test="${param.keyfield==2}">selected</c:if>>이름</option>
+						<option value="3" <c:if test="${param.keyfield==3}">selected</c:if>>email</option>
+					</select>
+				</li>
+				<li>
+					<input type="search" size="16" name="keyword" id="keyword" value="${param.keyword}" style="width:180px; height:30px;">
+				</li>
+				<li>
+					<input id="search_button" type="submit" value="검색" style="width:80px; height:30px;">
+				</li>
+			</ul>
+		</form>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </div>
