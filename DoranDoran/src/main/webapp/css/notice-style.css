@@ -148,12 +148,97 @@ ul.search_board li{
 
 /* 버튼 및 검색 공통 폼 끝 */
 
-/* 글 상세보기 시작 */
+/* writeForm 시작 */
 #hr_top1{
 	width:100%;
 	text-align: left;
 	margin: 25px 0 30px 0;
 }
+#hr_top2{
+	width:100%;
+	text-align: left;
+	margin: 10px 0 20px 0;
+}
+.content-main #write_form{
+	padding: 0;
+	/* border: 1px solid red; */
+	width: 690px;
+}
+.wline1{
+	height:45px;
+}
+#write_text{
+	height: 30px;
+	padding: 20px 0 0 0;
+	float: left;
+	margin:0;
+}
+#write_submit{
+	border: 0;
+	width: 100px;
+	height: 30px;
+	padding:0;
+	float: right;
+	margin: 20px 0 0 0;
+	color: #fff;
+	font-size:15px;
+	background-color: #FA5D57;
+	border-radius: 3px;	
+}
+.write_body{
+	/* border: 1px solid red; */
+	padding: 0;
+	line-height: 40;
+	height: 345px;
+}
+
+.head_title #notice_head{
+	float:left; 
+	width:160px; 
+	height:30px;
+	font-size:15px;
+}
+.head_title #notice_title{
+	float:right;
+	height: 30px;
+	width: 520px;
+	/* border: 1px solid red; */
+}
+.image_add{
+	/* border: 1px solid red;  */
+	padding:6px 0 50px 0;
+	line-height: 2.3;
+}
+.image_add #s{
+	font-size: 14px;
+	font-weight: bold;
+}
+.image_add .file_detail{
+	font-size: 14px;
+}
+.image_add p{
+	font-size: 12px;
+	color: gray;
+	margin: 0;
+}
+.image_add #file1, #file2, #file3{
+	font-size:15px;
+}
+/* writeForm 끝 */
+
+/* 글 수정 시작 */
+.file_del{
+	border: 0;
+	width: 65px;
+	height: 20px;
+	color: #fff;
+	font-size:12px;
+	background-color: gray;
+	border-radius: 3px;
+}
+/* 글 수정 끝 */
+
+/* 글 상세보기 시작 */
 #badge_must{
 	padding: 6px 0 0 12px;
 	width: 125px;

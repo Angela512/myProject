@@ -291,15 +291,15 @@ public class NoticeDAO {
 			
 			if(notice.getNotice_file1() != null) {
 				//업로드한 파일이 있는 경우
-				sub_sql = ", notice_file1=?";
+				sub_sql += ", notice_file1=?";
 			}
 			if(notice.getNotice_file2() != null) {
 				//업로드한 파일이 있는 경우
-				sub_sql = ", notice_file2=?";
+				sub_sql += ", notice_file2=?";
 			}
 			if(notice.getNotice_file3() != null) {
 				//업로드한 파일이 있는 경우
-				sub_sql = ", notice_file3=?";
+				sub_sql += ", notice_file3=?";
 			}
 			
 			//SQL문 작성
