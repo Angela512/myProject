@@ -29,10 +29,10 @@ public class MyBoardAction implements Action{
 		String board_head=request.getParameter("board_head");
 		
 		MemberDAO dao = MemberDAO.getInstance();
-		int count = dao.getMyTradeCount(board_head, user_num);
+		int count = dao.getMyBoardCount(board_head, user_num);
 		
 		//페이지 처리
-		PagingUtil page= new PagingUtil(Integer.parseInt(pageNum), count, 8, 5, "board.do");
+		PagingUtil page= new PagingUtil(Integer.parseInt(pageNum), count, 10, 5, "board.do");
 		
 		List<BoardVO> list=null;
 		
