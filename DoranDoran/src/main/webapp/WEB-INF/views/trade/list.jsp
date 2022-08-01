@@ -117,7 +117,7 @@
 			</a>
 			</c:forEach>
 			<div class="float-clear">
-				<hr width="100%" class="hr-look" size="1" noshade="noshade">
+				<hr width="100%" size="1" noshade="noshade">
 			</div>
 			
 		</div>

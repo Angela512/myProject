@@ -316,7 +316,7 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 	}
 	//관리자
 	//전체글 개수(검색글 개수)
-	public int getMemberCountByAdmin(String keyfield,String keyword)throws Exception{
+	public int getMemberCountByAdmin(String auth,String keyfield,String keyword)throws Exception{
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -330,14 +330,18 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 			//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션을 할당
 			conn=DBUtil.getConnection();
 			
+			if(auth!=null && !"".equals(auth)) {
+				 sub_sql+="AND auth="+auth+" ";
+			}
+			
 			if(keyword!=null && !"".equals(keyword)) {
 				//검색 처리
-				if(keyfield.equals("1")) sub_sql="WHERE mem_id LIKE ?";
-				else if(keyfield.equals("2")) sub_sql="WHERE mem_name LIKE ?";
-				else if(keyfield.equals("3")) sub_sql="WHERE mem_email LIKE ?";
+				if(keyfield.equals("1")) sub_sql+="AND mem_id LIKE ?";
+				else if(keyfield.equals("2")) sub_sql+="AND mem_name LIKE ?";
+				else if(keyfield.equals("3")) sub_sql+="AND mem_email LIKE ?";
 			}
 
-			sql="SELECT COUNT(*) FROM member LEFT JOIN member_detail USING (mem_num) "+sub_sql;
+			sql="SELECT COUNT(*) FROM member LEFT JOIN member_detail USING (mem_num) WHERE 1=1 "+sub_sql;
 
 			pstmt=conn.prepareStatement(sql);
 
@@ -486,7 +490,7 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 		}
 	
 	//목록(검색글 목록)
-		public List<MemberVO> getListMemberByAdmin(int start,int end,String keyfield,String keyword)throws Exception{
+		public List<MemberVO> getListMemberByAdmin(int start,int end,String keyfield,String keyword,String auth)throws Exception{
 			Connection conn=null;
 			PreparedStatement pstmt=null;
 			ResultSet rs=null;
@@ -501,16 +505,20 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 				//JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션을 할당
 				conn=DBUtil.getConnection();
 				
+				if(auth!=null && !"".equals(auth)) {
+					 sub_sql+="AND auth="+auth+" ";
+				}
+				
 				if(keyword!=null && !"".equals(keyword)) {
 					//검색 처리
-					if(keyfield.equals("1")) sub_sql="WHERE mem_id LIKE ?";
-					else if(keyfield.equals("2")) sub_sql="WHERE mem_name LIKE ?";
-					else if(keyfield.equals("3")) sub_sql="WHERE mem_email LIKE ?";
+					if(keyfield.equals("1")) sub_sql+="AND mem_id LIKE ?";
+					else if(keyfield.equals("2")) sub_sql+="AND mem_name LIKE ?";
+					else if(keyfield.equals("3")) sub_sql+="AND mem_email LIKE ?";
 				}
 				
 				sql="SELECT * FROM (SELECT a.*, rownum rnum FROM "
 						+ "(SELECT * FROM member m LEFT JOIN member_detail d "
-						+ "USING(mem_num) "+sub_sql
+						+ "USING(mem_num) WHERE 1=1 "+sub_sql
 						+" ORDER BY mem_num DESC NULLS LAST)a) "
 						+ "WHERE rnum>=? AND rnum<=?";
 				

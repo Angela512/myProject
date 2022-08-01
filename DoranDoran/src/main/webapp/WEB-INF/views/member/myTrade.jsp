@@ -60,9 +60,9 @@
 		</ul>
 	</div>
 	
-	<hr size="1" noshade="noshade" width="100%">
+	<hr width="100%" class="hr-look" size="1" noshade="noshade">
 		
-	<div class="align-center">
+	<div class="align-center" id="mytrade_button">
 		<div class="btn-group" role="group" aria-label="Basic outlined example">
 		<input type="button" value="삽니다" class="btn btn-outline-primary" onclick="location.href='trade.do?trade_head=0'">
 		<input type="button" value="팝니다" class="btn btn-outline-primary" onclick="location.href='trade.do?trade_head=1'">
@@ -86,8 +86,8 @@
 			<div class="horizontal-area">
 			<div class="trade_check">
 				<input type="checkbox" name="trade_num" value="${trade.trade_num }" class="trade_num">
-				<a href="${pageContext.request.contextPath}/trade/detail.do?trade_num=${trade.trade_num}">
 			</div>
+				<a href="${pageContext.request.contextPath}/trade/detail.do?trade_num=${trade.trade_num}">
 				<c:if test="${!empty trade.trade_image1 }">
 				<img class="board-image" src="${pageContext.request.contextPath}/upload/${trade.trade_image1}">
 				</c:if>
@@ -96,7 +96,6 @@
 				<img class="board-image" src="${pageContext.request.contextPath}/images/blank.png">
 				</c:if>
 				
-				<span id="mytrade-title">${fn:substring(trade.trade_title,0,10) }</span>
 				</a>
 				
 				<div class="board-detail" id="mytrade-detail">
@@ -132,8 +131,9 @@
 				<hr width="100%" size="1" noshade="noshade">
 			</div>
 			
-			
-					<input type="submit" value="삭제">
+					<div class="align-right">
+					<input type="submit" class="button" value="삭제" style="width:80px;">
+					</div>
 					<script type="text/javascript">
 					let myForm = document.getElementById('mytrade_delete_form');
 					//이벤트 연결
@@ -160,7 +160,7 @@
 		<div class="align-center">
 			${page }
 		</div>
-		
+		<hr width="100%" class="hr-look" size="1" noshade="noshade">
 		</c:if>
 	
 	</div>

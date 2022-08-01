@@ -39,7 +39,10 @@
 				</li>
 		</ul>
 	</div>
-	<div class="align-center">
+	
+	<hr width="100%" class="hr-look" size="1" noshade="noshade">
+	
+	<div class="align-center" id="mylike_button">
 		<div class="btn-group" role="group" aria-label="Basic outlined example">
 			<input type="button" value="삽니다" class="btn btn-outline-primary" onclick="location.href='myLike.do?trade_head=0'">
 			<input type="button" value="팝니다" class="btn btn-outline-primary" onclick="location.href='myLike.do?trade_head=1'">
@@ -69,7 +72,6 @@
 				<img class="board-image" src="${pageContext.request.contextPath}/images/blank.png">
 				</c:if>
 				
-				<span>${fn:substring(trade.trade_title,0,10) }</span>
 				</a>
 				
 				<div class="board-detail">
@@ -103,7 +105,7 @@
 		<div class="align-center">
 			${page }
 		</div>
-		
+		<hr width="100%" class="hr-look" size="1" noshade="noshade">
 		</c:if>
 	
 	</div>

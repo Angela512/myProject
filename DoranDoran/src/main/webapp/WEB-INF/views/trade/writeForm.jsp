@@ -42,19 +42,19 @@
 			
 			<li>
 				<!-- <label for="trade_title">제목</label> -->
-				<input type="text" name="trade_title" id="trade_title" maxlength="50">
+				<input type="text" name="trade_title" id="trade_title" placeholder="제목을 입력해주세요" maxlength="50">
 			</li>
 			
 			<li>
 				<!-- <label for="trade_content">내용</label> -->
-				<textarea rows="20" cols="95" name="trade_content" id="trade_content"></textarea>
+				<textarea rows="20" cols="95" name="trade_content" placeholder="내용을 입력해주세요" id="trade_content"></textarea>
 			</li>
 			
 			<li>
 				<!-- <label for="trade_phone"> --><b>연락처 입력</b><!-- </label> -->
 			</li>
 			<li>
-				<input type="text" name="trade_phone" id="trade_phone" maxlength="15">
+				<input type="text" name="trade_phone" id="trade_phone" placeholder="010-1234-5678" maxlength="15">
 			</li>
 			
 			<li>
@@ -63,8 +63,7 @@
 			
 			<li>
 				<!-- 숫자만 입력하세요 조건체크 -->
-				<input type="text" name="trade_price" id="trade_price" pattern="[0-9]+" maxlength="12">
-				<span>숫자만 입력하세요.</span>
+				<input type="text" name="trade_price" id="trade_price" placeholder="가격을 입력해주세요" pattern="[0-9]+" maxlength="12">
 			</li>
 		</ul>
 		

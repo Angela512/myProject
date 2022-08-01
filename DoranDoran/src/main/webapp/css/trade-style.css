@@ -202,6 +202,7 @@ div #flex2{
 	font-size:15px;
 	background-color: #FA5D57;
 	border-radius: 3px;
+	cursor: pointer;
 	
 }
 #hr_top2{
@@ -257,8 +258,17 @@ span .write-head{
 	background-color: gray;
 	border-radius: 3px;
 }
+/*찜 목록*/
+#mylike_button{
+	margin-top: 20px;
+}
+
+
 /*중고거래 내가 쓴 글*/
 
+#mytrade_button{
+	margin-top: 20px;
+}
 
 
 

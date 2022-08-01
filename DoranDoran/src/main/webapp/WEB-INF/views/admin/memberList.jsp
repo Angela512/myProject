@@ -107,7 +107,7 @@
 		<hr width="100%" color="#b5b5b5" size="1px" noshade>
 		</c:if>
 		<form id="search_form" action="memberList.do" method="get">
-		<!-- <input type="hidden" name="auth" value="${param.auth}"> -->
+		<input type="hidden" name="auth" value="${param.auth}">
 			<ul class="search_notice">
 				<li>
 					<select name="keyfield" style="width:100px; height:30px;">
