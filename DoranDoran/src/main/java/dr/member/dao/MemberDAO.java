@@ -8,6 +8,7 @@ import java.util.List;
 
 import dr.admin.adminvo.AdminVO;
 import dr.board.vo.BoardVO;
+import dr.job.vo.JobVO;
 import dr.member.vo.MemberVO;
 import dr.notice.vo.NoticeVO;
 import dr.trade.vo.TradeVO;
@@ -913,5 +914,99 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 				return list;
 			}
 	
+			
+			// 구인구직 글 수
+			public int getMyJobCount(int user_num) throws Exception {
+				Connection conn = null;
+				PreparedStatement pstmt = null;
+				ResultSet rs = null;
+				String sql = null;
+				String sub_sql = "";
+				int count = 0;
+
+				try {
+					// JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
+					conn = DBUtil.getConnection();
+
+					sql = "SELECT COUNT(*) FROM job j JOIN member m USING(mem_num) " + sub_sql;
+
+					// JDBC 수행 3단계 : PreparedStatement 객체 생성
+					pstmt = conn.prepareStatement(sql);
+				
+					// JDBC 수행 4단계
+					rs = pstmt.executeQuery();
+					if (rs.next()) {
+						count = rs.getInt(1);
+					}
+				} catch (Exception e) {
+					throw new Exception(e);
+				} finally {
+					// 자원정리
+					DBUtil.executeClose(rs, pstmt, conn);
+				}
+				return count;
+			}
+			
+
+			// 구인구직 목록
+			public List<JobVO> getMyJobList(int start, int end, int mem_num) throws Exception {
+				Connection conn = null;
+				PreparedStatement pstmt = null;
+				ResultSet rs = null;
+				List<JobVO> list = null;
+				String sql = null;
+				String sub_sql = "";
+				int cnt = 0;
+
+				try {
+					// JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
+					conn = DBUtil.getConnection();
+					
+					sql = "SELECT * FROM (SELECT a.*, rownum rnum " + "FROM (SELECT * FROM job j JOIN member m "
+							+ "USING (mem_num) JOIN member_detail d " + "USING (mem_num) " + sub_sql
+							+ " ORDER BY j.job_num DESC)a) " + "WHERE rnum >= ? AND rnum <= ? AND mem_num=?";
+	
+					
+					// JDBC 수행 3단계 : PreparedStatement 객체 생성
+					pstmt = conn.prepareStatement(sql);
+					// ?에 데이터 바인딩
+
+					pstmt.setInt(++cnt, start);
+					pstmt.setInt(++cnt, end);
+					pstmt.setInt(++cnt, mem_num);
+
+
+					// JDBC 수행 4단계
+					rs = pstmt.executeQuery();
+					list = new ArrayList<JobVO>();
+					while (rs.next()) {
+						JobVO Job = new JobVO();
+						
+						Job.setJob_num(rs.getInt("job_num"));
+						Job.setJob_title(StringUtil.useNoHtml(rs.getString("job_title")));
+						Job.setJob_content(rs.getString("job_content"));
+						Job.setJob_date(rs.getDate("job_date"));
+						Job.setJob_count(rs.getInt("job_count"));
+						Job.setJob_logo(rs.getString("job_logo"));
+						Job.setJob_enddate(rs.getString("job_enddate"));
+						Job.setJob_addr1(rs.getString("job_addr1"));
+						Job.setJob_addr2(rs.getString("job_addr2"));
+						Job.setJob_category(rs.getString("job_category"));
+						Job.setJob_link(rs.getString("job_link"));
+						Job.setJob_zipcode(rs.getString("job_zipcode"));
+						Job.setMem_num(rs.getInt("mem_num"));
+
+						list.add(Job);
+					}
+				} catch (Exception e) {
+					throw new Exception(e);
+				} finally {
+					// 자원정리
+					DBUtil.executeClose(rs, pstmt, conn);
+				}
+				return list;
+			}
 	
 }
+
+

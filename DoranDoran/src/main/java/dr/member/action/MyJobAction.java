@@ -4,9 +4,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dr.controller.Action;
-import dr.job.dao.JobDAO;
+import dr.member.dao.MemberDAO;
 import dr.job.vo.JobVO;
 import dr.util.PagingUtil;
 
@@ -19,33 +20,22 @@ public class MyJobAction implements Action{
 		String pageNum = request.getParameter("pageNum");
 		if(pageNum==null) pageNum = "1";
 		
-		String job_category = request.getParameter("job_category");
+		HttpSession session=request.getSession();
+		Integer user_num=(Integer)session.getAttribute("user_num");
+
+
 		
-		String keyfield = request.getParameter("keyfield");
-		String keyword = request.getParameter("keyword");
-		String job_category1 = null;
-		
-		JobDAO dao = JobDAO.getInstance();
-		int count = dao.getJobCount(keyfield, keyword, job_category);
-		
-		if(job_category!=null) {
-			job_category1 = "&job_category="+job_category;
-		}
+		MemberDAO dao = MemberDAO.getInstance();
+		int count = dao.getMyJobCount(user_num);
 		
 		
-		//페이지 처리
-		/*
-		 * PagingUtil page = new PagingUtil(keyfield,keyword,
-		 * Integer.parseInt(pageNum),count,20,10,"list.do","&job_category="+job_category
-		 * );
-		 */
-		PagingUtil page = new PagingUtil(keyfield,keyword,
-				Integer.parseInt(pageNum),count,20,10,"list.do",job_category1);
+		PagingUtil page = new PagingUtil(
+				Integer.parseInt(pageNum),count,20,10,"list.do");
 		
 		List<JobVO> list = null;
 		if(count > 0) {
-			list = dao.getListJob(page.getStartRow(),
-					       page.getEndRow(), keyfield, keyword, job_category);
+			list = dao.getMyJobList(page.getStartRow(),
+					       page.getEndRow(), user_num);
 		}
 		
 		
@@ -54,7 +44,7 @@ public class MyJobAction implements Action{
 		request.setAttribute("page", page.getPage());
 		
 		
-		return "/WEB-INF/views/job/list.jsp";
+		return "/WEB-INF/views/member/myJob.jsp";
 		
 	}
 
