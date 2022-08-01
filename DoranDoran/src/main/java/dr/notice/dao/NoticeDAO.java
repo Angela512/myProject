@@ -157,6 +157,7 @@ public class NoticeDAO {
 				notice.setNotice_title(StringUtil.useNoHtml(rs.getString("notice_title")));
 				notice.setNotice_count(rs.getInt("notice_count"));
 				notice.setNotice_date(rs.getDate("notice_date"));
+				notice.setNotice_modify_date(rs.getDate("notice_modify_date"));
 				notice.setNotice_content(rs.getString("notice_content"));
 				notice.setNotice_file1(rs.getString("notice_file1"));
 				notice.setNotice_file2(rs.getString("notice_file2"));
@@ -203,6 +204,7 @@ public class NoticeDAO {
 				notice.setNotice_content(rs.getString("notice_content"));
 				notice.setNotice_count(rs.getInt("notice_count"));
 				notice.setNotice_date(rs.getDate("notice_date"));
+				notice.setNotice_modify_date(rs.getDate("notice_modify_date"));
 				notice.setNotice_file1(rs.getString("notice_file1"));
 				notice.setNotice_file2(rs.getString("notice_file2"));
 				notice.setNotice_file3(rs.getString("notice_file3"));
@@ -301,7 +303,7 @@ public class NoticeDAO {
 			}
 			
 			//SQL문 작성
-			sql = "UPDATE notice SET notice_title=?, notice_content=?, notice_head=?" + sub_sql + " WHERE notice_num=?";
+			sql = "UPDATE notice SET notice_title=?, notice_content=?, notice_head=?, notice_modify_date=SYSDATE" + sub_sql + " WHERE notice_num=?";
 			
 			//JDBC 수행 3단계 : PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);
@@ -589,12 +591,5 @@ public class NoticeDAO {
 			return list;
 		}
 		
-	//댓글 등록
-	//댓글 갯수
-	//댓글 목록
-	//댓글 상세
-	//댓글 수정
-	//댓글 삭제
-
 	 
 }

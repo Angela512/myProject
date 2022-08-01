@@ -21,8 +21,7 @@
 		
 		<%-- 공지게시판은 관리자만 글쓰기 가능 --%>
 			${count}개의 공지
-			<input type="button" value="목록" onclick="location.href='list.do'"> 
-			<input type="button" value="홈으로" onclick="location.href='${pageContext.request.contextPath}/main/main.do'">         
+			<input id="home_button" type="button" value="홈으로" onclick="location.href='${pageContext.request.contextPath}/main/main.do'">         
 		
 		</div>
 		<c:if test="${count == 0}">
