@@ -63,22 +63,76 @@
 		표시할 게시물이 없습니다.
 	</div>
 	</c:if>
-		<c:forEach var="food" items="${foodList }">
-		<div class="horizontal-areaa">
+	
+			
+	<c:if test="${count>0 }">
+		<div class="board-space">
+			<form action="myFoodDelete.do" method="post" id="myfood_delete_form">
+			<c:forEach var="food" items="${list }">
+			<div class="horizontal-area">
+				<input type="checkbox" name="food_num" value="${food.food_num }" class="food_num">
 				<a href="${pageContext.request.contextPath}/food/detail.do?food_num=${food.food_num}">
-				<c:if test="${!empty food.food_image1}">
-				<img class="board-imagee" src="${pageContext.request.contextPath}/upload/${food.food_image1}">
+				<c:if test="${!empty food.food_image1 }">
+				<img class="board-image" src="${pageContext.request.contextPath}/upload/${food.food_image1}">
 				</c:if>
-				<c:if test="${empty food.food_image1}">
-				<img class="board-imagee" src="${pageContext.request.contextPath}/images/blank.png">
+				
+				<c:if test="${empty food.food_image1 }">
+				<img class="board-image" src="${pageContext.request.contextPath}/images/blank.png">
 				</c:if>
-				<p style="font-family:'Song Myung';font-size:5px; padding:0px;">[${food.food_local}] ${fn:substring(food.food_name,0,15)}</p>	
+				
+				<span style="padding-left:20px;"><b>[${food.food_local}]</b> ${fn:substring(food.food_name,0,10) }</span>
 				</a>
+				
+				<div class="board-detail">
+					<c:if test="${!empty food.mem_photo }">
+					<img src="${pageContext.request.contextPath}/upload/${food.mem_photo}" width="25" height="25" class="my-photo">
+					</c:if>
+
+					<c:if test="${empty food.mem_photo }">
+					<img src="${pageContext.request.contextPath}/images/face.png" width="25" height="25" class="my-photo">
+					</c:if>
+					
+					<span>${food.mem_name }</span>
+					<%-- <span><fmt:formatNumber value="${trade.trade_price }" pattern="#,###"/>원</span> --%>
+					<span>조회수 ${food.food_count }</span>
+				</div>
 			</div>
-	
 			</c:forEach>
+			
+			<div class="float-clear">
+				<hr width="100%" size="1" noshade="noshade">
 			</div>
+			
+			
+					<input type="submit" value="삭제">
+					<script type="text/javascript">
+					let myForm = document.getElementById('myfood_delete_form');
+					//이벤트 연결
+					myForm.onsubmit=function(){
+						let foodnum = document.getElementsByClassName('food_num');
+						let count=0;
+						for(let i=0;i<foodnum.length;i++){
+							if(foodnum[i].checked){
+								count++;
+							}
+						}
+						
+						if(count<1){
+							alert('1개 이상 선택하세요!');
+							return false;
+						}
+					};
+					</script>
+			
+			</form>
+			
+		</div>
 	
+		<div class="align-center">
+			${page }
+		</div>
+		
+		</c:if>
 	
 	
 	</div>

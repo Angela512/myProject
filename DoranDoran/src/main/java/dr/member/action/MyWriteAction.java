@@ -16,36 +16,36 @@ public class MyWriteAction implements Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum==null) pageNum = "1";
+		
 		HttpSession session=request.getSession();
 		Integer user_num=(Integer)session.getAttribute("user_num");
-		
-		if(user_num==null) {//로그인이 되지 않은 경우
-			return "redirect:/member/loginForm.do";
-		}
-		
-		String pageNum=request.getParameter("pageNum");
-		if(pageNum==null) pageNum="1";
-		
-		String food_local=request.getParameter("food_local");
+
+
 		
 		MemberDAO dao = MemberDAO.getInstance();
-		int count = dao.getMyTradeCount(food_local, user_num);
+		int count = dao.getMyFoodCount(user_num);
 		
-		//페이지 처리
-		PagingUtil page= new PagingUtil(Integer.parseInt(pageNum), count, 8, 5, "food.do");
 		
-		List<FoodVO> list=null;
+		PagingUtil page = new PagingUtil(
+				Integer.parseInt(pageNum),count,4,10,"list.do");
 		
-		/*
-		 * if(count>0) { list=dao.getMyListTrade(page.getStartRow(), page.getEndRow(),
-		 * food_local, user_num); }
-		 */
+		List<FoodVO> list = null;
+		if(count > 0) {
+			list = dao.getMyFoodList(page.getStartRow(),
+					       page.getEndRow(), user_num);
+		}
+		
 		
 		request.setAttribute("count", count);
 		request.setAttribute("list", list);
 		request.setAttribute("page", page.getPage());
 		
+		
 		return "/WEB-INF/views/member/myWrite.jsp";
+		
 	}
+
 
 }
