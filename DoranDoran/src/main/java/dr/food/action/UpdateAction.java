@@ -70,6 +70,8 @@ public class UpdateAction implements Action{
 		
 		food.setFood_link(multi.getParameter("link"));
 		
+		food.setFood_menu(multi.getParameter("menu"));
+		
 		dao.updateFood(food);
 		
 		if(filename1!=null) {

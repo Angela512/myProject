@@ -56,6 +56,8 @@ public class WriteAction implements Action{
 		food.setFood_timem2(multi.getParameter("min2"));
 		
 		food.setFood_link(multi.getParameter("link"));
+		
+		food.setFood_menu(multi.getParameter("menu"));
 
 		FoodDAO dao = FoodDAO.getInstance();
 		dao.insertFood(food);

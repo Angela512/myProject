@@ -30,6 +30,14 @@ li.img{
 	margin-left:10px;
 	
 }
+/*탑 버튼*/
+.button{
+	color: #fff;
+	font-size:15px;
+	border: 0;
+	background-color: #FA5D57;
+	border-radius: 3px;
+}
 
 </style>
 </head>
@@ -57,26 +65,28 @@ li.img{
 		<br>
 		<hr size="1" noshade="noshade" width="100%">
 		
-		<c:if test="${!empty food.food_image1}">
-		
+			
 		<div>
 		  <ul style="disply:inline-block; padding:10px; display:flex;">
+		    <c:if test="${!empty food.food_image1}">
 		    <li class="img"><img src="${pageContext.request.contextPath}/upload/${food.food_image1}" class="detail-image"></li>
+		    </c:if>
+		   	<c:if test="${!empty food.food_image2}">
 		    <li class="img"><img src="${pageContext.request.contextPath}/upload/${food.food_image2}" class="detail-image"></li>
+		    </c:if>
+		    <c:if test="${!empty food.food_image3}">
 		    <li class="img"><img src="${pageContext.request.contextPath}/upload/${food.food_image3}" class="detail-image"></li>
-		    
+		    </c:if>
 		  </ul>
 		  
 		</div>
 		
-		
-		
-		
-		
-		</c:if>
 		<br><br><br>
 		<div>
 			<ul>
+				<li class="j">
+					<b>대표메뉴</b><span style="padding-left:30px;">${food.food_menu}</span>
+				</li>
 				<li class="j">
 					<b>운영시간</b><span style="padding-left:30px;">${food.food_timeh1}:${food.food_timem1} ~ ${food.food_timeh2}:${food.food_timem2}</span>
 				</li>
@@ -109,9 +119,9 @@ li.img{
 				작성일 : ${food.food_date}
 				<%-- 로그인한 회원번호와 작성자 회원번호가 일치해야 수정,삭제 가능 --%>
 				<c:if test="${(user_auth == 3) || (user_num == food.mem_num)}">
-				<input type="button" value="수정" 
+				<input type="button" value="수정" class="button"
 				 onclick="location.href='updateForm.do?food_num=${food.food_num}'">
-				<input type="button" value="삭제" id="delete_btn">
+				<input type="button" value="삭제" id="delete_btn" class="button">
 				<script type="text/javascript">
 					let delete_btn = document.getElementById('delete_btn');
 					//이벤트 연결

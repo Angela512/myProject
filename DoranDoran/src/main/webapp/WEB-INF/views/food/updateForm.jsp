@@ -9,12 +9,23 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/food.js"></script>
+<style type="text/css">
+/*탑 버튼*/
+.button{
+	color: #fff;
+	font-size:15px;
+	border: 0;
+	background-color: #FA5D57;
+	border-radius: 3px;
+}
+</style>
 </head>
 <body>
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="content-main">
-		<h2>게시판 글수정</h2>
+		<h2 align="center">맛집 찾기 글수정</h2>
+		<hr size="1" class="hr-look" noshade="noshade" width="100%">
 		<form action="update.do" method="post"
 		      enctype="multipart/form-data" id="write_form">
 			<input type="hidden" name="food_num" 
@@ -39,10 +50,16 @@
 					<textarea rows="7" cols="70" name="content" placeholder="내용및 설명을 입력"
 					     id="content">${food.food_content}</textarea>
 				</li>
-	
+				<li>
+					<br>
+					<label for="menu"><b>대표메뉴</b></label>
+					<br><br>
+					<input type="text" name="menu" 
+					      id="menu" maxlength="20" style="width:200px;" value="${food.food_menu}">
+				</li>
 				<li>
 					<br><br>
-					<label for="filename">가게 & 메뉴 사진</label>
+					<label for="filename"><b>가게 & 메뉴 사진</b></label>
 					<br><br>
 					
 					
@@ -115,7 +132,7 @@
 				</li>
 				<li>
 					<br><br>
-					<label for="time">가게 운영시간</label>
+					<label for="time"><b>가게 운영시간</b></label>
 					<br><br>
 					<select name='hour1'>
 						<option value="${food.food_timeh1}">${food.food_timeh1}</option>
@@ -192,7 +209,7 @@
 				</li>
 				<li>
 					<br><br>
-					<label for="phone">가게 전화번호</label>
+					<label for="phone"><b>가게 전화번호</b></label>
 					<br>
 					<br>
 					<select name = 'phone1'>
@@ -210,37 +227,38 @@
 				</li>
 				<li>
 					<br><br>
-					<label for="link">가게 홈페이지</label>
+					<label for="link"><b>가게 홈페이지</b></label>
 					<br><br>
 					<input type="text" name="link" 
-					      id="link" maxlength="100" placeholder="가게 홈페이지 주소를 입력" value="${food.food_link}"  style="width:500px;">
+					      id="link" maxlength="100" placeholder="https://www.xxxx.com" value="${food.food_link}"  style="width:500px;">
 				</li>
 				<li>
 					<br><br>
-					<label for="address">가게 위치</label>
+					<label for="address"><b>가게 위치</b></label>
 					<br><br>
-					<label for="zipcode">우편번호</label>
+					<label for="zipcode"><b>우편번호</b></label>
 					<input type="text" name="zipcode" id="zipcode" 
 					   maxlength="5" autocomplete="off" value="${food.food_zipcode}">
 					<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기">
 				</li>
 				<li>
-					<label for="address1">주소</label>
+					<label for="address1"><b>주소</b></label>
 					<input type="text" name="address1" id="address1" 
 					                                        maxlength="30" value="${food.food_addr1}">
 				</li>
 				<li>
-					<label for="address2">나머지 주소</label>
+					<label for="address2"><b>상세 주소</b></label>
 					<input type="text" name="address2" id="address2" 
 					                                        maxlength="30" value="${food.food_addr2}">
 				</li>
 			</ul> 
 			<div class="align-center">
-				<input type="submit" value="수정">
-				<input type="button" value="목록"
+				<input type="submit" value="수정" class="button">
+				<input type="button" value="목록" class="button"
 				         onclick="location.href='list.do'">
 			</div>                      
 		</form>
+		<hr size="1" class="hr-look" noshade="noshade" width="100%">
 	</div>
 </div>
 	<!-- 다음 우편번호 찾기 시작 -->
@@ -341,6 +359,7 @@
     }
 </script>
 	<!-- 다음 우편번호 찾기 끝 -->
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>	
 </body>
 </html>
 

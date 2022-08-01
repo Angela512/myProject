@@ -70,7 +70,7 @@
 			<form action="myFoodDelete.do" method="post" id="myfood_delete_form">
 			<c:forEach var="food" items="${list }">
 			<div class="horizontal-area">
-				<input type="checkbox" name="food_num" value="${food.food_num }" class="food_num">
+               <%--<input type="checkbox" name="food_num" value="${food.food_num }" class="food_num"> --%>
 				<a href="${pageContext.request.contextPath}/food/detail.do?food_num=${food.food_num}">
 				<c:if test="${!empty food.food_image1 }">
 				<img class="board-image" src="${pageContext.request.contextPath}/upload/${food.food_image1}">
@@ -104,7 +104,7 @@
 			</div>
 			
 			
-					<input type="submit" value="삭제">
+                    <!--<input type="submit" value="삭제"> -->
 					<script type="text/javascript">
 					let myForm = document.getElementById('myfood_delete_form');
 					//이벤트 연결
