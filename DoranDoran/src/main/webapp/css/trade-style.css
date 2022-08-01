@@ -64,6 +64,7 @@ div #category-end{
 	border: 0;
 	background-color: #FA5D57;
 	border-radius: 3px;
+	cursor: pointer;
 }
 /*글쓰기 버튼*/
 .write_button{
@@ -168,4 +169,91 @@ div #flex{
 }
 div #flex2{
 	margin-left: 36%;
+}
+
+/*중고거래 글쓰기 시작*/
+#hr_top1{
+	width:100%;
+	text-align: left;
+	margin: 25px 0 30px 0;
+}
+.content-main #write_form{
+	padding: 0;
+	/* border: 1px solid red; */
+	width: 690px;
+}
+.wline1{
+	height:45px;
+}
+#write_text{
+	height: 30px;
+	padding: 20px 0 0 0;
+	float: left;
+	margin:0;
+}
+#write_submit{
+	border: 0;
+	width: 100px;
+	height: 30px;
+	padding:0;
+	float: right;
+	margin: 20px 0 0 0;
+	color: #fff;
+	font-size:15px;
+	background-color: #FA5D57;
+	border-radius: 3px;
+	
+}
+#hr_top2{
+	width:100%;
+	text-align: left;
+	margin: 10px 0 20px 0;
+}
+.write_body{
+	/* border: 1px solid red; */
+	padding: 0;
+	line-height: 40px;
+	height: 570px;
+}
+.write_trade_head{
+	width:30px; 
+	height:15px;
+	font-size:15px;
+}
+span .write-head{
+	font-size: 15px;
+}
+.write_body #trade_content{
+   width:100%;
+}
+.image_add{
+	/* border: 1px solid red;  */
+	padding:6px 0 50px 0;
+	line-height: 2.3;
+}
+.image_add #s{
+	font-size: 14px;
+	font-weight: bold;
+}
+.image_add .file_detail{
+	font-size: 14px;
+}
+.image_add p{
+	font-size: 12px;
+	color: gray;
+	margin: 0;
+}
+.image_add #trade_image1, #trade_image2, #trade_image3{
+	font-size:15px;
+}
+
+/*중고거래 글수정 시작*/
+.file_del{
+	border: 0;
+	width: 65px;
+	height: 20px;
+	color: #fff;
+	font-size:12px;
+	background-color: gray;
+	border-radius: 3px;
 }
