@@ -35,16 +35,9 @@ public class UpdateAction implements Action{
 			//로그인한 회원번호와 작성자 회원번호가 불일치
 			
 			//업로드된 파일이 있으면 파일 삭제
-			if(notice_file1!=null) {
-				FileUtil.removeFile(request, notice_file1);
-			}
-			if(notice_file2!=null) {
-				FileUtil.removeFile(request, notice_file2);
-			}
-			if(notice_file3!=null) {
-				FileUtil.removeFile(request, notice_file3);
-			}
-			
+			FileUtil.removeFile(request, notice_file1);
+			FileUtil.removeFile(request, notice_file2);
+			FileUtil.removeFile(request, notice_file3);
 			
 			return "/WEB-INF/views/common/notice.jsp";
 		}
