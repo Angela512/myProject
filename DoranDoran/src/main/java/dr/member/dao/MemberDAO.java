@@ -923,80 +923,86 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 		
 		return list;
 	}
-	//내가 쓴 댓글 자유게시판 게시물 수(수정)
-		public int getMyBoardReplyCount(int mem_num)throws Exception{
-			Connection conn=null;
-			PreparedStatement pstmt=null;
-			ResultSet rs=null;
-			String sql=null;
-			int count = 0;
-			
-			try {
-				conn=DBUtil.getConnection();
+	//내가 쓴 댓글 수(수정)
+			public int getMyBoardReplyCount(int mem_num)throws Exception{
+				Connection conn=null;
+				PreparedStatement pstmt=null;
+				ResultSet rs=null;
+				String sql=null;
+				int count = 0;
 				
-				sql="SELECT COUNT(*) FROM board_reply WHERE mem_num=? ";
-				
-				pstmt=conn.prepareStatement(sql);
-				pstmt.setInt(1, mem_num);
-				
-				rs=pstmt.executeQuery();
-				
-				if(rs.next()) {
-					count=rs.getInt(1);
-				}
-				
-			}catch(Exception e) {
-				throw new Exception(e);
-			}finally {
-				DBUtil.executeClose(rs, pstmt, conn);
-			}
-			
-			return count;
-		}
+				try {
+					conn=DBUtil.getConnection();
 
-	//내가 쓴 댓글 목록(수정)
-		public List<BoardReplyVO> getMyListBoardReply(int start,int end,int mem_num)throws Exception{
-			Connection conn=null;
-			PreparedStatement pstmt=null;
-			ResultSet rs=null;
-			List<BoardReplyVO> list=null;
-			String sql=null;
-			
-			try {
-				conn=DBUtil.getConnection();
-				
-				sql="SELECT * FROM (SELECT a.*, rownum rnum FROM"
-						+ "(SELECT * FROM board_reply r JOIN member_detail m USING(mem_num)"
-						+ "WHERE mem_num = ? ORDER BY reply_num DESC)a)"
-						+ "WHERE rnum >= ? AND rnum <= ?";
-				
-				pstmt=conn.prepareStatement(sql);
-				
-				//?에 데이터 바인딩
-				pstmt.setInt(1, mem_num);
-				pstmt.setInt(2, start);
-				pstmt.setInt(3, end);
-				
-				rs=pstmt.executeQuery();
-				
-				list=new ArrayList<BoardReplyVO>();
-				
-				while(rs.next()) {
-					BoardReplyVO boardReply = new BoardReplyVO();
-					boardReply.setMem_num(rs.getInt("mem_num"));
-					boardReply.setReply_content(rs.getString("reply_content"));
-					boardReply.setReply_date(rs.getString("reply_date"));
+					sql="SELECT COUNT(*) FROM board_reply r "
+							+ "JOIN board b USING(board_num)WHERE r.mem_num=?";
 					
-					list.add(boardReply);
+					pstmt=conn.prepareStatement(sql);
+					pstmt.setInt(1, mem_num);
+					
+					rs=pstmt.executeQuery();
+					
+					if(rs.next()) {
+						count=rs.getInt(1);
+					}
+					
+				}catch(Exception e) {
+					throw new Exception(e);
+				}finally {
+					DBUtil.executeClose(rs, pstmt, conn);
 				}
-			}catch(Exception e) {
-				throw new Exception(e);
-			}finally {
-				DBUtil.executeClose(rs, pstmt, conn);
+				
+				return count;
 			}
-			
-			return list;
-		}
+
+		//내가 쓴 댓글 목록(수정)
+			public List<BoardReplyVO> getMyListBoardReply(int start,int end,int mem_num)throws Exception{
+				Connection conn=null;
+				PreparedStatement pstmt=null;
+				ResultSet rs=null;
+				List<BoardReplyVO> list=null;
+				String sql=null;
+				
+				try {
+					conn=DBUtil.getConnection();
+					
+					sql="SELECT * FROM (SELECT a.*, rownum rnum FROM"
+							+ "(SELECT * FROM board_reply r JOIN member_detail m USING(mem_num)"
+							+ "WHERE mem_num = ? ORDER BY reply_num DESC)a)"
+							+ "WHERE rnum >= ? AND rnum <= ?";
+					
+					pstmt=conn.prepareStatement(sql);
+					
+					//?에 데이터 바인딩
+					pstmt.setInt(1, mem_num);
+					pstmt.setInt(2, start);
+					pstmt.setInt(3, end);
+					
+					rs=pstmt.executeQuery();
+					
+					list=new ArrayList<BoardReplyVO>();
+					
+					while(rs.next()) {
+						BoardReplyVO boardReply = new BoardReplyVO();
+						boardReply.setBoard_num(rs.getInt("board_num"));
+						boardReply.setMem_name(rs.getString("mem_name")); 
+						boardReply.setMem_num(rs.getInt("mem_num"));
+						boardReply.setReply_content(rs.getString("reply_content")); 
+						boardReply.setReply_count(rs.getInt("reply_count"));
+						boardReply.setReply_date(rs.getString("reply_date"));
+						boardReply.setReply_modifydate(rs.getString("reply_modifydate"));
+						boardReply.setReply_num(rs.getInt("reply_num"));
+						
+						list.add(boardReply);
+					}
+				}catch(Exception e) {
+					throw new Exception(e);
+				}finally {
+					DBUtil.executeClose(rs, pstmt, conn);
+				}
+				
+				return list;
+			}
 	
 	// 구인구직 글 수
 	public int getMyJobCount(int user_num) throws Exception {

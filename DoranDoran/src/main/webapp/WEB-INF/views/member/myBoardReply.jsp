@@ -66,13 +66,29 @@
 			표시할 댓글이 없습니다.
 		</div>
 		</c:if>
-		<div id="output"></div>
-		<div class="paging-button" style="display:none;">
-			<input type="button" value="다음글 보기">
+		<c:if test="${count > 0}">
+		<table class="boardreply_table">
+		<thead>
+			 <tr>
+			 	<th>내용</th>
+			 	<th>작성자</th>
+			 	<th>작성일</th>
+			 </tr>
+		</thead>
+			 <c:forEach var="board_reply" items="${list}">
+			 <tr id="tr_hover">
+			 	<td><a href="${pageContext.request.contextPath}/board/detail.do?board_num=${board.board_num}">${boardReply.reply_content}</a></td>
+			 	<td>${boardReply.mem_name}</td>  
+			 	<td>${boardreply.reply_date}</td>
+			 </tr>
+			 </c:forEach>
+		</table>
+		<div class="board_page">
+			${page}
 		</div>
-		<div id="loading" style="display:none;">
-			<img src="${pageContext.request.contextPath}/images/ajax-loader.gif">
-		</div>
+		<hr width="100%" color="#b5b5b5" size="1px"noshade>
+		</c:if>
+	</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>
