@@ -81,7 +81,7 @@
 			 <tr id="tr_hover">
 			 	<c:if test="${board.board_head == '동네소식'}">
 			 	<td><div class="news">${board.board_head}</div></td>
-			 	<td><a href="detail.do?board_num=${board.board_num}">${board.board_title}</a>  <c:if test="${board.reply_cnt>0}">[${board.reply_cnt}]</c:if></td>
+			 	<td><a href="${pageContext.request.contextPath}/board/detail.do?board_num=${board.board_num}">${board.board_title}</a>  <c:if test="${board.reply_cnt>0}">[${board.reply_cnt}]</c:if></td>
 			 	<td>${board.mem_name}</td>
 			 	<td>${board.board_date}</td>
 			 	<td>${board.board_count}</td>
@@ -89,7 +89,7 @@
 			 	
 			 	<c:if test="${board.board_head == '도움요청'}">
 			 	<td><div class="help">${board.board_head}</div></td>
-			 	<td><a href="detail.do?board_num=${board.board_num}">${board.board_title}</a>  <c:if test="${board.reply_cnt>0}">[${board.reply_cnt}]</c:if></td>
+			 	<td><a href="${pageContext.request.contextPath}/board/detail.do?board_num=${board.board_num}">${board.board_title}</a>  <c:if test="${board.reply_cnt>0}">[${board.reply_cnt}]</c:if></td>
 			 	<td>${board.mem_name}</td>
 			 	<td>${board.board_date}</td>
 			 	<td>${board.board_count}</td>
@@ -97,7 +97,7 @@
 			 	
 			 	<c:if test="${board.board_head == '함께해요'}">
 			 	<td><div class="together">${board.board_head}</div></td>
-			 	<td><a href="detail.do?board_num=${board.board_num}">${board.board_title}</a>  <c:if test="${board.reply_cnt>0}">[${board.reply_cnt}]</c:if></td>
+			 	<td><a href="${pageContext.request.contextPath}/board/detail.do?board_num=${board.board_num}">${board.board_title}</a>  <c:if test="${board.reply_cnt>0}">[${board.reply_cnt}]</c:if></td>
 			 	<td>${board.mem_name}</td>
 			 	<td>${board.board_date}</td>
 			 	<td>${board.board_count}</td>
@@ -105,7 +105,7 @@
 			 	
 			 	<c:if test="${board.board_head == '기타'}">
 			 	<td><div class="etc">${board.board_head}</div></td>
-			 	<td><a href="detail.do?board_num=${board.board_num}">${board.board_title}</a>  <c:if test="${board.reply_cnt>0}">[${board.reply_cnt}]</c:if></td>
+			 	<td><a href="${pageContext.request.contextPath}/board/detail.do?board_num=${board.board_num}">${board.board_title}</a>  <c:if test="${board.reply_cnt>0}">[${board.reply_cnt}]</c:if></td>
 			 	<td>${board.mem_name}</td>
 			 	<td>${board.board_date}</td>
 			 	<td>${board.board_count}</td>

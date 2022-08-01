@@ -223,6 +223,10 @@ ul.search_board li{
 	height: 345px;
 }
 
+.write_body #board_content{
+	width:100%;
+}
+
 .head_title #board_head{
 	float:left; 
 	width:160px; 

@@ -915,87 +915,80 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 		
 		return list;
 	}
-	//내가 쓴 글 자유게시판 게시물 수
-	public int getMyBoardReplyCount(int reply_num,int mem_num)throws Exception{
-		Connection conn=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		String sql=null;
-		int count=0;
-		
-		try {
-			conn=DBUtil.getConnection();
+	//내가 쓴 댓글 자유게시판 게시물 수(수정)
+		public int getMyBoardReplyCount(int mem_num)throws Exception{
+			Connection conn=null;
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			String sql=null;
+			int count = 0;
 			
-			sql="SELECT COUNT(*) FROM board_reply WHERE reply_num=? ";
-			
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, reply_num);
-			
-			rs=pstmt.executeQuery();
-			
-			if(rs.next()) {
-				count=rs.getInt(1);
-			}
-			
-		}catch(Exception e) {
-			throw new Exception(e);
-		}finally {
-			DBUtil.executeClose(rs, pstmt, conn);
-		}
-		
-		return count;
-	}
-
-//내가 쓴 댓글 목록
-	public List<BoardReplyVO> getMyListBoardReply(int start,int end,int reply_num,int mem_num)throws Exception{
-		Connection conn=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		List<BoardReplyVO> list=null;
-		String sql=null;
-		
-		try {
-			conn=DBUtil.getConnection();
-			
-			sql="SELECT a.*,NVL((SELECT COUNT(board_num) FROM board_reply r "
-					+ "WHERE r.board_num = a.board_num GROUP BY board_num),0) "
-					+ "AS reply_count FROM (SELECT aa.*,rownum rnum FROM "
-					+ "(SELECT * FROM board b JOIN member m "
-					+ "USING(mem_num) JOIN member_detail d USING(mem_num) "
-					+ "WHERE mem_num=? "
-					+ " ORDER BY b.board_num DESC)aa) A "
-					+ "WHERE rnum>=? AND rnum<=?";
-			
-			pstmt=conn.prepareStatement(sql);
-			
-			
-			//?에 데이터 바인딩
-			pstmt.setInt(1, mem_num);
-			pstmt.setInt(2, start);
-			pstmt.setInt(3, end);
-			
-			rs=pstmt.executeQuery();
-			
-			list=new ArrayList<BoardReplyVO>();
-			
-			while(rs.next()) {
-				BoardReplyVO boardReply = new BoardReplyVO();
-				boardReply.setReply_num(rs.getInt("reply_num"));
-				boardReply.setMem_num(rs.getInt("mem_num"));
-				boardReply.setReply_content(rs.getString("reply_content"));
-				boardReply.setReply_date(rs.getString("reply_date"));
+			try {
+				conn=DBUtil.getConnection();
 				
-				list.add(boardReply);
+				sql="SELECT COUNT(*) FROM board_reply WHERE mem_num=? ";
+				
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, mem_num);
+				
+				rs=pstmt.executeQuery();
+				
+				if(rs.next()) {
+					count=rs.getInt(1);
+				}
+				
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				DBUtil.executeClose(rs, pstmt, conn);
 			}
-		}catch(Exception e) {
-			throw new Exception(e);
-		}finally {
-			DBUtil.executeClose(rs, pstmt, conn);
+			
+			return count;
 		}
-		
-		return list;
-	}
-	
+
+	//내가 쓴 댓글 목록(수정)
+		public List<BoardReplyVO> getMyListBoardReply(int start,int end,int mem_num)throws Exception{
+			Connection conn=null;
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			List<BoardReplyVO> list=null;
+			String sql=null;
+			
+			try {
+				conn=DBUtil.getConnection();
+				
+				sql="SELECT * FROM (SELECT a.*, rownum rnum FROM"
+						+ "(SELECT * FROM board_reply r JOIN member_detail m USING(mem_num)"
+						+ "WHERE mem_num = ? ORDER BY reply_num DESC)a)"
+						+ "WHERE rnum >= ? AND rnum <= ?";
+				
+				pstmt=conn.prepareStatement(sql);
+				
+				//?에 데이터 바인딩
+				pstmt.setInt(1, mem_num);
+				pstmt.setInt(2, start);
+				pstmt.setInt(3, end);
+				
+				rs=pstmt.executeQuery();
+				
+				list=new ArrayList<BoardReplyVO>();
+				
+				while(rs.next()) {
+					BoardReplyVO boardReply = new BoardReplyVO();
+					boardReply.setMem_num(rs.getInt("mem_num"));
+					boardReply.setReply_content(rs.getString("reply_content"));
+					boardReply.setReply_date(rs.getString("reply_date"));
+					
+					list.add(boardReply);
+				}
+			}catch(Exception e) {
+				throw new Exception(e);
+			}finally {
+				DBUtil.executeClose(rs, pstmt, conn);
+			}
+			
+			return list;
+		}
 	
 	// 구인구직 글 수
 	public int getMyJobCount(int user_num) throws Exception {
