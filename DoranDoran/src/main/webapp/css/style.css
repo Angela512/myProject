@@ -347,7 +347,37 @@ form#mre_form {
 	border: none;
 	margin: 5px;
 }
-/*등록, 수정폼*/
+/* 회원가입 시작 */
+#register_form{
+	height: 600px;
+}
+#register_form ul{
+	padding-left:100px;
+}
+#register_form  label{
+	font-weight: bold;
+	margin:1% 0px 0px 0px;
+}
+#register_form  li{
+	margin:1.5% 0px 0px 0px;
+
+}
+#register_form input.underline{
+	border-top: black;
+	border-right: black;
+	border-left: black;
+}
+
+#home_btn, #register_btn{
+	color: #fff;
+	font-size:15px;
+	font-weight:600;
+	width:80px;
+	height:35px;
+	border: 0;
+	background-color: #FA5D57;
+	border-radius: 3px;
+}
 form {
 	width: 600px;
 	margin: 0 auto;
@@ -378,6 +408,40 @@ input[id="zipcode"] {
 .form-notice {
 	margin-left: 130px;
 }
+/* 회원가입 끝 */
+
+/* 로그인 시작 */
+#login_form{
+	height:570px;
+}
+#login_form ul{
+	padding-left:100px;
+}
+#login_form  label{
+	width:80px;
+	font-weight: bold;
+	margin:1% 0px 0px 0px;
+}
+#login_form  li{
+	margin:1.5% 0px 0px 0px;
+
+}
+#login_form input.underline{
+	border-top: black;
+	border-right: black;
+	border-left: black;
+}
+#login_btn{
+	color: #fff;
+	font-size:15px;
+	font-weight:600;
+	width:80px;
+	height:35px;
+	border: 0;
+	background-color: #FA5D57;
+	border-radius: 3px;
+}
+/* 로그인 끝 */
 
 /* 공지 말머리 css 시작 */
 .must{
