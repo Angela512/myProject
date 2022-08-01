@@ -36,10 +36,10 @@
 			<li id="name">
 				<span>${notice.mem_name}</span><br>
 				${notice.notice_date}
-			<!-- 	<c:if test="${!empty board.board_modifydate}">
-				| 수정 ${board.board_modifydate}
+			 	<c:if test="${!empty notice.notice_modify_date}">
+				| 최근 수정일 ${notice.notice_modify_date}
 				</c:if>
-			 -->	
+			 	
 			</li>
 			<li id="n_count"> 조회수 ${notice.notice_count}</li>
 		</ul>
