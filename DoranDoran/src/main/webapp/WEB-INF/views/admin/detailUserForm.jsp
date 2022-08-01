@@ -112,7 +112,7 @@
 				</c:forEach>
 				</tbody>
 			</table>
-			<div class="align-center">
+			<div class="board_page">
 				${page}
 			</div>
 		<hr width="100%" color="#b5b5b5" size="1px" noshade>
