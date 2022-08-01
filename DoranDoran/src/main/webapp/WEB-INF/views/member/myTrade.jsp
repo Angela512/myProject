@@ -8,7 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <title>내가 쓴 글 중고거래</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/trade-style.css" type="text/css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/member.js"></script>
 </head>
@@ -58,16 +60,18 @@
 		</ul>
 	</div>
 	
-		<hr size="1" noshade="noshade" width="100%">
+	<hr size="1" noshade="noshade" width="100%">
 		
-	<ul class="search">
-			
-		<li>
-			<input type="button" value="삽니다" onclick="location.href='trade.do?trade_head=0'">
-			<input type="button" value="팝니다" onclick="location.href='trade.do?trade_head=1'">
-		</li>
-	</ul>
+	<div class="align-center">
+		<div class="btn-group" role="group" aria-label="Basic outlined example">
+		<input type="button" value="삽니다" class="btn btn-outline-primary" onclick="location.href='trade.do?trade_head=0'">
+		<input type="button" value="팝니다" class="btn btn-outline-primary" onclick="location.href='trade.do?trade_head=1'">
+		</div>
+	</div>
 	
+	<div class="list-space align-right">
+		<span>총${count }개</span>
+	</div>
 	
 	<c:if test="${count==0 }">
 	<div class="result-display">
@@ -90,10 +94,10 @@
 				<img class="board-image" src="${pageContext.request.contextPath}/images/blank.png">
 				</c:if>
 				
-				<span>${fn:substring(trade.trade_title,0,10) }</span>
+				<span id="mytrade-title">${fn:substring(trade.trade_title,0,10) }</span>
 				</a>
 				
-				<div class="board-detail">
+				<div class="board-detail" id="mytrade-detail">
 					<c:if test="${!empty trade.mem_photo }">
 					<img src="${pageContext.request.contextPath}/upload/${trade.mem_photo}" width="25" height="25" class="my-photo">
 					</c:if>
@@ -102,10 +106,16 @@
 					<img src="${pageContext.request.contextPath}/images/face.png" width="25" height="25" class="my-photo">
 					</c:if>
 					
-					<span>${trade.mem_name }</span>
-					<%-- <span><fmt:formatNumber value="${trade.trade_price }" pattern="#,###"/>원</span> --%>
-					<span>조회수 ${trade.trade_count }</span>
-					<span>찜 ${trade.like_count }</span>
+					<span>${trade.mem_name }</span><br>
+					<c:if test="${trade.trade_head==0 }">
+					<span id="detail-title">[삽니다] ${fn:substring(trade.trade_title,0,8) }</span><br>
+					</c:if>
+					<c:if test="${trade.trade_head==1 }">
+					<span id="detail-title">[팝니다] ${fn:substring(trade.trade_title,0,8) }</span><br>
+					</c:if>
+					
+					<span><b><fmt:formatNumber value="${trade.trade_price }" pattern="#,###"/>원</b></span><br>
+					<span class="small">조회수 ${trade.trade_count} | 찜 ${trade.like_count }</span>	
 				</div>
 			</div>
 			</c:forEach>
@@ -146,6 +156,9 @@
 		</c:if>
 	
 	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
