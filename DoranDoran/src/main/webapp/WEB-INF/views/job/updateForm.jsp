@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>글수정</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/job-style.css" type="text/css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/job.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -23,8 +24,12 @@
 <body>
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<jsp:include page="/WEB-INF/views/job/banner.jsp" />
+	
 	<div class="content-main">
 		<h2>게시판 글수정</h2>
+		<hr>
+		
 		<form action="update.do" method="post"
 		      enctype="multipart/form-data" id="write_form">
 			<input type="hidden" name="job_num" 
@@ -60,7 +65,6 @@
 					<input type="file" name="job_logo"
 					  id="filename" 
 					  accept="image/gif,image/png,image/jpeg">
-					  <p>* 파일 용량은 640MB를 초과할 수 없습니다.</p>
 					<c:if test="${!empty job.job_logo}">
 					<br>
 					<span id="file_detail">
@@ -114,16 +118,21 @@
 				</li>
 				<li>
 					<label for="enddate">마감일</label>
-					<input type="text" id="datepicker" name="job_enddate" value="${job_enddate}" >
+					<input type="date"  name="job_enddate" id="enddate" value="${job_enddate}">
 				</li>
 				<li>
+					<div>
 					<label for="Homepage">주소</label>
-					<input type="text" id="sample3_postcode" name="job_zipcode" value="${job.job_zipcode}">
+					<input type="text" id="sample3_postcode" name="job_zipcode" placeholder="우편번호" required class="job_add">
 					<input type="button" onclick="sample3_execDaumPostcode()" value="찾기"><br>
-					<input type="text" id="sample3_address" name="job_addr1" value="${job.job_addr1}"><br>
-					<input type="text" id="sample3_detailAddress" name="job_addr2" value="${job.job_addr2}">
-					<input type="text" id="sample3_extraAddress" placeholder="참고항목">
-					
+				</div>
+				<div>
+					<input type="text" id="sample3_address" name="job_addr1" placeholder="주소" required  class="job_add">
+					<label>&nbsp;</label>
+					<input type="text" id="sample3_detailAddress" name="job_addr2" placeholder="상세주소"  class="job_add">
+ 					<br><input type="text" id="sample3_extraAddress" placeholder="참고항목" class="job_add">
+					<label>&nbsp;</label>
+ 				</div>
 					<div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
 					<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
 					</div>
@@ -214,6 +223,8 @@
 		</form>
 	</div>
 </div>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+
 </body>
 </html>
 

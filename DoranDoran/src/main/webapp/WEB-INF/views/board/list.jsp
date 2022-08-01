@@ -112,7 +112,7 @@
 		    <input type="hidden" name="head" id="h_head" value="${param.head}">
 			<ul class="search_board">
 				<li>
-					<select id="keyfield" name="keyfield" style="width:100px; height:30px;">
+					<select name="keyfield" style="width:100px; height:30px;">
 						<option value="1" <c:if test="${param.keyfield==1}">selected</c:if>>제목</option>
 						<option value="2" <c:if test="${param.keyfield==2}">selected</c:if>>작성자</option>
 						<option value="3" <c:if test="${param.keyfield==3}">selected</c:if>>내용</option>
