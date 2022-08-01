@@ -22,7 +22,7 @@ body{
 	vertical-align: middle;
 	color: #717171 !important;
 	font-weight: 600;
-	padding: 25px 0 25px 0;
+	padding: 20px 0 7px 0;
 	text-align: left;
 }
 
@@ -75,101 +75,24 @@ td {
 
 /* 글쓰기 시작 */
 .content-main form {
-	display:block;
-	padding: 0;
-	width:100%;
-	font-size:16px;
+	padding-top: 50px;
 }
 
-/* input[type=file] {
+input[type=file] {
 	position: absolute;
 	width: 0;
 	height: 0;
 	padding: 0;
 	overflow: hidden;
 	border: 0;
-} */
+}
 
 .content-main {
 	padding: 0 0 0 0 px;
 }
 
-.write_submit{
-	border: 0;
-	width: 100px;
-	height: 30px;
-	padding:0;
-	float: right;
-	margin: 20px 0 0 0;
-	color: #fff;
-	font-size:15px;
-	background-color: #FA5D57;
-	border-radius: 3px;
-}
-.content-main li{
-	padding:5px;
-	position:relative;
-	left:25%;
-}
-.content-main label{
-	color: #333;
-    font-weight: 700;
-}
-
-.content-main #title{
-	width:520px;
-	height:30px;
-}
-
-.content-main #content{
-	width:520px;
-	height:200px;
-}
-.content-main #link{
-	width:520px;
-	height:30px;
-}
-.content-main #enddate{
-	width:520px;
-	height:30px;
-}
-.content-main #sample3_postcode{
-	width:100px;
-	height:30px;
-}
-.content-main #sample3_address{
-	width:300px;
-	height:30px;
-}
-.content-main #sample3_detailAddress{
-	width:220px;
-	height:30px;
-}
-.content-main #sample3_extraAddress{
-	width:520px;
-	height:30px;
-}
-.content-main .job_add{
-	margin-bottom:5px;
-}
-.content-main form input[type="file"]{
- position: absolute;
-    height: 100%;
-    width:660px;
-    opacity: 0;
-}
-.input_file_btn{
-	
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto 0;
-    padding: 0 15px;
-    height: 30px;
-    font-size: 13px;
-    color: #fff;
-    background-color: #fa5d57;
-    width:520px;
+.content-main form {
+	padding: 0;
 }
 
 /* 글쓰기 끝 */
@@ -190,17 +113,35 @@ ul.default-info {
 .job_detail {
 	margin: 50px 0 0 0;
 	display:flex;
-	position:relative;
-	left:25%;
 }
 
-.job_detail table{
-	margin:0 0 0 50px;
+.job_detail ul{
+	margin: 0 0 0 50px;
+	
 }
 
-.job_detail td{
-	border:none;
+.job_detail li {
+	padding: 10px 10px 10px 0;
+	font-size: 16px;
 }
+
+.job_detail li:nth-child(odd) {
+	font-weight: 700;
+	margin: 0 !important;
+	padding: 0 0 10px 0 !important;
+    position: relative;
+}
+
+/* .job_detail li:nth-child(odd)::before{
+	content: "";
+    width: 1px;
+    height: 10px;
+    background-color: red;
+    position: absolute;
+    top: 4px;
+    right: 8px;
+	
+} */
 
 .detail_sub {
 	text-align: right;
@@ -247,7 +188,6 @@ ul.detail-sub li {
 	background-color: #FA5D57;
 	border-radius: 3px;
 	margin: 20px 0 0 0;
-	cursor:pointer;
 }
 
 /* 버튼 css 끝 */
@@ -283,8 +223,6 @@ ul.search_job li {
 	border: 0;
 	background-color: #FA5D57;
 	border-radius: 3px;
-		cursor:pointer;
-	
 }
 
 select::-ms-expand {
@@ -319,6 +257,7 @@ select::-ms-expand {
 .detail-info dt{
 	color: #666;
     display: inline-block;
+    color: #333;
     font-weight: 700;
     margin-left: 60px;
     padding-right: 20px;
@@ -349,14 +288,10 @@ select::-ms-expand {
 
 /* 글 상세보기 작성 정보 끝 */
 
+/* 글 내용 시작 */
+
+
+/* 글 내용 끝 */
+
 /***************** 글 상세보기 끝 *****************/
-
-
-
-/***************** 글 작성 시작 *****************/
-
-
-
-/***************** 글 작성 끝 *****************/
-
 
