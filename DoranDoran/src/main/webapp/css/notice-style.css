@@ -107,6 +107,7 @@ td {
 	background-color: #FA5D57;
 	border-radius: 3px;
 	margin:20px 0 0 0;
+	cursor:pointer;
 }
 .board_page{
 	width: 100%; 
@@ -133,6 +134,7 @@ ul.search_notice li{
 	border: 0;
 	background-color: #FA5D57;
 	border-radius: 3px;
+	cursor:pointer;
 }
 #home_button{
 	color: #fff;
@@ -143,7 +145,7 @@ ul.search_notice li{
 	border: 0;
 	background-color: #FA5D57;
 	border-radius: 3px;
-	
+	cursor:pointer;
 }
 
 /* 버튼 및 검색 공통 폼 끝 */
@@ -174,7 +176,7 @@ ul.search_notice li{
 	margin:0;
 }
 #write_submit{
-	border: 0;
+	border:0;
 	width: 100px;
 	height: 30px;
 	padding:0;
@@ -184,6 +186,7 @@ ul.search_notice li{
 	font-size:15px;
 	background-color: #FA5D57;
 	border-radius: 3px;	
+	cursor:pointer;
 }
 .write_body{
 	/* border: 1px solid red; */
@@ -273,10 +276,8 @@ ul.search_notice li{
 }
 .detail-info #name span{
 	font-weight: 600;
-	/* border: 1px solid red; */
 }
 .detail-info #n_count{
-	/* border: 1px solid red; */
 	float:right;
 	margin: 24px 0 0 0;
 }
@@ -293,7 +294,6 @@ ul.search_notice li{
 	position:relative;
 }
 #modify_btn{
-	border: 0;
 	width: 80px;
 	height: 30px;
 	float: right;
@@ -302,6 +302,7 @@ ul.search_notice li{
 	font-size:15px;
 	background-color: gray;
 	border-radius: 3px;
+	cursor:pointer;
 }
 #delete_btn{
 	border: 0;
@@ -314,9 +315,10 @@ ul.search_notice li{
 	font-size:15px;
 	background-color: gray;
 	border-radius: 3px;
+	cursor:pointer;
 }
 #list_btn{
-	border: 0;
+	border:0;
 	width: 160px;
 	height: 40px;
 	float: center;
@@ -325,11 +327,11 @@ ul.search_notice li{
 	font-size:15px;
 	background-color: #FA5D57;
 	border-radius: 3px;
-	/* border: 1px solid red; */
 	position:absolute;
 	top: 60%;
 	left:50%;
 	transform: translate(-50%, -50%);
+	cursor:pointer;
 }
 
 

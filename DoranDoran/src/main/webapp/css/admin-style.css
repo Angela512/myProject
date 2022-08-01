@@ -50,7 +50,7 @@
 	border: 0;
 	background-color: #FA5D57;
 	border-radius: 3px;
-	
+	cursor:pointer;
 }
 /*카테고리(head) 공통 끝*/
 /* 게시판 테이블 시작 */
@@ -93,6 +93,7 @@ ul.search_notice li{
 	border: 0;
 	background-color: #FA5D57;
 	border-radius: 3px;
+	cursor:pointer;
 }
 /* 검색 폼 끝 */
 
@@ -139,6 +140,7 @@ ul.search_notice li{
 	background-color: #FA5D57;
 	border-radius: 3px;
 	margin:10px 0 0 0;
+	cursor:pointer;
 }
 .board_page{
 	width: 100%; 

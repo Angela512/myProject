@@ -23,7 +23,7 @@
 					<img src="${pageContext.request.contextPath}/images/face.png" width="200" height="200" class="my-photo">
 				</c:if>
 				<c:if test="${!empty member.mem_photo}">
-					<img src="${pageContext.request.contextPath}/upload/${member.mem_photo}" style="padding-left:50%;" width="200" height="200" class="my-photo">
+					<img src="${pageContext.request.contextPath}/upload/${member.mem_photo}" width="200" height="200" class="my-photo">
 				</c:if>
 				
 			</div>

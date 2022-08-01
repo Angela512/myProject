@@ -377,6 +377,7 @@ form#mre_form {
 	border: 0;
 	background-color: #FA5D57;
 	border-radius: 3px;
+	cursor:pointer;
 }
 form {
 	width: 600px;
@@ -440,6 +441,7 @@ input[id="zipcode"] {
 	border: 0;
 	background-color: #FA5D57;
 	border-radius: 3px;
+	cursor:pointer;
 }
 /* 로그인 끝 */
 
