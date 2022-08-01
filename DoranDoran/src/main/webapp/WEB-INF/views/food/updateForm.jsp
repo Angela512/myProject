@@ -16,7 +16,7 @@
 	font-size:15px;
 	border: 0;
 	background-color: #FA5D57;
-	border-radius: 3px;
+	border-radius:3px;
 }
 </style>
 </head>
