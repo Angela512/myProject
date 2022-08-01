@@ -258,3 +258,54 @@ span .write-head{
 	border-radius: 3px;
 }
 /*중고거래 내가 쓴 글*/
+
+
+
+
+/************************************/
+
+.trade_check{
+	text-align:right;
+	 display: grid;
+}
+.trade_num{
+	display:block;
+	margin:0 0 10px 0 !important;
+	text-align:center;
+	justify-content : center;
+	
+}
+
+.board-space .horizontal-area{
+	height:100% !important;
+}
+
+.board-image{
+	text-align:center;
+}
+
+.board-space form{
+	width:100%;
+	margin:0 auto;
+	text-align:center;
+	
+}
+
+.board-space .horizontal-area div.board-detail{
+	text-align:left !important;
+}
+
+.board-user-info{
+	display:inline-block;
+}
+
+#detail-title{
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+#trade-text-area{
+	padding: 0 !important;
+	margin: 0 !important;
+	
+}

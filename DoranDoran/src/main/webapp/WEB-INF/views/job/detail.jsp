@@ -20,42 +20,18 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
+
 	<div class="page-main">
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
 		<jsp:include page="/WEB-INF/views/job/banner.jsp" />
 		<div class="content-main">
-			<ul class="detail-sub">
-				<li>
-					<%-- <c:if test="${!empty job.modify_date}">
-				최근 수정일 : ${job.modify_date}
-				</c:if> --%>
-				<c:if test="${user_num == job.mem_num}">
-					<input type="button" value="수정" onclick="location.href='updateForm.do?job_num=${job.job_num}'">
-				</c:if>
-				<c:if test="${user_num == job.mem_num || user_auth == 3}">
-
-						<input type="button" value="삭제" id="delete_btn" >
-						<script type="text/javascript">
-							let delete_btn = document
-									.getElementById('delete_btn');
-							//이벤트 연결
-							delete_btn.onclick = function() {
-								let choice = confirm('삭제하시겠습니까?');
-								if (choice) {
-									location.replace('delete.do?job_num=${job.job_num}');
-								}
-							};
-						
-						</script>
-					</c:if>
-				</li>
-			</ul>
+			
 			
 			<h2>${job.job_title}</h2>
 			
 			<hr>
 			
-			<div class="detail-info">
+			<%-- <div class="detail-info">
 					<dt>작성자</dt>
 					<dd>
 						<c:if test="${!empty member_detail.mem_photo}">
@@ -65,7 +41,7 @@
 							<img src="${pageContext.request.contextPath}/images/face.png" width="40" height="40" class="my-photo">
 						</c:if>
 					</dd>
-					<dd>${job.job_num}</dd>
+					<dd>${job.mem_name}</dd>
 			
 					<dt>작성일자</dt>
 					<dd>${job.job_date}</dd>
@@ -73,8 +49,8 @@
 					<dt>조회수</dt>
 					<dd>${job.job_count}</dd>
 			</div>
-			
-	<%-- 		<ul class="detail-info">
+			 --%>
+		<ul class="detail-info">
 				<li>
 				<c:if test="${!empty member_detail.mem_photo}">
 					<img src="${pageContext.request.contextPath}/upload/${member_detail.mem_photo}" width="40" height="40" class="my-photo">
@@ -83,12 +59,14 @@
 					<img src="${pageContext.request.contextPath}/images/face.png" width="40" height="40" class="my-photo">
 				</c:if>
 				</li>
-				<li>${job.job_num}</li>
-				<li>작성일자 : ${job.job_date}</li>
-				<li>조회수 : ${job.job_count}</li>
+				<li>
+				<div>${job.mem_name}</div>
+				<div>작성일자 : ${job.job_date}</div>
+				</li>
+				<li class="detail-info-r">조회수 : ${job.job_count}</li>
+				
 			</ul>
- --%>
- 
+
  
 			<div class="job_detail">
 			
@@ -204,7 +182,54 @@
 
 			<hr size="1" noshade="noshade" width="100%">
 
+			<div class="detail_bottom_btn">
+				<input id="list_btn" type="button" value="목록으로" onclick="location.href='list.do'">
+				<c:if test="${user_num == job.mem_num}">
+					<input type="button" value="수정" id="modify_btn" onclick="location.href='updateForm.do?job_num=${job.job_num}'">
+				</c:if>
+				<c:if test="${user_num == job.mem_num || user_auth == 3}">
+						
+					<input type="button" value="삭제" id="delete_btn">
+					<script type="text/javascript">
+						let delete_btn = document.getElementById('delete_btn');
+						//이벤트 연결
+						delete_btn.onclick = function() {
+							let choice = confirm('삭제하시겠습니까?');
+							if (choice) {
+								location
+										.replace('delete.do?job_num=${job.job_num}');
+							}
+						};
+					</script>
+				</c:if>
+			</div>
 
+<%-- 			<ul class="detail-sub">
+				<li>
+					<c:if test="${!empty job.modify_date}">
+				최근 수정일 : ${job.modify_date}
+				</c:if> <c:if test="${user_num == job.mem_num}">
+						<input type="button" value="수정"
+							onclick="location.href='updateForm.do?job_num=${job.job_num}'">
+					</c:if> <c:if test="${user_num == job.mem_num || user_auth == 3}">
+
+						<input type="button" value="삭제" id="delete_btn">
+						<script type="text/javascript">
+							let delete_btn = document
+									.getElementById('delete_btn');
+							//이벤트 연결
+							delete_btn.onclick = function() {
+								let choice = confirm('삭제하시겠습니까?');
+								if (choice) {
+									location
+											.replace('delete.do?job_num=${job.job_num}');
+								}
+							};
+						</script>
+					</c:if>
+				</li>
+			</ul>
+ --%>
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />

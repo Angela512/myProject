@@ -116,6 +116,10 @@ td {
     font-weight: 700;
 }
 
+.search_job li{
+	left:0;
+}
+
 .content-main #title{
 	width:520px;
 	height:30px;
@@ -204,11 +208,6 @@ ul.default-info {
 
 .detail_sub {
 	text-align: right;
-}
-
-ul.detail-sub li {
-	width: 100% !important;
-	
 }
 
 .logo_image{
@@ -300,52 +299,72 @@ select::-ms-expand {
 .detail-info{
 	padding:20px;
 	border-bottom:1px solid #dcdbdb;
-	overflow:hidden;
-	align-content: center;
-	text-align:center;
+	text-align:left;
 	width:100%;
-	display:block;
-	vertical-align:middle;
 }
 
-.detail-info dl{
-	float:left;
-	width:150px;
-	display:inline-block;
-	flex-direction: column;
+.detail-info li{
+	text-align:left;
+	left:0;
 	
 }
 
-.detail-info dt{
-	color: #666;
-    display: inline-block;
-    font-weight: 700;
-    margin-left: 60px;
-    padding-right: 20px;
-    position: relative;
+.detail_bottom_btn{
+	width:100%;
+	height: 100px;
+	position:relative;
+	/* border: 1px solid red; */
 }
 
-.detail-info dt::after{
-	content: "";
-    width: 1px;
-    height: 10px;
-    background-color: #dcdbdb;
-    position: absolute;
-    top: 4px;
-    right: 8px;
+.detail-info-r{
+	text-align:right;
+	float:right;
 }
 
-.detail-info dd{
-	color: #666;
-    display: inline-block;
-    margin:0 0 0 10px;
+#modify_btn{
+	border: 0;
+	width: 80px;
+	height: 30px;
+	float: right;
+	margin: 50px 0 0 0;
+	color: #fff;
+	font-size:15px;
+	background-color: gray;
+	border-radius: 3px;
+	cursor:pointer;
 }
-
-.detail-info dd img{
-	margin:0 0 0 0;
-	vertical-align:middle;
+#delete_btn{
+	border: 0;
+	width: 80px;
+	height: 30px;
+	padding:10;
+	float: right;
+	margin: 50px 10px 0 0;
+	color: #fff;
+	font-size:15px;
+	background-color: gray;
+	border-radius: 3px;
+		cursor:pointer;
+	
 }
-
+#list_btn{
+	border: 0;
+	width: 160px;
+	height: 40px;
+	float: center;
+	margin: 0;
+	color: #fff;
+	font-size:15px;
+	background-color: #FA5D57;
+	border-radius: 3px;
+	/* border: 1px solid red; */
+	position:absolute;
+	top: 60%;
+	left:50%;
+	transform: translate(-50%, -50%);
+		cursor:pointer;
+	
+}
 
 /* 글 상세보기 작성 정보 끝 */
 

@@ -84,8 +84,10 @@
 			<form action="myTradeDelete.do" method="post" id="mytrade_delete_form">
 			<c:forEach var="trade" items="${list }">
 			<div class="horizontal-area">
+			<div class="trade_check">
 				<input type="checkbox" name="trade_num" value="${trade.trade_num }" class="trade_num">
 				<a href="${pageContext.request.contextPath}/trade/detail.do?trade_num=${trade.trade_num}">
+			</div>
 				<c:if test="${!empty trade.trade_image1 }">
 				<img class="board-image" src="${pageContext.request.contextPath}/upload/${trade.trade_image1}">
 				</c:if>
@@ -98,27 +100,33 @@
 				</a>
 				
 				<div class="board-detail" id="mytrade-detail">
-					<c:if test="${!empty trade.mem_photo }">
-					<img src="${pageContext.request.contextPath}/upload/${trade.mem_photo}" width="25" height="25" class="my-photo">
-					</c:if>
-
-					<c:if test="${empty trade.mem_photo }">
-					<img src="${pageContext.request.contextPath}/images/face.png" width="25" height="25" class="my-photo">
-					</c:if>
+					<div class="board-user-info">
+						<c:if test="${!empty trade.mem_photo }">
+						<img src="${pageContext.request.contextPath}/upload/${trade.mem_photo}" width="25" height="25" class="my-photo">
+						</c:if>
+						<c:if test="${empty trade.mem_photo }">
+						<img src="${pageContext.request.contextPath}/images/face.png" width="25" height="25" class="my-photo">
+						</c:if>
+						<span>${trade.mem_name }</span><br>
+					</div>
+					<div class="trade-text-area">
+						<c:if test="${trade.trade_head==0 }">
+						<span id="detail-title">[삽니다] ${fn:substring(trade.trade_title,0,8) }</span><br>
+						</c:if>
+						<c:if test="${trade.trade_head==1 }">
+						<span id="detail-title">[팝니다] ${fn:substring(trade.trade_title,0,8) }</span><br>
+						</c:if>
+					</div>
 					
-					<span>${trade.mem_name }</span><br>
-					<c:if test="${trade.trade_head==0 }">
-					<span id="detail-title">[삽니다] ${fn:substring(trade.trade_title,0,8) }</span><br>
-					</c:if>
-					<c:if test="${trade.trade_head==1 }">
-					<span id="detail-title">[팝니다] ${fn:substring(trade.trade_title,0,8) }</span><br>
-					</c:if>
+					<span id="trade-text-area"><b><fmt:formatNumber value="${trade.trade_price }" pattern="#,###"/>원</b></span><br>
+					<span id="trade-text-area" class="small">조회수 ${trade.trade_count} | 찜 ${trade.like_count }</span>	
 					
-					<span><b><fmt:formatNumber value="${trade.trade_price }" pattern="#,###"/>원</b></span><br>
-					<span class="small">조회수 ${trade.trade_count} | 찜 ${trade.like_count }</span>	
 				</div>
 			</div>
 			</c:forEach>
+			
+			
+			<!-- CSS 수정 체크박스에 div 추가, 아래 프필, 닉네임 영역 div 묶고 span값들 아이디줘서 css에 important 걸어서 수정했습니다~! -->
 			
 			<div class="float-clear">
 				<hr width="100%" size="1" noshade="noshade">

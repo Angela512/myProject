@@ -179,6 +179,11 @@ public class JobDAO {
 				Job.setJob_link(rs.getString("job_link"));
 				Job.setJob_zipcode(rs.getString("job_zipcode"));
 				Job.setMem_num(rs.getInt("mem_num"));
+				
+				Job.setMem_id(rs.getString("mem_id"));
+				Job.setMem_photo(rs.getString("mem_photo"));
+				Job.setMem_name(rs.getString("mem_name"));
+
 
 				list.add(Job);
 			}
@@ -298,6 +303,10 @@ public class JobDAO {
 
 
 					job.setMem_num(rs.getInt("mem_num"));
+					
+					job.setMem_id(rs.getString("mem_id"));
+					job.setMem_photo(rs.getString("mem_photo"));
+					job.setMem_name(rs.getString("mem_name"));
 					
 					/*
 					job.setReg_date(rs.getDate("reg_date"));
