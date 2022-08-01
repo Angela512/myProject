@@ -61,40 +61,39 @@
 					<br><br>
 					<label for="filename"><b>가게 & 메뉴 사진</b></label>
 					<br><br>
-					
-					
 					<input type="file" name="filename1" 
 					 id="filename1" 
 					 accept="image/gif,image/png,image/jpeg">
 					 <c:if test="${!empty food.food_image1}">
+					<span>
 					 &nbsp; &nbsp;
 						(${food.food_image1})
 						<input type="button" value="파일삭제" data-file="food_image1" class="file_del">
 					
-					</c:if>					 		
-					 <br>
-					 
+					</span>				 		
+					</c:if>	
+					<br>
 					 <input type="file" name="filename2" 
 					 id="filename2" 
 					 accept="image/gif,image/png,image/jpeg">
 					 <c:if test="${!empty food.food_image2}">
+					 <span>
 					 &nbsp; &nbsp;
 						(${food.food_image2})
 						<input type="button" value="파일삭제" data-file="food_image2" class="file_del">
-					
+					</span>
 					</c:if>	
 					 <br>
-					 
 					 <input type="file" name="filename3" 
 					 id="filename3" 
 					 accept="image/gif,image/png,image/jpeg">
 					 <c:if test="${!empty food.food_image3}">
+					<span>
 					 &nbsp; &nbsp;
 						(${food.food_image3})
 						<input type="button" value="파일삭제" data-file="food_image3" class="file_del">
-					
+					</span>
 					</c:if>	
-					
 					<c:if test="${!empty food.food_image1 or !empty food.food_image2 or !empty food.food_image3}">
 					<script type="text/javascript">
 					$(function(){

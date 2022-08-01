@@ -45,6 +45,7 @@ public class DeleteFileAction implements Action{
 				}else if(food_image.equals("food_image3")) {
 					FileUtil.removeFile(request, db_food.getFood_image3());
 				}
+				mapAjax.put("result", "success");
 			}
 		}
 		
