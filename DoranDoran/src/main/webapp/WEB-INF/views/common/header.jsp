@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!-- header 시작 -->
+
 <div id="main_login">
    <ul class="member_top">
       <c:if test="${!empty user_num && user_auth == 3}">
@@ -17,15 +19,13 @@
       </c:if>
 
       <c:if test="${!empty user_num && !empty user_photo}">
-         <li class="menu-profile"><img
-            src="${pageContext.request.contextPath}/upload/${user_photo}"
-            width="25" height="25" class="my-photo"></li>
+         <li class="menu-profile"><img src="${pageContext.request.contextPath}/upload/${user_photo}" 
+         width="25" height="25" class="my-photo"></li>
       </c:if>
 
       <c:if test="${!empty user_num && empty user_photo}">
-         <li class="menu-profile"><img
-            src="${pageContext.request.contextPath}/images/face.png" width="25"
-            height="25" class="my-photo"></li>
+         <li class="menu-profile"><img src="${pageContext.request.contextPath}/images/face.png" 
+         width="25" height="25" class="my-photo"></li>
       </c:if>
 
       <c:if test="${!empty user_num}">
@@ -36,7 +36,7 @@
 
       <c:if test="${empty user_num}">
          <li><a
-            href="${pageContext.request.contextPath}/member/registerUserForm.do">회원가입</a>
+            href="${pageContext.request.contextPath}/member/registerUserForm.do">회원가입 | </a>
          </li>
          <li><a
             href="${pageContext.request.contextPath}/member/loginForm.do">로그인</a>

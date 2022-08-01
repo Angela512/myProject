@@ -85,18 +85,19 @@ body {
 
 #main_login {
 	text-align: right;
-	padding-right: 15%;
-	padding-top: 0;
-	border: 0;
 }
 
 #main_login ul li {
 	display: inline-block;
-	width: 100px;
-	text-align: right;
 	vertical-align: middle;
 }
-
+#main_login .menu-profile{
+	margin-left:1%;
+}
+#main_login .menu-logout{
+	width:130px;
+	text-align:left;
+}
 #main_logo {
 	padding-top: 0px;
 	font-family: 'MaplestoryOTFBold';
@@ -127,25 +128,6 @@ body {
 	width: 150px;
 	text-align: center;
 	padding-top: 5px;
-}
-.member_top{
-	width:100%;
-	float: right;
-	padding: 0 0 0 15%;
-	
-}
-.member_top .my-photo {
-	/* border: 1px solid red; */
-}
-
-.member_top .menu-logout {
-	width: 100px !important;
-	text-align: left;
-}
-
-.content-main {
-	/* 	padding: 10px 20px;
- */
 }
 
 .result-display {

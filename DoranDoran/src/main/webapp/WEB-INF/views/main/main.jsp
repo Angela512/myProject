@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>메인</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
-   
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/main-header.css" type="text/css">
 <style>
 .container{
 	display:flex;
@@ -151,7 +151,7 @@ to {
 </style>
 </head>
 <body>
-    <jsp:include page="/WEB-INF/views/common/header.jsp" />
+    <jsp:include page="/WEB-INF/views/common/header.jsp"/>
       <div class="slideshow-container">
 
          <div class="mySlides fade">
