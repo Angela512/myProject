@@ -35,7 +35,7 @@ public class DeleteAction implements Action{
 		dao.deleteFood(food_num);
 		//파일 삭제
 		FileUtil.removeFile(request, db_food.getFood_image1());
-		
+
 		return "redirect:/food/list.do";
 	}
 

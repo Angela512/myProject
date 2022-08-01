@@ -53,9 +53,10 @@ li.img{
 				조회 : ${food.food_count}
 			</li>
 		</ul>
-		
+		<h1 style="margin:0 auto; text-align:center;">[${food.food_local}] ${food.food_name}</h1>
+		<br>
 		<hr size="1" noshade="noshade" width="100%">
-		<h2>[${food.food_local}] ${food.food_name}</h2>
+		
 		<c:if test="${!empty food.food_image1}">
 		
 		<div>

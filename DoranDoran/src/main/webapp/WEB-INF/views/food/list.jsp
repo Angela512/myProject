@@ -7,13 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <title>맛집 찾기 게시판</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/food-style.css" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script:400" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Song+Myung:400" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/food.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/job-style.css" type="text/css">
+
  <style type="text/css">
  .containerr{
 	position:relative;
@@ -123,6 +124,56 @@ ul{
     left: 1px;
     background: #1f1f1f;
 }
+/*탑 버튼*/
+.button{
+	color: #fff;
+	font-size:15px;
+	border: 0;
+	background-color: #FA5D57;
+	border-radius: 3px;
+}
+/*글쓰기 버튼*/
+.write_button{
+	text-align:right;
+}
+#write_pen{
+	position:relative;
+	left:46px;
+	width: 18px; 
+	height: 18px;
+	/*border: 1px solid red;*/
+} 
+#write_button_box{
+	padding-left: 26px;
+	color: #fff;
+	width: 120px; 
+	height: 35px;
+	font-size:15px;
+	font-weight: 600;
+	border: 0;
+	background-color: #FA5D57;
+	border-radius: 3px;
+	margin:20px 0 0 0;
+}
+/*리스트 검색 창*/
+ul.search_board{
+	list-style:none;
+	padding:20px 55px 90px 0px;
+	margin:0;
+	text-align:center;
+}
+ul.search_board li{
+	padding:0;
+	display:inline;
+}
+
+.search_board #search_button{
+	color: #fff;
+	font-size:15px;
+	border: 0;
+	background-color: #FA5D57;
+	border-radius: 3px;
+}
  </style>
  </head>
 <body>
@@ -144,40 +195,7 @@ ul{
 		<!-- <h2 align= "center">맛집 찾기</h2> -->
 		<form id="search_form" action="list.do" method="get">
 		    <input type="hidden" name="food_local" value="${param.food_local}">
-			<%-- <ul class="search">
-				<li>
-				    <input type="button" value="전체" onclick="location.href='list.do'">
-					<input type="button" value="서울" onclick="location.href='list.do?food_local=서울'">
-					<input type="button" value="경기" onclick="location.href='list.do?food_local=경기'">
-					<input type="button" value="인천" onclick="location.href='list.do?food_local=인천'">
-					<input type="button" value="제주" onclick="location.href='list.do?food_local=제주'">
-				</li>
-				
-				<li>
-					<br><br><br>
-					<select name="keyfield">
-						<option value="1">제목</option>
-						<option value="2">작성자</option>
-						<option value="3">내용</option>
-					</select>
-				</li>
-				<li>
-					<input type="search" size="16" 
-					  name="keyword" id="keyword"
-					  value="${param.keyword}">
-				</li>
-				<li>
-					<input type="submit" value="검색">
-				</li>
-			</ul> --%>
-			<!-- <div id="category_btn">
-		
-				<input class="category_btn" type="button" value="전체보기" onclick="location.href='list.do'">
-				<input class="category_btn" type="button" value="서울"  onclick="location.href='list.do?job_category=서울'">
-				<input class="category_btn" type="button" value="경기"  onclick="location.href='list.do?job_category=경기'">
-				<input class="category_btn" type="button" value="인천"  onclick="location.href='list.do?job_category=인천'">
-				<input class="category_btn" type="button" value="제주"  onclick="location.href='list.do?job_category=제주'">
-			</div> -->
+
 			<div class="sub_nav" id="sub_nav1">
 			<ul>
 				<li><a href="${pageContext.request.contextPath}/food/list.do">전체보기</a></li>
@@ -189,14 +207,12 @@ ul{
 		</div>
 		
 		</form>
+
 		<div class="list-space align-right">
-		    <c:if test="${!empty user_num}">
-			<input type="button" value="글쓰기" class="btn btn-primary"
-			   onclick="location.href='writeForm.do'">
-			</c:if>   
-			<input type="button" value="목록" class="btn btn-primary"
-			       onclick="location.href='list.do'"> 
-			
+			<input type="button" class="button" value="목록" style="width:80px; height:30px;" onclick="location.href='list.do'">
+			<input type="button" class="button" value="홈으로" style="width:80px; height:30px;" onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
+			<br>
+			<span>총${count }개</span>
 		</div>
 		<c:if test="${count == 0}">
 		<div class="result-display">
@@ -261,30 +277,40 @@ ul{
 			
 			
 		</div>
-		<form id="search_form" action="list.do" method="get" style="margin-right:10px;">
-					<input type="hidden" name="fool_local" value="${param.food_local}" >
-					<ul class="search row align-items-center" >
-						<li class="col">
-						<select name="keyfield" class="form-select">
-							<option value="1">제목</option>
-							<option value="2">작성자</option>
-							<option value="3">내용</option>
-						</select>
-						</li>
-						
-						<li class="col-auto col">
-						<input type="search" class="form-control" size="14" name="keyword" id="keyword" value="${param.keyword}">
-						</li>
-
-						<input type="submit" class="btn btn-primary col-lg-2"  value="검색">
-
-					</ul>
-				</form>
+		
 		
 		<div class="align-center">
 			${page}
 		</div> 
 		</c:if>
+		
+		<c:if test="${!empty user_num }">
+			<div class=write_button>
+				<img src="../images/pen1.png" id="write_pen">
+				<input type="button" value="글쓰기" id="write_button_box" onclick="location.href='writeForm.do'">
+			</div>
+		</c:if>
+		
+		
+		<form id="search_form" action="list.do" method="get">
+			<ul class="search_board">	
+				<li>
+					<select name="keyfield" id="keyfield" style="width:100px; height:30px;">
+						<option value="1" <c:if test="${param.keyfield==1}">selected</c:if>>제목</option>
+						<option value="2" <c:if test="${param.keyfield==2}">selected</c:if>>작성자</option>
+						<option value="3" <c:if test="${param.keyfield==3}">selected</c:if>>내용</option>
+					</select>
+				</li>
+				
+				<li>
+					<input type="search" size="16" name="keyword" id="keyword" value="${param.keyword}" style="width:180px; height:30px;">
+				</li>
+				
+				<li>
+					<input type="submit" id="search_button" value="검색" style="width:80px; height:30px;">
+				</li>
+			</ul>
+		</form>
 	</div>
 			<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	

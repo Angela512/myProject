@@ -318,7 +318,7 @@ public class FoodDAO {
 	}
 	
 	//파일 삭제
-	public void deleteFile(int food_num)throws Exception{
+	public void deleteFile(int food_num,String food_image)throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = null;
@@ -327,7 +327,7 @@ public class FoodDAO {
 			//커넥션풀로부터 커넥션 할당
 			conn = DBUtil.getConnection();
 			//SQL문 작성
-			sql = "UPDATE food SET food_image1='' WHERE food_num=?";
+			sql = "UPDATE food SET "+food_image+"='' WHERE food_num=?";
 			
 			//PreparedStatement 객체 생성
 			pstmt = conn.prepareStatement(sql);

@@ -44,17 +44,74 @@
 					<br><br>
 					<label for="filename">가게 & 메뉴 사진</label>
 					<br><br>
+					
+					
 					<input type="file" name="filename1" 
 					 id="filename1" 
 					 accept="image/gif,image/png,image/jpeg">
+					 <c:if test="${!empty food.food_image1}">
+					 &nbsp; &nbsp;
+						(${food.food_image1})
+						<input type="button" value="파일삭제" data-file="food_image1" class="file_del">
+					
+					</c:if>					 		
 					 <br>
+					 
 					 <input type="file" name="filename2" 
 					 id="filename2" 
 					 accept="image/gif,image/png,image/jpeg">
+					 <c:if test="${!empty food.food_image2}">
+					 &nbsp; &nbsp;
+						(${food.food_image2})
+						<input type="button" value="파일삭제" data-file="food_image2" class="file_del">
+					
+					</c:if>	
 					 <br>
+					 
 					 <input type="file" name="filename3" 
 					 id="filename3" 
 					 accept="image/gif,image/png,image/jpeg">
+					 <c:if test="${!empty food.food_image3}">
+					 &nbsp; &nbsp;
+						(${food.food_image3})
+						<input type="button" value="파일삭제" data-file="food_image3" class="file_del">
+					
+					</c:if>	
+					
+					<c:if test="${!empty food.food_image1 or !empty food.food_image2 or !empty food.food_image3}">
+					<script type="text/javascript">
+					$(function(){
+						//이벤트 연결
+						$('.file_del').click(function(){
+							let choice = confirm('삭제하시겠습니까?');
+							let event_btn = $(this);
+							if(choice){
+								$.ajax({
+									url:'deleteFile.do',
+									type:'post',        //el임. jsp에서 쓸 수 있음
+									data:{food_num:${food.food_num},food_image:$(this).attr('data-file')},
+									dataType:'json',
+									cache:false,
+									timeout:30000,
+									success:function(param){
+										if(param.result == 'logout'){
+											alert('로그인 후 사용하세요!');
+										}else if(param.result == 'success'){
+											event_btn.parent().hide();
+										}else{
+											alert('파일 삭제 오류 발생');
+										}
+									},
+									error:function(){
+										alert('네트워크 오류 발생');
+									}
+								});
+							}
+						});
+					});
+					</script>
+					</c:if>
+					 
 				</li>
 				<li>
 					<br><br>

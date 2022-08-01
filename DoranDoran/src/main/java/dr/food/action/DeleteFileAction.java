@@ -29,17 +29,22 @@ public class DeleteFileAction implements Action{
 		}else {//로그인 된 경우
 			int food_num = Integer.parseInt(
 					request.getParameter("food_num"));
+			String food_image=request.getParameter("food_image");
 			FoodDAO dao = FoodDAO.getInstance();
 			FoodVO db_food = dao.getFood(food_num);
 			if(user_num!=db_food.getMem_num()) {
 				mapAjax.put("result", "wrongAccess");
 			}else {
-				dao.deleteFile(food_num);
+				dao.deleteFile(food_num,food_image);
 				
 				//파일 삭제
-				FileUtil.removeFile(request, 
-						         db_food.getFood_image1());
-				mapAjax.put("result", "success");
+				if(food_image.equals("food_image1")) {
+					FileUtil.removeFile(request, db_food.getFood_image1());
+				}else if(food_image.equals("food_image2")) {
+					FileUtil.removeFile(request, db_food.getFood_image2());
+				}else if(food_image.equals("food_image3")) {
+					FileUtil.removeFile(request, db_food.getFood_image3());
+				}
 			}
 		}
 		
