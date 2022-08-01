@@ -65,7 +65,7 @@
 			</c:forEach>
 			</tbody>
 		</table>
-		<div class=write_button>
+		<div class="write_button">
 		<c:if test="${user_auth == 3 && !empty user_num}">
 			<img src="../images/pen1.png" id="write_pen">
 			<input id="write_button_box" type="button" value="글쓰기" onclick="location.href='writeForm.do'">
