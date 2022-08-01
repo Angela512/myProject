@@ -396,22 +396,7 @@ input[id="zipcode"] {
 .form-notice {
 	margin-left: 130px;
 }
-/*My Page*/
-.mypage-div {
-	width: 48%;
-	float: left;
-	padding: 5px;
-}
 
-.mypage-end {
-	clear: both;
-}
-
-.my-photo {
-	object-fit: cover;
-	object-position: top;
-	border-radius: 50%;
-}
 /* 공지 말머리 css 시작 */
 .must{
   width: 45px;
@@ -464,6 +449,75 @@ input[id="zipcode"] {
 }
 
 /* 자유게시판 말머리 css 끝 */
+
+/* 마이페이지 내정보 시작 */
+#photo_btn{
+	color: #fff;
+	width: 80px; 
+	height: 35px;
+	font-size:15px;
+	font-weight: 600;
+	border: 0;
+	background-color: #FA5D57;
+	border-radius: 3px;
+	margin:20px 0 0 0;
+}
+.mypage-div1 {
+	width: 40%;
+	padding: 5px;
+}
+.mypage-div2 {
+	width: 60%;
+	padding: 5px;
+}
+.mypage-end {
+	clear: both;
+}
+
+.my-photo {
+	object-fit: cover;
+	object-position: top;
+	border-radius: 50%;
+}
+.mypage-box{
+	margin-top:3%;
+	width:100%;
+	display:flex;
+}
+.mypage-div2 label{
+	font-weight: bold;
+}
+.mypage-div2 li{
+	margin:1.5% 0px 0px 0px;
+	
+}
+#modify_btn{
+	color: #fff;
+	width: 120px; 
+	height: 35px;
+	font-size:15px;
+	font-weight: 600;
+	border: 0;
+	background-color: #FA5D57;
+	border-radius: 3px;
+	margin:20px 0 0 0;
+}
+.out_btn_box{
+	text-align:right;
+}
+#out_btn{
+	color: #fff;
+	width: 80px; 
+	height: 35px;
+	font-size:15px;
+	font-weight: 600;
+	border: 0;
+	background-color: #FA5D57;
+	border-radius: 3px;
+	margin:20px 0 0 0;
+}
+
+/* 마이페이지 내정보 끝 */
 
 /* footer 시작 */
 * {

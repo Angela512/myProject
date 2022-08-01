@@ -16,7 +16,7 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="content-main">
 		<h2>마이페이지</h2>
-		<hr size="1" noshade="noshade" width="100%">
+		<hr width="100%" color="#b5b5b5" size="1px" noshade>
 		<div id="main_nav">
 				<ul>
 						<li>
@@ -36,8 +36,8 @@
 						</li>
 				</ul>
 			</div>
-		
-		<div class="mypage-div">
+		<div class="mypage-box">
+		<div class="mypage-div1">
 			<h3>프로필 사진</h3>
 			<ul>
 				<li>
@@ -52,7 +52,7 @@
 				
 				<li>
 					<div class="align-center">
-						<input type="button" value="수정" id="photo_btn">
+						<input type="button" value="사진 변경" id="photo_btn">
 					</div>
 					<div id="photo_choice" style="display:none;">
 						<input type="file" id="photo" accept="image/gif,image/png,image/jpeg">
@@ -62,41 +62,37 @@
 				</li>
 			</ul>
 			
-			<h3>비밀번호 수정</h3>
-			<ul>
-				<li>
-					<input type="button" value="비밀번호 수정" onclick="location.href='modifyPasswordForm.do'">
-				</li>
-			</ul>
-			
-			<h3>회원탈퇴</h3>
-			<ul>
-				<li>
-					<input type="button" value="회원 탈퇴" onclick="location.href='deleteUserForm.do'">
-				</li>
-			</ul>
 		</div>
 		
-		<div class="mypage-div">
-			<h3>연락처</h3>
+		<div class="mypage-div2">
+			
 			<ul>
-				<li>이름 : ${member.mem_name }</li>
-				<li>전화번호 : ${member.mem_phone }</li>
-				<li>이메일 : ${member.mem_email }</li>
-				<li>우편번호 : ${member.mem_zipcode }</li>
-				<li>주소 : ${member.mem_addr1 } ${member.mem_addr2 }</li>
-				<li>가입일 : ${member.mem_date }</li>
+				<li><h3>내 정보</h3></li>
+				<li>
+					<label>이름</label>${member.mem_name }
+				</li>
+				<li><label>아이디</label>${member.mem_id}</li>
+				<li><label>비밀번호</label><input type="button" value="비밀번호 변경" onclick="location.href='modifyPasswordForm.do'"></li>
+				<li><label>전화번호</label>${member.mem_phone }</li>
+				<li><label>이메일</label>${member.mem_email }</li>
+				<li><label>우편번호</label>${member.mem_zipcode }</li>
+				<li><label>주소</label>${member.mem_addr1 } ${member.mem_addr2 }</li>
+				<li><label>가입일</label>${member.mem_date }</li>
 				<c:if test="${!empty member.mem_modify_date }">
-				<li>최근 정보 수정일 : ${member.mem_modify_date }</li>
+				<li><label>최근 정보 수정일</label>${member.mem_modify_date }</li>
 				</c:if>
 				<li>
-					<input type="button" value="연락처 수정" onclick="location.href='modifyUserForm.do'">
+					<input type="button" value="내 정보 수정" id="modify_btn" onclick="location.href='modifyUserForm.do'">
 				</li>
 			</ul>
 		</div>
-		
-		<div class="mypage-end"></div>
+		</div>
+		<div class="out_btn_box">
+			<input id="out_btn" type="button" value="회원탈퇴" onclick="location.href='deleteUserForm.do'">
+		</div>
+		<hr width="100%" color="#b5b5b5" size="1px" noshade>
 	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </div>
 </body>
 </html>
