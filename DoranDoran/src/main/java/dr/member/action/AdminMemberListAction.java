@@ -33,8 +33,14 @@ public class AdminMemberListAction implements Action{
 		
 		String keyfield = request.getParameter("keyfield");
 		String keyword = request.getParameter("keyword");
-		String auth=request.getParameter("auth");
+		String mem_auth=request.getParameter("auth");
+		String auth = null;
+		
 	//	int auth = Integer.parseInt(request.getParameter("auth"));
+		if(mem_auth != null) {
+			auth = "&auth=" + mem_auth;
+		}
+		
 		
 		MemberDAO dao = MemberDAO.getInstance();
 		int count = dao.getMemberCountByAdmin(auth,keyfield, keyword);
