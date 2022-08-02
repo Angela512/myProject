@@ -69,6 +69,7 @@ thead {
 td, th {
   padding: 1em .5em;
   vertical-align: middle;
+  width:25%;
 }
 td {
   border-bottom: 1px solid rgba(0,0,0,.1);
