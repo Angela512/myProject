@@ -166,7 +166,7 @@
 			<c:forEach var="job" items="${jobList}">
 			<tr>
 				<td><a href="detail.do?job_num=${job.job_num}">${job.job_title}</a></td>
-				<td>${job.job_num}</td>
+				<td>${job.mem_name}</td>
 				<td>${job.job_date}</td>
 			</tr>
 			</c:forEach>

@@ -109,7 +109,6 @@ td {
 .content-main li{
 	padding:5px;
 	position:relative;
-	left:25%;
 }
 .content-main label{
 	color: #333;
@@ -195,7 +194,6 @@ ul.default-info {
 	margin: 50px 0 0 0;
 	display:flex;
 	position:relative;
-	left:25%;
 }
 
 .job_detail table{
@@ -204,6 +202,7 @@ ul.default-info {
 
 .job_detail td{
 	border:none;
+	text-align:left;
 }
 
 .detail_sub {
@@ -316,9 +315,10 @@ select::-ms-expand {
 	/* border: 1px solid red; */
 }
 
-.detail-info-r{
+li.detail-info-r{
 	text-align:right;
 	float:right;
+	margin:24px 0 0 0;
 }
 
 #modify_btn{
