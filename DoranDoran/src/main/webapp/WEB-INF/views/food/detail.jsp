@@ -80,7 +80,7 @@ li.img{
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="content-main">
-			<h1 style="margin:0 auto; text-align:center;">[${food.food_local}] ${food.food_name}</h1>
+			
 		<ul class="detail-info">
 			<li>
 				<c:if test="${!empty food.mem_photo}">
@@ -101,7 +101,9 @@ li.img{
 			<li id="n_count"> 조회수 ${food.food_count}</li>
 		</ul>
 		<hr size="1" noshade="noshade" width="100%">
-		
+		<br>
+		<h1 style="margin:0 auto; text-align:left;">[${food.food_local}] ${food.food_name}</h1>
+		<br><br>
 			
 		<div>
 		  <ul style="disply:inline-block; padding:0px; display:flex;">
