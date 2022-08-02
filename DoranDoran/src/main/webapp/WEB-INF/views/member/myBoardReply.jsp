@@ -38,26 +38,6 @@
 				</li>
 		</ul>
 	</div>
-
-	<div id="main_nav">
-		<ul>
-				<li>
-					<a href="myWrite.do">맛집찾기</a>
-				</li>
-				
-				<li>
-					<a href="trade.do">중고거래</a>
-				</li>
-
-				<li>
-					<a href="job.do">구인구직</a>
-				</li>
-
-				<li>
-					<a href="board.do">자유게시판</a>
-				</li>
-		</ul>
-	</div>
 	
 	<hr size="1" noshade="noshade" width="100%">
 	</div>
@@ -70,16 +50,16 @@
 		<table class="board_table">
 		<thead>
 			 <tr>
-			 	<th>작성자</th>
+			 	<th>No</th>
 			 	<th>내용</th>
 			 	<th>작성일</th>
 			 </tr>
 		</thead>
-			 <c:forEach var="board_reply" items="${list}">
+			 <c:forEach var="board_reply" items="${list}" varStatus="status">
 			 <tr id="tr_hover">
-			 	<td>${board_reply.mem_num}</td>
-			 	<td><a href="${pageContext.request.contextPath}/board/detail.do?board_num=${board.board_num}">${board_reply.reply_content}</a></td>  
-			 	<td>${board_reply.reply_date}</td>
+			 	<td>${fn:length(list) - status.index}</td>
+			 	<td><a href="${pageContext.request.contextPath}/board/detail.do?board_num=${board_reply.board_num}">${board_reply.reply_content}</a></td>  
+			 	<td>${fn:substring(board_reply.reply_date, 0, 11)}</td>
 			 </tr>
 			 </c:forEach>
 		</table>

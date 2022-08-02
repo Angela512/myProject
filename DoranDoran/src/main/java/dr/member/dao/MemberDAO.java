@@ -984,6 +984,7 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 			
 			while(rs.next()) {
 				BoardReplyVO boardReply = new BoardReplyVO(); 
+				boardReply.setBoard_num(rs.getInt("board_num"));
 				boardReply.setMem_num(rs.getInt("mem_num"));
 				boardReply.setReply_content(rs.getString("reply_content")); 
 				boardReply.setReply_date(rs.getString("reply_date"));

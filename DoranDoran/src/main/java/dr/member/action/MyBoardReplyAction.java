@@ -31,7 +31,7 @@ public class MyBoardReplyAction implements Action{
 		int count = dao.getMyBoardReplyCount(user_num);
 		
 		//페이지 처리
-		PagingUtil page= new PagingUtil(Integer.parseInt(pageNum), count, 10, 5, "board.do");
+		PagingUtil page= new PagingUtil(Integer.parseInt(pageNum), count, 10, 5, "myReply.do");
 		
 		List<BoardReplyVO> list=null;
 		
