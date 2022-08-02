@@ -63,6 +63,7 @@
 	<hr width="100%" class="hr-look" size="1" noshade="noshade">
 		
 	<div class="align-center" id="mytrade_button">
+	<input type="hidden" value="${param.trade_head}" name="trade_head">
 		<div class="btn-group" role="group" aria-label="Basic outlined example">
 		<input type="button" value="삽니다" class="btn btn-outline-primary" onclick="location.href='trade.do?trade_head=0'">
 		<input type="button" value="팝니다" class="btn btn-outline-primary" onclick="location.href='trade.do?trade_head=1'">

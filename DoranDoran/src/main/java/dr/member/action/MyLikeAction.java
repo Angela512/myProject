@@ -27,12 +27,16 @@ public class MyLikeAction implements Action{
 		if(pageNum==null) pageNum="1";
 		
 		String trade_head=request.getParameter("trade_head");
+		String first_head=null;
+		if(trade_head!=null) {
+			first_head="&trade_head="+trade_head;
+		}
 		
 		MemberDAO dao=MemberDAO.getInstance();
 		int count=dao.getMyLikeTradeCount(trade_head, user_num);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(Integer.parseInt(pageNum),count,8,5,"myLike.do");
+		PagingUtil page = new PagingUtil(Integer.parseInt(pageNum),count,8,5,"myLike.do",first_head);
 		
 		List<TradeVO> list=null;
 		

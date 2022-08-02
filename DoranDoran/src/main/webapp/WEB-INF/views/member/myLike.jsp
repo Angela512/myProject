@@ -20,6 +20,7 @@
 	<div class="content-main">
 	<h2>마이페이지</h2>
 	<hr size="1" noshade="noshade" width="100%">
+	<input type="hidden" value="${param.trade_head}" name="trade_head">
 	<div id="main_nav">
 		<ul>
 				<li>
