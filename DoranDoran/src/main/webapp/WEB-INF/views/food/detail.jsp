@@ -14,9 +14,7 @@
 <style type="text/css">
 
 li.j{
-	
 	margin-top:25px;
-	
 }
 
 
@@ -39,16 +37,52 @@ li.img{
 	border-radius: 3px;
 }
 
+.detail-info {
+	/* border: 1px solid red; */
+	padding:0;
+	margin:0;
+}
+.detail-info .my-photo{
+	float:left;
+	
+}
+.detail-info #name{
+	/* border: 1px solid red; */
+	float:center;
+}
+.detail-info #name span{
+	font-weight: 600;
+	/* border: 1px solid red; */
+}
+.detail-info #reply_view{
+	/* border: 1px solid red; */
+	float:right;
+	margin: 24px 0 0 0;
+}
+
+.detail-info #content{
+	border: 1px solid red;
+	margin: 10px ;
+}
+
+.detail-img {
+	margin:50px 0 0 0;
+}
+.detail_bottom_btn{
+	width:100%;
+	height: 100px;
+	position:relative;
+	/* border: 1px solid red; */
+}
 </style>
 </head>
 <body>
 <div class="page-main">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="content-main">
-		
+			<h1 style="margin:0 auto; text-align:center;">[${food.food_local}] ${food.food_name}</h1>
 		<ul class="detail-info">
 			<li>
-				<br>
 				<c:if test="${!empty food.mem_photo}">
 				<img src="${pageContext.request.contextPath}/upload/${food.mem_photo}" width="40" height="40" class="my-photo">
 				</c:if>
@@ -56,18 +90,21 @@ li.img{
 				<img src="${pageContext.request.contextPath}/images/face.png" width="40" height="40" class="my-photo">
 				</c:if>
 			</li>
-			<li>
-				${food.mem_name}<br>
-				조회 : ${food.food_count}
+			<li id="name">
+				<span>${food.mem_name}</span><br>
+				${food.food_date}
+			 	<c:if test="${!empty food.food_date_modi}">
+				| 최근 수정일 ${food.food_date_modi}
+				</c:if>
+			 	
 			</li>
+			<li id="n_count"> 조회수 ${food.food_count}</li>
 		</ul>
-		<h1 style="margin:0 auto; text-align:center;">[${food.food_local}] ${food.food_name}</h1>
-		<br>
 		<hr size="1" noshade="noshade" width="100%">
 		
 			
 		<div>
-		  <ul style="disply:inline-block; padding:10px; display:flex;">
+		  <ul style="disply:inline-block; padding:0px; display:flex;">
 		    <c:if test="${!empty food.food_image1}">
 		    <li class="img"><img src="${pageContext.request.contextPath}/upload/${food.food_image1}" class="detail-image"></li>
 		    </c:if>
@@ -83,7 +120,7 @@ li.img{
 		
 		<br><br><br>
 		<div>
-			<ul>
+			<ul style="padding-left:10px;">
 				<li class="j">
 					<b>대표메뉴</b><span style="padding-left:30px;">${food.food_menu}</span>
 				</li>

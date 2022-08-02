@@ -1,0 +1,630 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'MaplestoryOTFBold';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFBold.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap')
+	;
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+@font-face {
+	font-family: 'Nanum Gothic';
+	font-style: normal;
+	font-weight: 700;
+	src:
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Bold.eot);
+	src:
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Bold.eot?#iefix)
+		format('embedded-opentype'),
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Bold.woff2)
+		format('woff2'),
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Bold.woff)
+		format('woff'),
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Bold.ttf)
+		format('truetype');
+}
+
+@font-face {
+	font-family: 'Nanum Gothic';
+	font-style: normal;
+	font-weight: 400;
+	src:
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.eot);
+	src:
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.eot?#iefix)
+		format('embedded-opentype'),
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.woff2)
+		format('woff2'),
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.woff)
+		format('woff'),
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.ttf)
+		format('truetype');
+}
+
+@font-face {
+	font-family: 'Nanum Gothic';
+	font-style: normal;
+	font-weight: 800;
+	src:
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-ExtraBold.eot);
+	src:
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-ExtraBold.eot?#iefix)
+		format('embedded-opentype'),
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-ExtraBold.woff2)
+		format('woff2'),
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-ExtraBold.woff)
+		format('woff'),
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-ExtraBold.ttf)
+		format('truetype');
+}
+
+/*공통*/
+body {
+	margin: 0 auto;
+	font-family: 'Nanum Gothic';
+	font-weight: 400;
+	color: #1f1f1f !important;
+}
+
+.page-main {
+	/* 	background:white;
+	margin:40px 0;
+	border-radius:5px;
+	box-shadow:0 2px 6px rgba(100,100,100,.3);
+	min-height:650px; */
+	padding: 0px 15% 0px 15% ;
+}
+
+#main_login {
+	text-align: right;
+}
+
+#main_login ul li {
+	display: inline-block;
+	vertical-align: middle;
+}
+#main_login .menu-profile{
+	margin-left:1%;
+}
+#main_login .menu-logout{
+	width:130px;
+	text-align:left;
+}
+#main_logo {
+	padding-top: 0px;
+	font-family: 'MaplestoryOTFBold';
+	color: #FA5D57;
+	font-size: 20px;
+}
+
+#main_logo a:visited {
+	color: #FA5D57;
+}
+
+#main_nav {
+	background-color: #ffffff;
+	text-align: center;
+	font-weight: 600;
+	color:#666666;
+	font-size:18px;	
+}
+
+#main_nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#main_nav ul li {
+	display: inline-block;
+	width: 150px;
+	text-align: center;
+	padding-top: 5px;
+}
+
+.result-display {
+	width: 400px;
+	height: 200px;
+	margin: 50px auto;
+/* 	border: 1px solid #000;
+ */	display: flex; /*하위요소를 수직으로 쌓을 수 있는 공간을 만듬*/
+	align-items: center; /*세로 정렬*/
+	justify-content: center; /*가로 정렬*/
+}
+
+.align-center {
+	text-align: center;
+}
+
+.align-right {
+	text-align: right;
+}
+
+.align-left {
+	text-align: left;
+}
+
+a:link {
+	text-decoration: none;
+	color: #000000;
+}
+
+a:visited {
+	text-decoration: none;
+	color: #1f1f1f;
+}
+
+a:hover {
+	text-decoration: none;
+	color: #6C6C6C;
+}
+/* 메인 */
+.board-space .horizontal-area {
+	margin: 2px;
+	padding: 3px;
+	width: 250px;
+	height: 310px;
+	float: left;
+	overflow: hidden;
+}
+
+.board-space .horizontal-area img.board-image {
+	width: 215px;
+	height: 175px;
+}
+
+.board-space .horizontal-area div.board-detail {
+	align-items: center;
+}
+
+.board-space .horizontal-area span {
+	padding: 5px;
+	margin: 5px;
+}
+.board-space .horizontal-area span#detail-title{
+	font-size: 15pt;
+}
+
+.board-space .horizontal-area span.small{
+	color:#5b695f;
+}
+
+.board-space .float-clear {
+	clear: both;
+}
+
+/*목록*/
+form#search_form {
+	border: none;
+	width:100%;
+}
+
+ul.search {
+	width: 300px;
+	list-style: none;
+	padding: 0;
+	margin: 0 auto;
+}
+
+ul.search li {
+	margin: 0 0 9px 0;
+	padding: 0;
+	display: inline;
+}
+
+.list-space {
+	margin-bottom: 10px;
+}
+
+table {
+/* 	width: 100%;
+	border: 1px solid #000;
+	border-collapse: collapse;
+	margin-top: 5px; */
+	text-align:center;
+}
+/*
+table td, table th {
+	border: 1px solid #000;
+	padding: 10px 0 10px 0;
+}
+
+table th{
+	padding: 20px 0 20px 0;
+	font-weight:bold;
+	
+} */
+/* 글상세 */
+ul.detail-info {
+	list-style: none;
+}
+
+ul.detail-info li {
+	display: inline-block;
+}
+
+.detail-img {
+	max-width: 500px;
+}
+
+ul.detail-sub {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+ul.detail-sub li {
+	display: inline-block;
+	width: 49%;
+	height: 50px;
+	vertical-align: middle;
+}
+
+ul.detail-sub li:first-child img {
+	vertical-align: middle;
+}
+
+ul.detail-sub li:last-child {
+	text-align: right;
+	line-height: 250%;
+}
+
+#output_fav {
+	cursor: pointer;
+}
+/* 댓글시작*/
+ div#reply_div {
+	padding: 5px 10px 40px 10px;
+	margin-top: 10px;
+	background-color: #EEEEEE;
+} 
+form#re_form {
+	width: 100%;
+	border: none;
+}
+
+span.re-title {
+	color: #000;
+	font-size: 12pt;
+	line-height: 200%;
+} 
+/* 댓글끝*/
+span.letter-count {
+	font-size: 10pt;
+	color: #999;
+}
+
+textarea.rep-content {
+	width: 90%;
+	height: 50px;
+	margin: 10px 10px;
+}
+
+div#re_first, div#mre_first {
+	float: left;
+	width: 70%;
+	padding-left: 15px;
+	margin-bottom: 10px;
+}
+
+div#re_second, div#re_second {
+	float: left;
+	width: 19%;
+	margin-bottom: 10px;
+}
+
+div#loading {
+	width: 100px;
+	height: 50px;
+	/*정중앙에 div를 배치하기 위한 설정*/
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: trancelate(-50%, -50%);
+	display: flex;
+	/*세로 정렬*/
+	align-items: center;
+	justify-content: center;
+}
+
+div.paging-button {
+	text-align: right;
+}
+
+div#output {
+	clear: both;
+}
+
+form#mre_form {
+	border: none;
+	margin: 5px;
+}
+/* 회원가입 시작 */
+#register_form{
+	height: 600px;
+}
+#register_form ul{
+	padding-left:100px;
+}
+#register_form  label{
+	font-weight: bold;
+	margin:1% 0px 0px 0px;
+}
+#register_form  li{
+	margin:1.5% 0px 0px 0px;
+
+}
+#register_form input.underline{
+	border-top: black;
+	border-right: black;
+	border-left: black;
+}
+
+#home_btn, #register_btn{
+	color: #fff;
+	font-size:15px;
+	font-weight:600;
+	width:80px;
+	height:35px;
+	border: 0;
+	background-color: #FA5D57;
+	border-radius: 3px;
+	cursor:pointer;
+}
+form {
+	width: 600px;
+	margin: 0 auto;
+	padding: 10px 10px 10px 30px;
+}
+
+ul {
+	list-style: none;
+}
+
+label {
+	width: 130px;
+	float: left; /*태그를 왼쪽으로 정렬*/
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+	width: 200px;
+}
+
+#register_form input[id="id"] {
+	width: 113px;
+}
+
+input[id="zipcode"] {
+	width: 95px;
+}
+
+.form-notice {
+	margin-left: 130px;
+}
+/* 회원가입 끝 */
+
+/* 로그인 시작 */
+#login_form{
+	height:570px;
+}
+#login_form ul{
+	padding-left:100px;
+}
+#login_form  label{
+	width:80px;
+	font-weight: bold;
+	margin:1% 0px 0px 0px;
+}
+#login_form  li{
+	margin:1.5% 0px 0px 0px;
+
+}
+#login_form input.underline{
+	border-top: black;
+	border-right: black;
+	border-left: black;
+}
+#login_btn{
+	color: #fff;
+	font-size:15px;
+	font-weight:600;
+	width:80px;
+	height:35px;
+	border: 0;
+	background-color: #FA5D57;
+	border-radius: 3px;
+	cursor:pointer;
+}
+/* 로그인 끝 */
+
+/* 공지 말머리 css 시작 */
+.must{
+  width: 45px;
+  height: 20px;
+  background: #FA5D57;
+  color:white;
+  margin:auto;
+}
+.read{
+  width: 45px;
+  height: 20px;
+  color: #FA5D57;
+  margin:auto;
+  border: 1px solid #FA5D57;
+}
+/* 공지 말머리 css 끝 */
+
+/* 자유게시판 말머리 css 시작 */
+.news{
+  width: 100px;
+  height: 20px;
+  background: #FAAB36; 
+  color:white;
+  margin:auto;
+  padding: 0;
+}
+.help{
+  width: 100px;
+  height: 20px;
+  background: #FA5D57;
+  color:white;
+  margin:auto;
+  padding: 0;
+}
+.together{
+  width: 100px;
+  height: 20px;
+  background: #8B8C00;
+  color:white;
+  margin:auto;
+  padding: 0;
+}
+.etc{
+  width: 100px;
+  height: 20px;
+  background: #7C7877;
+  color:white;
+  margin:auto;
+  padding: 0;
+}
+
+/* 자유게시판 말머리 css 끝 */
+
+/* 마이페이지 내정보 시작 */
+#photo_btn{
+	color: #fff;
+	width: 80px; 
+	height: 35px;
+	font-size:15px;
+	font-weight: 600;
+	border: 0;
+	background-color: #FA5D57;
+	border-radius: 3px;
+	margin:20px 0 0 0;
+}
+.mypage-div1 {
+	width: 40%;
+	padding: 5px;
+}
+.mypage-div2 {
+	width: 60%;
+	padding: 5px;
+}
+.mypage-end {
+	clear: both;
+}
+
+.my-photo {
+	object-fit: cover;
+	object-position: top;
+	border-radius: 50%;
+}
+.mypage-box{
+	margin-top:3%;
+	width:100%;
+	display:flex;
+}
+.mypage-div2 label{
+	font-weight: bold;
+}
+.mypage-div2 li{
+	margin:1.5% 0px 0px 0px;
+	
+}
+#modify_btn{
+	color: #fff;
+	width: 120px; 
+	height: 35px;
+	font-size:15px;
+	font-weight: 600;
+	border: 0;
+	background-color: #FA5D57;
+	border-radius: 3px;
+	margin:20px 0 0 0;
+}
+.out_btn_box{
+	text-align:right;
+}
+#out_btn{
+	color: #fff;
+	width: 80px; 
+	height: 35px;
+	font-size:15px;
+	font-weight: 600;
+	border: 0;
+	background-color: #FA5D57;
+	border-radius: 3px;
+	margin:20px 0 0 0;
+}
+
+/* 마이페이지 내정보 끝 */
+
+/* footer 시작 */
+* {
+   box-sizing: border-box;
+}
+.footer_container{
+	float:left;
+	width:100%;
+	font-family: Verdana, sans-serif;
+}
+.footer {
+	background-color: red;
+}
+
+.footer_logo {
+	float:left;
+	width:30%;
+	text-align: right;
+	padding-top: 20px;
+	font-family: 'MaplestoryOTFBold';
+	color: #FA5D57;
+	padding-left: 10%;
+	padding-right:2%;
+}
+
+.footer_logo a:visited {
+	color: #FA5D57;
+}
+
+.footer_content {
+	float:right;
+	width:70%;
+	text-align: left;
+	padding-right: 10%;
+	padding-left:2%;
+	font-size: 10pt;
+}
+/* footer 끝 */
+
+/* 검색 */
+/* 
+#search keyfield{
+  width: 100px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input#keyword{
+  width: 200px;
+ padding: 10px 0 0 0 ;
+ 
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+ */

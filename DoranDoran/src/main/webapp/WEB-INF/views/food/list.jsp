@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/food-style.css" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script:400" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Song+Myung:400" rel="stylesheet">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/food-style2.css" type="text/css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/food.js"></script>
 
@@ -314,7 +314,6 @@ ul.search_board li{
 			<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
 

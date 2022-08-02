@@ -50,3 +50,12 @@
 }
 /*카테고리(head) 공통 끝*/
 
+.detail-info {
+	/* border: 1px solid red; */
+	padding:0;
+	margin:0;
+}
+.detail-info .my-photo{
+	float:left;
+	
+}
