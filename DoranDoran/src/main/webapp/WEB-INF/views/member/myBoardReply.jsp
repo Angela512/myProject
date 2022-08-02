@@ -67,18 +67,18 @@
 		</div>
 		</c:if>
 		<c:if test="${count > 0}">
-		<table class="boardreply_table">
+		<table class="board_table">
 		<thead>
 			 <tr>
-			 	<th>내용</th>
 			 	<th>작성자</th>
+			 	<th>내용</th>
 			 	<th>작성일</th>
 			 </tr>
 		</thead>
 			 <c:forEach var="board_reply" items="${list}">
 			 <tr id="tr_hover">
-			 	<td><a href="${pageContext.request.contextPath}/board/detail.do?board_num=${board.board_num}">${boardReply.reply_content}</a></td>
-			 	<td>${boardReply.mem_name}</td>  
+			 	<td>${boardReply.mem_num}</td>
+			 	<td><a href="${pageContext.request.contextPath}/board/detail.do?board_num=${board.board_num}">${boardReply.reply_content}</a></td>  
 			 	<td>${boardreply.reply_date}</td>
 			 </tr>
 			 </c:forEach>
