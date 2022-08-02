@@ -12,6 +12,12 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/notice.js"></script>
 
+<style>
+	.active, .category_btn:hover {
+  background-color: #666;
+  color: white;
+}
+</style>
 </head>
 <body>
 	
@@ -22,7 +28,7 @@
 		<jsp:include page="/WEB-INF/views/job/banner.jsp" />
 		
 		<div class="content-main">
-			<div id="category_btn" class="job_ct">
+			<div id="category_btn job-category" class="job_ct">
 				<input class="category_btn" type="button" value="전체보기" onclick="location.href='list.do'">
 				<input class="category_btn" type="button" value="어업" onclick="location.href='list.do?job_category=어업'">
 				<input class="category_btn" type="button" value="농업" onclick="location.href='list.do?job_category=농업'">
@@ -31,6 +37,8 @@
 				<input class="category_btn" type="button" value="서비스" onclick="location.href='list.do?job_category=서비스'">
 				<input class="category_btn" type="button" value="생산" onclick="location.href='list.do?job_category=생산'">
 				<input class="category_btn" type="button" value="기타" onclick="location.href='list.do?job_category=기타'">
+				<Button class="category_btn"  value="기타" onclick="location.href='list.do?job_category=요식'">
+			
 			</div>
 
 			<!-- 글쓰기, 목록, 홈 버튼 -->
@@ -121,6 +129,18 @@
 		menu.addEventListener('click', clickHandler);
 	</script> -->
 </body>
+<script>
+// Add active class to the current button (highlight it)
+var header = document.getElementById("job-category");
+var btns = header.getElementsByClassName("category_btn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+  var current = document.getElementsByClassName("active");
+  current[0].className = current[0].className.replace(" active", "");
+  this.className += " active";
+  });
+}
+</script>
 </html>
 
 

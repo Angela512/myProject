@@ -77,7 +77,7 @@
 			</c:if>
 			<c:if test="${!empty trade.trade_image1 }">
 	  			<div class="carousel-item active">
-					<img src="${pageContext.request.contextPath}/upload/${trade.trade_image1}" class="d-block w-100">
+					<img src="${pageContext.request.contextPath}/upload/${trade.trade_image1}" class="d-block w-100">				
 				</div>
 			</c:if>
 	

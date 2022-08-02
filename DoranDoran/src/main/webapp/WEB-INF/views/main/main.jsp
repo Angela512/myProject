@@ -10,171 +10,28 @@
 <title>메인</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main-header.css" type="text/css">
-<style>
-.container{
-	display:flex;
-	justify-content: space-between;
-}
-.container_table{
-	width:48%;
-}
-.tboard{
-	display: flex;
-  justify-content: space-between;
-}
-.tname {
-  height: 50px;
-  text-align: center;
-}
-.main_table {
-  border: 1px #a39485 solid;
-  font-size: 16px;
-
-  width: 100%;
-  border-collapse: collapse;
-  border-radius: 5px;
-  overflow: hidden;
-}
-thead {
-  font-weight: bold;
-  background: #E1E1E1;
-}
-td, th {
-  padding: 1em .5em;
-  vertical-align: middle;
-}
-  
- td {
-  border-bottom: 1px solid rgba(0,0,0,.1);
-  background: #fff;
-}
-
-
-.mySlides {
-   display: none;
-}
-
-.mySlides img {
-   vertical-align: middle;
-   /*
-   width: 1920px;
-   height: 1080px;
-   */
-}
-
-/* Slideshow container */
-
-.slideshow-container {
-   /*
-   max-width: 100%;
-   position: relative;
-   margin: auto;
-   */
-   margin-top:20px;
-}
-
-/* Caption text */
-/* .text {
-   color: #f2f2f2;
-   font-size: 15px;
-   padding: 8px 12px;
-   position: absolute;
-   bottom: 8px;
-   width: 100%;
-   text-align: center;
-} */
-
-/* Number text (1/3 etc) */
-.numbertext {
-   color: #f2f2f2;
-   font-size: 12px;
-   padding: 8px 12px;
-   position: absolute;
-   top: 0;
-}
-
-/* The dots/bullets/indicators */
-.dot {
-   height: 15px;
-   width: 15px;
-   margin: 0 2px;
-   background-color: #bbb;
-   border-radius: 50%;
-   display: inline-block;
-   transition: background-color 0.6s ease;
-}
-
-.active {
-   background-color: #717171;
-}
-
-/* Fading animation */
-.fade {
-   animation-name: fade;
-   animation-duration: 1.5s;
-}
-
-@
-keyframes fade {
-   from {opacity: .4
-}
-
-to {
-   opacity: 1
-}
-
-}
-
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
-   .text {
-      font-size: 11px
-   }
-}
-
-
-/* 화면 디자인 맛집 게시판용 css  */
-.board-spacee .horizontal-areaa{
-	margin:0px ;
-	padding:0px;
-	width:150px;
-	height:200px;
-	float:left;
-	overflow: hidden;
-}
-
-.board-spacee .horizontal-areaa img.board-imagee{
-	width:100px;
-	height:120px;
-}
-
-</style>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/header.js"></script>
 </head>
 <body>
+
     <jsp:include page="/WEB-INF/views/common/header.jsp"/>
       <div class="slideshow-container">
 
-         <div class="mySlides fade">
-<!--             <div class="numbertext">1 / 3</div>
- -->            <img src="../images/coffee1.jpg" style="width: 100%;height:450px;">
-<!--             <div class="text">Caption Text</div>
- -->         </div>
+		<div class="mySlides fade">
+			<img src="../images/coffee1.jpg">
+		</div>
 
-         <div class="mySlides fade">
-<!--             <div class="numbertext">2 / 3</div>
- -->            <img src="../images/coffee2.jpg" style="width: 100%;height:450px;">
-<!--             <div class="text">Caption Two</div>
- -->         </div>
+		<div class="mySlides fade">
+			<img src="../images/coffee2.jpg">
+		</div>
 
-         <div class="mySlides fade">
-<!--             <div class="numbertext">3 / 3</div>
- -->            <img src="../images/aabb.jpg" style="width: 100%;height:450px;">
-<!--             <div class="text">Caption Three</div>
- -->         </div>
+		<div class="mySlides fade">
+			<img src="../images/aabb.jpg">
+		</div>
 
-      </div>
+		</div>
+		
    <div class="page-main">
-      <br>
 
       <div style="text-align: center">
          <span class="dot"></span> <span class="dot"></span> <span class="dot"></span>

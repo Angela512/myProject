@@ -53,8 +53,7 @@
 		<hr size="1" noshade="noshade" width="100%">
 		<c:if test="${!empty board.board_image1}">
 		<div class="align-center">
-			<img src="${pageContext.request.contextPath}
-			/upload/${board.board_image1}" class="detail-img">
+			<img src="${pageContext.request.contextPath}/upload/${board.board_image1}" class="detail-img">
 		</div>
 		</c:if>
 		<c:if test="${!empty board.board_image2}">
