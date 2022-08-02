@@ -118,7 +118,7 @@ public class MemberDAO {
 			if(rs.next()) {
 				member=new MemberVO();
 				member.setMem_num(rs.getInt("mem_num"));
-				member.setMem_id(rs.getString("mem_id"));
+				member.setMem_name(rs.getString("mem_name"));
 				member.setAuth(rs.getInt("auth"));
 				member.setMem_pw(rs.getString("mem_pw"));
 				member.setMem_photo(rs.getString("mem_photo"));;

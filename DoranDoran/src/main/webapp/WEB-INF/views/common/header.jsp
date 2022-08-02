@@ -29,7 +29,7 @@
       </c:if>
 
       <c:if test="${!empty user_num}">
-         <li class="menu-logout">[<span>${user_id}</span>] <a
+         <li class="menu-logout">[<span>${user_name}</span>] <a
             href="${pageContext.request.contextPath}/member/logout.do">로그아웃</a>
          </li>
       </c:if>

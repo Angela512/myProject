@@ -23,8 +23,6 @@ public class LoginAction implements Action{
 		MemberVO member = dao.checkMember(mem_id);
 		boolean check = false;
 		
-		System.out.println("1:"+member);
-		
 		if(member!=null) {
 			//비밀번호 일치 여부 체크
 			check = member.isCheckedPassword(mem_pw);
@@ -33,13 +31,11 @@ public class LoginAction implements Action{
 			request.setAttribute("auth", member.getAuth());
 		}
 		
-		System.out.println("3:"+check);
-		
 		if(check) { //인증 성공
 			//로그인 처리
 			HttpSession session = request.getSession();
 			session.setAttribute("user_num", member.getMem_num());
-			session.setAttribute("user_id", member.getMem_id());
+			session.setAttribute("user_name", member.getMem_name());
 			session.setAttribute("user_auth", member.getAuth());
 			session.setAttribute("user_photo", member.getMem_photo());
 			
