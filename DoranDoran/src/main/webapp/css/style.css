@@ -440,6 +440,7 @@ input[id="zipcode"] {
 .must{
   width: 45px;
   height: 20px;
+  line-height:20px;
   background: #FA5D57;
   color:white;
   margin:auto;
@@ -447,6 +448,7 @@ input[id="zipcode"] {
 .read{
   width: 45px;
   height: 20px;
+  line-height:20px;
   color: #FA5D57;
   margin:auto;
   border: 1px solid #FA5D57;
