@@ -20,6 +20,7 @@ public class DetailAction implements Action{
 		dao.updateReadcount(board_num);
 		//글상세 정보 반환
 		BoardVO board = dao.getBoard(board_num);
+		int reply=dao.getReplyBoardCount(board_num);
 		
 		//HTML을 허용하지 않음
 		board.setBoard_title(StringUtil.useNoHtml(board.getBoard_title()));
@@ -27,6 +28,7 @@ public class DetailAction implements Action{
 		board.setBoard_content(StringUtil.useBrNoHtml(board.getBoard_content()));
 		
 		request.setAttribute("board", board);
+		request.setAttribute("reply", reply);
 		
 		return "/WEB-INF/views/board/detail.jsp";
 	}

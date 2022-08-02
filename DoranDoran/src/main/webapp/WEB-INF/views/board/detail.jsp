@@ -48,7 +48,7 @@
 				| 수정 ${board.board_modifydate}
 				</c:if>
 			</li>
-			<li id="reply_view">댓글 ${board.reply_cnt} | 조회수 ${board.board_count}</li>
+			<li id="reply_view">댓글 ${reply} | 조회수 ${board.board_count}</li>
 		</ul>
 		<hr size="1" noshade="noshade" width="100%">
 		<c:if test="${!empty board.board_image1}">
