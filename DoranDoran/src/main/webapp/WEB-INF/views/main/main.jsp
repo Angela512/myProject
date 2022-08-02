@@ -10,6 +10,7 @@
 <title>메인</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main-header.css" type="text/css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/header.js"></script>
 </head>
 <body>
 
