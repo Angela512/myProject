@@ -46,6 +46,10 @@
 		<div class="result-display">
 			표시할 게시물이 없습니다.
 		</div>
+		<div class=write_button>
+			<img src="../images/pen1.png" id="write_pen">
+			<input id="write_button_box" type="button" value="글쓰기" onclick="location.href='writeForm.do'">
+			</div>
 		</c:if>
 		<c:if test="${count > 0}">
 		<table class="board_table">
