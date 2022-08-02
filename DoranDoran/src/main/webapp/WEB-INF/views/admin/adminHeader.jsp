@@ -4,7 +4,7 @@
 <div id="main_sub_nav">
 	<ul>
 		<li>
-			<a href="${pageContext.request.contextPath}/member/memberList.do">전체글</a>
+			<a href="${pageContext.request.contextPath}/member/memberList.do">전체</a>
 		</li>
 		<li>
 			<a href="${pageContext.request.contextPath}/member/memberList.do?auth=3">관리</a>

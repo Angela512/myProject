@@ -95,6 +95,38 @@ ul.search_notice li{
 	border-radius: 3px;
 	cursor:pointer;
 }
+/* 등급 별 색상 */
+.admin{
+  width: 50px;
+  height: 20px;
+  color: #fff;
+  background-color:#AB1297;
+  margin:auto;
+  border: none;
+}
+.normal{
+  width: 50px;
+  height: 20px;
+  color: #fff;
+  background-color:#1F51B7;
+  margin:auto;
+  border: none;
+}
+.block{
+  width: 50px;
+  height: 20px;
+  color: #fff;
+  background-color:#35B62C;
+  margin:auto;
+  border: none;
+}
+.out{
+  width: 50px;
+  height: 20px;
+  color: #000;
+  margin:auto;
+  border: 1px solid #000;
+}
 /* 검색 폼 끝 */
 
 /* 회원정보 상세 시작 */
@@ -102,6 +134,43 @@ ul.search_notice li{
 	width:100%;
 	text-align: left;
 	margin: 25px 0 30px 0;
+}
+#badge_admin{
+	padding: 6px 0 0 12px;
+	width: 140px;
+	height: 30px;
+	color: #fff;
+	font-size:15px;
+	background-color: #AB1297;
+	border-radius: 200px;
+}
+#badge_normal{
+	padding: 6px 0 0 12px;
+	width: 155px;
+	height: 30px;
+	color: #fff;
+	font-size:15px;
+	background-color: #1F51B7;
+	border-radius: 200px;
+}
+#badge_block{
+	padding: 6px 0 0 12px;
+	width: 155px;
+	height: 30px;
+	color: #fff;
+	font-size:15px;
+	background-color: #35B62C;
+	border-radius: 200px;
+}
+#badge_out{
+	padding: 6px 0 0 12px;
+	width: 155px;
+	height: 30px;
+	color: #000;
+	font-size:15px;
+	background-color: #fff;
+	border-radius: 200px;
+	border: 1px solid #000;
 }
 #detail_form{
 	width:100%;

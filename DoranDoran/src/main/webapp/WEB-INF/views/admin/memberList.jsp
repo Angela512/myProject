@@ -33,8 +33,6 @@
 			<tr>
 				<th>ID</th>
 				<th>이름</th>
-				<th>이메일</th>
-				<th>전화번호</th>
 				<th>가입일</th>
 				<th>등급</th>
 			</tr>
@@ -47,10 +45,8 @@
 					<a href="detailUserForm.do?mem_num=${member.mem_num}">${member.mem_id}</a>
 				</td>
 				<td>${member.mem_name}</td>
-				<td>${member.mem_email}</td>
-				<td>${member.mem_phone}</td>
 				<td>${member.mem_date}</td>
-				<td>관리</td>
+				<td><div class="admin">관리</div></td>
 				</c:if>
 			</tr>
 			</c:forEach>
@@ -62,10 +58,8 @@
 					<a href="detailUserForm.do?mem_num=${member.mem_num}">${member.mem_id}</a>
 				</td>
 				<td>${member.mem_name}</td>
-				<td>${member.mem_email}</td>
-				<td>${member.mem_phone}</td>
 				<td>${member.mem_date}</td>
-				<td>일반</td>
+				<td><div class="normal">일반</div></td>
 				</c:if>
 			</tr>
 			</c:forEach>
@@ -77,10 +71,8 @@
 					<a href="detailUserForm.do?mem_num=${member.mem_num}">${member.mem_id}</a>
 				</td>
 				<td>${member.mem_name}</td>
-				<td>${member.mem_email}</td>
-				<td>${member.mem_phone}</td>
 				<td>${member.mem_date}</td>
-				<td>정지</td>
+				<td><div class="block">정지</div></td>
 				</c:if>
 			</tr>
 			</c:forEach>
@@ -92,10 +84,8 @@
 					${member.mem_id}
 				</td>
 				<td>${member.mem_name}</td>
-				<td>${member.mem_email}</td>
-				<td>${member.mem_phone}</td>
 				<td>${member.mem_date}</td>
-				<td>탈퇴</td>
+				<td><div class="out">탈퇴</div></td>
 			</tr>
 			</c:if>
 			</c:forEach>

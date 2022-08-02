@@ -14,6 +14,18 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<hr width="100%" color="#b5b5b5" size="1px" id="hr_top1" noshade>
 	<div class="content-main">
+	<c:if test="${member.auth == 0}">
+		<td><div id="badge_out">회원관리 > 탈퇴회원</div></td>
+	</c:if>
+	<c:if test="${member.auth == 1}">
+		<td><div id="badge_block">회원관리  > 정지회원</div></td>
+	</c:if>
+	<c:if test="${member.auth == 2}">
+		<td><div id="badge_normal">회원관리 > 일반회원</div></td>
+	</c:if>
+	<c:if test="${member.auth == 3}">
+		<td><div id="badge_admin">회원관리  > 관리자</div></td>
+	</c:if>
 		<h2>${member.mem_name}님의 회원정보 (관리자 전용)</h2>
 		<form action="detailUser.do" method="post" id="detail_form">
 			<input type="hidden" name="mem_num" value="${member.mem_num}">
