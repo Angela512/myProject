@@ -78,7 +78,9 @@
 				</li>				
 				</c:if>
 				<li>
+				<c:if test="${member.auth != 3}">
 				<input type="submit" value="등급변경" id="button_box">
+				</c:if>
 				<input type="button" value="회원목록" id="button_box" onclick="location.href='memberList.do'">
 				</li>
 			</ul>
