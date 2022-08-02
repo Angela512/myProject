@@ -243,18 +243,20 @@ ul.search_notice li{
 
 /* 글 상세보기 시작 */
 #badge_must{
-	padding: 6px 0 0 12px;
+	text-align:center;
 	width: 125px;
 	height: 30px;
+	line-height:30px;
 	color: #fff;
 	font-size:15px;
 	background-color: #FA5D57;
 	border-radius: 200px;
 }
 #badge_read{
-	padding: 6px 0 0 12px;
+	text-align:center;
 	width: 125px;
 	height: 30px;
+	line-height:30px;
 	color: #FA5D57;
 	font-size:15px;
 	background-color: #fff;
