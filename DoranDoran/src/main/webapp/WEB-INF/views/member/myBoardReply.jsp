@@ -77,9 +77,9 @@
 		</thead>
 			 <c:forEach var="board_reply" items="${list}">
 			 <tr id="tr_hover">
-			 	<td>${boardReply.mem_num}</td>
-			 	<td><a href="${pageContext.request.contextPath}/board/detail.do?board_num=${board.board_num}">${boardReply.reply_content}</a></td>  
-			 	<td>${boardreply.reply_date}</td>
+			 	<td>${board_reply.mem_num}</td>
+			 	<td><a href="${pageContext.request.contextPath}/board/detail.do?board_num=${board.board_num}">${board_reply.reply_content}</a></td>  
+			 	<td>${board_reply.reply_date}</td>
 			 </tr>
 			 </c:forEach>
 		</table>

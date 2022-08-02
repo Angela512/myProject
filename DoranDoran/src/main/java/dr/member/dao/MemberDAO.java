@@ -1097,113 +1097,112 @@ public void updateMyPhoto(String mem_photo,int mem_num)throws Exception{
 /*                         */
 
 
-// 맛집찾기 글 수
-public int getMyFoodCount(int user_num) throws Exception {
-	Connection conn = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
-	String sql = null;
-	String sub_sql = "";
-	int count = 0;
+	// 맛집찾기 글 수
+	public int getMyFoodCount(int user_num) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int count = 0;
 
-	try {
-		// JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
-		conn = DBUtil.getConnection();
+		try {
+			// JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
+			conn = DBUtil.getConnection();
 
-		sql = "SELECT COUNT(*) FROM food j JOIN member m USING(mem_num) " + sub_sql;
+			sql = "SELECT COUNT(*) FROM food WHERE mem_num=?";
 
-		// JDBC 수행 3단계 : PreparedStatement 객체 생성
-		pstmt = conn.prepareStatement(sql);
-	
-		// JDBC 수행 4단계
-		rs = pstmt.executeQuery();
-		if (rs.next()) {
-			count = rs.getInt(1);
-		}
-	} catch (Exception e) {
-		throw new Exception(e);
-	} finally {
-		// 자원정리
-		DBUtil.executeClose(rs, pstmt, conn);
-	}
-	return count;
-}
-
-
-// 맛집찾기 목록
-public List<FoodVO> getMyFoodList(int start, int end, int mem_num) throws Exception {
-	Connection conn = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
-	List<FoodVO> list = null;
-	String sql = null;
-	String sub_sql = "";
-	int cnt = 0;
-
-	try {
-		// JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
-		conn = DBUtil.getConnection();
+			// JDBC 수행 3단계 : PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, user_num);
 		
-		sql = "SELECT * FROM (SELECT a.*, rownum rnum " + "FROM (SELECT * FROM food j JOIN member m "
-				+ "USING (mem_num) JOIN member_detail d " + "USING (mem_num) " + sub_sql
-				+ " ORDER BY j.food_num DESC)a) " + "WHERE rnum >= ? AND rnum <= ? AND mem_num=?";
-
-		
-		// JDBC 수행 3단계 : PreparedStatement 객체 생성
-		pstmt = conn.prepareStatement(sql);
-		// ?에 데이터 바인딩
-
-		pstmt.setInt(++cnt, start);
-		pstmt.setInt(++cnt, end);
-		pstmt.setInt(++cnt, mem_num);
-
-
-		// JDBC 수행 4단계
-		rs = pstmt.executeQuery();
-		list = new ArrayList<FoodVO>();
-		while (rs.next()) {
-			FoodVO food = new FoodVO();
-			food.setFood_num(rs.getInt("food_num"));
-			food.setMem_num(rs.getInt("mem_num"));
-			food.setFood_name(StringUtil.useNoHtml(rs.getString("food_name")));
-			food.setFood_phone1(rs.getString("food_phone1"));
-			food.setFood_phone2(rs.getString("food_phone2"));
-			food.setFood_phone3(rs.getString("food_phone3"));
-			
-			food.setFood_timeh1(rs.getString("food_timeh1"));
-			food.setFood_timem1(rs.getString("food_timem1"));
-			food.setFood_timeh2(rs.getString("food_timeh2"));
-			food.setFood_timem2(rs.getString("food_timem2"));
-			
-			food.setFood_menu(rs.getString("food_menu"));
-			food.setFood_link(rs.getString("food_link"));
-			food.setFood_zipcode(rs.getString("food_zipcode"));
-			food.setFood_addr1(rs.getString("food_addr1"));
-			food.setFood_addr2(rs.getString("food_addr2"));
-
-			food.setFood_image1(rs.getString("food_image1"));
-			food.setFood_image2(rs.getString("food_image2"));
-			food.setFood_image3(rs.getString("food_image3"));
-			food.setFood_count(rs.getInt("food_count"));		
-			food.setFood_content(rs.getString("food_content"));
-			food.setFood_date(rs.getDate("food_date"));
-			food.setFood_date_modi(rs.getDate("food_date_modi"));
-			
-			food.setMem_id(rs.getString("mem_id"));
-			food.setMem_name(rs.getString("mem_name"));
-			food.setMem_photo(rs.getString("mem_photo"));
-			
-			food.setFood_local(rs.getString("food_local"));
-			
-			list.add(food);
+			// JDBC 수행 4단계
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			// 자원정리
+			DBUtil.executeClose(rs, pstmt, conn);
 		}
-	} catch (Exception e) {
-		throw new Exception(e);
-	} finally {
-		// 자원정리
-		DBUtil.executeClose(rs, pstmt, conn);
+		return count;
 	}
-	return list;
-}
 
-}
+
+	// 맛집찾기 목록
+	public List<FoodVO> getMyFoodList(int start, int end, int mem_num) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<FoodVO> list = null;
+		String sql = null;
+		int cnt = 0;
+
+		try {
+			// JDBC 수행 1,2단계 : 커넥션풀로부터 커넥션 할당
+			conn = DBUtil.getConnection();
+			
+			sql = "SELECT * FROM (SELECT a.*, rownum rnum " + "FROM (SELECT * FROM food j JOIN member m "
+					+ "USING (mem_num) JOIN member_detail d " + "USING (mem_num) WHERE mem_num=?" 
+					+ " ORDER BY j.food_num DESC)a) " + "WHERE rnum >= ? AND rnum <= ?";
+
+			
+			// JDBC 수행 3단계 : PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			// ?에 데이터 바인딩
+
+			pstmt.setInt(++cnt, mem_num);
+			pstmt.setInt(++cnt, start);
+			pstmt.setInt(++cnt, end);
+
+
+			// JDBC 수행 4단계
+			rs = pstmt.executeQuery();
+			list = new ArrayList<FoodVO>();
+			while (rs.next()) {
+				FoodVO food = new FoodVO();
+				food.setFood_num(rs.getInt("food_num"));
+				food.setMem_num(rs.getInt("mem_num"));
+				food.setFood_name(StringUtil.useNoHtml(rs.getString("food_name")));
+				food.setFood_phone1(rs.getString("food_phone1"));
+				food.setFood_phone2(rs.getString("food_phone2"));
+				food.setFood_phone3(rs.getString("food_phone3"));
+				
+				food.setFood_timeh1(rs.getString("food_timeh1"));
+				food.setFood_timem1(rs.getString("food_timem1"));
+				food.setFood_timeh2(rs.getString("food_timeh2"));
+				food.setFood_timem2(rs.getString("food_timem2"));
+				
+				food.setFood_menu(rs.getString("food_menu"));
+				food.setFood_link(rs.getString("food_link"));
+				food.setFood_zipcode(rs.getString("food_zipcode"));
+				food.setFood_addr1(rs.getString("food_addr1"));
+				food.setFood_addr2(rs.getString("food_addr2"));
+
+				food.setFood_image1(rs.getString("food_image1"));
+				food.setFood_image2(rs.getString("food_image2"));
+				food.setFood_image3(rs.getString("food_image3"));
+				food.setFood_count(rs.getInt("food_count"));		
+				food.setFood_content(rs.getString("food_content"));
+				food.setFood_date(rs.getDate("food_date"));
+				food.setFood_date_modi(rs.getDate("food_date_modi"));
+				
+				food.setMem_id(rs.getString("mem_id"));
+				food.setMem_name(rs.getString("mem_name"));
+				food.setMem_photo(rs.getString("mem_photo"));
+				
+				food.setFood_local(rs.getString("food_local"));
+				
+				list.add(food);
+			}
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			// 자원정리
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		return list;
+	}
+
+	}

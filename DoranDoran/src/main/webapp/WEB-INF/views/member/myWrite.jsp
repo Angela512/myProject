@@ -67,7 +67,7 @@
 			
 	<c:if test="${count>0 }">
 		<div class="board-space">
-			<form action="myFoodDelete.do" method="post" id="myfood_delete_form">
+			<!-- <form action="myFoodDelete.do" method="post" id="myfood_delete_form"> -->
 			<c:forEach var="food" items="${list }">
 			<div class="horizontal-area">
                <%--<input type="checkbox" name="food_num" value="${food.food_num }" class="food_num"> --%>
@@ -105,7 +105,7 @@
 			
 			
                     <!--<input type="submit" value="삭제"> -->
-					<script type="text/javascript">
+					<!-- <script type="text/javascript">
 					let myForm = document.getElementById('myfood_delete_form');
 					//이벤트 연결
 					myForm.onsubmit=function(){
@@ -122,9 +122,9 @@
 							return false;
 						}
 					};
-					</script>
+					</script> -->
 			
-			</form>
+		<!-- 	</form> -->
 			
 		</div>
 	
