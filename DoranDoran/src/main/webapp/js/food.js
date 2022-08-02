@@ -36,6 +36,21 @@ $(function(){
 			$('#address2').val('').focus();
 			return false;
 		}
+		if($('#filename1').val().trim()==''){
+			alert('이미지 3장 필수입니다!');
+			$('#filename1').val('').focus();
+			return false;
+		}
+		if($('#filename2').val().trim()==''){
+			alert('이미지 3장 필수입니다!');
+			$('#filename2').val('').focus();
+			return false;
+		}
+		if($('#filename3').val().trim()==''){
+			alert('이미지 3장 필수입니다!');
+			$('#filename3').val('').focus();
+			return false;
+		}
 	});
 	
 	//============== 목록 검색창 ==============//

@@ -32,6 +32,8 @@
 			                       value="${food.food_num}">
 			<ul>
 				<li>
+					<label for="title"><b><span style="color:red;">*</span>맛집 이름 & 설명</b></label>
+					<br><br>
 					<select name='local'>
 						<option value="${food.food_local}">${food.food_local}</option>
 						<option disabled>-------</option>
@@ -39,10 +41,9 @@
 						<option value="경기">경기</option>
 						<option value="인천">인천</option>
 						<option value="제주">제주</option>
-					</select>
-					<label for="title"></label>
+					</select>				
 					<input type="text" name="title" 
-					      id="title" maxlength="50" placeholder="가게 이름을 입력" value="${food.food_name}">
+					      id="title" maxlength="50" placeholder="맛집 이름을 입력" value="${food.food_name}">
 				</li>
 				<li>
 				    <br>
@@ -59,7 +60,7 @@
 				</li>
 				<li>
 					<br><br>
-					<label for="filename"><b>가게 & 메뉴 사진</b></label>
+					<label for="filename"><b><span style="color:red;">*</span>맛집 & 메뉴 사진</b></label>
 					<br><br>
 					<input type="file" name="filename1" 
 					 id="filename1" 
@@ -131,7 +132,7 @@
 				</li>
 				<li>
 					<br><br>
-					<label for="time"><b>가게 운영시간</b></label>
+					<label for="time"><b>맛집 운영시간</b></label>
 					<br><br>
 					<select name='hour1'>
 						<option value="${food.food_timeh1}">${food.food_timeh1}</option>
@@ -208,7 +209,7 @@
 				</li>
 				<li>
 					<br><br>
-					<label for="phone"><b>가게 전화번호</b></label>
+					<label for="phone"><b><span style="color:red;">*</span>맛집 전화번호</b></label>
 					<br>
 					<br>
 					<select name = 'phone1'>
@@ -226,14 +227,14 @@
 				</li>
 				<li>
 					<br><br>
-					<label for="link"><b>가게 홈페이지</b></label>
+					<label for="link"><b>맛집 홈페이지</b></label>
 					<br><br>
 					<input type="text" name="link" 
 					      id="link" maxlength="100" placeholder="https://www.xxxx.com" value="${food.food_link}"  style="width:500px;">
 				</li>
 				<li>
 					<br><br>
-					<label for="address"><b>가게 위치</b></label>
+					<label for="address"><b><span style="color:red;">*</span>맛집 위치</b></label>
 					<br><br>
 					<label for="zipcode"><b>우편번호</b></label>
 					<input type="text" name="zipcode" id="zipcode" 
