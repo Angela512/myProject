@@ -20,7 +20,7 @@
 #sub_nav2{
 	padding: 20px 0 7px 0;
 	float:right; 
-	width:100px; 
+	width:120px; 
 	height:23px;
 	font-size:15px;
 	/* border:1px solid red; */
@@ -270,8 +270,8 @@ ul.search_board li{
 #badge_news{
 	padding: 6px 0 0 12px;
 	/* border: 1px solid red; */
-	width: 170px;
-	height: 30px;
+	width: 180px;
+    height: 33px;
 	color: #fff;
 	font-size:15px;
 	background-color: #FAAB36;
