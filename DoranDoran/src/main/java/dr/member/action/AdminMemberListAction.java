@@ -33,17 +33,23 @@ public class AdminMemberListAction implements Action{
 		
 		String keyfield = request.getParameter("keyfield");
 		String keyword = request.getParameter("keyword");
-		String auth=request.getParameter("auth");
+		String mem_auth=request.getParameter("auth");
+		String auth = null;
+		
 	//	int auth = Integer.parseInt(request.getParameter("auth"));
+		if(mem_auth != null) {
+			auth = "&auth=" + mem_auth;
+		}
+		
 		
 		MemberDAO dao = MemberDAO.getInstance();
-		int count = dao.getMemberCountByAdmin(auth,keyfield, keyword);
+		int count = dao.getMemberCountByAdmin(mem_auth,keyfield, keyword);
 		//페이지 처리
 		//keyfield,keyword,currentPage,count,rowCount,pageCount,url
 		PagingUtil page = new PagingUtil(keyfield,keyword,Integer.parseInt(pageNum),count,20,10,"memberList.do",auth);
 		List<MemberVO> list = null;
 		if(count > 0) {
-			list = dao.getListMemberByAdmin(page.getStartRow(),page.getEndRow(),keyfield,keyword,auth);
+			list = dao.getListMemberByAdmin(page.getStartRow(),page.getEndRow(),keyfield,keyword,mem_auth);
 		}
 		
 		request.setAttribute("count", count);
