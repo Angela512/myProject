@@ -103,7 +103,7 @@ li.img{
 		<hr size="1" noshade="noshade" width="100%">
 		<br>
 		<h1 style="margin:0 auto; text-align:left;">[${food.food_local}] ${food.food_name}</h1>
-		<br><br>
+		<br>
 			
 		<div>
 		  <ul style="disply:inline-block; padding:0px; display:flex;">
