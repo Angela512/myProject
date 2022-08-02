@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판 목록</title>
+<title>공지사항</title>
 <link rel ="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
 <link rel ="stylesheet" href="${pageContext.request.contextPath}/css/notice-style.css" type="text/css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
@@ -25,9 +25,18 @@
 		
 		</div>
 		<c:if test="${count == 0}">
+		<hr width="100%" color="#b5b5b5" size="1px" noshade>
 		<div class="result-display">
 			표시할 게시물이 없습니다.
 		</div>
+		<div class="write_button">
+			<c:if test="${user_auth == 3 && !empty user_num}">
+				<img src="../images/pen1.png" id="write_pen">
+				<input id="write_button_box" type="button" value="글쓰기" onclick="location.href='writeForm.do'">
+			</c:if>
+		</div>
+		<hr width="100%" color="#b5b5b5" size="1px" noshade>
+		
 		</c:if>
 		<c:if test="${count > 0}">
 		<table class="notice_table">
