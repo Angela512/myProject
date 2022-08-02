@@ -13,10 +13,10 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/notice.js"></script>
 
 <style>
-	.active, .category_btn:hover {
+/* 	.active, .category_btn:hover {
   background-color: #666;
   color: white;
-}
+} */
 </style>
 </head>
 <body>
@@ -49,6 +49,8 @@
 			<!-- count가 0인 경우 -->
 			<c:if test="${count == 0}">
 				<div class="result-display">표시할 게시물이 없습니다.</div>
+									<input type="button" value="글쓰기" id="write_button_box" onclick="location.href='writeForm.do'">
+				
 			</c:if>
 
 			<!-- count가 0 이상 -->
