@@ -130,7 +130,7 @@
 					</script>
 			</c:if>
 		</div>
-			<c:if test="${!empty user_num && user_auth == 3}">
+			<%-- <c:if test="${!empty user_num && user_auth == 3}">
 				<input type="button" value="관리자 삭제" id="delete_btn">
 					<script type="text/javascript">
 						let delete_btn = document.getElementById('delete_btn');
@@ -142,7 +142,7 @@
 							}
 						};
 					</script>
-					</c:if>
+					</c:if> --%>
 					<!-- 하단 버튼 들 끝-->
 	</div>
 </div>
