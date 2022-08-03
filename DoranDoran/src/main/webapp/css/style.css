@@ -458,7 +458,7 @@ input[id="zipcode"] {
 /* 자유게시판 말머리 css 시작 */
 .news{
   width: 100px;
-  height: 20px;
+  height: 22px;
   background: #FAAB36; 
   color:white;
   margin:auto;
@@ -466,7 +466,7 @@ input[id="zipcode"] {
 }
 .help{
   width: 100px;
-  height: 20px;
+  height: 22px;
   background: #FA5D57;
   color:white;
   margin:auto;
@@ -474,7 +474,7 @@ input[id="zipcode"] {
 }
 .together{
   width: 100px;
-  height: 20px;
+  height: 22px;
   background: #8B8C00;
   color:white;
   margin:auto;
@@ -482,7 +482,7 @@ input[id="zipcode"] {
 }
 .etc{
   width: 100px;
-  height: 20px;
+  height: 22px;
   background: #7C7877;
   color:white;
   margin:auto;

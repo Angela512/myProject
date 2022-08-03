@@ -118,7 +118,7 @@ td {
 }
 .news{
   width: 100px;
-  height: 20px;
+  height: 22px;
   background: #FAAB36; 
   color:white;
   margin:auto;
@@ -126,7 +126,7 @@ td {
 }
 .help{
   width: 100px;
-  height: 20px;
+  height: 22px;
   background: #FA5D57;
   color:white;
   margin:auto;
@@ -134,7 +134,7 @@ td {
 }
 .together{
   width: 100px;
-  height: 20px;
+  height: 22px;
   background: #8B8C00;
   color:white;
   margin:auto;
@@ -142,7 +142,7 @@ td {
 }
 .etc{
   width: 100px;
-  height: 20px;
+  height: 22px;
   background: #7C7877;
   color:white;
   margin:auto;
@@ -280,8 +280,8 @@ ul.search_board li{
 #badge_help{
 	padding: 6px 0 0 12px;
 	/* border: 1px solid red; */
-	width: 170px;
-	height: 30px;
+	width: 180px;
+    height: 33px;
 	color: #fff;
 	font-size:15px;
 	background-color: #FA5D57;
@@ -290,8 +290,8 @@ ul.search_board li{
 #badge_together{
 	padding: 6px 0 0 12px;
 	/* border: 1px solid red; */
-	width: 170px;
-	height: 30px;
+	width: 180px;
+    height: 33px;
 	color: #fff;
 	font-size:15px;
 	background-color: #8B8C00;
@@ -300,8 +300,8 @@ ul.search_board li{
 #badge_etc{
 	padding: 6px 0 0 12px;
 	/* border: 1px solid red; */
-	width: 140px;
-	height: 30px;
+	width: 150px;
+    height: 33px;
 	color: #fff;
 	font-size:15px;
 	background-color: #7C7877;
