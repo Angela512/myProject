@@ -18,15 +18,15 @@
       <div class="slideshow-container">
 
 		<div class="mySlides fade">
-			<img src="../images/coffee1.jpg">
+			<img src="../images/b_banner0.jpg">
 		</div>
 
 		<div class="mySlides fade">
-			<img src="../images/coffee2.jpg">
+			<img src="../images/b_banner1.jpg">
 		</div>
 
 		<div class="mySlides fade">
-			<img src="../images/aabb.jpg">
+			<img src="../images/b_banner3.jpg">
 		</div>
 
 		</div>
